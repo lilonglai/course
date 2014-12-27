@@ -12,10 +12,10 @@
         <class>com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday</class>
         <class>com.kevin.aeas.object.v2.AeasTeacherHoliday</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/aeas"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="root"/>
+            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.70.128:orcl"/>
+            <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="hibernate.connection.username" value="aeas"/>
+            <property name="hibernate.connection.password" value="oracle"/>
             <property name="hibernate.archive.autodetection" value="class"/>  
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>

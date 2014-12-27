@@ -1,5 +1,5 @@
-dbHost=localhost
-dbPort=3306
-dbName=aeas
-dbUser=root
-dbPassword=root
+dbHost=192.168.70.128
+dbPort=1521
+dbName=orcl
+dbUser=aeas
+dbPassword=oracle
