@@ -1,16 +1,10 @@
+<%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
+<%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.v2.AeasStudent"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasStudentOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.utils.TeacherHelp"%>
-<%@page import="com.kevin.aeas.object.Student"%>
-<%@page import="com.kevin.aeas.operation.StudentOperation"%>
-<%@page import="com.kevin.aeas.utils.GradeHelp"%>
-<%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.operation.TeacherDefaultHolidayOperation"%>
-<%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.kevin.aeas.operation.TeacherOperation"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -112,7 +106,7 @@
     
    <%
    AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
-   TeacherOperation teacherOperation = new TeacherOperation();
+   AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
    %>
    
    <div class="container">

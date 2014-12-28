@@ -1,13 +1,9 @@
-<%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.SecondCourseOperation"%>
-<%@page import="com.kevin.aeas.object.SecondCourse"%>
-<%@page import="com.kevin.aeas.operation.FirstCourseOperation"%>
-<%@page import="com.kevin.aeas.utils.GradeHelp"%>
-<%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.operation.TeacherDefaultHolidayOperation"%>
-<%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.kevin.aeas.operation.TeacherOperation"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kevin.aeas.object.v2.AeasSecondCourse"%>
+<%@page import="com.kevin.aeas.object.v2.AeasFirstCourse"%>
+<%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -90,9 +86,7 @@
 					<li><a href="./student.jsp">学生信息</a></li>
 				</ul>
 			</div>
-			<!--/.nav-collapse -->
 		</div>
-		<!--/.container-fluid -->
 	</div>
     
    <%
@@ -101,8 +95,8 @@
 		grade = Integer.valueOf(request.getParameter("grade"));
 	}
    
-	FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
-	SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
+	AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
+	AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
 	
    if(request.getParameter("id") != null){
 	   int id = (Integer.valueOf(request.getParameter("id")));
@@ -142,8 +136,8 @@
 		      <tbody>
 					<%
 						int firstCourseCount = 1;
-						ArrayList<FirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
-						for (FirstCourse firstCourse : FirstCourseList) {
+						List<AeasFirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
+						for (AeasFirstCourse firstCourse : FirstCourseList) {
 					%>
 			
 					<tr>
@@ -184,13 +178,13 @@
 		<%
 		int secondCourseCount = 1;
 		int firstCourseId = 0;
-			ArrayList<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
-			for (SecondCourse secondCourse : secondCourseList) {
-				if(firstCourseId == secondCourse.getFirstCourseId()){
+			List<AeasSecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
+			for (AeasSecondCourse secondCourse : secondCourseList) {
+				if(firstCourseId == secondCourse.getAeasFirstCourse().getId()){
 					secondCourseCount++;
 				}else{
 					secondCourseCount = 1;
-					firstCourseId= secondCourse.getFirstCourseId();
+					firstCourseId= secondCourse.getAeasFirstCourse().getId();
 				}
 		%>
 
@@ -198,7 +192,7 @@
 		    <td><%=secondCourseCount%></td>
 			<td><%=secondCourse.getName()%></td>
 			<td><%=secondCourse.getShortName()%></td>
-			<td><%=firstCourseOperation.get(secondCourse.getFirstCourseId()).getName() %></td>
+			<td><%=secondCourse.getAeasFirstCourse().getName() %></td>
 			<td><%=secondCourse.getDescription()%></td>							
 			
 			<td><input type="button" class="btn btn-default" value='修改' onclick="modifySecondCourse(<%=secondCourse.getId()%>)"> 

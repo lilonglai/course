@@ -5,10 +5,14 @@ public class AeasOperationManager {
 	
 	private AeasTeacherOperation aeasTeacherOperation;	
 	private AeasStudentOperation aeasStudentOperation;
+	private AeasFirstCourseOperation aeasFirstCourseOperation;
+	private AeasSecondCourseOperation aeasSecondCourseOperation;
 	
 	private AeasOperationManager(){
 		aeasTeacherOperation = new AeasTeacherOperation();
 		aeasStudentOperation = new AeasStudentOperation();
+		aeasFirstCourseOperation = new AeasFirstCourseOperation();
+		aeasSecondCourseOperation = new AeasSecondCourseOperation();
 	}
 	
 	public static AeasOperationManager getInstance(){
@@ -21,6 +25,14 @@ public class AeasOperationManager {
 	
 	public AeasStudentOperation getStudentOperation(){
 		return aeasStudentOperation;
+	}
+	
+	public AeasFirstCourseOperation getFirstCourseOperation(){
+		return aeasFirstCourseOperation;
+	}
+	
+	public AeasSecondCourseOperation getSecondCourseOperation(){
+		return aeasSecondCourseOperation;
 	}
 
 }

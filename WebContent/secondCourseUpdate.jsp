@@ -1,12 +1,9 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.FirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.SecondCourseOperation"%>
-<%@page import="com.kevin.aeas.object.SecondCourse"%>
-<%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.operation.TeacherDefaultHolidayOperation"%>
-<%@page import="com.kevin.aeas.operation.TeacherOperation"%>
-<%@page import="com.kevin.aeas.object.Teacher"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kevin.aeas.object.v2.AeasFirstCourse"%>
+<%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
+<%@page import="com.kevin.aeas.object.v2.AeasSecondCourse"%>
+<%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,14 +31,14 @@
 </head>
 <body>
 	<%
-	SecondCourse secondCourse = null;
-    SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
-    FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
+	AeasSecondCourse secondCourse = null;
+    AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
+    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
 	if (request.getParameter("submit") != null) {
-		secondCourse = new SecondCourse();
+		
 		
 		int courseId = Integer.valueOf(request.getParameter("id"));
-		secondCourse.setId(courseId);
+		secondCourse = secondCourseOperation.get(courseId);
 		
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");
@@ -53,7 +50,8 @@
 		secondCourse.setShortName(shortName);
 
 		int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-		secondCourse.setFirstCourseId(firstCourseId);
+		AeasFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+		secondCourse.setAeasFirstCourse(firstCourse);
 		
 		String description = request.getParameter("description");
 		description = new String(description.getBytes("iso-8859-1"),
@@ -70,9 +68,9 @@
     	int id = Integer.valueOf(idStr);	    	
     	secondCourse = secondCourseOperation.get(id);
     	
-    	FirstCourse firstCourse = firstCourseOperation.get(secondCourse.getFirstCourseId());
+    	AeasFirstCourse firstCourse = secondCourse.getAeasFirstCourse();
         int grade = firstCourse.getGrade();
-        ArrayList<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+        List<AeasFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 		
 	%>
   <div class="container">
@@ -87,9 +85,9 @@
 		<div class="form-group">
 		课程分类: <select name="firstCourseId">
 		<%
-		    for(FirstCourse course:firstCourseList){
+		    for(AeasFirstCourse course:firstCourseList){
 		%>
-				<option value="<%= course.getId() %>" <%= course.getId()==secondCourse.getFirstCourseId()?"selected":"" %>><%= course.getName() %></option>
+				<option value="<%= course.getId() %>" <%= course.getId()==secondCourse.getAeasFirstCourse().getId()?"selected":"" %>><%= course.getName() %></option>
 				
 		<% 
 		     }

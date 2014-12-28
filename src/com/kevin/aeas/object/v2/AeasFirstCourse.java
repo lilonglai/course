@@ -1,6 +1,7 @@
 package com.kevin.aeas.object.v2;
 
 import javax.persistence.*;
+
 import java.util.Collection;
 
 /**
@@ -108,7 +109,7 @@ public class AeasFirstCourse {
         return result;
     }
 
-    @OneToMany(mappedBy = "aeasFirstCourse")
+    @OneToMany(mappedBy = "aeasFirstCourse", cascade=CascadeType.ALL)
     public Collection<AeasSecondCourse> getAeasSecondCourses() {
         return aeasSecondCourses;
     }

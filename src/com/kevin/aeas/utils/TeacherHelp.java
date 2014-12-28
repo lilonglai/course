@@ -1,11 +1,11 @@
 package com.kevin.aeas.utils;
 
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.TeacherOperation;
+import com.kevin.aeas.object.v2.AeasTeacher;
+import com.kevin.aeas.operation.v2.AeasTeacherOperation;
 
 public class TeacherHelp {
-	public static String getTeacherName(TeacherOperation teacherOperation, int teacherId){
-		Teacher teacher = teacherOperation.get(teacherId);
+	public static String getTeacherName(AeasTeacherOperation teacherOperation, int teacherId){
+		AeasTeacher teacher = teacherOperation.get(teacherId);
 		String name = null;
 		if(teacher != null)
 			name = teacher.getName();
