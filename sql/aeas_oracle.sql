@@ -11,7 +11,7 @@ GRANT "CONNECT" TO aeas ;
 
 drop table aeas_firstcourse;
 drop sequence aeas_firstcourse_id;
-drop trigger aeas_firstcourse_id_increment;
+drop trigger aeas_firstcourse_tr;
 
 CREATE TABLE aeas_firstcourse (
   id number(11,0) NOT NULL,
@@ -70,7 +70,10 @@ INSERT INTO aeas_firstcourse VALUES (29,3,'”Ô∑®','',' ',1);
 INSERT INTO aeas_firstcourse VALUES (30,3,'∞‡÷˜»Œ≤πøŒ','',' ',1);
 commit;
 
+
 DROP TABLE aeas_secondcourse;
+DROP sequence aeas_secondcourse_id;
+DROP trigger aeas_secondcourse_tr;
 
 CREATE TABLE aeas_secondcourse (
   id number(11,0) NOT NULL,
@@ -309,6 +312,8 @@ commit;
 
 
 DROP TABLE aeas_student;
+DROP sequence aeas_student_id;
+DROP trigger aeas_student_tr;
 
 CREATE TABLE aeas_student (
   id number(11,0) NOT NULL,
@@ -352,7 +357,10 @@ INSERT INTO aeas_student VALUES (17,'÷‹º—‰Ù','null',2,'25-27∑÷','50+',to_date('2
 INSERT INTO aeas_student VALUES (18,'Œ‚’‘¿','null',2,'19','45',to_date('2014-12-27','YYYY-MM-DD'),'…œ∫£',5,'',1);
 commit;
 
+
 DROP TABLE aeas_teacher;
+DROP sequence aeas_teacher_id;
+DROP trigger aeas_teacher_tr;
 
 CREATE TABLE aeas_teacher (
   id number(11,0) NOT NULL,
@@ -406,10 +414,12 @@ INSERT INTO aeas_teacher VALUES (25,'Nina','Nina','',0,1);
 INSERT INTO aeas_teacher VALUES (26,'ª∆º‡øº','ª∆º‡øº','',0,1);
 INSERT INTO aeas_teacher VALUES (27,'Vera','Vera','',0,1);
 INSERT INTO aeas_teacher VALUES (28,'null','“∂÷¶','18721194321',0,1);
-
 commit;
 
+
 DROP TABLE aeas_teacherability;
+DROP sequence aeas_teacherability_id;
+DROP trigger aeas_teacherability_tr;
 
 CREATE TABLE aeas_teacherability (
   id number(11,0) NOT NULL,
@@ -690,7 +700,10 @@ INSERT INTO aeas_teacherability VALUES (290,22,3);
 INSERT INTO aeas_teacherability VALUES (291,22,5);
 commit;
 
+
 DROP TABLE aeas_teacherdefaultholiday;
+DROP sequence aeas_teacherdefaultholiday_id;
+DROP trigger aeas_teacherdefaultholiday_tr;
 
 CREATE TABLE aeas_teacherdefaultholiday (
   id number(11,0) NOT NULL,
@@ -747,9 +760,13 @@ INSERT INTO aeas_teacherdefaultholiday VALUES (24,24,0,0,0,0,0,0,0);
 INSERT INTO aeas_teacherdefaultholiday VALUES (25,25,0,0,0,0,0,0,0);
 INSERT INTO aeas_teacherdefaultholiday VALUES (26,26,0,0,0,0,0,0,0);
 INSERT INTO aeas_teacherdefaultholiday VALUES (27,27,0,0,0,0,0,0,0);
+commit;
 
 
 DROP TABLE aeas_teacherholiday;
+DROP sequence aeas_teacherholiday_id;
+DROP trigger aeas_teacherholiday_tr;
+
 CREATE TABLE aeas_teacherholiday (
   id number(11,0) NOT NULL,
   teacherid number(11,0) DEFAULT NULL,
@@ -777,6 +794,8 @@ INSERT INTO aeas_teacherholiday VALUES (1,2,to_date('2014-10-16','yyyy-mm-dd'),0
 
 
 DROP TABLE aeas_schedule;
+DROP sequence aeas_schedule_id;
+DROP trigger aeas_schedule_tr;
 
 CREATE TABLE aeas_schedule (
   id number(11,0) NOT NULL,

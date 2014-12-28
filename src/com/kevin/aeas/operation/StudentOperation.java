@@ -326,17 +326,7 @@ public class StudentOperation {
 
 	public static void main(String[] args) {
 		StudentOperation studentOperation = new StudentOperation();
-		
-		Student student = new Student();
-		student.setName("学生4");
-		student.setShortName("学生4");
-		student.setGrade(1);
-		student.setTestScore("30");
-		student.setExaminePlace("上海");
-		student.setId(5);
-		student.setDescription("good student");
-		
-		System.out.println(studentOperation.update(student));
+		System.out.println(studentOperation.getAll());
 		
 	}
 

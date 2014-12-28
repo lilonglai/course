@@ -247,13 +247,7 @@ public class TeacherOperation {
 	
 	public static void main(String[] args) {
 		TeacherOperation operation = new TeacherOperation();
-		System.out.println(operation.getAll());
-		
-		operation.delete(6);
-		
-		
-		
-		
+		System.out.println(operation.getAll());		
 	}
 
 }

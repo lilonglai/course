@@ -12,7 +12,7 @@
         <class>com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday</class>
         <class>com.kevin.aeas.object.v2.AeasTeacherHoliday</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.70.128:orcl"/>
+            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.182.251.230:1521:orcl"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
             <property name="hibernate.connection.username" value="aeas"/>
             <property name="hibernate.connection.password" value="oracle"/>
