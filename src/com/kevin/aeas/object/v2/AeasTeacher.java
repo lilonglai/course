@@ -1,6 +1,7 @@
 package com.kevin.aeas.object.v2;
 
 import javax.persistence.*;
+
 import java.util.Collection;
 
 /**
@@ -21,8 +22,9 @@ public class AeasTeacher {
     private Collection<AeasTeacherHoliday> aeasTeacherHolidays;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacher_id")
+    @SequenceGenerator(name="aeas_teacher_id", sequenceName="aeas_teacher_id")
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
         return id;
     }

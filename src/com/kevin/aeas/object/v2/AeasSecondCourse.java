@@ -16,6 +16,8 @@ public class AeasSecondCourse {
     private AeasFirstCourse aeasFirstCourse;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_secondcourse_id")
+    @SequenceGenerator(name="aeas_secondcourse_id", sequenceName="aeas_secondcourse_id")
     @Column(name = "id")
     public int getId() {
         return id;

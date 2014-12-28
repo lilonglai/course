@@ -13,6 +13,8 @@ public class AeasTeacherAbility {
     private AeasTeacher aeasTeacher;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherability_id")
+    @SequenceGenerator(name="aeas_teacherability_id", sequenceName="aeas_teacherability_id")
     @Column(name = "id")
     public int getId() {
         return id;

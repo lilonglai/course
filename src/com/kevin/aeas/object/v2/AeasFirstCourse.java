@@ -19,6 +19,8 @@ public class AeasFirstCourse {
     private Collection<AeasTeacherAbility> aeasTeacherAbilities;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_firstcourse_id")
+    @SequenceGenerator(name="aeas_firstcourse_id", sequenceName="aeas_firstcourse_id")
     @Column(name = "id")
     public int getId() {
         return id;

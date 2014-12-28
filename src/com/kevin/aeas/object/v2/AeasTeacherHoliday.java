@@ -1,6 +1,7 @@
 package com.kevin.aeas.object.v2;
 
 import javax.persistence.*;
+
 import java.sql.Date;
 
 /**
@@ -15,6 +16,8 @@ public class AeasTeacherHoliday {
     private AeasTeacher aeasTeacher;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherholiday_id")
+    @SequenceGenerator(name="aeas_teacherholiday_id", sequenceName="aeas_teacherholiday_id")
     @Column(name = "id")
     public int getId() {
         return id;

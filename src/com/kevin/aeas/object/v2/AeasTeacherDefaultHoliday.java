@@ -19,8 +19,9 @@ public class AeasTeacherDefaultHoliday {
     private AeasTeacher aeasTeacher;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherdefaultholiday_id")
+    @SequenceGenerator(name="aeas_teacherdefaultholiday_id", sequenceName="aeas_teacherdefaultholiday_id")
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
         return id;
     }
