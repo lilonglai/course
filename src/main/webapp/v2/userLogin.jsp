@@ -11,6 +11,7 @@
     <s:form action="userLogin" >
         <s:textfield name="userName" label="用户名" />
         <s:password name="userPassword" label="密码" />
+        <s:checkbox name="rememberUser" label="自动登陆" />
         <s:submit />
     </s:form>
 </body>

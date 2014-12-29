@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1><s:property value="userName" /> 成功</h1>
+    <h2><s:a action="userLogin" > 注销 </s:a></a> </h2>
 </body>
 </html>
