@@ -7,12 +7,14 @@ public class AeasOperationManager {
 	private AeasStudentOperation aeasStudentOperation;
 	private AeasFirstCourseOperation aeasFirstCourseOperation;
 	private AeasSecondCourseOperation aeasSecondCourseOperation;
+	private AeasUserOperation aeasUserOperation;
 	
 	private AeasOperationManager(){
 		aeasTeacherOperation = new AeasTeacherOperation();
 		aeasStudentOperation = new AeasStudentOperation();
 		aeasFirstCourseOperation = new AeasFirstCourseOperation();
-		aeasSecondCourseOperation = new AeasSecondCourseOperation();
+		aeasSecondCourseOperation = new AeasSecondCourseOperation();		
+		aeasUserOperation = new AeasUserOperation();
 	}
 	
 	public static AeasOperationManager getInstance(){
@@ -33,6 +35,10 @@ public class AeasOperationManager {
 	
 	public AeasSecondCourseOperation getSecondCourseOperation(){
 		return aeasSecondCourseOperation;
+	}
+	
+	public AeasUserOperation getUserOperation(){
+		return aeasUserOperation;
 	}
 
 }

@@ -2,8 +2,13 @@
 <struts>
 	<include file="struts-default.xml"></include>
 	<package name="default" extends="struts-default">
-		<action name="HelloWorld" class="com.kevin.aeas.struts.HelloWorld">
-			<result name="SUCCESS">/v2/success.jsp</result>
+		<action name="userLogin" class="com.kevin.aeas.struts.UserLogin">
+			<result name="SUCCESS">/v2/loginSuccess.jsp</result>
+			<result name="FAILURE">/v2/loginFailure.jsp</result>
+		</action>
+	    <action name="userRegister" class="com.kevin.aeas.struts.UserRegister">
+			<result name="SUCCESS">/v2/loginSuccess.jsp</result>
+			<result name="FAILURE">/v2/loginFailure.jsp</result>
 		</action>
 	</package>
 </struts>

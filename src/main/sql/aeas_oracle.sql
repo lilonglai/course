@@ -822,4 +822,30 @@ begin
       select aeas_schedule_id.nextval into :New.id from dual;
     end if; 
 end;
+
+drop table aeas_user;
+
+CREATE TABLE aeas_user(
+  id number(11,0) NOT NULL,
+  name varchar2(64) unique not NULL,
+  password varchar2(64) not NULL,
+  description varchar2(256) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+create sequence aeas_user_id 
+  increment by 1
+  start with 1000
+  nomaxvalue
+  nocycle;
+  
+create trigger aeas_user_tr before
+insert on aeas_user for each row
+begin
+	if :New.id is NULL then
+      select aeas_user_id.nextval into :New.id from dual;
+    end if; 
+end;
+
+insert into aeas_user(name,password, description) values('admin', 'admin', 'admin user');
   
