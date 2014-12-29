@@ -1,6 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'ear'
+//apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+//apply plugin: 'idea'
 
 repositories{
     mavenCentral()
@@ -29,4 +32,23 @@ dependencies{
     compile name: 'jxl'
     
     compile name: 'ojdbc6-12.1.0.1.0'
+}
+
+eclipse{
+  project{
+    natures 'org.eclipse.wst.jsdt.core.jsNature'
+    buildCommand 'org.eclipse.wst.jsdt.core.javascriptValidator'
+    buildCommand 'org.eclipse.jdt.core.javabuilder'
+  }
+  
+  classpath{
+    file{
+      withXml { xml ->
+        def node = xml.asNode()
+        node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+        node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+      }   
+    }  
+  }
+
 }
