@@ -28,6 +28,7 @@ dependencies{
     compile group: 'org.apache.struts', name: 'struts2-core', version: '2.3.20'
     
     compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.7.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.3.7.Final'
     
     compile name: 'jxl'
     
