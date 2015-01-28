@@ -175,7 +175,7 @@ public class ScheduleService {
 	@Path("getTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public  ArrayList<Teacher> getTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime, 
-			@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
+			 @FormParam("firstCourseId") int firstCourseId){
 		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		return teacherList;
 	}
