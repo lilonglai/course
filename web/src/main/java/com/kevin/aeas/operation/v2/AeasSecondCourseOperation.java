@@ -5,30 +5,30 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.v2.AeasFirstCourse;
-import com.kevin.aeas.object.v2.AeasSecondCourse;
+import com.kevin.aeas.object.oracle.OracleFirstCourse;
+import com.kevin.aeas.object.oracle.OracleSecondCourse;
 
-public class AeasSecondCourseOperation extends AeasBasicOperation<AeasSecondCourse>{
+public class AeasSecondCourseOperation extends AeasBasicOperation<OracleSecondCourse>{
 	public AeasSecondCourseOperation(){
-		super(AeasSecondCourse.class);
+		super(OracleSecondCourse.class);
 	}
 	
-	public List<AeasSecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<OracleSecondCourse> getByFirstCourseId(int firstCourseId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select fc from AeasFirstCourse fc where fc.id=:id");
 		q.setParameter("id", firstCourseId);
-		List<AeasFirstCourse> fcList = q.getResultList();
-		ArrayList<AeasSecondCourse> scList = new ArrayList<AeasSecondCourse>();
-		for(AeasFirstCourse fc: fcList)
+		List<OracleFirstCourse> fcList = q.getResultList();
+		ArrayList<OracleSecondCourse> scList = new ArrayList<OracleSecondCourse>();
+		for(OracleFirstCourse fc: fcList)
 		  scList.addAll(fc.getAeasSecondCourses());
 		return scList;		
 	}
 	
-	public List<AeasSecondCourse> getByGrade(int grade){
+	public List<OracleSecondCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select fc from AeasFirstCourse fc where fc.grade=:grade");
 		q.setParameter("grade", grade);
-		List<AeasFirstCourse> fcList = q.getResultList();
-		ArrayList<AeasSecondCourse> scList = new ArrayList<AeasSecondCourse>();
-		for(AeasFirstCourse fc: fcList)
+		List<OracleFirstCourse> fcList = q.getResultList();
+		ArrayList<OracleSecondCourse> scList = new ArrayList<OracleSecondCourse>();
+		for(OracleFirstCourse fc: fcList)
 		  scList.addAll(fc.getAeasSecondCourses());
 		return scList;		
 	}

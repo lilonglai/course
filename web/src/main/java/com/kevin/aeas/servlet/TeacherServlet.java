@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.object.v2.AeasTeacher;
-import com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday;
+import com.kevin.aeas.object.oracle.OracleTeacher;
+import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.TeacherOperation;
 import com.kevin.aeas.operation.v2.AeasOperationManager;
@@ -38,7 +38,7 @@ public class TeacherServlet extends HttpServlet {
 
 	private void add(HttpServletRequest request)
 			throws UnsupportedEncodingException {
-		AeasTeacher teacher = new AeasTeacher();
+		OracleTeacher teacher = new OracleTeacher();
 		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");
@@ -54,7 +54,7 @@ public class TeacherServlet extends HttpServlet {
 		else
 			teacher.setIsMaster(false);
 
-		AeasTeacherDefaultHoliday teacherDefaultHoliday = new AeasTeacherDefaultHoliday();
+		OracleTeacherDefaultHoliday teacherDefaultHoliday = new OracleTeacherDefaultHoliday();
 
 
 		String[] weeks = request.getParameterValues("weeks");
@@ -91,12 +91,12 @@ public class TeacherServlet extends HttpServlet {
 	private void update(HttpServletRequest request)
 			throws UnsupportedEncodingException {
 
-		AeasTeacher teacher = null;
+		OracleTeacher teacher = null;
 		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
 		
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		teacher = teacherOperation.get(teacherId);
-		AeasTeacherDefaultHoliday teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();
+		OracleTeacherDefaultHoliday teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();
 		
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");

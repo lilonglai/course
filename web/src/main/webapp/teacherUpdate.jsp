@@ -1,6 +1,6 @@
-<%@page import="com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.object.v2.AeasTeacherHoliday"%>
-<%@page import="com.kevin.aeas.object.v2.AeasTeacher"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleTeacherHoliday"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
@@ -29,17 +29,16 @@
 </head>
 <body>
 	<%
-	   AeasTeacher teacher = null;
-	   AeasTeacherDefaultHoliday teacherDefaultHoliday = null;
-	   	   
-	    String idStr = (String)request.getParameter("id");
-	    if(idStr != null){
-	    	int id = Integer.valueOf(idStr);
-	    	AeasTeacherOperation aeasTeacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
-	    	teacher = aeasTeacherOperation.get(id);
-	    	
-	    	teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();
-	    			
+		OracleTeacher teacher = null;
+			   OracleTeacherDefaultHoliday teacherDefaultHoliday = null;
+			   	   
+			    String idStr = (String)request.getParameter("id");
+			    if(idStr != null){
+			    	int id = Integer.valueOf(idStr);
+			    	AeasTeacherOperation aeasTeacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+			    	teacher = aeasTeacherOperation.get(id);
+			    	
+			    	teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();
 	%>
 	<div class="container">
 	<form action="teacherServlet" method="get" onSubmit="return checkForm();">

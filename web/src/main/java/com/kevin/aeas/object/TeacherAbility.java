@@ -1,13 +1,12 @@
 package com.kevin.aeas.object;
 
 public class TeacherAbility {
-	private int id;
-	private int teacherId;
-	private int courseId;
+	protected int id;
+	protected int teacherId;
+	protected int courseId;
 
 	public TeacherAbility() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public TeacherAbility(int id, int teacherId, int courseId) {
@@ -46,5 +45,35 @@ public class TeacherAbility {
 		return "TeacherAbility [id=" + id + ", teacherId=" + teacherId
 				+ ", courseId=" + courseId + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + courseId;
+		result = prime * result + id;
+		result = prime * result + teacherId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TeacherAbility other = (TeacherAbility) obj;
+		if (courseId != other.courseId)
+			return false;
+		if (id != other.id)
+			return false;
+		if (teacherId != other.teacherId)
+			return false;
+		return true;
+	}
+	
+	
 
 }

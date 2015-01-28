@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
-<%@page import="com.kevin.aeas.object.v2.AeasTeacher"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -84,20 +84,20 @@
 	</div>
    
    	<%
-    String statusString = request.getParameter("status");
-    if(statusString ==null)
-    	statusString = "2";
-    int status = Integer.valueOf(statusString);
-    %>
+      		String statusString = request.getParameter("status");
+      	    if(statusString ==null)
+      	    	statusString = "2";
+      	    int status = Integer.valueOf(statusString);
+      	%>
 
     
    <div class="container">
    
    	<form action="teacher.jsp"  method="get" name="statusForm" id="statusForm">
 	  <select name="status" onChange="document.getElementById('statusForm').submit()">
-		<option value="1" <%= status==1?"selected":"" %> >所有老师</option>
-		<option value="2" <%= status==2?"selected":"" %> >在职老师</option>
-		<option value="3" <%= status==3?"selected":"" %> >离职老师</option>
+		<option value="1" <%=status==1?"selected":""%> >所有老师</option>
+		<option value="2" <%=status==2?"selected":""%> >在职老师</option>
+		<option value="3" <%=status==3?"selected":""%> >离职老师</option>
 	  </select>
    </form>
 	 <div class="table-responsive"> 
@@ -114,22 +114,22 @@
 		  </thead>
           <tbody>
 		<%
-		    List<AeasTeacher> list = null;
-		    AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
-		    switch(status){
-		    case 1:
-		    	list = teacherOperation.getAll();
-		    	break;
-		    case 2:
-		    	list = teacherOperation.getAlive();
-		    	break;
-		    case 3:
-		    	list = teacherOperation.getNotAlive();
-		    	break;
-		    }
+			List<OracleTeacher> list = null;
+				    AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+				    switch(status){
+				    case 1:
+				    	list = teacherOperation.getAll();
+				    	break;
+				    case 2:
+				    	list = teacherOperation.getAlive();
+				    	break;
+				    case 3:
+				    	list = teacherOperation.getNotAlive();
+				    	break;
+				    }
 			
 			int teacherCount = 1;
-			for (AeasTeacher teacher : list) {
+			for (OracleTeacher teacher : list) {
 		%>
 
 		<tr>

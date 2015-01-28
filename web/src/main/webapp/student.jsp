@@ -1,7 +1,7 @@
 <%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.v2.AeasStudent"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasStudentOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.utils.TeacherHelp"%>
@@ -105,9 +105,9 @@
 	</div>
     
    <%
-   AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
-   AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
-   %>
+       	AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
+          AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+       %>
    
    <div class="container">
    	<form action="importCourse.jsp" enctype="multipart/form-data" method="post" name="importForm" id="importForm">
@@ -135,16 +135,16 @@
 	<br>
 	
 	<%
-    String statusString = request.getParameter("status");
-    if(statusString ==null)
-    	statusString = "2";
-    int status = Integer.valueOf(statusString);
-    %>
+			String statusString = request.getParameter("status");
+		    if(statusString ==null)
+		    	statusString = "2";
+		    int status = Integer.valueOf(statusString);
+		%>
 	<form action="student.jsp"  method="get" name="statusForm" id="statusForm">
 		<select name="status" onChange="document.getElementById('statusForm').submit()">
-			<option value="1" <%= status==1?"selected":"" %> >所有学生</option>
-			<option value="2" <%= status==2?"selected":"" %> >在职学生</option>
-			<option value="3" <%= status==3?"selected":"" %> >毕业学生</option>
+			<option value="1" <%=status==1?"selected":""%> >所有学生</option>
+			<option value="2" <%=status==2?"selected":""%> >在职学生</option>
+			<option value="3" <%=status==3?"selected":""%> >毕业学生</option>
 		</select>
 	</form>
 	
@@ -168,19 +168,19 @@
 	 <tbody>
 
 		<%
-		    List<AeasStudent> list = null;
-		    switch(status){
-		    case 1:
-		    	list = studentOperation.getAll();
-		    	break;
-		    case 2:
-		    	list = studentOperation.getAlive();
-		    	break;
-		    case 3:
-		    	list = studentOperation.getNotAlive();
-		    	break;
-		    }
-			for (AeasStudent student : list) {
+			List<OracleStudent> list = null;
+				    switch(status){
+				    case 1:
+				    	list = studentOperation.getAll();
+				    	break;
+				    case 2:
+				    	list = studentOperation.getAlive();
+				    	break;
+				    case 3:
+				    	list = studentOperation.getNotAlive();
+				    	break;
+				    }
+			for (OracleStudent student : list) {
 		%>
 
 		<tr>

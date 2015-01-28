@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.v2.AeasTeacher;
+import com.kevin.aeas.object.oracle.OracleTeacher;
 
 public class AeasBasicOperation<T> {
 	private Class<T> actualClass;
@@ -48,7 +48,7 @@ public class AeasBasicOperation<T> {
 	
 	
 	public static void main(String[] args){
-		AeasBasicOperation<AeasTeacher> operation = new AeasBasicOperation<AeasTeacher>(AeasTeacher.class);
+		AeasBasicOperation<OracleTeacher> operation = new AeasBasicOperation<OracleTeacher>(OracleTeacher.class);
 		operation.getAll();
 	}
 	

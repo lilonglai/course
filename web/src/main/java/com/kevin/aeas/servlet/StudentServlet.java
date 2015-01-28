@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.object.v2.AeasStudent;
+import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.operation.StudentOperation;
 import com.kevin.aeas.operation.v2.AeasOperationManager;
 import com.kevin.aeas.operation.v2.AeasStudentOperation;
@@ -30,7 +30,7 @@ public class StudentServlet extends HttpServlet {
 			throws UnsupportedEncodingException {
 		AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
 	    
-	    AeasStudent student = new AeasStudent();		
+	    OracleStudent student = new OracleStudent();		
 		String tempStr;
 		
 		String name = request.getParameter("name");
@@ -87,7 +87,7 @@ public class StudentServlet extends HttpServlet {
 	private void update(HttpServletRequest request)
 			throws UnsupportedEncodingException {
 		AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
-		AeasStudent student;
+		OracleStudent student;
 		
 		String tempStr;
 		

@@ -1,4 +1,4 @@
-package com.kevin.aeas.object.v2;
+package com.kevin.aeas.object.mysql;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,7 +9,7 @@ public class TestJpa {
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("AeasPersistenceUnit");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		AeasTeacher aeaTeacher = entityManager.find(AeasTeacher.class, 2);
+		MySqlTeacher aeaTeacher = entityManager.find(MySqlTeacher.class, 2);
 		entityManager.close();
 		entityManagerFactory.close();
 

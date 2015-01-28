@@ -1,4 +1,4 @@
-<%@page import="com.kevin.aeas.object.v2.AeasTeacher"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
@@ -60,54 +60,54 @@
 <body>
 	<%
 		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
-		TeacherAbilityOperation teacherAbilityOperation = new TeacherAbilityOperation();
-		FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
-		
-		int teacherId = Integer.valueOf(request.getParameter("id"));
-		int grade = 3;
-		if(request.getParameter("grade") != null){
-			grade = Integer.valueOf(request.getParameter("grade"));
-		}
-		
-		if(request.getParameter("abilitySubmit") != null){
-			int oldGrade = Integer.valueOf(request.getParameter("oldGrade"));
-			if(grade == oldGrade){
-		String[] chosenCourses = request.getParameterValues("chosen");
-		//teacherAbilityOperation.deleteByTeacherId(teacherId);
-		teacherAbilityOperation.deleteByTeacherAndGrade(teacherId, grade);
-		TeacherAbility teacherAbility = new TeacherAbility();
-		teacherAbility.setTeacherId(teacherId);
-		if(chosenCourses != null){
-			for(String chosenCourse:chosenCourses){
-				teacherAbility.setCourseId(Integer.valueOf(chosenCourse));
-				teacherAbilityOperation.add(teacherAbility);
-			}
-		}
+			TeacherAbilityOperation teacherAbilityOperation = new TeacherAbilityOperation();
+			FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
+			
+			int teacherId = Integer.valueOf(request.getParameter("id"));
+			int grade = 3;
+			if(request.getParameter("grade") != null){
+		grade = Integer.valueOf(request.getParameter("grade"));
 			}
 			
-
+			if(request.getParameter("abilitySubmit") != null){
+		int oldGrade = Integer.valueOf(request.getParameter("oldGrade"));
+		if(grade == oldGrade){
+			String[] chosenCourses = request.getParameterValues("chosen");
+			//teacherAbilityOperation.deleteByTeacherId(teacherId);
+			teacherAbilityOperation.deleteByTeacherAndGrade(teacherId, grade);
+			TeacherAbility teacherAbility = new TeacherAbility();
+			teacherAbility.setTeacherId(teacherId);
+			if(chosenCourses != null){
+		for(String chosenCourse:chosenCourses){
+			teacherAbility.setCourseId(Integer.valueOf(chosenCourse));
+			teacherAbilityOperation.add(teacherAbility);
 		}
-			
-			
-			AeasTeacher teacher = teacherOperation.get(teacherId);
+			}
+		}
+		
 
-			
-			ArrayList<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(teacherId);
-			
-			
+			}
+		
+		
+		OracleTeacher teacher = teacherOperation.get(teacherId);
 
-			
-			ArrayList<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
-			ArrayList<FirstCourse> selectedFirstCourseList =new ArrayList<FirstCourse>();
-			for(int i = 0; i < teacherAbilityList.size(); i++){
-				TeacherAbility teacherAbility = teacherAbilityList.get(i);
-				for(int j = 0; j<firstCourseList.size(); j++){
-					if(teacherAbilityList.get(i).getCourseId() == firstCourseList.get(j).getId()){
-						selectedFirstCourseList.add(firstCourseList.get(j));
-						firstCourseList.remove(j);
-					}
+		
+		ArrayList<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(teacherId);
+		
+		
+
+		
+		ArrayList<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+		ArrayList<FirstCourse> selectedFirstCourseList =new ArrayList<FirstCourse>();
+		for(int i = 0; i < teacherAbilityList.size(); i++){
+			TeacherAbility teacherAbility = teacherAbilityList.get(i);
+			for(int j = 0; j<firstCourseList.size(); j++){
+				if(teacherAbilityList.get(i).getCourseId() == firstCourseList.get(j).getId()){
+					selectedFirstCourseList.add(firstCourseList.get(j));
+					firstCourseList.remove(j);
 				}
 			}
+		}
 	%>
 	
 		<div class="navbar navbar-default" role="navigation">

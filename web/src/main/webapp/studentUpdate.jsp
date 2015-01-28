@@ -1,9 +1,9 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.v2.AeasTeacher"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasStudentOperation"%>
-<%@page import="com.kevin.aeas.object.v2.AeasStudent"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -34,49 +34,49 @@ function checkForm(){
 </head>
 <body>
 	<%
-	AeasStudent student = null;
-	AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
-    AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();	
-    String idStr = (String)request.getParameter("id");
-    if(idStr != null){
-    	int id = Integer.valueOf(idStr);	    	
-    	student = studentOperation.get(id);	    	
-    	List<AeasTeacher> teacherList = teacherOperation.getAll();
-	    			
+		OracleStudent student = null;
+			AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
+		    AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();	
+		    String idStr = (String)request.getParameter("id");
+		    if(idStr != null){
+		    	int id = Integer.valueOf(idStr);	    	
+		    	student = studentOperation.get(id);	    	
+		    	List<OracleTeacher> teacherList = teacherOperation.getAll();
 	%>	
 	  <div class="container">
 		<form action="studentServlet" method="get" onSubmit="return checkForm();">
 		  <input type="hidden" name="action" value="update">
-		  <input type="hidden" name="id" value="<%= student.getId() %>">
+		  <input type="hidden" name="id" value="<%=student.getId()%>">
 		<div class="form-group">      
-		学生姓名: <input type="text" name="name" value="<%= student.getName() %>" />
+		学生姓名: <input type="text" name="name" value="<%=student.getName()%>" />
 		</div>
 		<div class="form-group">
-		学生简称: <input type="text" name="shortName" value="<%= student.getShortName() %>" />
+		学生简称: <input type="text" name="shortName" value="<%=student.getShortName()%>" />
 		</div>
 		<div class="form-group">
 		 年级:
-		     <input type="radio" name="grade" value = "1" <%=student.getGrade()==1?"checked":"" %>> 4-6
-             <input type="radio" name="grade" value = "2" <%=student.getGrade()==2?"checked":"" %>> 7-9
-             <input type="radio" name="grade" value = "3" <%=student.getGrade()==3?"checked":"" %>> 10-12
+		     <input type="radio" name="grade" value = "1" <%=student.getGrade()==1?"checked":""%>> 4-6
+             <input type="radio" name="grade" value = "2" <%=student.getGrade()==2?"checked":""%>> 7-9
+             <input type="radio" name="grade" value = "3" <%=student.getGrade()==3?"checked":""%>> 10-12
         </div>
         <div class="form-group">        
-		测试成绩: <input type="text" name="testScore" value="<%= student.getTestScore() %>" />
+		测试成绩: <input type="text" name="testScore" value="<%=student.getTestScore()%>" />
 		</div>
 		<div class="form-group">
-		目标分数: <input type="text" name="targetScore" value="<%= student.getTargetScore() %>" />
+		目标分数: <input type="text" name="targetScore" value="<%=student.getTargetScore()%>" />
 		</div>
 		<div class="form-group">
 		考试时间: 
 		    <span> <input name="examineDate" type="text" id="examineDate" size="10"
-                        maxlength="10" onclick="new Calendar().show(this);" readonly="readonly" value="<%= student.getExamineDate() %>"/>
+                        maxlength="10" onclick="new Calendar().show(this);" readonly="readonly" value="<%=student.getExamineDate()%>"/>
             </span><br>
-		考试地点: <input type="text" name="examinePlace" value="<%= student.getExaminePlace() %>" />
+		考试地点: <input type="text" name="examinePlace" value="<%=student.getExaminePlace()%>" />
 		</div>
 		<div class="form-group">
 		班主任: 		
 		<select name="teacherId" >
-			<% for(AeasTeacher teacher:teacherList){
+			<%
+				for(OracleTeacher teacher:teacherList){
 			%>
 			  <option value="<%= teacher.getId() %>" <%= student.getTeacherId()==teacher.getId()?"selected":"" %>> <%= teacher.getName() %> </option>
 			<% 

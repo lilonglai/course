@@ -1,6 +1,6 @@
 <%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
-<%@page import="com.kevin.aeas.object.v2.AeasFirstCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -28,40 +28,37 @@
 </head>
 <body>
 	<%
-	AeasFirstCourse firstCourse = null;
-    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
-	if (request.getParameter("submit") != null) {		
-		
-		int courseId = Integer.valueOf(request.getParameter("id"));
-		firstCourse = firstCourseOperation.get(courseId);
-		
-		firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
-		String name = request.getParameter("name");
-		name = new String(name.getBytes("iso-8859-1"), "utf-8");
-		firstCourse.setName(name);
+		OracleFirstCourse firstCourse = null;
+	    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
+		if (request.getParameter("submit") != null) {		
+			
+			int courseId = Integer.valueOf(request.getParameter("id"));
+			firstCourse = firstCourseOperation.get(courseId);
+			
+			firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
+			String name = request.getParameter("name");
+			name = new String(name.getBytes("iso-8859-1"), "utf-8");
+			firstCourse.setName(name);
 
-		String shortName = request.getParameter("shortName");
-		shortName = new String(shortName.getBytes("iso-8859-1"),
-				"utf-8");
-		firstCourse.setShortName(shortName);
-		
-		String description = request.getParameter("description");
-		description = new String(description.getBytes("iso-8859-1"),
-				"utf-8");
-		firstCourse.setDescription(description);
+			String shortName = request.getParameter("shortName");
+			shortName = new String(shortName.getBytes("iso-8859-1"),
+			"utf-8");
+			firstCourse.setShortName(shortName);
+			
+			String description = request.getParameter("description");
+			description = new String(description.getBytes("iso-8859-1"),
+			"utf-8");
+			firstCourse.setDescription(description);
 
-		firstCourseOperation.update(firstCourse);
+			firstCourseOperation.update(firstCourse);
 
-		response.sendRedirect("course.jsp" + "?grade=" + firstCourse.getGrade());
-	}	
-	
-	    String idStr = (String)request.getParameter("id");
-	    if(idStr != null){
-	    	int id = Integer.valueOf(idStr);	    	
-	    	firstCourse = firstCourseOperation.get(id);
-	    	
-	    	
+			response.sendRedirect("course.jsp" + "?grade=" + firstCourse.getGrade());
+		}	
 		
+		    String idStr = (String)request.getParameter("id");
+		    if(idStr != null){
+		    	int id = Integer.valueOf(idStr);	    	
+		    	firstCourse = firstCourseOperation.get(id);
 	%>
 	
   <div class="container">

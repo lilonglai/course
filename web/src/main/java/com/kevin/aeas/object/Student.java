@@ -3,24 +3,27 @@ package com.kevin.aeas.object;
 import java.sql.Date;
 
 public class Student {
-	private int id;
-	private String name;
-	private String shortName;
-	private int grade;
-	private String testScore;
-	private String targetScore;
-	private Date examineDate;
-	private String examinePlace;
-	private int teacherId;
-	private String description;
+	protected int id;
+	protected String name;
+	protected String shortName;
+	protected int grade;
+	protected String testScore;
+	protected String targetScore;
+	protected Date examineDate;
+	protected String examinePlace;
+	protected int teacherId;
+	protected String description;
+	protected Boolean isAlive;
 
 	public Student() {
 		super();
 	}
 
+
 	public Student(int id, String name, String shortName, int grade,
 			String testScore, String targetScore, Date examineDate,
-			String examinePlace, int teacherId, String description) {
+			String examinePlace, int teacherId, String description,
+			Boolean isAlive) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,7 +35,9 @@ public class Student {
 		this.examinePlace = examinePlace;
 		this.teacherId = teacherId;
 		this.description = description;
+		this.isAlive = isAlive;
 	}
+
 
 	public int getId() {
 		return id;
@@ -114,13 +119,63 @@ public class Student {
 		this.description = description;
 	}
 
+
+	public Boolean getIsAlive() {
+		return isAlive;
+	}
+
+
+	public void setIsAlive(Boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", shortName="
 				+ shortName + ", grade=" + grade + ", testScore=" + testScore
-				+ ", targetScore=" + targetScore + ", examineDate=" + examineDate
-				+ ", examinePlace=" + examinePlace + ", teacherId=" + teacherId
-				+ ", description=" + description + "]";
+				+ ", targetScore=" + targetScore + ", examineDate="
+				+ examineDate + ", examinePlace=" + examinePlace
+				+ ", teacherId=" + teacherId + ", description=" + description
+				+ ", isAlive=" + isAlive + "]";
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student that = (Student) o;
+
+        if (id != that.id) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (examineDate != null ? !examineDate.equals(that.examineDate) : that.examineDate != null) return false;
+        if (examinePlace != null ? !examinePlace.equals(that.examinePlace) : that.examinePlace != null) return false;
+        if (grade != that.grade) return false;
+        if (isAlive != null ? !isAlive.equals(that.isAlive) : that.isAlive != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (shortName != null ? !shortName.equals(that.shortName) : that.shortName != null) return false;
+        if (targetScore != null ? !targetScore.equals(that.targetScore) : that.targetScore != null) return false;
+        if (teacherId != that.teacherId) return false;
+        if (testScore != null ? !testScore.equals(that.testScore) : that.testScore != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (shortName != null ? shortName.hashCode() : 0);
+        result = 31 * result + grade;
+        result = 31 * result + (testScore != null ? testScore.hashCode() : 0);
+        result = 31 * result + (targetScore != null ? targetScore.hashCode() : 0);
+        result = 31 * result + (examineDate != null ? examineDate.hashCode() : 0);
+        result = 31 * result + (examinePlace != null ? examinePlace.hashCode() : 0);
+        result = 31 * result + teacherId;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (isAlive != null ? isAlive.hashCode() : 0);
+        return result;
+    }
 
 }

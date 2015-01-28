@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.v2.AeasFirstCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
-<%@page import="com.kevin.aeas.object.v2.AeasSecondCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -31,10 +31,10 @@
 </head>
 <body>
 	<%
-	AeasSecondCourse secondCourse = null;
-    AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
-    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
-	if (request.getParameter("submit") != null) {
+		OracleSecondCourse secondCourse = null;
+		    AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
+		    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
+			if (request.getParameter("submit") != null) {
 		
 		
 		int courseId = Integer.valueOf(request.getParameter("id"));
@@ -46,46 +46,45 @@
 
 		String shortName = request.getParameter("shortName");
 		shortName = new String(shortName.getBytes("iso-8859-1"),
-				"utf-8");
+		"utf-8");
 		secondCourse.setShortName(shortName);
 
 		int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-		AeasFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+		OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 		secondCourse.setAeasFirstCourse(firstCourse);
 		
 		String description = request.getParameter("description");
 		description = new String(description.getBytes("iso-8859-1"),
-				"utf-8");
+		"utf-8");
 		secondCourse.setDescription(description);
 
 		secondCourseOperation.update(secondCourse);
 
 		response.sendRedirect("course.jsp" + "?grade=" + firstCourseOperation.get(firstCourseId).getGrade());
-	}
-	
-	else{
-	    String idStr = (String)request.getParameter("id");
-    	int id = Integer.valueOf(idStr);	    	
-    	secondCourse = secondCourseOperation.get(id);
-    	
-    	AeasFirstCourse firstCourse = secondCourse.getAeasFirstCourse();
-        int grade = firstCourse.getGrade();
-        List<AeasFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
-		
+			}
+			
+			else{
+			    String idStr = (String)request.getParameter("id");
+		    	int id = Integer.valueOf(idStr);	    	
+		    	secondCourse = secondCourseOperation.get(id);
+		    	
+		    	OracleFirstCourse firstCourse = secondCourse.getAeasFirstCourse();
+		        int grade = firstCourse.getGrade();
+		        List<OracleFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 	%>
   <div class="container">
 	<form action="secondCourseUpdate.jsp" method="get" onSubmit="return checkForm();">
-	    <input type="hidden" name="id" value="<%= secondCourse.getId() %>">
+	    <input type="hidden" name="id" value="<%=secondCourse.getId()%>">
 	    <div class="form-group">
-		课程名称: <input type="text" name="name" value="<%= secondCourse.getName() %>"/>
+		课程名称: <input type="text" name="name" value="<%=secondCourse.getName()%>"/>
 		</div>
 		<div class="form-group">
-		课程简称: <input type="text" name="shortName" value="<%= secondCourse.getShortName() %>"/>
+		课程简称: <input type="text" name="shortName" value="<%=secondCourse.getShortName()%>"/>
 		</div>
 		<div class="form-group">
 		课程分类: <select name="firstCourseId">
 		<%
-		    for(AeasFirstCourse course:firstCourseList){
+			for(OracleFirstCourse course:firstCourseList){
 		%>
 				<option value="<%= course.getId() %>" <%= course.getId()==secondCourse.getAeasFirstCourse().getId()?"selected":"" %>><%= course.getName() %></option>
 				

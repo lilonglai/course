@@ -4,18 +4,18 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday;
+import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 
-public class AeasTeacherDefaultHolidayOperation extends AeasBasicOperation<AeasTeacherDefaultHoliday>{
+public class AeasTeacherDefaultHolidayOperation extends AeasBasicOperation<OracleTeacherDefaultHoliday>{
 	public AeasTeacherDefaultHolidayOperation(){
-		super(AeasTeacherDefaultHoliday.class);
+		super(OracleTeacherDefaultHoliday.class);
 	}
 	
-	public AeasTeacherDefaultHoliday getByTeacherId(int teacherId){
+	public OracleTeacherDefaultHoliday getByTeacherId(int teacherId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select h from AeasTeacherDefaultHoliday h where h.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-		List<AeasTeacherDefaultHoliday> list = q.getResultList();
-		AeasTeacherDefaultHoliday aeasTeacherDefaultHoliday = null;
+		List<OracleTeacherDefaultHoliday> list = q.getResultList();
+		OracleTeacherDefaultHoliday aeasTeacherDefaultHoliday = null;
 		if(list.size() > 0)
 			aeasTeacherDefaultHoliday = list.get(0);
 		return aeasTeacherDefaultHoliday;		

@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.v2.AeasUser;
+import com.kevin.aeas.object.oracle.OracleUser;
 
-public class AeasUserOperation extends AeasBasicOperation<AeasUser> {
+public class AeasUserOperation extends AeasBasicOperation<OracleUser> {
 	public AeasUserOperation() {
-		super(AeasUser.class);
+		super(OracleUser.class);
 	}
 
 	public boolean isExistUser(String userName, String userPassword) {

@@ -3,36 +3,36 @@ package com.kevin.aeas.operation.v2;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kevin.aeas.object.v2.AeasFirstCourse;
-import com.kevin.aeas.object.v2.AeasTeacher;
-import com.kevin.aeas.object.v2.AeasTeacherAbility;
+import com.kevin.aeas.object.oracle.OracleFirstCourse;
+import com.kevin.aeas.object.oracle.OracleTeacher;
+import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 
-public class AeasTeacherAbilityOperation extends AeasBasicOperation<AeasTeacherAbility>{
+public class AeasTeacherAbilityOperation extends AeasBasicOperation<OracleTeacherAbility>{
 	public AeasTeacherAbilityOperation(){
-	  super(AeasTeacherAbility.class);	
+	  super(OracleTeacherAbility.class);	
 	}
 	
-	public List<AeasTeacherAbility> getByTeacherId(int teacherId) {
-		AeasTeacher aeasTeacher = EntityManangerUtil.getInstance().find(AeasTeacher.class, teacherId);
-		List<AeasTeacherAbility> list;
+	public List<OracleTeacherAbility> getByTeacherId(int teacherId) {
+		OracleTeacher aeasTeacher = EntityManangerUtil.getInstance().find(OracleTeacher.class, teacherId);
+		List<OracleTeacherAbility> list;
 		if(aeasTeacher.getAeasTeacherAbilities() instanceof List){
-			list = (List<AeasTeacherAbility>)aeasTeacher.getAeasTeacherAbilities();
+			list = (List<OracleTeacherAbility>)aeasTeacher.getAeasTeacherAbilities();
 		}
 		else{
-			list = new ArrayList<AeasTeacherAbility>();
+			list = new ArrayList<OracleTeacherAbility>();
 			list.addAll(aeasTeacher.getAeasTeacherAbilities());
 		}
 		return list;
 	}
 	
-	public List<AeasTeacherAbility> getByCourseId(int courseId) {
-		AeasFirstCourse aeasFirstCourse = EntityManangerUtil.getInstance().find(AeasFirstCourse.class, courseId);
-		List<AeasTeacherAbility> list;
+	public List<OracleTeacherAbility> getByCourseId(int courseId) {
+		OracleFirstCourse aeasFirstCourse = EntityManangerUtil.getInstance().find(OracleFirstCourse.class, courseId);
+		List<OracleTeacherAbility> list;
 		if(aeasFirstCourse.getAeasTeacherAbilities() instanceof List){
-			list = (List<AeasTeacherAbility>)aeasFirstCourse.getAeasTeacherAbilities();
+			list = (List<OracleTeacherAbility>)aeasFirstCourse.getAeasTeacherAbilities();
 		}
 		else{
-			list = new ArrayList<AeasTeacherAbility>();
+			list = new ArrayList<OracleTeacherAbility>();
 			list.addAll(aeasFirstCourse.getAeasTeacherAbilities());
 		}
 		return list;

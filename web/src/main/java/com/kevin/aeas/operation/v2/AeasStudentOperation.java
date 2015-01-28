@@ -5,50 +5,50 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.v2.AeasStudent;
+import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class AeasStudentOperation extends AeasBasicOperation<AeasStudent>{
+public class AeasStudentOperation extends AeasBasicOperation<OracleStudent>{
 	public AeasStudentOperation(){
-		super(AeasStudent.class);
+		super(OracleStudent.class);
 	}
 	
-	public AeasStudent getByName(String name) {		
+	public OracleStudent getByName(String name) {		
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.name=:name");
 		q.setParameter("name", name);
-		List<AeasStudent> list = q.getResultList();
-		AeasStudent aeasStudent = null;
+		List<OracleStudent> list = q.getResultList();
+		OracleStudent aeasStudent = null;
 		if(list.size() >0)
 			aeasStudent = list.get(0);
 		return aeasStudent;
 	}
 	
 
-	public List<AeasStudent> getByGrade(int grade) {
+	public List<OracleStudent> getByGrade(int grade) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.grade=:grade");
 		q.setParameter("grade", grade);
-		List<AeasStudent> list = q.getResultList();
+		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 	
-	public List<AeasStudent> getAlive() {		
+	public List<OracleStudent> getAlive() {		
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
-		List<AeasStudent> list = q.getResultList();
+		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 	
-	public List<AeasStudent> getNotAlive() {
+	public List<OracleStudent> getNotAlive() {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
-		List<AeasStudent> list = q.getResultList();
+		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 
-	public List<AeasStudent> getByTeacherId(int teacherId) {
+	public List<OracleStudent> getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-		List<AeasStudent> list = q.getResultList();
+		List<OracleStudent> list = q.getResultList();
 		return list;
 
 	}

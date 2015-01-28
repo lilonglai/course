@@ -3,10 +3,10 @@ package com.kevin.aeas.object;
 import java.sql.Date;
 
 public class TeacherHoliday {
-	private int id;
-	private int teacherId;
-	private Date adjustDate;
-	private boolean isHoliday;
+	protected int id;
+	protected int teacherId;
+	protected Date adjustDate;
+	protected Boolean isHoliday;
 
 	public TeacherHoliday() {
 		super();
@@ -45,11 +45,12 @@ public class TeacherHoliday {
 		this.adjustDate = adjustDate;
 	}
 
-	public boolean isHoliday() {
+
+	public Boolean getIsHoliday() {
 		return isHoliday;
 	}
 
-	public void setHoliday(boolean isHoliday) {
+	public void setIsHoliday(Boolean isHoliday) {
 		this.isHoliday = isHoliday;
 	}
 
@@ -59,5 +60,46 @@ public class TeacherHoliday {
 				+ ", adjustDate=" + adjustDate + ", isHoliday=" + isHoliday
 				+ "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((adjustDate == null) ? 0 : adjustDate.hashCode());
+		result = prime * result + id;
+		result = prime * result
+				+ ((isHoliday == null) ? 0 : isHoliday.hashCode());
+		result = prime * result + teacherId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TeacherHoliday other = (TeacherHoliday) obj;
+		if (adjustDate == null) {
+			if (other.adjustDate != null)
+				return false;
+		} else if (!adjustDate.equals(other.adjustDate))
+			return false;
+		if (id != other.id)
+			return false;
+		if (isHoliday == null) {
+			if (other.isHoliday != null)
+				return false;
+		} else if (!isHoliday.equals(other.isHoliday))
+			return false;
+		if (teacherId != other.teacherId)
+			return false;
+		return true;
+	}
+	
+	
 
 }

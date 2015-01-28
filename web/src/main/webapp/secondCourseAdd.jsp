@@ -1,9 +1,9 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.v2.AeasFirstCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
-<%@page import="com.kevin.aeas.object.v2.AeasSecondCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,13 +31,13 @@
 </head>
 <body>
 	<%
-		AeasSecondCourse secondCourse = null;
-	    AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
-	    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
+		OracleSecondCourse secondCourse = null;
+			    AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
+			    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
 		if (request.getParameter("submit") != null) {
-			secondCourse = new AeasSecondCourse();
+			secondCourse = new OracleSecondCourse();
 			int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-			AeasFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+			OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 			
 			secondCourse.setAeasFirstCourse(firstCourse);
 			String name = request.getParameter("name");
@@ -46,14 +46,14 @@
 
 			String shortName = request.getParameter("shortName");
 			shortName = new String(shortName.getBytes("iso-8859-1"),
-					"utf-8");
+			"utf-8");
 			secondCourse.setShortName(shortName);
 			
 
 			
 			String description = request.getParameter("description");
 			description = new String(description.getBytes("iso-8859-1"),
-					"utf-8");
+			"utf-8");
 			secondCourse.setDescription(description);
 
 			secondCourseOperation.add(secondCourse);
@@ -64,9 +64,9 @@
 		    String idStr = (String)request.getParameter("id");
 		    int firstCourseId = Integer.valueOf(idStr);
 		    	
-	    	AeasFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-	        int grade = firstCourse.getGrade();
-	        List<AeasFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+			    	OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+			        int grade = firstCourse.getGrade();
+			        List<OracleFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 	%>
   <div class="container">
 	<form action="secondCourseAdd.jsp" method="get" onSubmit="return checkForm();">
@@ -79,7 +79,7 @@
 	  <div class="form-group">
 		课程分类: <select name="firstCourseId">
 		<%
-		    for(AeasFirstCourse course:firstCourseList){
+			for(OracleFirstCourse course:firstCourseList){
 		%>
 				<option value="<%= course.getId() %>" <%= course.getId()==firstCourseId?"selected":"" %> > <%= course.getName() %></option>
 		<% 

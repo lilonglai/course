@@ -4,18 +4,18 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.v2.AeasFirstCourse;
+import com.kevin.aeas.object.oracle.OracleFirstCourse;
 
 
-public class AeasFirstCourseOperation extends AeasBasicOperation<AeasFirstCourse> {
+public class AeasFirstCourseOperation extends AeasBasicOperation<OracleFirstCourse> {
 	public AeasFirstCourseOperation(){
-		super(AeasFirstCourse.class);
+		super(OracleFirstCourse.class);
 	}
 	
-	public List<AeasFirstCourse> getByGrade(int grade){
+	public List<OracleFirstCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select c from AeasFirstCourse c where c.grade=:grade");
 		q.setParameter("grade", grade);
-		List<AeasFirstCourse> list = q.getResultList();		
+		List<OracleFirstCourse> list = q.getResultList();		
 		return list;		
 	}		
 	

@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.v2.AeasSecondCourse"%>
-<%@page import="com.kevin.aeas.object.v2.AeasFirstCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
+<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
@@ -90,34 +90,34 @@
 	</div>
     
    <%
-   int grade =3;
-	if(request.getParameter("grade") != null){
-		grade = Integer.valueOf(request.getParameter("grade"));
-	}
-   
-	AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
-	AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
-	
-   if(request.getParameter("id") != null){
-	   int id = (Integer.valueOf(request.getParameter("id")));
-	   int flag = (Integer.valueOf(request.getParameter("flag")));
-	   if(flag==1){
-		   firstCourseOperation.delete(id);
-		   
-	   }
-	   else if(flag==2){
-		   secondCourseOperation.delete(id);
-	   }
-	   //courseOperation.delete(id);	   	   
-   }
-   %>
+       	int grade =3;
+              	if(request.getParameter("grade") != null){
+              		grade = Integer.valueOf(request.getParameter("grade"));
+              	}
+                 
+              	AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
+              	AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
+              	
+                 if(request.getParameter("id") != null){
+              	   int id = (Integer.valueOf(request.getParameter("id")));
+              	   int flag = (Integer.valueOf(request.getParameter("flag")));
+              	   if(flag==1){
+              		   firstCourseOperation.delete(id);
+              		   
+              	   }
+              	   else if(flag==2){
+              		   secondCourseOperation.delete(id);
+              	   }
+              	   //courseOperation.delete(id);	   	   
+                 }
+       %>
    
    <div class="container">
    	<form method="get" action="course.jsp" name="gradeForm" id="gradeForm">	  	
 	                选择年级: <select name="grade" onChange="gradeChanged();">
-				<option value="1" <%= grade==1?"selected":"" %>>4-6</option>
-				<option value="2" <%= grade==2?"selected":"" %>>7-9</option>
-				<option value="3" <%= grade==3?"selected":"" %>>10-12</option>
+				<option value="1" <%=grade==1?"selected":""%>>4-6</option>
+				<option value="2" <%=grade==2?"selected":""%>>7-9</option>
+				<option value="3" <%=grade==3?"selected":""%>>10-12</option>
 			</select> 
      </form>
      <br>
@@ -136,12 +136,12 @@
 		      <tbody>
 					<%
 						int firstCourseCount = 1;
-						List<AeasFirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
-						for (AeasFirstCourse firstCourse : FirstCourseList) {
+												List<OracleFirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
+												for (OracleFirstCourse firstCourse : FirstCourseList) {
 					%>
 			
 					<tr>
-					    <td><%=firstCourseCount++ %></td>
+					    <td><%=firstCourseCount++%></td>
 						<td><%=firstCourse.getName()%></td>
 						<td><%=firstCourse.getShortName()%></td>
 						<td><%=firstCourse.getDescription()%></td>							
@@ -176,10 +176,10 @@
 			</thead>
 			<tbody>
 		<%
-		int secondCourseCount = 1;
-		int firstCourseId = 0;
-			List<AeasSecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
-			for (AeasSecondCourse secondCourse : secondCourseList) {
+			int secondCourseCount = 1;
+				int firstCourseId = 0;
+			List<OracleSecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
+			for (OracleSecondCourse secondCourse : secondCourseList) {
 				if(firstCourseId == secondCourse.getAeasFirstCourse().getId()){
 					secondCourseCount++;
 				}else{
