@@ -25,7 +25,7 @@ dependencies{
     compile group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.9.2', ext: 'jar'
     compile group: 'org.codehaus.jackson', name: 'jackson-xc', version: '1.9.2', ext: 'jar'
     
-    compile group: 'org.apache.struts', name: 'struts2-core', version: '2.3.20'
+   // compile group: 'org.apache.struts', name: 'struts2-core', version: '2.3.20'
     
     compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.7.Final'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.3.7.Final'
@@ -33,6 +33,10 @@ dependencies{
     compile name: 'jxl'
     
     compile name: 'ojdbc6-12.1.0.1.0'
+    
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.18'
+    
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
 }
 
 eclipse{
