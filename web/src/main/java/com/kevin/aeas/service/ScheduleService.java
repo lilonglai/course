@@ -33,143 +33,157 @@ public class ScheduleService {
 		super();
 	}
 	
-	private ArrayList<SecondCourse> getSecondCourseList(Date onDate, int onTime, int studentId, int firstCourseId){
+	private ArrayList<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
 		SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
 		ArrayList<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
 		ArrayList<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
-		for(Schedule schedule : scheduleList){
-			for(int i = 0; i< secondCourseList.size(); i++){
-				if(secondCourseList.get(i).getId() == schedule.getCourseId()){
-					secondCourseList.remove(i);
-					break;
-				}
+		ArrayList<SecondCourse> resultList = new ArrayList<SecondCourse>();
+		for(SecondCourse secondCourse : secondCourseList){
+			if(isScheduled(secondCourse, scheduleList)){
+				continue;
 			}
-			
+			resultList.add(secondCourse);
 		}
 		
-		return secondCourseList;
-		
+		return secondCourseList;		
 	}
 	
-	private ArrayList<Teacher> getTeacherList(Date onDate, int onTime, int studentId, int firstCourseId){
+	private boolean isScheduled(SecondCourse secondCourse, ArrayList<Schedule> scheduleList){
+		for(Schedule schedule : scheduleList){
+			if(secondCourse.getId() == schedule.getCourseId()){
+				return true;
+			}		
+		}
+		return false;
+	}
+	
+	private ArrayList<Teacher> getTeacherList(Date onDate, int onTime, int firstCourseId){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(onDate);
 		TeacherAbilityOperation teacherAbilityOperation = new TeacherAbilityOperation();
-		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
-		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
+
 		TeacherOperation teacherOperation = new TeacherOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
 		ArrayList<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
 		
 		ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
+	    ArrayList<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
 		
-	outer:	
 		for(TeacherAbility teacherAbility:teacherAbilityList){
 			int teacherId = teacherAbility.getTeacherId();
 
-		    TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
-		    ArrayList<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
-		    if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
+		    if(isTeacherInHoliday(teacherId, calendar)){
 		    	continue;
 		    }
-		    
-		    ArrayList<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
-		    
-			for(Schedule schedule : scheduleList){
-				if(schedule.getTeacherId() == teacherId){
-					continue outer;
-				}					
-			}
+		    		    		    
+		    if(isScheduled(teacherId, scheduleList)){
+		    	continue;
+		    }
 		    teacherList.add(teacherOperation.get(teacherId));
 		    			    
 		}
 		return teacherList;
 	}
 	
+	/*
+	 *  decide teacher has been in a holiday
+	 *  @param teacherId the teacher identification.
+	 *  @param calendar represent a day
+	 */
+	private boolean isTeacherInHoliday(int teacherId, Calendar calendar){
+		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
+		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
+		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
+		ArrayList<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
+	    if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
+	    	return true;
+	    }
+	    return false;
+	}
+	
+	
+	/*
+	 * decide teacher has been arranged a class. 
+	 * @param teacherId the teacher identification.
+	 * @param Schedule the arranged list
+	 */
+	private boolean isScheduled(int teacherId, ArrayList<Schedule> scheduleList){
+		for(Schedule schedule : scheduleList){
+			if(schedule.getTeacherId() == teacherId){
+				return true;
+			}			
+		}
+		return false;
+	}
+	
 	
 	private ArrayList<Teacher> getAvailableTeacherList(Date onDate, int onTime){
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
 		TeacherOperation teacherOperation = new TeacherOperation();
-		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
-		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
 		ArrayList<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
 		ArrayList<Teacher> teacherList = teacherOperation.getAll();
-		
-		for(Schedule schedule:scheduleList){
-			for(Teacher teacher:teacherList)
-			if(schedule.getTeacherId() == teacher.getId()){
-				teacherList.remove(teacher);
-				break;
-			}	
-		}
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(onDate);
 		
- 
-	    for(int i= teacherList.size()-1; i >=0; i--){
-	    	int teacherId = teacherList.get(i).getId();
-		    TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
-		    ArrayList<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
-		    if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
-		    	teacherList.remove(i);
+		ArrayList<Teacher> resultList = new ArrayList<Teacher>();
+	    for(Teacher teacher:teacherList){
+	    	int teacherId = teacher.getId();
+	    	
+		    if(isTeacherInHoliday(teacherId, calendar)){
 		    	continue;
 		    }
+		    
+		    // decide the teacher's scheduling time
+			if(isScheduled(teacher.getId(), scheduleList)){
+				continue;
+			}
+			
+			resultList.add(teacher);
 	    	
-	    	for(Schedule schedule:scheduleList){
-	    		if(schedule.getTeacherId() == teacherId){
-					teacherList.remove(i);
-					break;
-				}	    		
-	    	}
-	    	
-
 	    }
 	    
-		return teacherList;
+		return resultList;
 	}
 			
 	@GET
 	@Path("getSecondCourseList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<SecondCourse> getSecondCourseList2(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime,
-			@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(onDate, onTime, studentId, firstCourseId);
+	public ArrayList<SecondCourse> getSecondCourseListByGet(@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
+		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
 		return secondCourseList;
 	}
 	
 	@POST
 	@Path("getSecondCourseList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<SecondCourse> getSecondCourseList3(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime,
-			@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(onDate, onTime, studentId, firstCourseId);
+	public ArrayList<SecondCourse> getSecondCourseListByPost(@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
+		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
 		return secondCourseList;
 	}
 	
 	@GET
 	@Path("getTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  ArrayList<Teacher> getTeacherList2(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime, 
-			@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, studentId, firstCourseId);
+	public  ArrayList<Teacher> getTeacherListByGet(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime, @QueryParam("firstCourseId") int firstCourseId){
+		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		return teacherList;
 	}
 	
 	@POST
 	@Path("getTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  ArrayList<Teacher> getTeacherList3(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime, 
+	public  ArrayList<Teacher> getTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime, 
 			@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, studentId, firstCourseId);
+		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		return teacherList;
 	}
 	
 	@GET
 	@Path("getAvailableTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Teacher> getAvailableTeacherList2(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime){
+	public ArrayList<Teacher> getAvailableTeacherListByGet(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime){
 		ArrayList<Teacher> teacherList = getAvailableTeacherList(onDate, onTime);
 		return teacherList;
 	}
@@ -177,7 +191,7 @@ public class ScheduleService {
 	@POST
 	@Path("getAvailableTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Teacher> getAvailableTeacherList3(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime){
+	public ArrayList<Teacher> getAvailableTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime){
 		ArrayList<Teacher> teacherList = getAvailableTeacherList(onDate, onTime);
 		return teacherList;
 	}
@@ -185,10 +199,10 @@ public class ScheduleService {
 	@GET
 	@Path("getSecondCourseAndTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public HashMap<String, Object> getSecondCourseAndTeacherList2(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime,
+	public HashMap<String, Object> getSecondCourseAndTeacherListByGet(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime,
 			@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(onDate, onTime, studentId, firstCourseId);
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, studentId, firstCourseId);
+		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
+		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("secondCourseList", secondCourseList);
 		map.put("teacherList", teacherList);
@@ -198,10 +212,10 @@ public class ScheduleService {
 	@POST
 	@Path("getSecondCourseAndTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public HashMap<String, Object> getSecondCourseAndTeacherList3(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime,
+	public HashMap<String, Object> getSecondCourseAndTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime,
 			@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(onDate, onTime, studentId, firstCourseId);
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, studentId, firstCourseId);
+		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
+		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("secondCourseList", secondCourseList);
 		map.put("teacherList", teacherList);
