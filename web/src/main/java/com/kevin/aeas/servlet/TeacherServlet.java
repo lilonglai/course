@@ -14,9 +14,9 @@ import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.TeacherOperation;
-import com.kevin.aeas.operation.jpa.JpaOperationManager;
-import com.kevin.aeas.operation.jpa.JpaTeacherDefaultHolidayOperation;
-import com.kevin.aeas.operation.jpa.JpaTeacherOperation;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaTeacherDefaultHolidayOperation;
+import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
 
 /**
  * this servlet is used to operate teacher user can add/delete/retire teacher

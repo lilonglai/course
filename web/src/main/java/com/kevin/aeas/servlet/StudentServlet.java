@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.operation.StudentOperation;
-import com.kevin.aeas.operation.jpa.JpaOperationManager;
-import com.kevin.aeas.operation.jpa.JpaStudentOperation;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaStudentOperation;
 
 public class StudentServlet extends HttpServlet {
 	private void delete(int id) {

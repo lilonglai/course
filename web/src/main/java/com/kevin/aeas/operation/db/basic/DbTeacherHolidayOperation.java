@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.db;
+package com.kevin.aeas.operation.db.basic;
 
 import java.sql.Date;
 import java.sql.ResultSet;

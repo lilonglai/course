@@ -1,9 +1,9 @@
-<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaStudentOperation"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaStudentOperation"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.utils.TeacherHelp"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

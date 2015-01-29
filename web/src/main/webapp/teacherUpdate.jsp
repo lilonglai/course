@@ -1,8 +1,8 @@
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacherHoliday"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
 <%@page import="com.kevin.aeas.operation.TeacherDefaultHolidayOperation"%>
 <%@page import="com.kevin.aeas.operation.TeacherOperation"%>

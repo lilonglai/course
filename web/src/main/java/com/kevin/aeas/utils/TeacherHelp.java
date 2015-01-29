@@ -1,7 +1,7 @@
 package com.kevin.aeas.utils;
 
 import com.kevin.aeas.object.oracle.OracleTeacher;
-import com.kevin.aeas.operation.jpa.JpaTeacherOperation;
+import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
 
 public class TeacherHelp {
 	public static String getTeacherName(JpaTeacherOperation teacherOperation, int teacherId){

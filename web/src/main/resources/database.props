@@ -1,7 +1,11 @@
 # oracle database configuration
-dbUrl=jdbc:oracle:thin:@10.182.251.230:1521:orcl
-dbDriver=oracle.jdbc.driver.OracleDriver
-dbUser=aeas
-dbPassword=oracle
+#dbUrl=jdbc:oracle:thin:@10.182.251.230:1521:orcl
+#dbDriver=oracle.jdbc.driver.OracleDriver
+#dbUser=aeas
+#dbPassword=oracle
 
 # mysql database configuration
+dbUrl=jdbc:mysql://localhost:3306/aeas
+dbDriver=com.mysql.jdbc.Driver
+dbUser=root
+dbPassword=root

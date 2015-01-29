@@ -1,5 +1,5 @@
-<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaFirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
-<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

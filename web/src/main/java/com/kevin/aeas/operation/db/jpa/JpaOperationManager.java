@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.jpa;
+package com.kevin.aeas.operation.db.jpa;
 
 public class JpaOperationManager {
 	private static JpaOperationManager instance = new JpaOperationManager();
