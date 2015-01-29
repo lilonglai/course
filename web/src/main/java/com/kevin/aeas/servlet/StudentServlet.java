@@ -11,24 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.oracle.OracleStudent;
+import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.StudentOperation;
-import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
-import com.kevin.aeas.operation.db.jpa.JpaStudentOperation;
 
 public class StudentServlet extends HttpServlet {
 	private void delete(int id) {
-		JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
+		StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
 		studentOperation.delete(id);
 	}
 
 	private void retire(int id) {
-		JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
+		StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
 		studentOperation.retire(id);
 	}
 
 	private void add(HttpServletRequest request)
 			throws UnsupportedEncodingException {
-		JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
+		StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
 	    
 	    OracleStudent student = new OracleStudent();		
 		String tempStr;
@@ -86,8 +85,8 @@ public class StudentServlet extends HttpServlet {
 
 	private void update(HttpServletRequest request)
 			throws UnsupportedEncodingException {
-		JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
-		OracleStudent student;
+		StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
+		Student student;
 		
 		String tempStr;
 		

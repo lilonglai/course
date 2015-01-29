@@ -1,11 +1,11 @@
 package com.kevin.aeas.utils;
 
-import com.kevin.aeas.object.oracle.OracleTeacher;
-import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
+import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.operation.db.TeacherOperation;
 
 public class TeacherHelp {
-	public static String getTeacherName(JpaTeacherOperation teacherOperation, int teacherId){
-		OracleTeacher teacher = teacherOperation.get(teacherId);
+	public static String getTeacherName(TeacherOperation teacherOperation, int teacherId){
+		Teacher teacher = teacherOperation.get(teacherId);
 		String name = null;
 		if(teacher != null)
 			name = teacher.getName();

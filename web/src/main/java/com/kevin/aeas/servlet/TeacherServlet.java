@@ -12,10 +12,10 @@ import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
+import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.db.TeacherOperation;
 import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
-import com.kevin.aeas.operation.db.jpa.JpaTeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
 
 /**
@@ -39,7 +39,8 @@ public class TeacherServlet extends HttpServlet {
 	private void add(HttpServletRequest request)
 			throws UnsupportedEncodingException {
 		OracleTeacher teacher = new OracleTeacher();
-		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");
 		teacher.setName(name);
@@ -62,19 +63,19 @@ public class TeacherServlet extends HttpServlet {
 		if (weeks != null) {
 			for (String week : weeks) {
 				if ("week1".equals(week))
-					teacherDefaultHoliday.setWeak1(true);
+					teacherDefaultHoliday.setWeek1(true);
 				else if ("week2".equals(week))
-					teacherDefaultHoliday.setWeak2(true);
+					teacherDefaultHoliday.setWeek2(true);
 				else if ("week3".equals(week))
-					teacherDefaultHoliday.setWeak3(true);
+					teacherDefaultHoliday.setWeek3(true);
 				else if ("week4".equals(week))
-					teacherDefaultHoliday.setWeak4(true);
+					teacherDefaultHoliday.setWeek4(true);
 				else if ("week5".equals(week))
-					teacherDefaultHoliday.setWeak5(true);
+					teacherDefaultHoliday.setWeek5(true);
 				else if ("week6".equals(week))
-					teacherDefaultHoliday.setWeak6(true);
+					teacherDefaultHoliday.setWeek6(true);
 				else if ("week7".equals(week))
-					teacherDefaultHoliday.setWeak7(true);
+					teacherDefaultHoliday.setWeek7(true);
 				else {
 					throw new IllegalArgumentException("week must between 1-7");
 				}
@@ -82,21 +83,20 @@ public class TeacherServlet extends HttpServlet {
 		}
 		
 		teacher.setIsAlive(true);
-
-		teacher.setAeasTeacherDefaultHoliday(teacherDefaultHoliday);
-		teacherDefaultHoliday.setAeasTeacher(teacher);
 		teacherOperation.add(teacher);
+		teacherDefaultHolidayOperation.add(teacherDefaultHoliday);
 	}
 
 	private void update(HttpServletRequest request)
 			throws UnsupportedEncodingException {
 
-		OracleTeacher teacher = null;
-		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
+		Teacher teacher = null;
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
 		
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		teacher = teacherOperation.get(teacherId);
-		OracleTeacherDefaultHoliday teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();
+		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
 		
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");
@@ -118,19 +118,19 @@ public class TeacherServlet extends HttpServlet {
 		if (weeks != null) {
 			for (String week : weeks) {
 				if ("week1".equals(week))
-					teacherDefaultHoliday.setWeak1(true);
+					teacherDefaultHoliday.setWeek1(true);
 				else if ("week2".equals(week))
-					teacherDefaultHoliday.setWeak2(true);
+					teacherDefaultHoliday.setWeek2(true);
 				else if ("week3".equals(week))
-					teacherDefaultHoliday.setWeak3(true);
+					teacherDefaultHoliday.setWeek3(true);
 				else if ("week4".equals(week))
-					teacherDefaultHoliday.setWeak4(true);
+					teacherDefaultHoliday.setWeek4(true);
 				else if ("week5".equals(week))
-					teacherDefaultHoliday.setWeak5(true);
+					teacherDefaultHoliday.setWeek5(true);
 				else if ("week6".equals(week))
-					teacherDefaultHoliday.setWeak6(true);
+					teacherDefaultHoliday.setWeek6(true);
 				else if ("week7".equals(week))
-					teacherDefaultHoliday.setWeak7(true);
+					teacherDefaultHoliday.setWeek7(true);
 				else {
 					throw new IllegalArgumentException("week must between 1-7");
 				}
