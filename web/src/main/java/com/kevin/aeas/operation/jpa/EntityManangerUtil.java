@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

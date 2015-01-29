@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -16,11 +16,12 @@ import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 import com.kevin.aeas.object.oracle.OracleTeacherHoliday;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class AeasTeacherHolidayOperation {
+public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday>{
 	
-	public OracleTeacherHoliday get(int key) {		
-		OracleTeacherHoliday aeasTeacherHoliday = EntityManangerUtil.getInstance().find(OracleTeacherHoliday.class,key);
-		return aeasTeacherHoliday;
+	
+
+	public JpaTeacherHolidayOperation() {
+		super(TeacherHoliday.class);
 	}
 
 	public List<OracleTeacherHoliday> getByTeacherId(int teacherId) {		
@@ -54,19 +55,6 @@ public class AeasTeacherHolidayOperation {
 
 	}
 
-	public void add(OracleTeacherHoliday aeasTeacherHoliday) {
-		EntityManangerUtil.getInstance().persist(aeasTeacherHoliday);
-
-	}
-
-	public void update(OracleTeacherHoliday aeasTeacherHoliday) {
-		EntityManangerUtil.getInstance().merge(aeasTeacherHoliday);
-	}
-
-	public void delete(int key) {
-		OracleTeacherHoliday aeasTeacherHoliday = EntityManangerUtil.getInstance().find(OracleTeacherHoliday.class,key);
-		EntityManangerUtil.getInstance().remove(aeasTeacherHoliday);
-	}
 
 	public static void main(String[] args) {
 		

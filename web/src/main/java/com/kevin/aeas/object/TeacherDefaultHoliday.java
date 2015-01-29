@@ -46,7 +46,7 @@ public class TeacherDefaultHoliday {
 		this.teacherId = teacherId;
 	}
 
-	
+
 	public Boolean getWeek1() {
 		return week1;
 	}

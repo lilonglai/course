@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import com.kevin.aeas.object.oracle.OracleSchedule;
 import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 
-public class AeasScheduleOperation extends AeasBasicOperation<OracleSchedule>{
-	public AeasScheduleOperation(){
+public class JpaScheduleOperation extends JpaBasicOperation<OracleSchedule>{
+	public JpaScheduleOperation(){
 		super(OracleSchedule.class);
 	}
 	
@@ -61,7 +61,7 @@ public class AeasScheduleOperation extends AeasBasicOperation<OracleSchedule>{
 	}
 	
 	public static void main(String[] args) {
-		AeasScheduleOperation operation = new AeasScheduleOperation();
+		JpaScheduleOperation operation = new JpaScheduleOperation();
 		
 	}
 

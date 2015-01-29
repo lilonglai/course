@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import javax.persistence.Query;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 
 
-public class AeasFirstCourseOperation extends AeasBasicOperation<OracleFirstCourse> {
-	public AeasFirstCourseOperation(){
+public class JpaFirstCourseOperation extends JpaBasicOperation<OracleFirstCourse> {
+	public JpaFirstCourseOperation(){
 		super(OracleFirstCourse.class);
 	}
 	
@@ -20,7 +20,7 @@ public class AeasFirstCourseOperation extends AeasBasicOperation<OracleFirstCour
 	}		
 	
 	public static void main(String[] args) {
-		AeasFirstCourseOperation operation = new AeasFirstCourseOperation();
+		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
 		System.out.println(operation.getAll());		
 	}
 

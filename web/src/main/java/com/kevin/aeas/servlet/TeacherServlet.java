@@ -14,9 +14,9 @@ import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.TeacherOperation;
-import com.kevin.aeas.operation.v2.AeasOperationManager;
-import com.kevin.aeas.operation.v2.AeasTeacherDefaultHolidayOperation;
-import com.kevin.aeas.operation.v2.AeasTeacherOperation;
+import com.kevin.aeas.operation.jpa.JpaOperationManager;
+import com.kevin.aeas.operation.jpa.JpaTeacherDefaultHolidayOperation;
+import com.kevin.aeas.operation.jpa.JpaTeacherOperation;
 
 /**
  * this servlet is used to operate teacher user can add/delete/retire teacher
@@ -27,19 +27,19 @@ import com.kevin.aeas.operation.v2.AeasTeacherOperation;
 public class TeacherServlet extends HttpServlet {
 
 	private void delete(int id) {		
-		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
 		teacherOperation.delete(id);
 	}
 
 	private void retire(int id) {
-		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
 		teacherOperation.retire(id);
 	}
 
 	private void add(HttpServletRequest request)
 			throws UnsupportedEncodingException {
 		OracleTeacher teacher = new OracleTeacher();
-		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");
 		teacher.setName(name);
@@ -92,7 +92,7 @@ public class TeacherServlet extends HttpServlet {
 			throws UnsupportedEncodingException {
 
 		OracleTeacher teacher = null;
-		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
 		
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		teacher = teacherOperation.get(teacherId);

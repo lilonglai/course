@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.persistence.Query;
 
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 
-public class AeasTeacherDefaultHolidayOperation extends AeasBasicOperation<OracleTeacherDefaultHoliday>{
-	public AeasTeacherDefaultHolidayOperation(){
+public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation<OracleTeacherDefaultHoliday>{
+	public JpaTeacherDefaultHolidayOperation(){
 		super(OracleTeacherDefaultHoliday.class);
 	}
 	
@@ -22,7 +22,7 @@ public class AeasTeacherDefaultHolidayOperation extends AeasBasicOperation<Oracl
 	}
 	
 	public static void main(String[] args) {
-		AeasTeacherDefaultHolidayOperation operation = new AeasTeacherDefaultHolidayOperation();
+		JpaTeacherDefaultHolidayOperation operation = new JpaTeacherDefaultHolidayOperation();
 		System.out.println(operation.getAll());		
 	}
 }

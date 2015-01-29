@@ -1,8 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasStudentOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaStudentOperation"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -35,13 +35,13 @@ function checkForm(){
 <body>
 	<%
 		OracleStudent student = null;
-			AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
-		    AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();	
-		    String idStr = (String)request.getParameter("id");
-		    if(idStr != null){
-		    	int id = Integer.valueOf(idStr);	    	
-		    	student = studentOperation.get(id);	    	
-		    	List<OracleTeacher> teacherList = teacherOperation.getAll();
+		JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
+			    JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();	
+			    String idStr = (String)request.getParameter("id");
+			    if(idStr != null){
+			    	int id = Integer.valueOf(idStr);	    	
+			    	student = studentOperation.get(id);	    	
+			    	List<OracleTeacher> teacherList = teacherOperation.getAll();
 	%>	
 	  <div class="container">
 		<form action="studentServlet" method="get" onSubmit="return checkForm();">

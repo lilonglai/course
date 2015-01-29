@@ -1,9 +1,9 @@
-<%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasStudentOperation"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaStudentOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.utils.TeacherHelp"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -105,8 +105,8 @@
 	</div>
     
    <%
-       	AeasStudentOperation studentOperation = AeasOperationManager.getInstance().getStudentOperation();
-          AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+       	JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
+                               JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
        %>
    
    <div class="container">

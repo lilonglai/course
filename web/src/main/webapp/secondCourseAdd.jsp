@@ -1,8 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaFirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaSecondCourseOperation"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -32,41 +32,41 @@
 <body>
 	<%
 		OracleSecondCourse secondCourse = null;
-			    AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
-			    AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
-		if (request.getParameter("submit") != null) {
-			secondCourse = new OracleSecondCourse();
-			int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-			OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-			
-			secondCourse.setAeasFirstCourse(firstCourse);
-			String name = request.getParameter("name");
-			name = new String(name.getBytes("iso-8859-1"), "utf-8");
-			secondCourse.setName(name);
+		    JpaSecondCourseOperation secondCourseOperation = JpaOperationManager.getInstance().getSecondCourseOperation();
+		    JpaFirstCourseOperation firstCourseOperation = JpaOperationManager.getInstance().getFirstCourseOperation();
+			if (request.getParameter("submit") != null) {
+		secondCourse = new OracleSecondCourse();
+		int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
+		OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+		
+		secondCourse.setAeasFirstCourse(firstCourse);
+		String name = request.getParameter("name");
+		name = new String(name.getBytes("iso-8859-1"), "utf-8");
+		secondCourse.setName(name);
 
-			String shortName = request.getParameter("shortName");
-			shortName = new String(shortName.getBytes("iso-8859-1"),
-			"utf-8");
-			secondCourse.setShortName(shortName);
-			
+		String shortName = request.getParameter("shortName");
+		shortName = new String(shortName.getBytes("iso-8859-1"),
+		"utf-8");
+		secondCourse.setShortName(shortName);
+		
 
-			
-			String description = request.getParameter("description");
-			description = new String(description.getBytes("iso-8859-1"),
-			"utf-8");
-			secondCourse.setDescription(description);
+		
+		String description = request.getParameter("description");
+		description = new String(description.getBytes("iso-8859-1"),
+		"utf-8");
+		secondCourse.setDescription(description);
 
-			secondCourseOperation.add(secondCourse);
+		secondCourseOperation.add(secondCourse);
 
-			response.sendRedirect("course.jsp" + "?grade=" + firstCourseOperation.get(firstCourseId).getGrade());
-		}
-		else{
-		    String idStr = (String)request.getParameter("id");
-		    int firstCourseId = Integer.valueOf(idStr);
-		    	
-			    	OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-			        int grade = firstCourse.getGrade();
-			        List<OracleFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+		response.sendRedirect("course.jsp" + "?grade=" + firstCourseOperation.get(firstCourseId).getGrade());
+			}
+			else{
+			    String idStr = (String)request.getParameter("id");
+			    int firstCourseId = Integer.valueOf(idStr);
+			    	
+		    	OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+		        int grade = firstCourse.getGrade();
+		        List<OracleFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 	%>
   <div class="container">
 	<form action="secondCourseAdd.jsp" method="get" onSubmit="return checkForm();">

@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,8 +8,8 @@ import javax.persistence.Query;
 import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class AeasStudentOperation extends AeasBasicOperation<OracleStudent>{
-	public AeasStudentOperation(){
+public class JpaStudentOperation extends JpaBasicOperation<OracleStudent>{
+	public JpaStudentOperation(){
 		super(OracleStudent.class);
 	}
 	
@@ -67,7 +67,7 @@ public class AeasStudentOperation extends AeasBasicOperation<OracleStudent>{
 	}
 
 	public static void main(String[] args) {
-		AeasStudentOperation studentOperation = new AeasStudentOperation();		
+		JpaStudentOperation studentOperation = new JpaStudentOperation();		
 		System.out.println(studentOperation.getAll());
 		
 	}

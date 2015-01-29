@@ -1,8 +1,8 @@
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacherHoliday"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
 <%@page import="com.kevin.aeas.operation.TeacherDefaultHolidayOperation"%>
 <%@page import="com.kevin.aeas.operation.TeacherOperation"%>
@@ -35,7 +35,7 @@
 			    String idStr = (String)request.getParameter("id");
 			    if(idStr != null){
 			    	int id = Integer.valueOf(idStr);
-			    	AeasTeacherOperation aeasTeacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+			    	JpaTeacherOperation aeasTeacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
 			    	teacher = aeasTeacherOperation.get(id);
 			    	
 			    	teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();

@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.persistence.Query;
 
 import com.kevin.aeas.object.oracle.OracleUser;
 
-public class AeasUserOperation extends AeasBasicOperation<OracleUser> {
-	public AeasUserOperation() {
+public class JpaUserOperation extends JpaBasicOperation<OracleUser> {
+	public JpaUserOperation() {
 		super(OracleUser.class);
 	}
 
@@ -22,7 +22,7 @@ public class AeasUserOperation extends AeasBasicOperation<OracleUser> {
 	}
 
 	public static void main(String[] args) {
-		AeasUserOperation operation = new AeasUserOperation();
+		JpaUserOperation operation = new JpaUserOperation();
 		System.out.println(operation.getAll());
 	}
 

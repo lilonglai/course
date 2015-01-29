@@ -1,6 +1,6 @@
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasTeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
 <%@page import="com.kevin.aeas.operation.FirstCourseOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
@@ -59,7 +59,7 @@
 </head>
 <body>
 	<%
-		AeasTeacherOperation teacherOperation = AeasOperationManager.getInstance().getTeacherOperation();
+		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
 			TeacherAbilityOperation teacherAbilityOperation = new TeacherAbilityOperation();
 			FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
 			
@@ -102,10 +102,10 @@
 		for(int i = 0; i < teacherAbilityList.size(); i++){
 			TeacherAbility teacherAbility = teacherAbilityList.get(i);
 			for(int j = 0; j<firstCourseList.size(); j++){
-				if(teacherAbilityList.get(i).getCourseId() == firstCourseList.get(j).getId()){
-					selectedFirstCourseList.add(firstCourseList.get(j));
-					firstCourseList.remove(j);
-				}
+		if(teacherAbilityList.get(i).getCourseId() == firstCourseList.get(j).getId()){
+			selectedFirstCourseList.add(firstCourseList.get(j));
+			firstCourseList.remove(j);
+		}
 			}
 		}
 	%>

@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +10,8 @@ import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class AeasTeacherOperation extends AeasBasicOperation<OracleTeacher>{
-	public AeasTeacherOperation(){
+public class JpaTeacherOperation extends JpaBasicOperation<OracleTeacher>{
+	public JpaTeacherOperation(){
 		super(OracleTeacher.class);
 	}
 	
@@ -84,7 +84,7 @@ public class AeasTeacherOperation extends AeasBasicOperation<OracleTeacher>{
 	}
 	
 	public static void main(String[] args) {
-		AeasTeacherOperation operation = new AeasTeacherOperation();
+		JpaTeacherOperation operation = new JpaTeacherOperation();
 		System.out.println(operation.getAll());		
 	}
 

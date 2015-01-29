@@ -1,9 +1,9 @@
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasSecondCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasFirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.v2.AeasOperationManager"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaSecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaFirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.jpa.JpaOperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -91,25 +91,25 @@
     
    <%
        	int grade =3;
-              	if(request.getParameter("grade") != null){
-              		grade = Integer.valueOf(request.getParameter("grade"));
-              	}
-                 
-              	AeasFirstCourseOperation firstCourseOperation = AeasOperationManager.getInstance().getFirstCourseOperation();
-              	AeasSecondCourseOperation secondCourseOperation = AeasOperationManager.getInstance().getSecondCourseOperation();
-              	
-                 if(request.getParameter("id") != null){
-              	   int id = (Integer.valueOf(request.getParameter("id")));
-              	   int flag = (Integer.valueOf(request.getParameter("flag")));
-              	   if(flag==1){
-              		   firstCourseOperation.delete(id);
-              		   
-              	   }
-              	   else if(flag==2){
-              		   secondCourseOperation.delete(id);
-              	   }
-              	   //courseOperation.delete(id);	   	   
-                 }
+                                   	if(request.getParameter("grade") != null){
+                                   		grade = Integer.valueOf(request.getParameter("grade"));
+                                   	}
+                                      
+                                   	JpaFirstCourseOperation firstCourseOperation = JpaOperationManager.getInstance().getFirstCourseOperation();
+                                   	JpaSecondCourseOperation secondCourseOperation = JpaOperationManager.getInstance().getSecondCourseOperation();
+                                   	
+                                      if(request.getParameter("id") != null){
+                                   	   int id = (Integer.valueOf(request.getParameter("id")));
+                                   	   int flag = (Integer.valueOf(request.getParameter("flag")));
+                                   	   if(flag==1){
+                                   		   firstCourseOperation.delete(id);
+                                   		   
+                                   	   }
+                                   	   else if(flag==2){
+                                   		   secondCourseOperation.delete(id);
+                                   	   }
+                                   	   //courseOperation.delete(id);	   	   
+                                      }
        %>
    
    <div class="container">

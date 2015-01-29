@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import javax.persistence.Query;
 
 import com.kevin.aeas.object.oracle.OracleTeacher;
 
-public class AeasBasicOperation<T> {
+public class JpaBasicOperation<T> {
 	private Class<T> actualClass;
-	public AeasBasicOperation(Class<T> c){
+	public JpaBasicOperation(Class<T> c){
 		actualClass = c;
 	}
 	
@@ -48,7 +48,7 @@ public class AeasBasicOperation<T> {
 	
 	
 	public static void main(String[] args){
-		AeasBasicOperation<OracleTeacher> operation = new AeasBasicOperation<OracleTeacher>(OracleTeacher.class);
+		JpaBasicOperation<OracleTeacher> operation = new JpaBasicOperation<OracleTeacher>(OracleTeacher.class);
 		operation.getAll();
 	}
 	

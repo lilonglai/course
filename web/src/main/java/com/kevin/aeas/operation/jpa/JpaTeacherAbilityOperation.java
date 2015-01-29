@@ -1,4 +1,4 @@
-package com.kevin.aeas.operation.v2;
+package com.kevin.aeas.operation.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 
-public class AeasTeacherAbilityOperation extends AeasBasicOperation<OracleTeacherAbility>{
-	public AeasTeacherAbilityOperation(){
+public class JpaTeacherAbilityOperation extends JpaBasicOperation<OracleTeacherAbility>{
+	public JpaTeacherAbilityOperation(){
 	  super(OracleTeacherAbility.class);	
 	}
 	
