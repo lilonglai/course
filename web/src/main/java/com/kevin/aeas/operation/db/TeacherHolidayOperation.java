@@ -6,145 +6,81 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.TeacherHoliday;
+import com.kevin.aeas.operation.db.basic.DbOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
 
 public class TeacherHolidayOperation {
 	public TeacherHoliday get(int key) {
-		String sql = "select * from aeas_teacherholiday where id = " + key;
-		TeacherHoliday teacherHoliday = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				teacherHoliday = new TeacherHoliday();
-				teacherHoliday.setId(rs.getInt("id"));
-				teacherHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherHoliday.setAdjustDate(rs.getDate("adjustdate"));
-				teacherHoliday.setHoliday(rs.getBoolean("isholiday"));
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (TeacherHoliday)JpaOperationManager.getInstance().getTeacherHolidayOperation().get(key);
 		}
-
-		return teacherHoliday;
+		else{
+			return DbOperationManager.getInstance().getTeacherHolidayOperation().get(key);
+		}
 
 	}
 
 	public ArrayList<TeacherHoliday> getByTeacherId(int teacherId) {
-		String sql = "select * from aeas_teacherholiday where teacherid = "
-				+ teacherId;
-		ArrayList<TeacherHoliday> list = new ArrayList<TeacherHoliday>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherHoliday teacherHoliday = new TeacherHoliday();
-				teacherHoliday.setId(rs.getInt("id"));
-				teacherHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherHoliday.setAdjustDate(rs.getDate("adjustdate"));
-				teacherHoliday.setHoliday(rs.getBoolean("isholiday"));
-
-				list.add(teacherHoliday);
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<TeacherHoliday>)JpaOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherId(teacherId);
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherId(teacherId);
+		}
 
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
-		String sql = "select * from aeas_teacherholiday where teacherid = " + teacherId 
-				      + " and adjustdate='" +date + "'";
-		TeacherHoliday teacherHoliday = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				teacherHoliday = new TeacherHoliday();
-				teacherHoliday.setId(rs.getInt("id"));
-				teacherHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherHoliday.setAdjustDate(rs.getDate("adjustdate"));
-				teacherHoliday.setHoliday(rs.getBoolean("isholiday"));
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (TeacherHoliday)JpaOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherAndDate(teacherId, date);
 		}
-
-		return teacherHoliday;
+		else{
+			return DbOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherAndDate(teacherId, date);
+		}
 
 	}
 
 	public ArrayList<TeacherHoliday> getAll() {
-		String sql = "select * from aeas_teacherholiday";
-		ArrayList<TeacherHoliday> list = new ArrayList<TeacherHoliday>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherHoliday teacherHoliday = new TeacherHoliday();
-				teacherHoliday.setId(rs.getInt("id"));
-				teacherHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherHoliday.setAdjustDate(rs.getDate("adjustdate"));
-				teacherHoliday.setHoliday(rs.getBoolean("isholiday"));
-
-				list.add(teacherHoliday);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<TeacherHoliday>)JpaOperationManager.getInstance().getTeacherHolidayOperation().getAll();
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getTeacherHolidayOperation().getAll();
+		}
 
 	}
 
-	public int add(TeacherHoliday teacherHoliday) {
-		String sql = "insert into aeas_teacherholiday(teacherid,adjustdate,isholiday) values("
-				+ "" + teacherHoliday.getTeacherId() + ",";
-		sql += "'" + teacherHoliday.getAdjustDate() + "',";
-		sql += teacherHoliday.isHoliday() + ")";
-
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void add(TeacherHoliday teacherHoliday) {
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherHolidayOperation().add(teacherHoliday);
+		}
+		else{
+			DbOperationManager.getInstance().getTeacherHolidayOperation().add(teacherHoliday);
 		}
 
-		return count;
 
 	}
 
-	public int update(TeacherHoliday teacherHoliday) {
-		String sql = "update aeas_teacherholiday set " + "teacherid="
-				+ teacherHoliday.getTeacherId() + ",";
-
-		sql += "adjustdate='" + teacherHoliday.getAdjustDate() + "',";
-		sql += "isholiday=" + teacherHoliday.isHoliday();
-
-		sql += " where id = " + teacherHoliday.getId();
-
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void update(TeacherHoliday teacherHoliday) {
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherHolidayOperation().update(teacherHoliday);
 		}
-
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherHolidayOperation().update(teacherHoliday);
+		}
 	}
 
-	public int delete(int key) {
-		String sql = "delete from aeas_teacherholiday where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void delete(int key) {
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherHolidayOperation().delete(key);
 		}
-
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherHolidayOperation().delete(key);
+		}
 	}
 
 	public static void main(String[] args) {
@@ -153,7 +89,7 @@ public class TeacherHolidayOperation {
 		TeacherHoliday teacherHoliday = new TeacherHoliday();
 		teacherHoliday.setTeacherId(1);
 		teacherHoliday.setAdjustDate(new Date(new java.util.Date().getTime()));
-		teacherHoliday.setHoliday(true);
+		teacherHoliday.setIsHoliday(true);
 		// operation.add(teacherHoliday);
 
 		Calendar cal = Calendar.getInstance();

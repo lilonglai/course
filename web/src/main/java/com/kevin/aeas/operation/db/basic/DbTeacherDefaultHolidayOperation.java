@@ -71,7 +71,7 @@ public class DbTeacherDefaultHolidayOperation {
 		return list;		
 	}
 
-	public int add(TeacherDefaultHoliday teacherDefaultHoliday){
+	public void add(TeacherDefaultHoliday teacherDefaultHoliday){
 		String sql = "insert into aeas_teacherdefaultholiday(teacherid,weak1,weak2,weak3,weak4,weak5,weak6,weak7) values("
 				+ "" +teacherDefaultHoliday.getTeacherId() +",";
 		sql += teacherDefaultHoliday.getWeek1() +",";
@@ -89,11 +89,10 @@ public class DbTeacherDefaultHolidayOperation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return count;		
+			
 	}
 	
-	public int update(TeacherDefaultHoliday teacherDefaultHoliday){
+	public void update(TeacherDefaultHoliday teacherDefaultHoliday){
 		String sql = "update aeas_teacherdefaultholiday set "
 				+ "teacherid=" + teacherDefaultHoliday.getTeacherId() +",";
 		
@@ -115,11 +114,10 @@ public class DbTeacherDefaultHolidayOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	
-	public int delete(int key){
+	public void delete(int key){
 		String sql = "delete from aeas_teacherdefaultholiday where id = " + key;
 		int count = 0;
 		try {
@@ -129,10 +127,9 @@ public class DbTeacherDefaultHolidayOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
-	public int deleteByTeacherId(int teacherId){
+	public void deleteByTeacherId(int teacherId){
 		String sql = "delete from aeas_teacherdefaultholiday where teacherid = " + teacherId;
 		int count = 0;
 		try {
@@ -142,7 +139,6 @@ public class DbTeacherDefaultHolidayOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	public static void main(String[] args) {

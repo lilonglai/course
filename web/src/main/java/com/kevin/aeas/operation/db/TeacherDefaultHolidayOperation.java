@@ -1,167 +1,79 @@
 package com.kevin.aeas.operation.db;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.utils.DatabaseHelp;
+import com.kevin.aeas.operation.db.basic.DbOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class TeacherDefaultHolidayOperation {
 	public TeacherDefaultHoliday get(int key){
-		String sql = "select * from aeas_teacherdefaultholiday where id = " + key;
-		TeacherDefaultHoliday teacherDefaultHoliday = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				teacherDefaultHoliday = new TeacherDefaultHoliday();
-				teacherDefaultHoliday.setId(rs.getInt("id"));
-				teacherDefaultHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherDefaultHoliday.setWeek1(rs.getBoolean("weak1"));
-				teacherDefaultHoliday.setWeek2(rs.getBoolean("weak2"));
-				teacherDefaultHoliday.setWeek3(rs.getBoolean("weak3"));
-				teacherDefaultHoliday.setWeek4(rs.getBoolean("weak4"));
-				teacherDefaultHoliday.setWeek5(rs.getBoolean("weak5"));
-				teacherDefaultHoliday.setWeek6(rs.getBoolean("weak6"));
-				teacherDefaultHoliday.setWeek7(rs.getBoolean("weak7"));
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (TeacherDefaultHoliday)JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().get(key);
 		}
-		
-		return teacherDefaultHoliday;
+		else{
+			return DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().get(key);
+		}
 		
 	}
 	
 	public TeacherDefaultHoliday getByTeacherId(int teacherId){
-		String sql = "select * from aeas_teacherdefaultholiday where teacherid = " + teacherId;
-		TeacherDefaultHoliday teacherDefaultHoliday = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				teacherDefaultHoliday = new TeacherDefaultHoliday();
-				teacherDefaultHoliday.setId(rs.getInt("id"));
-				teacherDefaultHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherDefaultHoliday.setWeek1(rs.getBoolean("weak1"));
-				teacherDefaultHoliday.setWeek2(rs.getBoolean("weak2"));
-				teacherDefaultHoliday.setWeek3(rs.getBoolean("weak3"));
-				teacherDefaultHoliday.setWeek4(rs.getBoolean("weak4"));
-				teacherDefaultHoliday.setWeek5(rs.getBoolean("weak5"));
-				teacherDefaultHoliday.setWeek6(rs.getBoolean("weak6"));
-				teacherDefaultHoliday.setWeek7(rs.getBoolean("weak7"));
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (TeacherDefaultHoliday)JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().getByTeacherId(teacherId);
 		}
-		
-		return teacherDefaultHoliday;
+		else{
+			return DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().getByTeacherId(teacherId);
+		}
 		
 	}
 	
 	public ArrayList<TeacherDefaultHoliday> getAll(){
-		String sql = "select * from aeas_teacherdefaultholiday";
-		ArrayList<TeacherDefaultHoliday> list = new ArrayList<TeacherDefaultHoliday>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
-				teacherDefaultHoliday.setId(rs.getInt("id"));
-				teacherDefaultHoliday.setTeacherId(rs.getInt("teacherid"));
-				teacherDefaultHoliday.setWeek1(rs.getBoolean("weak1"));
-				teacherDefaultHoliday.setWeek2(rs.getBoolean("weak2"));
-				teacherDefaultHoliday.setWeek3(rs.getBoolean("weak3"));
-				teacherDefaultHoliday.setWeek4(rs.getBoolean("weak4"));
-				teacherDefaultHoliday.setWeek5(rs.getBoolean("weak5"));
-				teacherDefaultHoliday.setWeek6(rs.getBoolean("weak6"));
-				teacherDefaultHoliday.setWeek7(rs.getBoolean("weak7"));
-				list.add(teacherDefaultHoliday);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<TeacherDefaultHoliday>)JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().getAll();
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().getAll();
+		}
 		
 	}
 
-	public int add(TeacherDefaultHoliday teacherDefaultHoliday){
-		String sql = "insert into aeas_teacherdefaultholiday(teacherid,weak1,weak2,weak3,weak4,weak5,weak6,weak7) values("
-				+ "" +teacherDefaultHoliday.getTeacherId() +",";
-		sql += teacherDefaultHoliday.isWeek1() +",";
-		sql += teacherDefaultHoliday.isWeek2() +",";
-		sql += teacherDefaultHoliday.isWeek3() +",";
-		sql += teacherDefaultHoliday.isWeek4() +",";
-		sql += teacherDefaultHoliday.isWeek5() +",";
-		sql += teacherDefaultHoliday.isWeek6() +",";
-		sql += teacherDefaultHoliday.isWeek7() +")";
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void add(TeacherDefaultHoliday teacherDefaultHoliday){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().add(teacherDefaultHoliday);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().add(teacherDefaultHoliday);
+		}
 		
 	}
 	
-	public int update(TeacherDefaultHoliday teacherDefaultHoliday){
-		String sql = "update aeas_teacherdefaultholiday set "
-				+ "teacherid=" + teacherDefaultHoliday.getTeacherId() +",";
-		
-		sql += "weak1=" + teacherDefaultHoliday.isWeek1() +",";
-		sql += "weak2=" + teacherDefaultHoliday.isWeek2() +",";
-		sql += "weak3=" + teacherDefaultHoliday.isWeek3() +",";
-		sql += "weak4=" + teacherDefaultHoliday.isWeek4() +",";
-		sql += "weak5=" + teacherDefaultHoliday.isWeek5() +",";
-		sql += "weak6=" + teacherDefaultHoliday.isWeek6() +",";
-		sql += "weak7=" + teacherDefaultHoliday.isWeek7();
-		
-		sql += " where id = " + teacherDefaultHoliday.getId();
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void update(TeacherDefaultHoliday teacherDefaultHoliday){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().update(teacherDefaultHoliday);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().update(teacherDefaultHoliday);
+		}
 	}
 	
 	
-	public int delete(int key){
-		String sql = "delete from aeas_teacherdefaultholiday where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void delete(int key){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().delete(key);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().delete(key);
+		}
 	}
 	
-	public int deleteByTeacherId(int teacherId){
-		String sql = "delete from aeas_teacherdefaultholiday where teacherid = " + teacherId;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void deleteByTeacherId(int teacherId){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getTeacherDefaultHolidayOperation().deleteByTeacherId(teacherId);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherDefaultHolidayOperation().deleteByTeacherId(teacherId);
+		}
 	}
 	
 	public static void main(String[] args) {

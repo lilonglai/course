@@ -136,7 +136,7 @@ public class DbScheduleOperation {
 	}
 	
 	
-	public int add(Schedule schedule){
+	public void add(Schedule schedule){
 		String sql = "insert into aeas_schedule(ondate,ontime,studentid,courseid,teacherid,addition,description) values(";
 		if(schedule.getOnDate() == null){
 			sql += "" + "NULL" + ",";
@@ -172,11 +172,9 @@ public class DbScheduleOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
-		
 	}
 	
-	public int update(Schedule schedule){
+	public void update(Schedule schedule){
 		String sql = "update aeas_schedule set ";
 		if(schedule.getOnDate() == null){
 			sql += "ondate=" + "" + "NULL" + ",";
@@ -206,29 +204,25 @@ public class DbScheduleOperation {
 		
 		sql += " where id = " + schedule.getId();
 		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			DatabaseHelp.getInstance().executeUpdateSql(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	
-	public int delete(int key){
+	public void delete(int key){
 		String sql = "delete from aeas_schedule where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			 DatabaseHelp.getInstance().executeUpdateSql(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	public static void main(String[] args) {

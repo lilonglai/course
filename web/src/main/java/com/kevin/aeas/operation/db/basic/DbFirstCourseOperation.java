@@ -99,7 +99,7 @@ public class DbFirstCourseOperation {
 		
 	}
 	
-	public int update(FirstCourse firstCourse){
+	public void update(FirstCourse firstCourse){
 		String sql = "update aeas_firstcourse set "
 				+ "grade=" + firstCourse.getGrade() +","
 				+ "name=" + "'" + firstCourse.getName() +"',"
@@ -123,11 +123,10 @@ public class DbFirstCourseOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	
-	public int delete(int key){
+	public void delete(int key){
 		String sql = "delete from aeas_firstcourse where id = " + key;
 		int count = 0;
 		try {
@@ -137,7 +136,6 @@ public class DbFirstCourseOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	public static void main(String[] args) {

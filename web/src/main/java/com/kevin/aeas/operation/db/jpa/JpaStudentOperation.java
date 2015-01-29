@@ -8,12 +8,12 @@ import javax.persistence.Query;
 import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class JpaStudentOperation extends JpaBasicOperation<OracleStudent>{
+public class JpaStudentOperation extends JpaBasicOperation{
 	public JpaStudentOperation(){
 		super(OracleStudent.class);
 	}
 	
-	public OracleStudent getByName(String name) {		
+	public Object getByName(String name) {		
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.name=:name");
 		q.setParameter("name", name);
 		List<OracleStudent> list = q.getResultList();
@@ -24,28 +24,28 @@ public class JpaStudentOperation extends JpaBasicOperation<OracleStudent>{
 	}
 	
 
-	public List<OracleStudent> getByGrade(int grade) {
+	public List getByGrade(int grade) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.grade=:grade");
 		q.setParameter("grade", grade);
-		List<OracleStudent> list = q.getResultList();
+		List list = q.getResultList();
 		return list;
 	}
 	
-	public List<OracleStudent> getAlive() {		
+	public List getAlive() {		
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
 		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 	
-	public List<OracleStudent> getNotAlive() {
+	public List getNotAlive() {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
 		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 
-	public List<OracleStudent> getByTeacherId(int teacherId) {
+	public List getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List<OracleStudent> list = q.getResultList();

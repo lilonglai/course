@@ -4,170 +4,97 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.TeacherAbility;
+import com.kevin.aeas.operation.db.basic.DbOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
 
 public class TeacherAbilityOperation {
 	public TeacherAbility get(int key) {
-		String sql = "select * from aeas_teacherability where id = " + key;
-		TeacherAbility teacherAbility = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				teacherAbility = new TeacherAbility();
-				teacherAbility.setId(rs.getInt("id"));
-				teacherAbility.setTeacherId(rs.getInt("teacherid"));
-				teacherAbility.setCourseId(rs.getInt("courseid"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (TeacherAbility)JpaOperationManager.getInstance().getTeacherAbilityOperation().get(key);
 		}
-
-		return teacherAbility;
+		else{
+			return DbOperationManager.getInstance().getTeacherAbilityOperation().get(key);
+		}
 
 	}
 
 	public ArrayList<TeacherAbility> getAll() {
-		String sql = "select aeas_teacherability.* from"
-				+ " aeas_teacherability,aeas_firstcourse"
-				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
-				+ " order by aeas_firstcourse.grade";
-		ArrayList<TeacherAbility> list = new ArrayList<TeacherAbility>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherAbility teacherAbility = new TeacherAbility();
-				teacherAbility.setId(rs.getInt("id"));
-				teacherAbility.setTeacherId(rs.getInt("teacherid"));
-				teacherAbility.setCourseId(rs.getInt("courseid"));
-				list.add(teacherAbility);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getAll();
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getTeacherAbilityOperation().getAll();
+		}
 	}
 	
 	public ArrayList<TeacherAbility> getByTeacherId(int teacherId) {
-		String sql = "select aeas_teacherability.*"
-				+ " from aeas_teacherability,aeas_firstcourse"
-				+ " where teacherid = " + teacherId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
-				+ " order by aeas_firstcourse.grade";
-		ArrayList<TeacherAbility> list = new ArrayList<TeacherAbility>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherAbility teacherAbility = new TeacherAbility();
-				teacherAbility.setId(rs.getInt("id"));
-				teacherAbility.setTeacherId(rs.getInt("teacherid"));
-				teacherAbility.setCourseId(rs.getInt("courseid"));
-				list.add(teacherAbility);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getByTeacherId(teacherId);
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getTeacherAbilityOperation().getByTeacherId(teacherId);
+		}
 	}
 	
 	public ArrayList<TeacherAbility> getByCourseId(int courseId) {
-		String sql = "select aeas_teacherability.*"
-				+ " from aeas_teacherability,aeas_firstcourse"
-				+ " where courseid = " + courseId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
-				+ " order by aeas_firstcourse.grade";
-		ArrayList<TeacherAbility> list = new ArrayList<TeacherAbility>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherAbility teacherAbility = new TeacherAbility();
-				teacherAbility.setId(rs.getInt("id"));
-				teacherAbility.setTeacherId(rs.getInt("teacherid"));
-				teacherAbility.setCourseId(rs.getInt("courseid"));
-				list.add(teacherAbility);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getByCourseId(courseId);
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getTeacherAbilityOperation().getByCourseId(courseId);
+		}
 	}
 	
-	public int add(TeacherAbility teacherAbility){
-		String sql = "insert into aeas_teacherability(teacherid,courseid) values("
-				+"" +teacherAbility.getTeacherId() +","
-				+"" +teacherAbility.getCourseId() +")";
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void add(TeacherAbility teacherAbility){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherAbilityOperation().add(teacherAbility);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherAbilityOperation().add(teacherAbility);
+		}
 		
 	}
 	
-	public int update(TeacherAbility teacherAbility){
-		String sql = "update aeas_teacherability set "
-				+ "teacherid=" + "" + teacherAbility.getTeacherId() +","
-				+ "courseid=" +"" + teacherAbility.getCourseId() +"";
-		
-		sql += " where id = " + teacherAbility.getId();
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void update(TeacherAbility teacherAbility){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherAbilityOperation().update(teacherAbility);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherAbilityOperation().update(teacherAbility);
+		}
 	}
 	
 	
-	public int delete(int key){
-		String sql = "delete from aeas_teacherability where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void delete(int key){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherAbilityOperation().delete(key);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherAbilityOperation().delete(key);
+		}
 	}
 	
-	public int deleteByTeacherId(int teacherId){
-		String sql = "delete from aeas_teacherability where teacherid = " + teacherId;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void deleteByTeacherId(int teacherId){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherAbilityOperation().deleteByTeacherId(teacherId);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherAbilityOperation().deleteByTeacherId(teacherId);
+		}
 	}
 	
 	
-	public int deleteByTeacherAndGrade(int teacherId,int grade){
-		String sql = "delete t from aeas_teacherability t where t.teacherid = " + teacherId
-				+ " and t.courseid in(select c.id from aeas_firstcourse c where c.grade = " + grade + ")";
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void deleteByTeacherAndGrade(int teacherId,int grade){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getTeacherAbilityOperation().deleteByTeacherAndGrade(teacherId,grade);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getTeacherAbilityOperation().deleteByTeacherAndGrade(teacherId,grade);
+		}
 	}
 	
 	public static void main(String[] args) {

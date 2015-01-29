@@ -8,28 +8,22 @@ import javax.persistence.Query;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleSecondCourse;
 
-public class JpaSecondCourseOperation extends JpaBasicOperation<OracleSecondCourse>{
+public class JpaSecondCourseOperation extends JpaBasicOperation{
 	public JpaSecondCourseOperation(){
 		super(OracleSecondCourse.class);
 	}
 	
-	public List<OracleSecondCourse> getByFirstCourseId(int firstCourseId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select fc from AeasFirstCourse fc where fc.id=:id");
-		q.setParameter("id", firstCourseId);
-		List<OracleFirstCourse> fcList = q.getResultList();
-		ArrayList<OracleSecondCourse> scList = new ArrayList<OracleSecondCourse>();
-		for(OracleFirstCourse fc: fcList)
-		  scList.addAll(fc.getAeasSecondCourses());
+	public List getByFirstCourseId(int firstCourseId){
+		Query q = EntityManangerUtil.getInstance().createQuery("select sc from AeasSecondCourse sc where sc.firstCourseId=:firstCourseId");
+		q.setParameter("firstCourseId", firstCourseId);
+		List scList = q.getResultList();
 		return scList;		
 	}
 	
-	public List<OracleSecondCourse> getByGrade(int grade){
-		Query q = EntityManangerUtil.getInstance().createQuery("select fc from AeasFirstCourse fc where fc.grade=:grade");
+	public List getByGrade(int grade){
+		Query q = EntityManangerUtil.getInstance().createQuery("select sc from AeasFirstCourse fc, AeasSecondCourse sc  where fc.grade=:grade and sc.firstCourseId=fc.id");
 		q.setParameter("grade", grade);
-		List<OracleFirstCourse> fcList = q.getResultList();
-		ArrayList<OracleSecondCourse> scList = new ArrayList<OracleSecondCourse>();
-		for(OracleFirstCourse fc: fcList)
-		  scList.addAll(fc.getAeasSecondCourses());
+		List<OracleFirstCourse> scList = q.getResultList();
 		return scList;		
 	}
 	

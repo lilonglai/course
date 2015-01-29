@@ -92,7 +92,7 @@ public class DbSecondCourseOperation {
 	}
 	
 	
-	public int add(SecondCourse secondCourse){
+	public void add(SecondCourse secondCourse){
 		String sql = "insert into aeas_secondcourse(name,shortname,firstcourseid,description) values("
 				+ "'" +secondCourse.getName() +"',";
 		
@@ -119,11 +119,10 @@ public class DbSecondCourseOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 		
 	}
 	
-	public int update(SecondCourse secondCourse){
+	public void update(SecondCourse secondCourse){
 		String sql = "update aeas_secondcourse set "
 				+ "name=" + "'" + secondCourse.getName() +"',"
 				+ "shortname=" +"'" +secondCourse.getShortName() +"',"
@@ -146,11 +145,10 @@ public class DbSecondCourseOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	
-	public int delete(int key){
+	public void delete(int key){
 		String sql = "delete from aeas_secondcourse where id = " + key;
 		int count = 0;
 		try {
@@ -159,7 +157,6 @@ public class DbSecondCourseOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	public static void main(String[] args) {

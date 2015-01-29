@@ -145,7 +145,7 @@ public class DbStudentOperation {
 
 	}
 
-	public int add(Student student){
+	public void add(Student student){
 		String sql = "insert into aeas_student(name,shortname,grade,testscore,targetScore,examinedate,examineplace,teacherid,description) values("
 				+ "'" + student.getName() +"',"
 				+ "'" +student.getShortName() +"',"
@@ -183,11 +183,10 @@ public class DbStudentOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 		
 	}
 
-	public int update(Student student) {
+	public void update(Student student) {
 		String sql = "update aeas_student set "
 				+ "name=" + "'" + student.getName() + "'," 
 				+ "shortname=" + "'" + student.getShortName() + "',"
@@ -229,10 +228,9 @@ public class DbStudentOperation {
 			e.printStackTrace();
 		}
 
-		return count;
 	}
 
-	public int delete(int key) {
+	public void delete(int key) {
 		String sql = "delete from aeas_student where id = " + key;
 		int count = 0;
 		try {
@@ -242,10 +240,9 @@ public class DbStudentOperation {
 			e.printStackTrace();
 		}
 
-		return count;
 	}
 	
-	public int retire(int key) {
+	public void retire(int key) {
 		String sql = "update aeas_student set isalive = false" + " where id = " + key;
 		int count = 0;
 		try {
@@ -254,8 +251,6 @@ public class DbStudentOperation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return count;
 	}
 
 	public static void main(String[] args) {

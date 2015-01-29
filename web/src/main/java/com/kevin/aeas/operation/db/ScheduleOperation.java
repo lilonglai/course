@@ -1,269 +1,102 @@
 package com.kevin.aeas.operation.db;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.utils.DatabaseHelp;
+import com.kevin.aeas.operation.db.basic.DbOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class ScheduleOperation {
 	public Schedule get(int key){
-		String sql = "select * from aeas_schedule where id = " + key + " order by ondate,ontime";
-		Schedule schedule = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				schedule = new Schedule();
-				schedule.setId(rs.getInt("id"));
-				schedule.setOnDate(rs.getDate("ondate"));
-				schedule.setOnTime(rs.getInt("ontime"));
-				schedule.setStudentId(rs.getInt("id"));
-				schedule.setCourseId(rs.getInt("courseid"));
-				schedule.setTeacherId(rs.getInt("teacherid"));
-				schedule.setAddition(rs.getString("addition"));
-				schedule.setDescription(rs.getString("description"));				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (Schedule)JpaOperationManager.getInstance().getScheduleOperation().get(key);
 		}
-		
-		return schedule;
+		else{
+			return DbOperationManager.getInstance().getScheduleOperation().get(key);
+		}
 		
 	}
 	
 	public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
-		String sql = "select * from aeas_schedule where studentid = " + studentId 
-				+" and onDate = '" + onDate + "'" + " and onTime=" + onTime;;
-		Schedule schedule = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				schedule = new Schedule();
-				schedule.setId(rs.getInt("id"));
-				schedule.setOnDate(rs.getDate("ondate"));
-				schedule.setOnTime(rs.getInt("ontime"));
-				schedule.setStudentId(rs.getInt("id"));
-				schedule.setCourseId(rs.getInt("courseid"));
-				schedule.setTeacherId(rs.getInt("teacherid"));
-				schedule.setAddition(rs.getString("addition"));
-				schedule.setDescription(rs.getString("description"));				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (Schedule)JpaOperationManager.getInstance().getScheduleOperation().getByStudentIdOnDateAndTime(studentId, onDate, onTime);
 		}
-		
-		return schedule;
+		else{
+			return DbOperationManager.getInstance().getScheduleOperation().getByStudentIdOnDateAndTime(studentId, onDate, onTime);
+		}
 		
 	}
 	
 	public ArrayList<Schedule> getByStudentId(int studentId){
-		String sql = "select * from aeas_schedule where studentid = " + studentId + " order by ondate,ontime" ;
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = new Schedule();
-				schedule.setId(rs.getInt("id"));
-				schedule.setOnDate(rs.getDate("ondate"));
-				schedule.setOnTime(rs.getInt("ontime"));
-				schedule.setStudentId(rs.getInt("studentid"));
-				schedule.setCourseId(rs.getInt("courseid"));
-				schedule.setTeacherId(rs.getInt("teacherid"));
-				schedule.setAddition(rs.getString("addition"));
-				schedule.setDescription(rs.getString("description"));	
-				list.add(schedule);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
+		}
 		
 	}
 	
 	public ArrayList<Schedule> getByTeacherId(int teacherId){
-		String sql = "select * from aeas_schedule where teacherid = " + teacherId + " order by ondate,ontime";
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = new Schedule();
-				schedule.setId(rs.getInt("id"));
-				schedule.setOnDate(rs.getDate("ondate"));
-				schedule.setOnTime(rs.getInt("ontime"));
-				schedule.setStudentId(rs.getInt("studentid"));
-				schedule.setCourseId(rs.getInt("courseid"));
-				schedule.setTeacherId(rs.getInt("teacherid"));
-				schedule.setAddition(rs.getString("addition"));
-				schedule.setDescription(rs.getString("description"));	
-				list.add(schedule);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
+		}
 		
 	}
 	
 	
 	public ArrayList<Schedule> getByDateAndTime(Date onDate, int onTime){
-		String sql = "select * from aeas_schedule where onDate = '" + onDate + "'";
-		if(onTime >=1){
-			sql += " and onTime=" + onTime;
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
 		}
-		sql += " order by ondate,ontime";
-		
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = new Schedule();
-				schedule.setId(rs.getInt("id"));
-				schedule.setOnDate(rs.getDate("ondate"));
-				schedule.setOnTime(rs.getInt("ontime"));
-				schedule.setStudentId(rs.getInt("studentid"));
-				schedule.setCourseId(rs.getInt("courseid"));
-				schedule.setTeacherId(rs.getInt("teacherid"));
-				schedule.setAddition(rs.getString("addition"));
-				schedule.setDescription(rs.getString("description"));	
-				list.add(schedule);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		else{
+			return DbOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
 		}
-		
-		return list;
 		
 	}
 	
 	public ArrayList<Schedule> getAll(){
-		String sql = "select * from aeas_schedule" + " order by ondate,ontime";
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = new Schedule();
-				schedule.setId(rs.getInt("id"));
-				schedule.setOnDate(rs.getDate("ondate"));
-				schedule.setOnTime(rs.getInt("ontime"));
-				schedule.setStudentId(rs.getInt("studentid"));
-				schedule.setCourseId(rs.getInt("courseid"));
-				schedule.setTeacherId(rs.getInt("teacherid"));
-				schedule.setAddition(rs.getString("addition"));
-				schedule.setDescription(rs.getString("description"));	
-				list.add(schedule);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getAll();
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getScheduleOperation().getAll();
+		}
 		
 	}
 	
 	
-	public int add(Schedule schedule){
-		String sql = "insert into aeas_schedule(ondate,ontime,studentid,courseid,teacherid,addition,description) values(";
-		if(schedule.getOnDate() == null){
-			sql += "" + "NULL" + ",";
+	public void add(Schedule schedule){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getScheduleOperation().add(schedule);
 		}
 		else{
-			sql += "'" +  schedule.getOnDate() +"',";
+			 DbOperationManager.getInstance().getScheduleOperation().add(schedule);
 		}
-		
-		sql +=	schedule.getOnTime() +",";
-		sql +=	schedule.getStudentId() +",";
-		sql +=	schedule.getCourseId() +",";
-		sql +=	schedule.getTeacherId() +",";
-		
-		if(schedule.getAddition() == null){
-			sql += "'" + "" + "',";
-		}
-		else{
-			sql += "'" +  schedule.getAddition() +"',";
-		}
-		
-		if(schedule.getDescription() == null){
-			sql += "'" + "" + "')";
-		}
-		else{
-			sql += "'" +  schedule.getDescription() +"')";
-		}
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return count;
-		
 	}
 	
-	public int update(Schedule schedule){
-		String sql = "update aeas_schedule set ";
-		if(schedule.getOnDate() == null){
-			sql += "ondate=" + "" + "NULL" + ",";
-		}else{
-			sql += "ondate=" + "'" + schedule.getOnDate() +"',";
-		}
-		
-		sql += "ontime=" + schedule.getOnTime() + ",";
-		sql += "studentid=" + schedule.getStudentId() + ",";
-		sql += "courseid=" + schedule.getCourseId() + ",";
-		sql += "teacherid=" + schedule.getTeacherId() + ",";
-
-		if(schedule.getAddition() == null){
-			sql += "addition=" + "'" + "',";
+	public void update(Schedule schedule){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getScheduleOperation().update(schedule);
 		}
 		else{
-			sql += "addition=" + "'" + schedule.getAddition() +"',";
+			 DbOperationManager.getInstance().getScheduleOperation().update(schedule);
 		}
-		
-		if(schedule.getDescription() == null){
-			sql += "description=" + "'" + "'";
-		}
-		else{
-			sql += "description=" + "'" + schedule.getDescription() +"'";
-		}
-		
-		
-		sql += " where id = " + schedule.getId();
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return count;
 	}
 	
 	
-	public int delete(int key){
-		String sql = "delete from aeas_schedule where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void delete(int key){
+		if(ConfigurationManager.getInstance().isJpa()){
+			 JpaOperationManager.getInstance().getScheduleOperation().delete(key);
 		}
-		
-		return count;
+		else{
+			 DbOperationManager.getInstance().getScheduleOperation().delete(key);
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -276,10 +109,7 @@ public class ScheduleOperation {
 		schedule.setTeacherId(3);
 		schedule.setAddition("5-1");
 		operation.update(schedule);
-		
-		
-		
-		
+				
 	}
 
 }

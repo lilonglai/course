@@ -89,7 +89,7 @@ public class DbTeacherAbilityOperation {
 		return list;
 	}
 	
-	public int add(TeacherAbility teacherAbility){
+	public void add(TeacherAbility teacherAbility){
 		String sql = "insert into aeas_teacherability(teacherid,courseid) values("
 				+"" +teacherAbility.getTeacherId() +","
 				+"" +teacherAbility.getCourseId() +")";
@@ -102,11 +102,10 @@ public class DbTeacherAbilityOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 		
 	}
 	
-	public int update(TeacherAbility teacherAbility){
+	public void update(TeacherAbility teacherAbility){
 		String sql = "update aeas_teacherability set "
 				+ "teacherid=" + "" + teacherAbility.getTeacherId() +","
 				+ "courseid=" +"" + teacherAbility.getCourseId() +"";
@@ -120,12 +119,11 @@ public class DbTeacherAbilityOperation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return count;
+
 	}
 	
 	
-	public int delete(int key){
+	public void delete(int key){
 		String sql = "delete from aeas_teacherability where id = " + key;
 		int count = 0;
 		try {
@@ -135,10 +133,9 @@ public class DbTeacherAbilityOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
-	public int deleteByTeacherId(int teacherId){
+	public void deleteByTeacherId(int teacherId){
 		String sql = "delete from aeas_teacherability where teacherid = " + teacherId;
 		int count = 0;
 		try {
@@ -148,11 +145,10 @@ public class DbTeacherAbilityOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	
-	public int deleteByTeacherAndGrade(int teacherId,int grade){
+	public void deleteByTeacherAndGrade(int teacherId,int grade){
 		String sql = "delete t from aeas_teacherability t where t.teacherid = " + teacherId
 				+ " and t.courseid in(select c.id from aeas_firstcourse c where c.grade = " + grade + ")";
 		int count = 0;
@@ -163,7 +159,6 @@ public class DbTeacherAbilityOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 	}
 	
 	public static void main(String[] args) {

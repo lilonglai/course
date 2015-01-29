@@ -8,6 +8,10 @@ public class JpaOperationManager {
 	private JpaFirstCourseOperation aeasFirstCourseOperation;
 	private JpaSecondCourseOperation aeasSecondCourseOperation;
 	private JpaUserOperation aeasUserOperation;
+	private JpaScheduleOperation aeasScheduleOperation;
+	private JpaTeacherAbilityOperation aeasTeacherAbilityOperation;
+	private JpaTeacherDefaultHolidayOperation aeasTeacherDefaultHolidayOperation;
+	private JpaTeacherHolidayOperation aeasTeacherHolidayOperation;
 	
 	private JpaOperationManager(){
 		aeasTeacherOperation = new JpaTeacherOperation();
@@ -41,4 +45,20 @@ public class JpaOperationManager {
 		return aeasUserOperation;
 	}
 
+	public JpaScheduleOperation getScheduleOperation() {
+		return aeasScheduleOperation;
+	}
+
+	public JpaTeacherAbilityOperation getTeacherAbilityOperation() {
+		return aeasTeacherAbilityOperation;
+	}
+
+	public JpaTeacherDefaultHolidayOperation getTeacherDefaultHolidayOperation() {
+		return aeasTeacherDefaultHolidayOperation;
+	}
+
+	public JpaTeacherHolidayOperation getTeacherHolidayOperation() {
+		return aeasTeacherHolidayOperation;
+	}
+	
 }

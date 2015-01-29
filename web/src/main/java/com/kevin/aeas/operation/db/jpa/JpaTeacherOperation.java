@@ -10,12 +10,12 @@ import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class JpaTeacherOperation extends JpaBasicOperation<OracleTeacher>{
+public class JpaTeacherOperation extends JpaBasicOperation{
 	public JpaTeacherOperation(){
 		super(OracleTeacher.class);
 	}
 	
-	public OracleTeacher getByName(String name){
+	public Object getByName(String name){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.name=:name");
 		q.setParameter("name", name);
 		List<OracleTeacher> list = q.getResultList();
@@ -26,7 +26,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<OracleTeacher>{
 	}
 	
 	
-	public OracleTeacher getByShortName(String shortName){
+	public Object getByShortName(String shortName){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.shortName=:shortName");
 		q.setParameter("shortName", shortName);
 		List<OracleTeacher> list = q.getResultList();
@@ -36,14 +36,14 @@ public class JpaTeacherOperation extends JpaBasicOperation<OracleTeacher>{
 		return aeasTeacher;		
 	}
 	
-	public List<OracleTeacher> getAlive(){
+	public List getAlive(){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
 		List<OracleTeacher> list = q.getResultList();
 		return list;		
 	}
 	
-	public List<OracleTeacher> getNotAlive(){
+	public List getNotAlive(){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
 		List<OracleTeacher> list = q.getResultList();

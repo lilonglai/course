@@ -32,27 +32,27 @@ public class DateHelp {
 		boolean flag = false;
 		switch (week) {
 		case 1:
-			flag = teacherDefaultHoliday.isWeek1();
+			flag = teacherDefaultHoliday.getWeek1();
 			break;
 		case 2:
-			flag = teacherDefaultHoliday.isWeek2();
+			flag = teacherDefaultHoliday.getWeek2();
 			break;
 
 		case 3:
-			flag = teacherDefaultHoliday.isWeek3();
+			flag = teacherDefaultHoliday.getWeek3();
 			break;
 
 		case 4:
-			flag = teacherDefaultHoliday.isWeek4();
+			flag = teacherDefaultHoliday.getWeek4();
 			break;
 		case 5:
-			flag = teacherDefaultHoliday.isWeek5();
+			flag = teacherDefaultHoliday.getWeek5();
 			break;
 		case 6:
-			flag = teacherDefaultHoliday.isWeek6();
+			flag = teacherDefaultHoliday.getWeek6();
 			break;
 		case 7:
-			flag = teacherDefaultHoliday.isWeek7();
+			flag = teacherDefaultHoliday.getWeek7();
 			break;
 
 		default:
@@ -63,7 +63,7 @@ public class DateHelp {
 		for(TeacherHoliday teacherHoliday:holidayList){
 			Date date = new Date(calendar.getTime().getTime()); 
 			if(teacherHoliday.getAdjustDate().toString().equals(date.toString())){
-				flag = teacherHoliday.isHoliday();
+				flag = teacherHoliday.getIsHoliday();
 				break;
 			}
 		}

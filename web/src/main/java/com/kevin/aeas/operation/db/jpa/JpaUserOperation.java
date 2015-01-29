@@ -6,7 +6,7 @@ import javax.persistence.Query;
 
 import com.kevin.aeas.object.oracle.OracleUser;
 
-public class JpaUserOperation extends JpaBasicOperation<OracleUser> {
+public class JpaUserOperation extends JpaBasicOperation {
 	public JpaUserOperation() {
 		super(OracleUser.class);
 	}

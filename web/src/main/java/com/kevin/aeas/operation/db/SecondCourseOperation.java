@@ -4,172 +4,82 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.object.SecondCourse;
+import com.kevin.aeas.operation.db.basic.DbOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
 
 public class SecondCourseOperation {
 	public SecondCourse get(int key){
-		String sql = "select * from aeas_secondcourse where id = " + key;
-		SecondCourse secondCourse = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				secondCourse = new SecondCourse();
-				secondCourse.setId(rs.getInt("id"));
-				secondCourse.setName(rs.getString("name"));
-				secondCourse.setShortName(rs.getString("shortname"));
-				secondCourse.setFirstCourseId(rs.getInt("firstcourseid"));
-				secondCourse.setDescription(rs.getString("description"));				
-			}
-		} catch (SQLException e) {			
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (SecondCourse)JpaOperationManager.getInstance().getSecondCourseOperation().get(key);
 		}
-		
-		return secondCourse;
+		else{
+			return DbOperationManager.getInstance().getSecondCourseOperation().get(key);
+		}
 		
 	}
 	
 	public ArrayList<SecondCourse> getByFirstCourseId(int firstCourseId){
-		String sql = "select * from aeas_secondcourse where firstcourseid = " + firstCourseId;
-		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
-		SecondCourse secondCourse = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				secondCourse = new SecondCourse();
-				secondCourse.setId(rs.getInt("id"));
-				secondCourse.setName(rs.getString("name"));
-				secondCourse.setShortName(rs.getString("shortname"));
-				secondCourse.setFirstCourseId(rs.getInt("firstcourseid"));
-				secondCourse.setDescription(rs.getString("description"));
-				list.add(secondCourse);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
+		}
 		
 	}
 	
 	public ArrayList<SecondCourse> getByGrade(int grade){
-		String sql = "select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse "
-				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = " + grade
-				+ " order by aeas_secondcourse.firstcourseid";
-		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
-		SecondCourse secondCourse = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				secondCourse = new SecondCourse();
-				secondCourse.setId(rs.getInt("id"));
-				secondCourse.setName(rs.getString("name"));
-				secondCourse.setShortName(rs.getString("shortname"));
-				secondCourse.setFirstCourseId(rs.getInt("firstcourseid"));
-				secondCourse.setDescription(rs.getString("description"));
-				list.add(secondCourse);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
+		}
 		
 	}
 	
 	public ArrayList<SecondCourse> getAll(){
-		String sql = "select * from aeas_secondcourse"
-				+ " order by firstcourseid";
-		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
-		SecondCourse secondCourse = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				secondCourse = new SecondCourse();
-				secondCourse.setId(rs.getInt("id"));
-				secondCourse.setName(rs.getString("name"));
-				secondCourse.setShortName(rs.getString("shortname"));
-				secondCourse.setFirstCourseId(rs.getInt("firstcourseid"));
-				secondCourse.setDescription(rs.getString("description"));
-				list.add(secondCourse);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getAll();
 		}
-		
-		return list;
+		else{
+			return DbOperationManager.getInstance().getSecondCourseOperation().getAll();
+		}
 		
 	}
 	
 	
-	public int add(SecondCourse secondCourse){
-		String sql = "insert into aeas_secondcourse(name,shortname,firstcourseid,description) values("
-				+ "'" +secondCourse.getName() +"',";
-		
-		if(secondCourse.getShortName() == null){
-			sql += "'" + "" + "',";
+	public void add(SecondCourse secondCourse){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getSecondCourseOperation().add(secondCourse);
 		}
 		else{
-			sql += "'" +  secondCourse.getShortName() +"',";
+			DbOperationManager.getInstance().getSecondCourseOperation().add(secondCourse);
 		}
-		
-		sql += secondCourse.getFirstCourseId() + ",";
-				
-		if(secondCourse.getDescription() == null){
-			sql += "'" + "" + "')";
-		}
-		else{
-			sql += "'" +  secondCourse.getDescription() +"')";
-		}
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
 		
 	}
 	
-	public int update(SecondCourse secondCourse){
-		String sql = "update aeas_secondcourse set "
-				+ "name=" + "'" + secondCourse.getName() +"',"
-				+ "shortname=" +"'" +secondCourse.getShortName() +"',"
-		        + "firstcourseid=" + secondCourse.getFirstCourseId() + ",";
-		
-		if(secondCourse.getDescription() == null){
-			sql += "description=" + "'" + "'";
+	public void update(SecondCourse secondCourse){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getSecondCourseOperation().update(secondCourse);
 		}
 		else{
-			sql += "description=" + "'" + secondCourse.getDescription() +"'";
+			DbOperationManager.getInstance().getSecondCourseOperation().update(secondCourse);
 		}
-		
-		
-		sql += " where id = " + secondCourse.getId();
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
 	}
 	
 	
-	public int delete(int key){
-		String sql = "delete from aeas_secondcourse where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void delete(int key){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getSecondCourseOperation().delete(key);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getSecondCourseOperation().delete(key);
+		}
 	}
 	
 	public static void main(String[] args) {

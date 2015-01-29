@@ -9,3 +9,7 @@ dbUrl=jdbc:mysql://localhost:3306/aeas
 dbDriver=com.mysql.jdbc.Driver
 dbUser=root
 dbPassword=root
+
+
+jpa=false
+jpaName=MySqlPersistenceUnit

@@ -1,327 +1,115 @@
 package com.kevin.aeas.operation.db;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.utils.DatabaseHelp;
+import com.kevin.aeas.operation.db.basic.DbOperationManager;
+import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class StudentOperation {
 	public Student get(int key) {
-		String sql = "select * from aeas_student where id = " + key;
-		Student student = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (Student)JpaOperationManager.getInstance().getStudentOperation().get(key);
 		}
-
-		return student;
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().get(key);
+		}
 	}
 	
 	public Student getByName(String name) {
-		String sql = "select * from aeas_student where name = '" + name + "'";
-		Student student = null;
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (Student)JpaOperationManager.getInstance().getStudentOperation().getByName(name);
 		}
-
-		return student;
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().getByName(name);
+		}
 	}
 	
 
 	public ArrayList<Student> getByGrade(int grade) {
-		String sql = "select * from aeas_student where grade = " + grade;
-		ArrayList<Student> list = new ArrayList<Student>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = new Student();
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-				list.add(student);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getByGrade(grade);
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().getByGrade(grade);
+		}
 
 	}
 
 	public ArrayList<Student> getAll() {
-		String sql = "select * from aeas_student";
-		ArrayList<Student> list = new ArrayList<Student>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = new Student();
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-				list.add(student);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getAll();
+		}
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().getAll();
 		}
 
-		return list;
 	}
 	
 	public ArrayList<Student> getAlive() {
-		String sql = "select * from aeas_student" + " where isalive=true";
-		ArrayList<Student> list = new ArrayList<Student>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = new Student();
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-				list.add(student);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getAlive();
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().getAlive();
+		}
 	}
 	
 	public ArrayList<Student> getNotAlive() {
-		String sql = "select * from aeas_student" + " where isalive=false";
-		ArrayList<Student> list = new ArrayList<Student>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = new Student();
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-				list.add(student);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getNotAlive();
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().getNotAlive();
+		}
 	}
 
 	public ArrayList<Student> getByTeacherId(int teacherId) {
-		String sql = "select * from aeas_student where teacherid = "
-				+ teacherId;
-		ArrayList<Student> list = new ArrayList<Student>();
-		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = new Student();
-				student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setName(rs.getString("name"));
-				student.setShortName(rs.getString("shortname"));
-				student.setGrade(rs.getInt("grade"));
-				student.setTestScore(rs.getString("testscore"));
-				student.setTargetScore(rs.getString("targetScore"));
-
-				student.setExamineDate(rs.getDate("examinedate"));
-				student.setExaminePlace(rs.getString("examineplace"));
-				student.setTeacherId(rs.getInt("teacherid"));
-				student.setDescription(rs.getString("description"));
-				list.add(student);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ConfigurationManager.getInstance().isJpa()){
+			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);
 		}
-
-		return list;
+		else{
+			return DbOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);
+		}
 
 	}
 
-	public int add(Student student){
-		String sql = "insert into aeas_student(name,shortname,grade,testscore,targetScore,examinedate,examineplace,teacherid,description) values("
-				+ "'" + student.getName() +"',"
-				+ "'" +student.getShortName() +"',"
-				+"" +student.getGrade() +","
-		        +"'" +student.getTestScore() +"'," 
-				+"'" +student.getTargetScore() +"',";;
-		if(student.getExamineDate() == null){
-			sql += "" + "NULL" + ",";
+	public void add(Student student){
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getStudentOperation().add(student);
 		}
 		else{
-			sql += "'" +  student.getExamineDate() +"',";
+			DbOperationManager.getInstance().getStudentOperation().add(student);
 		}
-		
-		if(student.getExaminePlace() == null){
-			sql += "'" + "" + "',";
-		}
-		else{
-			sql += "'" +  student.getExaminePlace() +"',";
-		}
-		
-		sql += "" +student.getTeacherId() +",";
-		
-		if(student.getDescription() == null){
-			sql += "'" + "" + "')";
-		}
-		else{
-			sql += "'" +  student.getDescription() +"')";
-		}
-		
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return count;
 		
 	}
 
-	public int update(Student student) {
-		String sql = "update aeas_student set "
-				+ "name=" + "'" + student.getName() + "'," 
-				+ "shortname=" + "'" + student.getShortName() + "',"
-	            + "grade=" + student.getGrade() + ","
-		        + "testscore='" + student.getTestScore() + "',"
-	            +"targetScore='" + student.getTargetScore() + "',";
-		
-		if(student.getExamineDate() == null){
-			sql += "examinedate =" + "" + "NULL" + ",";
+	public void update(Student student) {
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getStudentOperation().update(student);
 		}
 		else{
-			sql += "examinedate =" + "'" +  student.getExamineDate() +"',";
+			DbOperationManager.getInstance().getStudentOperation().update(student);
 		}
-		
-		if(student.getExaminePlace() == null){
-			sql += "examineplace=" + "'" + "" + "',";
-		}
-		else{
-			sql += "examineplace=" + "'" +  student.getExaminePlace() +"',";
-		}
-		
-		sql += "teacherid=" +student.getTeacherId() +",";
-		
-		if(student.getDescription() == null){
-			sql += "description="+ "'" + "" + "'";
-		}
-		else{
-			sql += "description="+ "'" +  student.getDescription() +"'";
-		}
-		
-
-		sql += " where id = " + student.getId();
-
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return count;
 	}
 
-	public int delete(int key) {
-		String sql = "delete from aeas_student where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void delete(int key) {
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getStudentOperation().delete(key);
 		}
-
-		return count;
+		else{
+			DbOperationManager.getInstance().getStudentOperation().delete(key);
+		}
 	}
 	
-	public int retire(int key) {
-		String sql = "update aeas_student set isalive = false" + " where id = " + key;
-		int count = 0;
-		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void retire(int key) {
+		if(ConfigurationManager.getInstance().isJpa()){
+			JpaOperationManager.getInstance().getStudentOperation().retire(key);
 		}
-		
-		return count;
+		else{
+			DbOperationManager.getInstance().getStudentOperation().retire(key);
+		}
 	}
 
 	public static void main(String[] args) {

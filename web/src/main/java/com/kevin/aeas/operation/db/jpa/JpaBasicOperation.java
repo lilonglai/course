@@ -7,31 +7,31 @@ import javax.persistence.Query;
 
 import com.kevin.aeas.object.oracle.OracleTeacher;
 
-public class JpaBasicOperation<T> {
-	private Class<T> actualClass;
-	public JpaBasicOperation(Class<T> c){
+public class JpaBasicOperation {
+	private Class actualClass;
+	public JpaBasicOperation(Class c){
 		actualClass = c;
 	}
 	
-	public List<T> getAll(){
+	public List getAll(){
 		String hsql = "select t from " + actualClass.getSimpleName() +" t";
 		Query q = EntityManangerUtil.getInstance().createQuery(hsql);
-		List<T> list = q.getResultList();				
+		List list = q.getResultList();				
 		return list;
 	}
 	
-	public T get(int key){
+	public Object get(int key){
 		return EntityManangerUtil.getInstance().find(actualClass, key);
 	}
 	
-	public void add(T t){
+	public void add(Object t){
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
 		transaction.begin();
 		EntityManangerUtil.getInstance().persist(t);
 		transaction.commit();
 	}
 
-	public void update(T t) {
+	public void update(Object t) {
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
 		transaction.begin();
 		EntityManangerUtil.getInstance().merge(t);
@@ -41,15 +41,9 @@ public class JpaBasicOperation<T> {
 	public void delete(int key) {
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
 		transaction.begin();
-		T t = EntityManangerUtil.getInstance().find(actualClass, key);
+		Object t = EntityManangerUtil.getInstance().find(actualClass, key);
 		EntityManangerUtil.getInstance().remove(t);
 		transaction.commit();
-	}
-	
-	
-	public static void main(String[] args){
-		JpaBasicOperation<OracleTeacher> operation = new JpaBasicOperation<OracleTeacher>(OracleTeacher.class);
-		operation.getAll();
 	}
 	
 }

@@ -10,49 +10,39 @@ import com.kevin.aeas.object.oracle.OracleSchedule;
 import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 
-public class JpaScheduleOperation extends JpaBasicOperation<OracleSchedule>{
+public class JpaScheduleOperation extends JpaBasicOperation{
 	public JpaScheduleOperation(){
 		super(OracleSchedule.class);
 	}
 	
-	public OracleSchedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
-		OracleStudent aeasStudent = EntityManangerUtil.getInstance().find(OracleStudent.class, studentId);
-		for(OracleSchedule aeasSchedule: aeasStudent.getAeasSchedules()){
-			if(aeasSchedule.getOnDate().equals(onDate) && (aeasSchedule.getOnTime() == onTime))
-				return aeasSchedule;
-		}
+	public Object getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.onDate=:onDate and s.onTime=:onTime and s.studentId=:studentId");
+		q.setParameter("onDate", onDate);
+		q.setParameter("ontime", onTime);
+		q.setParameter("studentId", studentId);
+		List<OracleSchedule> list = q.getResultList();
+		if(list.size() > 0)
+			return list.get(0);
 		return null;		
 	}
 	
-	public List<OracleSchedule> getByStudentId(int studentId){		
-		OracleStudent aeasStudent = EntityManangerUtil.getInstance().find(OracleStudent.class, studentId);
-		List<OracleSchedule> list = null;
-		if(aeasStudent.getAeasSchedules() instanceof List){
-			list = (List<OracleSchedule>)aeasStudent.getAeasSchedules();
-		}
-		else{
-			list = new ArrayList<OracleSchedule>();
-			list.addAll(aeasStudent.getAeasSchedules());
-		}
+	public List getByStudentId(int studentId){		
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.studentId=:studentId");
+		q.setParameter("studentId", studentId);
+		List<OracleSchedule> list = q.getResultList();
 		return list;		
 	}
 	
-	public List<OracleSchedule> getByTeacherId(int teacherId){
-		OracleTeacher aeasTeacher = EntityManangerUtil.getInstance().find(OracleTeacher.class, teacherId);
-		List<OracleSchedule> list;
-		if(aeasTeacher.getAeasSchedules() instanceof List){
-			list = (List<OracleSchedule>)aeasTeacher.getAeasSchedules();
-		}
-		else{
-			list = new ArrayList<OracleSchedule>();
-			list.addAll(aeasTeacher.getAeasSchedules());
-		}
-		return list;
+	public List getByTeacherId(int teacherId){
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.teacherId=:teacherId");
+		q.setParameter("teacherId", teacherId);
+		List<OracleSchedule> list = q.getResultList();
+		return list;	
 		
 	}
 	
 	
-	public List<OracleSchedule> getByDateAndTime(Date onDate, int onTime){
+	public List getByDateAndTime(Date onDate, int onTime){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.onDate=:onDate and d.onTime=:onTime order by s.onDate,d.onTime");
 		q.setParameter("onDate", onDate);
 		q.setParameter("ontime", onTime);
