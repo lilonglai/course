@@ -6,7 +6,7 @@ public class OperationManager {
 	private TeacherOperation teacherOperation;	
 	private StudentOperation studentOperation;
 	private FirstCourseOperation firstCourseOperation;
-	private SecondCourseOperation asecondCourseOperation;
+	private SecondCourseOperation secondCourseOperation;
 	private UserOperation userOperation;
 	private ScheduleOperation scheduleOperation;
 	
@@ -34,8 +34,8 @@ public class OperationManager {
 		return firstCourseOperation;
 	}
 
-	public SecondCourseOperation getAsecondCourseOperation() {
-		return asecondCourseOperation;
+	public SecondCourseOperation getSecondCourseOperation() {
+		return secondCourseOperation;
 	}
 
 	public UserOperation getUserOperation() {

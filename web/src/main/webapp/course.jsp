@@ -1,3 +1,7 @@
+<%@page import="com.kevin.aeas.object.FirstCourse"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
+<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
@@ -95,8 +99,8 @@
                                    		grade = Integer.valueOf(request.getParameter("grade"));
                                    	}
                                       
-                                   	JpaFirstCourseOperation firstCourseOperation = JpaOperationManager.getInstance().getFirstCourseOperation();
-                                   	JpaSecondCourseOperation secondCourseOperation = JpaOperationManager.getInstance().getSecondCourseOperation();
+                                   	FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+                                   	SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
                                    	
                                       if(request.getParameter("id") != null){
                                    	   int id = (Integer.valueOf(request.getParameter("id")));
@@ -136,8 +140,8 @@
 		      <tbody>
 					<%
 						int firstCourseCount = 1;
-												List<OracleFirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
-												for (OracleFirstCourse firstCourse : FirstCourseList) {
+												List<FirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
+												for (FirstCourse firstCourse : FirstCourseList) {
 					%>
 			
 					<tr>
