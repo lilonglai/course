@@ -7,7 +7,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.operation.SecondCourseOperation;
+import com.kevin.aeas.operation.db.SecondCourseOperation;
 
 @Path("/secondcourse")
 public class SecondCourseService {

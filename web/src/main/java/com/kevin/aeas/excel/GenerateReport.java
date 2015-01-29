@@ -11,9 +11,9 @@ import java.util.TreeMap;
 import com.kevin.aeas.object.Schedule;
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.ScheduleOperation;
-import com.kevin.aeas.operation.StudentOperation;
-import com.kevin.aeas.operation.TeacherOperation;
+import com.kevin.aeas.operation.db.ScheduleOperation;
+import com.kevin.aeas.operation.db.StudentOperation;
+import com.kevin.aeas.operation.db.TeacherOperation;
 
 import jxl.Workbook;
 import jxl.format.Colour;

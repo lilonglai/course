@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.oracle.OracleStudent;
-import com.kevin.aeas.operation.StudentOperation;
+import com.kevin.aeas.operation.db.StudentOperation;
 import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
 import com.kevin.aeas.operation.db.jpa.JpaStudentOperation;
 

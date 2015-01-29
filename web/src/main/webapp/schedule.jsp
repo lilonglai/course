@@ -1,16 +1,16 @@
 <%@page import="java.sql.Date"%>
 <%@page import="com.kevin.aeas.object.SecondCourse"%>
-<%@page import="com.kevin.aeas.operation.SecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.FirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
 <%@page import="com.kevin.aeas.utils.TimeHelp"%>
 <%@page import="com.kevin.aeas.object.Schedule"%>
-<%@page import="com.kevin.aeas.operation.ScheduleOperation"%>
+<%@page import="com.kevin.aeas.operation.db.ScheduleOperation"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="com.kevin.aeas.operation.TeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kevin.aeas.object.Student"%>
-<%@page import="com.kevin.aeas.operation.StudentOperation"%>
+<%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

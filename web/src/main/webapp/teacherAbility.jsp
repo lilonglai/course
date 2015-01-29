@@ -2,13 +2,13 @@
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.FirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.kevin.aeas.operation.TeacherAbilityOperation"%>
+<%@page import="com.kevin.aeas.operation.db.TeacherAbilityOperation"%>
 <%@page import="com.kevin.aeas.object.TeacherAbility"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="com.kevin.aeas.operation.TeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

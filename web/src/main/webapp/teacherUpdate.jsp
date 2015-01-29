@@ -4,8 +4,8 @@
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.operation.TeacherDefaultHolidayOperation"%>
-<%@page import="com.kevin.aeas.operation.TeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation"%>
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

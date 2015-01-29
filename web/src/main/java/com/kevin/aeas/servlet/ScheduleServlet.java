@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.operation.ScheduleOperation;
+import com.kevin.aeas.operation.db.ScheduleOperation;
 
 /**
  * Servlet implementation class ScheduleServlet

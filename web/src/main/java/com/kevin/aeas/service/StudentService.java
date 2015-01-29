@@ -7,7 +7,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.operation.StudentOperation;
+import com.kevin.aeas.operation.db.StudentOperation;
 
 @Path("/student")
 public class StudentService {

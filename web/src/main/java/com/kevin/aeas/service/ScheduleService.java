@@ -19,12 +19,12 @@ import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.TeacherHoliday;
-import com.kevin.aeas.operation.ScheduleOperation;
-import com.kevin.aeas.operation.SecondCourseOperation;
-import com.kevin.aeas.operation.TeacherAbilityOperation;
-import com.kevin.aeas.operation.TeacherDefaultHolidayOperation;
-import com.kevin.aeas.operation.TeacherHolidayOperation;
-import com.kevin.aeas.operation.TeacherOperation;
+import com.kevin.aeas.operation.db.ScheduleOperation;
+import com.kevin.aeas.operation.db.SecondCourseOperation;
+import com.kevin.aeas.operation.db.TeacherAbilityOperation;
+import com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation;
+import com.kevin.aeas.operation.db.TeacherHolidayOperation;
+import com.kevin.aeas.operation.db.TeacherOperation;
 import com.kevin.aeas.utils.DateHelp;
 
 @Path("/schedule")
