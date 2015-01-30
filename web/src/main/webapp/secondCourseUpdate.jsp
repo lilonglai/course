@@ -1,3 +1,8 @@
+<%@page import="com.kevin.aeas.object.FirstCourse"%>
+<%@page import="com.kevin.aeas.object.SecondCourse"%>
+<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
@@ -31,9 +36,9 @@
 </head>
 <body>
 	<%
-		OracleSecondCourse secondCourse = null;
-			    JpaSecondCourseOperation secondCourseOperation = JpaOperationManager.getInstance().getSecondCourseOperation();
-			    JpaFirstCourseOperation firstCourseOperation = JpaOperationManager.getInstance().getFirstCourseOperation();
+		        SecondCourse secondCourse = null;
+			    SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
+			    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
 		if (request.getParameter("submit") != null) {
 			
 			
@@ -50,8 +55,8 @@
 			secondCourse.setShortName(shortName);
 
 			int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-			OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-			secondCourse.setAeasFirstCourse(firstCourse);
+			FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+			secondCourse.setFirstCourseId(firstCourseId);
 			
 			String description = request.getParameter("description");
 			description = new String(description.getBytes("iso-8859-1"),
@@ -68,9 +73,10 @@
 			    	int id = Integer.valueOf(idStr);	    	
 			    	secondCourse = secondCourseOperation.get(id);
 			    	
-			    	OracleFirstCourse firstCourse = secondCourse.getAeasFirstCourse();
+			    	int firstCourseId = secondCourse.getFirstCourseId();
+			    	FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 			        int grade = firstCourse.getGrade();
-			        List<OracleFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+			        List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 	%>
   <div class="container">
 	<form action="secondCourseUpdate.jsp" method="get" onSubmit="return checkForm();">
@@ -84,9 +90,9 @@
 		<div class="form-group">
 		课程分类: <select name="firstCourseId">
 		<%
-			for(OracleFirstCourse course:firstCourseList){
+			for(FirstCourse course:firstCourseList){
 		%>
-				<option value="<%= course.getId() %>" <%= course.getId()==secondCourse.getAeasFirstCourse().getId()?"selected":"" %>><%= course.getName() %></option>
+				<option value="<%= course.getId() %>" <%= course.getId()==secondCourse.getFirstCourseId()?"selected":"" %>><%= course.getName() %></option>
 				
 		<% 
 		     }

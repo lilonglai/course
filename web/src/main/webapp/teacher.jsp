@@ -1,3 +1,6 @@
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
+<%@page import="com.kevin.aeas.object.Teacher"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
@@ -114,8 +117,8 @@
 		  </thead>
           <tbody>
 		<%
-			List<OracleTeacher> list = null;
-				    JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
+			List<Teacher> list = null;
+				    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
 				    switch(status){
 				    case 1:
 				    	list = teacherOperation.getAll();
@@ -129,7 +132,7 @@
 				    }
 			
 			int teacherCount = 1;
-			for (OracleTeacher teacher : list) {
+			for (Teacher teacher : list) {
 		%>
 
 		<tr>

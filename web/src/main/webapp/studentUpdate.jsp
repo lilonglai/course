@@ -1,3 +1,8 @@
+<%@page import="com.kevin.aeas.object.Teacher"%>
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
+<%@page import="com.kevin.aeas.object.Student"%>
+<%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
@@ -34,14 +39,14 @@ function checkForm(){
 </head>
 <body>
 	<%
-		OracleStudent student = null;
-		JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
-			    JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();	
+		Student student = null;
+	    StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
+			    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();	
 			    String idStr = (String)request.getParameter("id");
 			    if(idStr != null){
 			    	int id = Integer.valueOf(idStr);	    	
 			    	student = studentOperation.get(id);	    	
-			    	List<OracleTeacher> teacherList = teacherOperation.getAll();
+			    	List<Teacher> teacherList = teacherOperation.getAll();
 	%>	
 	  <div class="container">
 		<form action="studentServlet" method="get" onSubmit="return checkForm();">
@@ -76,7 +81,7 @@ function checkForm(){
 		班主任: 		
 		<select name="teacherId" >
 			<%
-				for(OracleTeacher teacher:teacherList){
+				for(Teacher teacher:teacherList){
 			%>
 			  <option value="<%= teacher.getId() %>" <%= student.getTeacherId()==teacher.getId()?"selected":"" %>> <%= teacher.getName() %> </option>
 			<% 

@@ -1,3 +1,4 @@
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.kevin.aeas.object.TeacherHoliday"%>
@@ -27,9 +28,9 @@
 	    //PrintWriter out = response.getWriter();
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		
-		TeacherOperation teacherOperation = new TeacherOperation();
-		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
-		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
+		TeacherHolidayOperation teacherHolidayOperation =  OperationManager.getInstance().getTeacherHolidayOperation();
 		
 		if (request.getParameter("submit") != null) {
 			String control_date  = request.getParameter("control_date");
@@ -40,10 +41,10 @@
 		        	teacherHoliday = new TeacherHoliday();
 		        	teacherHoliday.setTeacherId(teacherId);
 		        	teacherHoliday.setAdjustDate(Date.valueOf(control_date));
-		        	teacherHoliday.setHoliday(setHoliday);
+		        	teacherHoliday.setIsHoliday(setHoliday);
 		        	teacherHolidayOperation.add(teacherHoliday);
 		        }else{
-		        	teacherHoliday.setHoliday(setHoliday);
+		        	teacherHoliday.setIsHoliday(setHoliday);
 		        	teacherHolidayOperation.update(teacherHoliday);
 		        }
 			}

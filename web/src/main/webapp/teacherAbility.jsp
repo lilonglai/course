@@ -1,3 +1,4 @@
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
@@ -59,9 +60,9 @@
 </head>
 <body>
 	<%
-		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
-			TeacherAbilityOperation teacherAbilityOperation = new TeacherAbilityOperation();
-			FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+			TeacherAbilityOperation teacherAbilityOperation = OperationManager.getInstance().getTeacherAbilityOperation();
+			FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
 			
 			int teacherId = Integer.valueOf(request.getParameter("id"));
 			int grade = 3;
@@ -89,7 +90,7 @@
 			}
 		
 		
-		OracleTeacher teacher = teacherOperation.get(teacherId);
+		Teacher teacher = teacherOperation.get(teacherId);
 
 		
 		ArrayList<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(teacherId);

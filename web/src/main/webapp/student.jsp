@@ -1,3 +1,7 @@
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
+<%@page import="com.kevin.aeas.object.Student"%>
+<%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
@@ -105,8 +109,8 @@
 	</div>
     
    <%
-       	JpaStudentOperation studentOperation = JpaOperationManager.getInstance().getStudentOperation();
-                               JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
+       	StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
+                               TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
        %>
    
    <div class="container">
@@ -168,7 +172,7 @@
 	 <tbody>
 
 		<%
-			List<OracleStudent> list = null;
+			List<Student> list = null;
 				    switch(status){
 				    case 1:
 				    	list = studentOperation.getAll();
@@ -180,7 +184,7 @@
 				    	list = studentOperation.getNotAlive();
 				    	break;
 				    }
-			for (OracleStudent student : list) {
+			for (Student student : list) {
 		%>
 
 		<tr>
@@ -192,7 +196,7 @@
 			<td><%=student.getTargetScore()%></td>
 			<td><%=student.getExamineDate()%></td>
 			<td><%=student.getExaminePlace()%></td>
-			<td><%=TeacherHelp.getTeacherName(teacherOperation, student.getTeacherId())%></td>
+			<td><%= TeacherHelp.getTeacherName(teacherOperation, student.getTeacherId()) %></td>
 			<td><%=student.getDescription()%></td>							
 			
 			<td><input type="button" class="btn btn-default" value='修改' onclick="modifyStudent(<%=student.getId()%>)"> 

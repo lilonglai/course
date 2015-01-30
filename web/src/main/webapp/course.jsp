@@ -1,3 +1,4 @@
+<%@page import="com.kevin.aeas.object.SecondCourse"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
@@ -182,21 +183,23 @@
 		<%
 			int secondCourseCount = 1;
 				int firstCourseId = 0;
-			List<OracleSecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
-			for (OracleSecondCourse secondCourse : secondCourseList) {
-				if(firstCourseId == secondCourse.getAeasFirstCourse().getId()){
+			List<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
+			for (SecondCourse secondCourse : secondCourseList) {
+				if(firstCourseId == secondCourse.getFirstCourseId()){
 					secondCourseCount++;
 				}else{
 					secondCourseCount = 1;
-					firstCourseId= secondCourse.getAeasFirstCourse().getId();
+					firstCourseId= secondCourse.getFirstCourseId();
 				}
+				
+				FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 		%>
 
 		<tr>
 		    <td><%=secondCourseCount%></td>
 			<td><%=secondCourse.getName()%></td>
 			<td><%=secondCourse.getShortName()%></td>
-			<td><%=secondCourse.getAeasFirstCourse().getName() %></td>
+			<td><%=firstCourse.getName() %></td>
 			<td><%=secondCourse.getDescription()%></td>							
 			
 			<td><input type="button" class="btn btn-default" value='修改' onclick="modifySecondCourse(<%=secondCourse.getId()%>)"> 

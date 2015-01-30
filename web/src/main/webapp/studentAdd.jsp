@@ -1,3 +1,7 @@
+<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
+<%@page import="com.kevin.aeas.object.Student"%>
+<%@page import="com.kevin.aeas.object.Teacher"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
@@ -34,9 +38,9 @@
 </head>
 <body>
 	<%
-		OracleStudent student = null;
-			    JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();		
-		List<OracleTeacher> teacherList = teacherOperation.getAll();
+		Student student = null;
+			    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();		
+		List<Teacher> teacherList = teacherOperation.getAll();
 	%>
    <div class="container">
 	<form action="studentServlet" method="get" onSubmit="return checkForm();">
@@ -72,7 +76,7 @@
 		班主任:
 		<select name="teacherId" >
 			<%
-				for(OracleTeacher teacher:teacherList){
+				for(Teacher teacher:teacherList){
 			%>
 			  <option value="<%= teacher.getId() %>"  > <%= teacher.getName() %> </option>
 			<% 

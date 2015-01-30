@@ -1,3 +1,4 @@
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacherHoliday"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
@@ -29,16 +30,17 @@
 </head>
 <body>
 	<%
-		OracleTeacher teacher = null;
-			   OracleTeacherDefaultHoliday teacherDefaultHoliday = null;
+		       Teacher teacher = null;
+			   TeacherDefaultHoliday teacherDefaultHoliday = null;
 			   	   
 			    String idStr = (String)request.getParameter("id");
 			    if(idStr != null){
 			    	int id = Integer.valueOf(idStr);
-			    	JpaTeacherOperation aeasTeacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
-			    	teacher = aeasTeacherOperation.get(id);
+			    	TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+			    	TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
+			    	teacher = teacherOperation.get(id);
 			    	
-			    	teacherDefaultHoliday = teacher.getAeasTeacherDefaultHoliday();
+			    	teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(id);
 	%>
 	<div class="container">
 	<form action="teacherServlet" method="get" onSubmit="return checkForm();">
@@ -79,7 +81,7 @@
 		%>
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak1()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek1()){
 		%>
 		周一 <input type="checkbox" name="weeks" value="week1" checked> &nbsp;
 		<% 
@@ -92,7 +94,7 @@
 		%>
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak2()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek2()){
 		%>
 		周二 <input type="checkbox" name="weeks" value="week2" checked> &nbsp;
 		<% 
@@ -105,7 +107,7 @@
 		%>
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak3()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek3()){
 		%>
 		周三 <input type="checkbox" name="weeks" value="week3" checked> &nbsp;
 		<% 
@@ -119,7 +121,7 @@
 		
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak4()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek4()){
 		%>
 		周四 <input type="checkbox" name="weeks" value="week4" checked> &nbsp;
 		<% 
@@ -132,7 +134,7 @@
 		%>
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak5()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek5()){
 		%>
 		周五 <input type="checkbox" name="weeks" value="week5" checked> &nbsp;
 		<% 
@@ -145,7 +147,7 @@
 		%>
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak6()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek6()){
 		%>
 		周六 <input type="checkbox" name="weeks" value="week6" checked> &nbsp;
 		<% 
@@ -158,7 +160,7 @@
 		%>
 		
 		<% 
-		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeak7()){
+		  if(teacherDefaultHoliday != null && teacherDefaultHoliday.getWeek7()){
 		%>
 		周日 <input type="checkbox" name="weeks" value="week7" checked>
 		<% 

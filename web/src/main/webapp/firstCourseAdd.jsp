@@ -1,3 +1,5 @@
+<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
@@ -29,7 +31,7 @@
 <body>
 	<%
 		OracleFirstCourse firstCourse = null;
-			    JpaFirstCourseOperation firstCourseOperation = JpaOperationManager.getInstance().getFirstCourseOperation();
+			    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
 			if (request.getParameter("submit") != null) {
 		firstCourse = new OracleFirstCourse();
 		

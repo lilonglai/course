@@ -10,7 +10,7 @@ public class OperationManager {
 	private UserOperation userOperation;
 	private ScheduleOperation scheduleOperation;
 	
-	private TeacherAbilityOperation ateacherAbilityOperation;
+	private TeacherAbilityOperation teacherAbilityOperation;
 	private TeacherDefaultHolidayOperation teacherDefaultHolidayOperation;
 	private TeacherHolidayOperation teacherHolidayOperation;
 	
@@ -46,8 +46,8 @@ public class OperationManager {
 		return scheduleOperation;
 	}
 
-	public TeacherAbilityOperation getAteacherAbilityOperation() {
-		return ateacherAbilityOperation;
+	public TeacherAbilityOperation getTeacherAbilityOperation() {
+		return teacherAbilityOperation;
 	}
 
 	public TeacherDefaultHolidayOperation getTeacherDefaultHolidayOperation() {

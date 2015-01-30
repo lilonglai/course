@@ -1,3 +1,7 @@
+<%@page import="com.kevin.aeas.object.FirstCourse"%>
+<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
@@ -32,14 +36,14 @@
 <body>
 	<%
 		OracleSecondCourse secondCourse = null;
-		    JpaSecondCourseOperation secondCourseOperation = JpaOperationManager.getInstance().getSecondCourseOperation();
-		    JpaFirstCourseOperation firstCourseOperation = JpaOperationManager.getInstance().getFirstCourseOperation();
+		    SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
+		    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
 			if (request.getParameter("submit") != null) {
 		secondCourse = new OracleSecondCourse();
 		int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-		OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+		FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 		
-		secondCourse.setAeasFirstCourse(firstCourse);
+		secondCourse.setFirstCourseId(firstCourse.getId());
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");
 		secondCourse.setName(name);
@@ -64,9 +68,9 @@
 			    String idStr = (String)request.getParameter("id");
 			    int firstCourseId = Integer.valueOf(idStr);
 			    	
-		    	OracleFirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+		    	FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 		        int grade = firstCourse.getGrade();
-		        List<OracleFirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+		        List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 	%>
   <div class="container">
 	<form action="secondCourseAdd.jsp" method="get" onSubmit="return checkForm();">
@@ -79,7 +83,7 @@
 	  <div class="form-group">
 		课程分类: <select name="firstCourseId">
 		<%
-			for(OracleFirstCourse course:firstCourseList){
+			for(FirstCourse course:firstCourseList){
 		%>
 				<option value="<%= course.getId() %>" <%= course.getId()==firstCourseId?"selected":"" %> > <%= course.getName() %></option>
 		<% 

@@ -1,3 +1,4 @@
+<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.kevin.aeas.object.SecondCourse"%>
 <%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
@@ -116,11 +117,11 @@
 <body>
 	<%
 	
-	    StudentOperation studentOperation = new StudentOperation();
-	    FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
-	    SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
-	    TeacherOperation teacherOperation = new TeacherOperation();
-	    ScheduleOperation scheduleOperation = new ScheduleOperation();
+	    StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
+	    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+	    SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
+	    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+	    ScheduleOperation scheduleOperation = OperationManager.getInstance().getScheduleOperation();
 	    
 		int studentId = (Integer.valueOf(request.getParameter("id")));
 		Student student = studentOperation.get(studentId);
@@ -191,7 +192,7 @@
 			<td><%=TimeHelp.getStringByNumber(schedule.getOnTime())%></td>
 			<td><%=secondCourse !=null?secondCourse.getName():"" %></td>
 			<td><%=teacher.getName()%></td>
-			<td><%=schedule.getDescription()%></td>
+			<td><%= schedule.getDescription() %></td>
 			<td><input type="button" value='修改' onclick="modifyStudent(<%=schedule.getId()%>)"> 
 			    <input type="button" value='删除'  onclick="deleteSchedule(<%=schedule.getId()%>)">
 		    </td>
