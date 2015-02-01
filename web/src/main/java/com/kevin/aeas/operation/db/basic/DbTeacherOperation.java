@@ -220,9 +220,5 @@ public class DbTeacherOperation {
 		}
 	}
 	
-	public static void main(String[] args) {
-		DbTeacherOperation operation = new DbTeacherOperation();
-		System.out.println(operation.getAll());		
-	}
 
 }

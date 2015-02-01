@@ -1,5 +1,7 @@
 package com.kevin.aeas.test.db.basic;
 
-public class TeacherDefaultHolidayOperationTest {
+import junit.framework.TestCase;
+
+public class TeacherDefaultHolidayOperationTest extends TestCase{
 
 }

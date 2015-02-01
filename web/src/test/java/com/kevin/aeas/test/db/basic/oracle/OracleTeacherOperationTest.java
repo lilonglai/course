@@ -1,9 +1,9 @@
 package com.kevin.aeas.test.db.basic.oracle;
 
-import com.kevin.aeas.test.db.basic.SecondCourseOperationTest;
+import com.kevin.aeas.test.db.basic.TeacherOperationTest;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-public class OracleStudentOperationTest extends SecondCourseOperationTest{
+public class OracleTeacherOperationTest extends TeacherOperationTest{
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
