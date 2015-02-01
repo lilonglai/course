@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.basic.DbFirstCourseOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 
 import junit.framework.TestCase;
 
@@ -34,21 +35,21 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		firstCourse.setName("test");
 		firstCourse.setShortName("test");
 		firstCourse.setGrade(1);
-		firstCourse.setDescription("this is the test case");		
+		firstCourse.setDescription("this is the test case for first course");		
 		operation.add(firstCourse);
 		
 		// add grade 2 first course
 		firstCourse.setName("test");
 		firstCourse.setShortName("test");
 		firstCourse.setGrade(2);
-		firstCourse.setDescription("this is the test case");		
+		firstCourse.setDescription("this is the test case for first course");		
 		operation.add(firstCourse);
 		
 		// add grade 3 first course
 		firstCourse.setName("test");
 		firstCourse.setShortName("test");
 		firstCourse.setGrade(2);
-		firstCourse.setDescription("this is the test case");		
+		firstCourse.setDescription("this is the test case for first course");		
 		operation.add(firstCourse);
 	}
 	
@@ -58,7 +59,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
-				firstCourse.setDescription("change the test case");
+				firstCourse.setDescription("change the test case for first course");
 				operation.update(firstCourse);
 			}
 		}
@@ -70,9 +71,13 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
-				firstCourse.setDescription("change the test case");
+				firstCourse.setDescription("change the test case for first course");
 				operation.delete(firstCourse.getId());
 			}
 		}
+	}
+	
+	protected void setUp() throws Exception{
+		DbUtils.resetDbInstance();
 	}
 }

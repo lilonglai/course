@@ -1,9 +1,9 @@
 package com.kevin.aeas.test.db.basic.mysql;
 
-import com.kevin.aeas.test.db.basic.FirstCourseOperationTest;
+import com.kevin.aeas.test.db.basic.StudentOperationTest;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-public class MySqlFirstCourseOperationTest extends FirstCourseOperationTest {
+public class MySqlStudentOperationTest extends StudentOperationTest{
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -16,5 +16,4 @@ public class MySqlFirstCourseOperationTest extends FirstCourseOperationTest {
 		ConfigurationManager.getInstance().setProperty("jpa", "false");
 		ConfigurationManager.getInstance().setProperty("usePool", "false");
 	}
-	
 }
