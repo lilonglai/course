@@ -1,54 +1,39 @@
 package com.kevin.aeas.utils;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseHelp {
-	private static DatabaseHelp instance = new DatabaseHelp();
-
-	private String dbDriver = "com.mysql.jdbc.Driver";
-
-	private String dbUrl;
-	private String dbUser;
-	private String dbPassword;
-	private Connection connection = null;
-
+	private static DatabaseHelp instance = null;
+    private boolean usePool = true;
+    
+    private IGetConnection getCon;
+	
 	private DatabaseHelp() {
-		dbUser = ConfigurationManager.getInstance().getProperty("dbUser");
-		dbPassword = ConfigurationManager.getInstance().getProperty(
-				"dbPassword");
-		dbUrl = ConfigurationManager.getInstance().getProperty("dbUrl");
-		dbDriver = ConfigurationManager.getInstance().getProperty("dbDriver");
-
-		try {
-			Class.forName(dbDriver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		String usePoolString = ConfigurationManager.getInstance().getProperty("usePool");
+		if(usePoolString != null){
+			usePool = Boolean.valueOf(usePoolString);
+		}
+		
+		if(usePool){
+			getCon =  new C3Pool();
+		}
+		else{
+			getCon =  new DbNoPool();
 		}
 	}
 
-	public Connection getConnection() {
-		if (connection != null)
-			return connection;
-
-		try {
-			/*
-			 * String url = dbUrl + "?user=" + dbUser + "&password=" +dbPassword
-			 * + "&useUnicode=true&characterEncoding=utf-8"; connection =
-			 * DriverManager.getConnection(url);
-			 */
-			connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-		} catch (SQLException e) {
-			connection = null;
-			System.out.println(e);
-		}
-		return connection;
+	public Connection getConnection() throws SQLException{
+		return getCon.getConnection();
 	}
+	
 
-	public static DatabaseHelp getInstance() {
+	public static synchronized DatabaseHelp getInstance() {
+		if(instance == null){
+			instance = new DatabaseHelp();
+		}
 		return instance;
 	}
 

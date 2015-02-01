@@ -11,7 +11,7 @@ public class ConfigurationManager {
 	private ConfigurationManager() {
 		InputStream is = DatabaseHelp.class.getClassLoader()
 				.getResourceAsStream("database.props");
-		Properties prop = new Properties();
+		prop = new Properties();
 		try {
 			prop.load(is);
 		} catch (IOException e) {
@@ -25,6 +25,10 @@ public class ConfigurationManager {
 
 	public String getProperty(String propertyName) {
 		return prop.getProperty(propertyName);
+	}
+	
+	public void setProperty(String propertyName, String propertyValue){
+		prop.setProperty(propertyName, propertyValue);		
 	}
 	
 	public boolean isJpa(){

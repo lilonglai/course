@@ -74,7 +74,7 @@ public class DbFirstCourseOperation {
 	}
 	
 	
-	public int add(FirstCourse firstCourse){
+	public void add(FirstCourse firstCourse){
 		String sql = "insert into aeas_firstcourse(grade,name,shortname,description) values("
 				+ firstCourse.getGrade() +","
 				+ "'" +firstCourse.getName() +"',"
@@ -95,7 +95,6 @@ public class DbFirstCourseOperation {
 			e.printStackTrace();
 		}
 		
-		return count;
 		
 	}
 	
@@ -136,11 +135,6 @@ public class DbFirstCourseOperation {
 			e.printStackTrace();
 		}
 		
-	}
-	
-	public static void main(String[] args) {
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
-		System.out.println(operation.getAll());		
 	}
 
 }

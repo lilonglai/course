@@ -12,4 +12,5 @@ dbPassword=root
 
 
 jpa=false
+usePool=true
 jpaName=MySqlPersistenceUnit
