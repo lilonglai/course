@@ -5,12 +5,18 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.oracle.OracleTeacher;
-
 public class JpaBasicOperation {
 	private Class actualClass;
 	public JpaBasicOperation(Class c){
 		actualClass = c;
+	}
+	
+	public JpaBasicOperation(){
+
+	}
+	
+	protected void setActualClass(Class c){
+		this.actualClass = c;
 	}
 	
 	public List getAll(){

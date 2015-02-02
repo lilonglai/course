@@ -5,12 +5,19 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.mysql.MySqlStudent;
 import com.kevin.aeas.object.oracle.OracleStudent;
+import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
 
 public class JpaStudentOperation extends JpaBasicOperation{
 	public JpaStudentOperation(){
-		super(OracleStudent.class);
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlStudent.class);
+		}
+		else{
+			setActualClass(OracleStudent.class);
+		}
 	}
 	
 	public Object getByName(String name) {		

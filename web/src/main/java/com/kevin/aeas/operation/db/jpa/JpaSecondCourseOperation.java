@@ -1,16 +1,22 @@
 package com.kevin.aeas.operation.db.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.mysql.MySqlSecondCourse;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleSecondCourse;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class JpaSecondCourseOperation extends JpaBasicOperation{
 	public JpaSecondCourseOperation(){
-		super(OracleSecondCourse.class);
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlSecondCourse.class);
+		}
+		else{
+			setActualClass(OracleSecondCourse.class);
+		}
 	}
 	
 	public List getByFirstCourseId(int firstCourseId){

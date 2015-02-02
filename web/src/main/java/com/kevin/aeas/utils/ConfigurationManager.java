@@ -41,4 +41,16 @@ public class ConfigurationManager {
 	public String getJpaName(){
 		return prop.getProperty("jpaName");
 	}
+	
+	/* check the underlying database
+	 *  true represent the underlying database is MySql
+	 *  false for the Oracle
+	 */
+	public boolean isMySql(){
+		String jpa = prop.getProperty("jpaName");
+		if(jpa.startsWith("MySql"))
+			return true;
+		else return false;
+		
+	}
 }

@@ -1,20 +1,21 @@
 package com.kevin.aeas.operation.db.jpa;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.oracle.OracleFirstCourse;
-import com.kevin.aeas.object.oracle.OracleStudent;
-import com.kevin.aeas.object.oracle.OracleTeacher;
+import com.kevin.aeas.object.mysql.MySqlTeacherAbility;
 import com.kevin.aeas.object.oracle.OracleTeacherAbility;
-import com.kevin.aeas.utils.DatabaseHelp;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 	public JpaTeacherAbilityOperation(){
-	  super(OracleTeacherAbility.class);	
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlTeacherAbility.class);
+		}
+		else{
+			setActualClass(OracleTeacherAbility.class);
+		}
 	}
 	
 	public List getByTeacherId(int teacherId) {		

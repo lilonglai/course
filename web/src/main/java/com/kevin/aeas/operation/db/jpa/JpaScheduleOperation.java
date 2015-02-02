@@ -1,18 +1,22 @@
 package com.kevin.aeas.operation.db.jpa;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.mysql.MySqlSchedule;
 import com.kevin.aeas.object.oracle.OracleSchedule;
-import com.kevin.aeas.object.oracle.OracleStudent;
-import com.kevin.aeas.object.oracle.OracleTeacher;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class JpaScheduleOperation extends JpaBasicOperation{
 	public JpaScheduleOperation(){
-		super(OracleSchedule.class);
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlSchedule.class);
+		}
+		else{
+			setActualClass(OracleSchedule.class);
+		}
 	}
 	
 	public Object getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){

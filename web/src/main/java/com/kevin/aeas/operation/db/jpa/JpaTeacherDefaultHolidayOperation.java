@@ -4,11 +4,18 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation{
 	public JpaTeacherDefaultHolidayOperation(){
-		super(OracleTeacherDefaultHoliday.class);
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlTeacherDefaultHoliday.class);
+		}
+		else{
+			setActualClass(OracleTeacherDefaultHoliday.class);
+		}
 	}
 	
 	public Object getByTeacherId(int teacherId){

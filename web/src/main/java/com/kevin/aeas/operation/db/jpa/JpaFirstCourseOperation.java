@@ -4,13 +4,19 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.FirstCourse;
+import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
+import com.kevin.aeas.utils.ConfigurationManager;
 
 
 public class JpaFirstCourseOperation extends JpaBasicOperation {
-	public JpaFirstCourseOperation(){
-		super(OracleFirstCourse.class);
+	public JpaFirstCourseOperation(){		
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlFirstCourse.class);
+		}
+		else{
+			setActualClass(OracleFirstCourse.class);
+		}
 	}
 	
 	public List getByGrade(int grade){

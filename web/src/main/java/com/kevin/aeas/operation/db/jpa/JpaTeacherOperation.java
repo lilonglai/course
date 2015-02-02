@@ -7,12 +7,19 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.object.mysql.MySqlTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacher;
+import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
 
 public class JpaTeacherOperation extends JpaBasicOperation{
 	public JpaTeacherOperation(){
-		super(OracleTeacher.class);
+		if(ConfigurationManager.getInstance().isMySql()){
+			setActualClass(MySqlTeacher.class);
+		}
+		else{
+			setActualClass(OracleTeacher.class);
+		}
 	}
 	
 	public Object getByName(String name){
