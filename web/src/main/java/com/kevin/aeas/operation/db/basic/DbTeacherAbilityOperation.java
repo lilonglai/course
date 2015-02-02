@@ -161,10 +161,6 @@ public class DbTeacherAbilityOperation {
 		
 	}
 	
-	public static void main(String[] args) {
-		DbTeacherAbilityOperation teacherAbilityOperation = new DbTeacherAbilityOperation();
-				
-	}
 }
 
 

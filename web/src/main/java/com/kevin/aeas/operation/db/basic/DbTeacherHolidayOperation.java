@@ -1,11 +1,8 @@
 package com.kevin.aeas.operation.db.basic;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.utils.DatabaseHelp;
 
@@ -89,7 +86,7 @@ public class DbTeacherHolidayOperation {
 
 	}
 
-	public int add(TeacherHoliday teacherHoliday) {
+	public void add(TeacherHoliday teacherHoliday) {
 		String sql = "insert into aeas_teacherholiday(teacherid,adjustdate,isholiday) values("
 				+ "" + teacherHoliday.getTeacherId() + ",";
 		sql += "'" + teacherHoliday.getAdjustDate() + "',";
@@ -102,11 +99,10 @@ public class DbTeacherHolidayOperation {
 			e.printStackTrace();
 		}
 
-		return count;
 
 	}
 
-	public int update(TeacherHoliday teacherHoliday) {
+	public void update(TeacherHoliday teacherHoliday) {
 		String sql = "update aeas_teacherholiday set " + "teacherid="
 				+ teacherHoliday.getTeacherId() + ",";
 
@@ -122,36 +118,15 @@ public class DbTeacherHolidayOperation {
 			e.printStackTrace();
 		}
 
-		return count;
 	}
 
-	public int delete(int key) {
+	public void delete(int key) {
 		String sql = "delete from aeas_teacherholiday where id = " + key;
 		int count = 0;
 		try {
 			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-
-		return count;
-	}
-
-	public static void main(String[] args) {
-		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
-		// System.out.println(operation.getAll());
-		TeacherHoliday teacherHoliday = new TeacherHoliday();
-		teacherHoliday.setTeacherId(1);
-		teacherHoliday.setAdjustDate(new Date(new java.util.Date().getTime()));
-		teacherHoliday.setIsHoliday(true);
-		// operation.add(teacherHoliday);
-
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(teacherHoliday.getAdjustDate());
-		for (int i = 1; i <= 30; i++) {
-			int weekno = cal.get(Calendar.DAY_OF_WEEK);
-			System.out.println(cal.getTime() +":" + weekno);
-			cal.add(Calendar.DAY_OF_MONTH, 1);
 		}
 
 	}

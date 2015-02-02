@@ -141,17 +141,4 @@ public class DbTeacherDefaultHolidayOperation {
 		
 	}
 	
-	public static void main(String[] args) {
-		DbTeacherDefaultHolidayOperation operation = new DbTeacherDefaultHolidayOperation();
-		System.out.println(operation.getAll());
-		
-		TeacherDefaultHoliday object= new TeacherDefaultHoliday();
-		object.setId(3);
-		object.setTeacherId(1);
-		object.setWeek1(true);
-		object.setWeek2(true);
-		
-		operation.update(object);
-				
-	}
 }
