@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaFirstCourse;
 import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -26,6 +27,19 @@ public class JpaFirstCourseOperation extends JpaBasicOperation {
 		return list;		
 	}		
 	
+	protected  Object changeToJpa(Object t){
+		JpaFirstCourse newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlFirstCourse();
+		}
+		else{
+			newObject = new OracleFirstCourse();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
 	public static void main(String[] args) {
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
 		System.out.println(operation.getAll());		

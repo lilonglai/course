@@ -8,18 +8,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import com.kevin.aeas.object.FirstCourse;
-import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.object.Student;
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.FirstCourseOperation;
-import com.kevin.aeas.operation.db.ScheduleOperation;
-import com.kevin.aeas.operation.db.SecondCourseOperation;
-import com.kevin.aeas.operation.db.StudentOperation;
-import com.kevin.aeas.operation.db.TeacherOperation;
-import com.kevin.aeas.utils.GradeHelp;
-
 import jxl.Workbook;
 import jxl.format.Alignment;
 import jxl.format.Border;
@@ -33,6 +21,18 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
+
+import com.kevin.aeas.object.FirstCourse;
+import com.kevin.aeas.object.Schedule;
+import com.kevin.aeas.object.SecondCourse;
+import com.kevin.aeas.object.Student;
+import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.operation.db.FirstCourseOperation;
+import com.kevin.aeas.operation.db.ScheduleOperation;
+import com.kevin.aeas.operation.db.SecondCourseOperation;
+import com.kevin.aeas.operation.db.StudentOperation;
+import com.kevin.aeas.operation.db.TeacherOperation;
+import com.kevin.aeas.utils.GradeHelp;
 
 public class GenerateStudentCourse {
 

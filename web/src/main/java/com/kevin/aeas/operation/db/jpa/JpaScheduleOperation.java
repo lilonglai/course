@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaSchedule;
 import com.kevin.aeas.object.mysql.MySqlSchedule;
 import com.kevin.aeas.object.oracle.OracleSchedule;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -54,6 +55,19 @@ public class JpaScheduleOperation extends JpaBasicOperation{
 		return list;		
 	}
 	
+	protected  Object changeToJpa(Object t){
+		JpaSchedule newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlSchedule();
+		}
+		else{
+			newObject = new OracleSchedule();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
 	public static void main(String[] args) {
 		JpaScheduleOperation operation = new JpaScheduleOperation();
 		

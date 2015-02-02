@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaTeacherAbility;
 import com.kevin.aeas.object.mysql.MySqlTeacherAbility;
 import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -43,6 +44,20 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 				+ " and ta.courseId in(select c.id from FirstCourse fc where fc.grade = " + grade + ")";
 		EntityManangerUtil.getInstance().createQuery(sql);
 		
+	}
+	
+	protected  Object changeToJpa(Object t){
+		JpaTeacherAbility newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlTeacherAbility();
+		}
+		else{
+			newObject = new OracleTeacherAbility();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
 	}
 		
 	public static void main(String[] args) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaStudent;
 import com.kevin.aeas.object.mysql.MySqlStudent;
 import com.kevin.aeas.object.oracle.OracleStudent;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -73,6 +74,20 @@ public class JpaStudentOperation extends JpaBasicOperation{
 		return count;
 	}
 
+	protected  Object changeToJpa(Object t){
+		JpaStudent newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlStudent();
+		}
+		else{
+			newObject = new OracleStudent();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
+	
 	public static void main(String[] args) {
 		JpaStudentOperation studentOperation = new JpaStudentOperation();		
 		System.out.println(studentOperation.getAll());

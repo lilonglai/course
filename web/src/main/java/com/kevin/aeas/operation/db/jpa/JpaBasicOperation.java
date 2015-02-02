@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-public class JpaBasicOperation {
+public abstract class JpaBasicOperation {
 	private Class actualClass;
 	public JpaBasicOperation(Class c){
 		actualClass = c;
@@ -19,6 +19,10 @@ public class JpaBasicOperation {
 		this.actualClass = c;
 	}
 	
+	protected Class getActualClass(){
+		return actualClass;
+	}
+	
 	public List getAll(){
 		String hsql = "select t from " + actualClass.getSimpleName() +" t";
 		Query q = EntityManangerUtil.getInstance().createQuery(hsql);
@@ -30,17 +34,19 @@ public class JpaBasicOperation {
 		return EntityManangerUtil.getInstance().find(actualClass, key);
 	}
 	
+	protected abstract Object changeToJpa(Object t);
+	
 	public void add(Object t){
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
 		transaction.begin();
-		EntityManangerUtil.getInstance().persist(t);
+		EntityManangerUtil.getInstance().persist(changeToJpa(t));
 		transaction.commit();
 	}
 
 	public void update(Object t) {
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
 		transaction.begin();
-		EntityManangerUtil.getInstance().merge(t);
+		EntityManangerUtil.getInstance().merge(changeToJpa(t));
 		transaction.commit();
 	}
 
@@ -50,6 +56,10 @@ public class JpaBasicOperation {
 		Object t = EntityManangerUtil.getInstance().find(actualClass, key);
 		EntityManangerUtil.getInstance().remove(t);
 		transaction.commit();
+	}
+	
+	protected void setValueByObject(Object from, Object to){
+		
 	}
 	
 }

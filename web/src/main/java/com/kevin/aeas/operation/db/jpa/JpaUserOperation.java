@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaUser;
 import com.kevin.aeas.object.mysql.MySqlUser;
 import com.kevin.aeas.object.oracle.OracleUser;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -28,6 +29,21 @@ public class JpaUserOperation extends JpaBasicOperation {
 		return true;
 	}
 
+	protected  Object changeToJpa(Object t){
+		JpaUser newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlUser();
+		}
+		else{
+			newObject = new OracleUser();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
+	
+	
 	public static void main(String[] args) {
 		JpaUserOperation operation = new JpaUserOperation();
 		System.out.println(operation.getAll());

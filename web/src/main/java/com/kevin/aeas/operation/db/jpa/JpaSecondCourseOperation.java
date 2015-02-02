@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaSecondCourse;
 import com.kevin.aeas.object.mysql.MySqlSecondCourse;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleSecondCourse;
@@ -33,13 +34,23 @@ public class JpaSecondCourseOperation extends JpaBasicOperation{
 		return scList;		
 	}
 	
+	protected  Object changeToJpa(Object t){
+		JpaSecondCourse newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlSecondCourse();
+		}
+		else{
+			newObject = new OracleSecondCourse();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
+	
 	public static void main(String[] args) {
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		System.out.println(operation.getByFirstCourseId(1));
-		
-		
-		
-		
+		System.out.println(operation.getByFirstCourseId(1));		
 	}
 
 }

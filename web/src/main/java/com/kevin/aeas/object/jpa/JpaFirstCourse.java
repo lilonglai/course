@@ -1,6 +1,9 @@
 package com.kevin.aeas.object.jpa;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.kevin.aeas.object.FirstCourse;
 

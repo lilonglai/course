@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.object.jpa.JpaTeacher;
 import com.kevin.aeas.object.mysql.MySqlTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -83,6 +84,21 @@ public class JpaTeacherOperation extends JpaBasicOperation{
 		return id;
 		
 	}
+	
+	protected  Object changeToJpa(Object t){
+		JpaTeacher newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlTeacher();
+		}
+		else{
+			newObject = new OracleTeacher();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
+	
 	
 	public void retire(int key){
 		OracleTeacher aeasTeacher = EntityManangerUtil.getInstance().find(OracleTeacher.class, key);

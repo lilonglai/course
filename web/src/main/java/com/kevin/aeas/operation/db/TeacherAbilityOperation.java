@@ -1,15 +1,11 @@
 package com.kevin.aeas.operation.db;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
 import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
 import com.kevin.aeas.utils.ConfigurationManager;
-import com.kevin.aeas.utils.DatabaseHelp;
 
 public class TeacherAbilityOperation {
 	public TeacherAbility get(int key) {

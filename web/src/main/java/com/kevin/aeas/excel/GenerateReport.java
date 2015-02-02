@@ -8,15 +8,7 @@ import java.util.Calendar;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.object.Student;
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.ScheduleOperation;
-import com.kevin.aeas.operation.db.StudentOperation;
-import com.kevin.aeas.operation.db.TeacherOperation;
-
 import jxl.Workbook;
-import jxl.format.Colour;
 import jxl.format.VerticalAlignment;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
@@ -25,6 +17,13 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
+
+import com.kevin.aeas.object.Schedule;
+import com.kevin.aeas.object.Student;
+import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.operation.db.ScheduleOperation;
+import com.kevin.aeas.operation.db.StudentOperation;
+import com.kevin.aeas.operation.db.TeacherOperation;
 
 public class GenerateReport {
 	private Date startDate;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.kevin.aeas.object.jpa.JpaTeacherDefaultHoliday;
 import com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -32,6 +33,22 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation{
 		q.setParameter("teacherId", teacherId);
 		List list = q.getResultList();
 	}
+	
+	
+	protected  Object changeToJpa(Object t){
+		JpaTeacherDefaultHoliday newObject = null;
+		if(ConfigurationManager.getInstance().isMySql()){
+			newObject = new MySqlTeacherDefaultHoliday();
+		}
+		else{
+			newObject = new OracleTeacherDefaultHoliday();
+		}
+		
+		setValueByObject(t, newObject);
+		
+		return newObject;
+	}
+	
 	
 	public static void main(String[] args) {
 		JpaTeacherDefaultHolidayOperation operation = new JpaTeacherDefaultHolidayOperation();

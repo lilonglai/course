@@ -1,6 +1,11 @@
 package com.kevin.aeas.object.oracle;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import com.kevin.aeas.object.jpa.JpaSecondCourse;
 
 /**

@@ -1,17 +1,13 @@
 package com.kevin.aeas.operation.db;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
 import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
 import com.kevin.aeas.utils.ConfigurationManager;
-import com.kevin.aeas.utils.DatabaseHelp;
 
 public class TeacherHolidayOperation {
 	public TeacherHoliday get(int key) {

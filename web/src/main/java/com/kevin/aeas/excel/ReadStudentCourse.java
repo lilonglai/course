@@ -10,6 +10,12 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.format.CellFormat;
+import jxl.read.biff.BiffException;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.kevin.aeas.object.FirstCourse;
@@ -23,12 +29,6 @@ import com.kevin.aeas.operation.db.SecondCourseOperation;
 import com.kevin.aeas.operation.db.StudentOperation;
 import com.kevin.aeas.operation.db.TeacherOperation;
 import com.kevin.aeas.utils.GradeHelp;
-
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.format.CellFormat;
-import jxl.read.biff.BiffException;
 
 public class ReadStudentCourse {
 
