@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
@@ -58,8 +59,25 @@ public abstract class JpaBasicOperation {
 		transaction.commit();
 	}
 	
-	protected void setValueByObject(Object from, Object to){
-		
+	protected void setValueByObject(Object from, Object to) {
+		Class fromClass = from.getClass();
+		Class toClass = to.getClass();
+		Method[] toMethods = toClass.getMethods();
+		for (Method toMethod : toMethods) {
+			if (toMethod.getName().startsWith("set")) {
+				String fromMethodName = "get" + toMethod.getName().substring(3);
+				Method fromMethod = null;
+				try {
+					fromMethod = fromClass.getMethod(fromMethodName);
+					Object value = fromMethod.invoke(from);
+					toMethod.invoke(to, value);
+				} catch (Exception e) {
+					fromMethod = null;
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 	
 }
