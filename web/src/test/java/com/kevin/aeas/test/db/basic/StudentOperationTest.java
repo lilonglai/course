@@ -1,13 +1,13 @@
 package com.kevin.aeas.test.db.basic;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.basic.DbStudentOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
-
-import junit.framework.TestCase;
 
 public abstract class StudentOperationTest extends TestCase {
 	public void testGet() {
@@ -24,28 +24,28 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testGetByGrade() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getByGrade(1);
+		List<Student> list = operation.getByGrade(1);
 
 	}
 
 	public void testGetAll() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getAll();
+		List<Student> list = operation.getAll();
 	}
 	
 	public void testGetAlive() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getAlive();
+		List<Student> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getNotAlive();
+		List<Student> list = operation.getNotAlive();
 	}
 
 	public void testGetByTeacherId() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getByTeacherId(1);
+		List<Student> list = operation.getByTeacherId(1);
 
 	}
 
@@ -71,7 +71,7 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testUpdate() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getAll();
+		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -84,7 +84,7 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testDelete() {		
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getAll();
+		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -97,7 +97,7 @@ public abstract class StudentOperationTest extends TestCase {
 	
 	public void testRetire() {
 		DbStudentOperation operation = new DbStudentOperation();
-		ArrayList<Student> list = operation.getAll();
+	    List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");

@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -34,7 +35,7 @@ public class DbSecondCourseOperation {
 		return secondCourse;
 	}
 	
-	public ArrayList<SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		String sql = "select * from aeas_secondcourse where firstcourseid = " + firstCourseId;
 		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
 		SecondCourse secondCourse = null;
@@ -52,7 +53,7 @@ public class DbSecondCourseOperation {
 		
 	}
 	
-	public ArrayList<SecondCourse> getByGrade(int grade){
+	public List<SecondCourse> getByGrade(int grade){
 		String sql = "select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse "
 				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = " + grade
 				+ " order by aeas_secondcourse.firstcourseid";
@@ -72,7 +73,7 @@ public class DbSecondCourseOperation {
 		
 	}
 	
-	public ArrayList<SecondCourse> getAll(){
+	public List<SecondCourse> getAll(){
 		String sql = "select * from aeas_secondcourse"
 				+ " order by firstcourseid";
 		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();

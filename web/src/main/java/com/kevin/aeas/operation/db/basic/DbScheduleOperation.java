@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Schedule;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -57,7 +58,7 @@ public class DbScheduleOperation {
 		
 	}
 	
-	public ArrayList<Schedule> getByStudentId(int studentId){
+	public List<Schedule> getByStudentId(int studentId){
 		String sql = "select * from aeas_schedule where studentid = " + studentId + " order by ondate,ontime" ;
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
 		try {
@@ -75,7 +76,7 @@ public class DbScheduleOperation {
 		
 	}
 	
-	public ArrayList<Schedule> getByTeacherId(int teacherId){
+	public List<Schedule> getByTeacherId(int teacherId){
 		String sql = "select * from aeas_schedule where teacherid = " + teacherId + " order by ondate,ontime";
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
 		try {
@@ -94,7 +95,7 @@ public class DbScheduleOperation {
 	}
 	
 	
-	public ArrayList<Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
 		String sql = "select * from aeas_schedule where onDate = '" + onDate + "'";
 		if(onTime >=1){
 			sql += " and onTime=" + onTime;
@@ -117,7 +118,7 @@ public class DbScheduleOperation {
 		
 	}
 	
-	public ArrayList<Schedule> getAll(){
+	public List<Schedule> getAll(){
 		String sql = "select * from aeas_schedule" + " order by ondate,ontime";
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
 		try {

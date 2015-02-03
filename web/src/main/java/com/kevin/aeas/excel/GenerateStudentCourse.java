@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -205,7 +206,7 @@ public class GenerateStudentCourse {
 		totalHours = 0; 
 		
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		ArrayList<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
+		List<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
 		TreeMap<Date, Schedule[]> sortedMap = new TreeMap<Date, Schedule[]>();
 		for(Schedule schedule : scheduleList){
 			Schedule[] scheduleArray = sortedMap.get(schedule.getOnDate());

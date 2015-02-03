@@ -1,11 +1,11 @@
 package com.kevin.aeas.test.db.basic;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.basic.DbTeacherAbilityOperation;
-
-import junit.framework.TestCase;
 
 public abstract class TeacherAbilityOperationTest extends TestCase {
 	public void testGet() {
@@ -15,17 +15,17 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 
 	public void testGetAll() {
 		DbTeacherAbilityOperation operation = new DbTeacherAbilityOperation();
-		ArrayList<TeacherAbility> list=operation.getAll();
+		List<TeacherAbility> list=operation.getAll();
 	}
 
 	public void testGetByTeacherId() {
 		DbTeacherAbilityOperation operation = new DbTeacherAbilityOperation();
-		ArrayList<TeacherAbility> list = operation.getByTeacherId(1);
+		List<TeacherAbility> list = operation.getByTeacherId(1);
 	}
 
 	public void testGetByCourseId() {
 		DbTeacherAbilityOperation operation = new DbTeacherAbilityOperation();
-		ArrayList<TeacherAbility> list = operation.getByCourseId(1);
+		List<TeacherAbility> list = operation.getByCourseId(1);
 	}
 
 	public void testAdd() {
@@ -38,7 +38,7 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 
 	public void testUpdate() {
 		DbTeacherAbilityOperation operation = new DbTeacherAbilityOperation();
-		ArrayList<TeacherAbility> list=operation.getAll();
+		List<TeacherAbility> list=operation.getAll();
 		for(TeacherAbility teacherAbility: list){
 			if(teacherAbility.getTeacherId() == 25){
 				teacherAbility.setCourseId(26);
@@ -49,7 +49,7 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 
 	public void testDelete() {
 		DbTeacherAbilityOperation operation = new DbTeacherAbilityOperation();
-		ArrayList<TeacherAbility> list=operation.getAll();
+		List<TeacherAbility> list=operation.getAll();
 		for(TeacherAbility teacherAbility: list){
 			if(teacherAbility.getTeacherId() == 25){
 				teacherAbility.setCourseId(26);

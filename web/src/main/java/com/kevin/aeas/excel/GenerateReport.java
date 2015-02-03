@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -129,7 +130,7 @@ public class GenerateReport {
 			stringValue = (calandar.get(Calendar.MONTH)+1) + "/" + calandar.get(Calendar.DAY_OF_MONTH);
 			fillDate(sheet, i, rowIndex, stringValue);
 			Date currentDate = new Date(calandar.getTime().getTime());
-			ArrayList<Schedule> scheduleList = scheduleOperation.getByDateAndTime(currentDate, 0);
+			List<Schedule> scheduleList = scheduleOperation.getByDateAndTime(currentDate, 0);
 			scheduleMap = new TreeMap<Integer, Schedule[]>();
 			for(Schedule schedule:scheduleList){
 				Schedule[] scheduleArray = scheduleMap.get(schedule.getStudentId());

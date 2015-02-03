@@ -1,6 +1,7 @@
 package com.kevin.aeas.operation.db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -36,9 +37,9 @@ public class TeacherOperation {
 		}		
 	}
 	
-	public ArrayList<Teacher> getAll(){
+	public List<Teacher> getAll(){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Teacher>)JpaOperationManager.getInstance().getTeacherOperation().getAll();
+			return (List<Teacher>)JpaOperationManager.getInstance().getTeacherOperation().getAll();
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherOperation().getAll();
@@ -46,9 +47,9 @@ public class TeacherOperation {
 		
 	}
 	
-	public ArrayList<Teacher> getAlive(){
+	public List<Teacher> getAlive(){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Teacher>)JpaOperationManager.getInstance().getTeacherOperation().getAlive();
+			return (List<Teacher>)JpaOperationManager.getInstance().getTeacherOperation().getAlive();
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherOperation().getAlive();
@@ -56,9 +57,9 @@ public class TeacherOperation {
 		
 	}
 	
-	public ArrayList<Teacher> getNotAlive(){
+	public List<Teacher> getNotAlive(){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Teacher>)JpaOperationManager.getInstance().getTeacherOperation().getNotAlive();
+			return (List<Teacher>)JpaOperationManager.getInstance().getTeacherOperation().getNotAlive();
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherOperation().getNotAlive();

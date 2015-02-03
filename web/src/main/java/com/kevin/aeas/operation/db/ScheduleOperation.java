@@ -2,6 +2,7 @@ package com.kevin.aeas.operation.db;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Schedule;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -29,9 +30,9 @@ public class ScheduleOperation {
 		
 	}
 	
-	public ArrayList<Schedule> getByStudentId(int studentId){
+	public List<Schedule> getByStudentId(int studentId){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
+			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
 		}
 		else{
 			return DbOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
@@ -39,9 +40,9 @@ public class ScheduleOperation {
 		
 	}
 	
-	public ArrayList<Schedule> getByTeacherId(int teacherId){
+	public List<Schedule> getByTeacherId(int teacherId){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
+			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
 		}
 		else{
 			return DbOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
@@ -50,9 +51,9 @@ public class ScheduleOperation {
 	}
 	
 	
-	public ArrayList<Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
+			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
 		}
 		else{
 			return DbOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
@@ -60,9 +61,9 @@ public class ScheduleOperation {
 		
 	}
 	
-	public ArrayList<Schedule> getAll(){
+	public List<Schedule> getAll(){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getAll();
+			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getAll();
 		}
 		else{
 			return DbOperationManager.getInstance().getScheduleOperation().getAll();

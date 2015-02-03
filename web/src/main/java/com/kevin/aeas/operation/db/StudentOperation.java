@@ -1,6 +1,7 @@
 package com.kevin.aeas.operation.db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -27,9 +28,9 @@ public class StudentOperation {
 	}
 	
 
-	public ArrayList<Student> getByGrade(int grade) {
+	public List<Student> getByGrade(int grade) {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getByGrade(grade);
+			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getByGrade(grade);
 		}
 		else{
 			return DbOperationManager.getInstance().getStudentOperation().getByGrade(grade);
@@ -37,9 +38,9 @@ public class StudentOperation {
 
 	}
 
-	public ArrayList<Student> getAll() {
+	public List<Student> getAll() {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getAll();
+			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getAll();
 		}
 		else{
 			return DbOperationManager.getInstance().getStudentOperation().getAll();
@@ -47,27 +48,27 @@ public class StudentOperation {
 
 	}
 	
-	public ArrayList<Student> getAlive() {
+	public List<Student> getAlive() {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getAlive();
+			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getAlive();
 		}
 		else{
 			return DbOperationManager.getInstance().getStudentOperation().getAlive();
 		}
 	}
 	
-	public ArrayList<Student> getNotAlive() {
+	public List<Student> getNotAlive() {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getNotAlive();
+			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getNotAlive();
 		}
 		else{
 			return DbOperationManager.getInstance().getStudentOperation().getNotAlive();
 		}
 	}
 
-	public ArrayList<Student> getByTeacherId(int teacherId) {
+	public List<Student> getByTeacherId(int teacherId) {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<Student>)JpaOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);
+			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);
 		}
 		else{
 			return DbOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);

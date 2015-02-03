@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -67,7 +68,7 @@ public class DbTeacherOperation {
 		return teacher;		
 	}
 	
-	public ArrayList<Teacher> getAll(){
+	public List<Teacher> getAll(){
 		String sql = "select * from aeas_teacher";
 		ArrayList<Teacher> list = new ArrayList<Teacher>();
 		try {
@@ -85,7 +86,7 @@ public class DbTeacherOperation {
 		
 	}
 	
-	public ArrayList<Teacher> getAlive(){
+	public List<Teacher> getAlive(){
 		String sql = "select * from aeas_teacher" + " where isalive=true";
 		ArrayList<Teacher> list = new ArrayList<Teacher>();
 		try {
@@ -103,7 +104,7 @@ public class DbTeacherOperation {
 		
 	}
 	
-	public ArrayList<Teacher> getNotAlive(){
+	public List<Teacher> getNotAlive(){
 		String sql = "select * from aeas_teacher" + " where isalive=false";
 		ArrayList<Teacher> list = new ArrayList<Teacher>();
 		try {

@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -57,7 +58,7 @@ public class DbStudentOperation {
 	}
 	
 
-	public ArrayList<Student> getByGrade(int grade) {
+	public List<Student> getByGrade(int grade) {
 		String sql = "select * from aeas_student where grade = " + grade;
 		ArrayList<Student> list = new ArrayList<Student>();
 		try {
@@ -75,7 +76,7 @@ public class DbStudentOperation {
 
 	}
 
-	public ArrayList<Student> getAll() {
+	public List<Student> getAll() {
 		String sql = "select * from aeas_student";
 		ArrayList<Student> list = new ArrayList<Student>();
 		try {
@@ -92,7 +93,7 @@ public class DbStudentOperation {
 		return list;
 	}
 	
-	public ArrayList<Student> getAlive() {
+	public List<Student> getAlive() {
 		String sql = "select * from aeas_student" + " where isalive=true";
 		ArrayList<Student> list = new ArrayList<Student>();
 		try {
@@ -109,7 +110,7 @@ public class DbStudentOperation {
 		return list;
 	}
 	
-	public ArrayList<Student> getNotAlive() {
+	public List<Student> getNotAlive() {
 		String sql = "select * from aeas_student" + " where isalive=false";
 		ArrayList<Student> list = new ArrayList<Student>();
 		try {
@@ -126,7 +127,7 @@ public class DbStudentOperation {
 		return list;
 	}
 
-	public ArrayList<Student> getByTeacherId(int teacherId) {
+	public List<Student> getByTeacherId(int teacherId) {
 		String sql = "select * from aeas_student where teacherid = "
 				+ teacherId;
 		ArrayList<Student> list = new ArrayList<Student>();

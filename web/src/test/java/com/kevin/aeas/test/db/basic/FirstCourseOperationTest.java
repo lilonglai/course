@@ -1,12 +1,12 @@
 package com.kevin.aeas.test.db.basic;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.basic.DbFirstCourseOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
-
-import junit.framework.TestCase;
 
 
 public abstract class  FirstCourseOperationTest extends TestCase{
@@ -18,12 +18,12 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	
 	public void testGetByGrade(){
 		DbFirstCourseOperation operation = new DbFirstCourseOperation();
-		ArrayList<FirstCourse> list = operation.getByGrade(1);
+		List<FirstCourse> list = operation.getByGrade(1);
 	}
 	
 	public void testGetAll(){
 		DbFirstCourseOperation operation = new DbFirstCourseOperation();
-		ArrayList<FirstCourse> list = operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 	}
 	
 	
@@ -55,7 +55,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		DbFirstCourseOperation operation = new DbFirstCourseOperation();
-		ArrayList<FirstCourse> list = operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
@@ -67,7 +67,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		
 	public void testDelete(){
 		DbFirstCourseOperation operation = new DbFirstCourseOperation();
-		ArrayList<FirstCourse> list = operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");

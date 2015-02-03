@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -33,12 +34,12 @@ public class ScheduleService {
 		super();
 	}
 	
-	private ArrayList<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
+	private List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
 		SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		ArrayList<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
-		ArrayList<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
-		ArrayList<SecondCourse> resultList = new ArrayList<SecondCourse>();
+		List<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
+		List<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
+		List<SecondCourse> resultList = new ArrayList<SecondCourse>();
 		for(SecondCourse secondCourse : secondCourseList){
 			if(isScheduled(secondCourse, scheduleList)){
 				continue;
@@ -49,7 +50,7 @@ public class ScheduleService {
 		return secondCourseList;		
 	}
 	
-	private boolean isScheduled(SecondCourse secondCourse, ArrayList<Schedule> scheduleList){
+	private boolean isScheduled(SecondCourse secondCourse, List<Schedule> scheduleList){
 		for(Schedule schedule : scheduleList){
 			if(secondCourse.getId() == schedule.getCourseId()){
 				return true;
@@ -58,17 +59,17 @@ public class ScheduleService {
 		return false;
 	}
 	
-	private ArrayList<Teacher> getTeacherList(Date onDate, int onTime, int firstCourseId){
+	private List<Teacher> getTeacherList(Date onDate, int onTime, int firstCourseId){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(onDate);
 		TeacherAbilityOperation teacherAbilityOperation = new TeacherAbilityOperation();
 
 		TeacherOperation teacherOperation = new TeacherOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		ArrayList<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
+		List<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
 		
-		ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
-	    ArrayList<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
+		List<Teacher> teacherList = new ArrayList<Teacher>();
+	    List<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
 		
 		for(TeacherAbility teacherAbility:teacherAbilityList){
 			int teacherId = teacherAbility.getTeacherId();
@@ -95,7 +96,7 @@ public class ScheduleService {
 		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
 		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
 		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
-		ArrayList<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
+		List<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
 	    if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
 	    	return true;
 	    }
@@ -108,7 +109,7 @@ public class ScheduleService {
 	 * @param teacherId the teacher identification.
 	 * @param Schedule the arranged list
 	 */
-	private boolean isScheduled(int teacherId, ArrayList<Schedule> scheduleList){
+	private boolean isScheduled(int teacherId, List<Schedule> scheduleList){
 		for(Schedule schedule : scheduleList){
 			if(schedule.getTeacherId() == teacherId){
 				return true;
@@ -121,8 +122,8 @@ public class ScheduleService {
 	private ArrayList<Teacher> getAvailableTeacherList(Date onDate, int onTime){
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
 		TeacherOperation teacherOperation = new TeacherOperation();
-		ArrayList<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
-		ArrayList<Teacher> teacherList = teacherOperation.getAll();
+		List<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
+		List<Teacher> teacherList = teacherOperation.getAll();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(onDate);
@@ -150,33 +151,33 @@ public class ScheduleService {
 	@GET
 	@Path("getSecondCourseList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<SecondCourse> getSecondCourseListByGet(@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
+	public List<SecondCourse> getSecondCourseListByGet(@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
+		List<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
 		return secondCourseList;
 	}
 	
 	@POST
 	@Path("getSecondCourseList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<SecondCourse> getSecondCourseListByPost(@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
+	public List<SecondCourse> getSecondCourseListByPost(@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
+		List<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
 		return secondCourseList;
 	}
 	
 	@GET
 	@Path("getTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  ArrayList<Teacher> getTeacherListByGet(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime, @QueryParam("firstCourseId") int firstCourseId){
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
+	public  List<Teacher> getTeacherListByGet(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime, @QueryParam("firstCourseId") int firstCourseId){
+		List<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		return teacherList;
 	}
 	
 	@POST
 	@Path("getTeacherList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  ArrayList<Teacher> getTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime, 
+	public  List<Teacher> getTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime, 
 			 @FormParam("firstCourseId") int firstCourseId){
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
+		List<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		return teacherList;
 	}
 	
@@ -201,8 +202,8 @@ public class ScheduleService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public HashMap<String, Object> getSecondCourseAndTeacherListByGet(@QueryParam("onDate") Date onDate, @QueryParam("onTime") int onTime,
 			@QueryParam("studentId") int studentId, @QueryParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
+		List<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
+		List<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("secondCourseList", secondCourseList);
 		map.put("teacherList", teacherList);
@@ -214,8 +215,8 @@ public class ScheduleService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public HashMap<String, Object> getSecondCourseAndTeacherListByPost(@FormParam("onDate") Date onDate, @FormParam("onTime") int onTime,
 			@FormParam("studentId") int studentId, @FormParam("firstCourseId") int firstCourseId){
-		ArrayList<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
-		ArrayList<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
+		List<SecondCourse> secondCourseList = getSecondCourseList(studentId, firstCourseId);
+		List<Teacher> teacherList = getTeacherList(onDate, onTime, firstCourseId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("secondCourseList", secondCourseList);
 		map.put("teacherList", teacherList);

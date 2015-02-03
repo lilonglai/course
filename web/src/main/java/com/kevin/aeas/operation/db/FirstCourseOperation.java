@@ -1,6 +1,6 @@
 package com.kevin.aeas.operation.db;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -18,9 +18,9 @@ public class FirstCourseOperation {
 		}
 	}
 	
-	public ArrayList<FirstCourse> getByGrade(int grade){
+	public List<FirstCourse> getByGrade(int grade){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<FirstCourse>) JpaOperationManager.getInstance().getFirstCourseOperation().getByGrade(grade);
+			return (List<FirstCourse>) JpaOperationManager.getInstance().getFirstCourseOperation().getByGrade(grade);
 		}
 		else{
 			return DbOperationManager.getInstance().getFirstCourseOperation().getByGrade(grade);
@@ -28,9 +28,9 @@ public class FirstCourseOperation {
 		
 	}
 	
-	public ArrayList<FirstCourse> getAll(){
+	public List<FirstCourse> getAll(){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<FirstCourse>) JpaOperationManager.getInstance().getFirstCourseOperation().getAll();
+			return (List<FirstCourse>) JpaOperationManager.getInstance().getFirstCourseOperation().getAll();
 		}
 		else{
 			return DbOperationManager.getInstance().getFirstCourseOperation().getAll();

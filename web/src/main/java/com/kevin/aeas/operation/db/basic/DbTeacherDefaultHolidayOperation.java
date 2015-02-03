@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -54,7 +55,7 @@ public class DbTeacherDefaultHolidayOperation {
 		return teacherDefaultHoliday;		
 	}
 	
-	public ArrayList<TeacherDefaultHoliday> getAll(){
+	public List<TeacherDefaultHoliday> getAll(){
 		String sql = "select * from aeas_teacherdefaultholiday";
 		ArrayList<TeacherDefaultHoliday> list = new ArrayList<TeacherDefaultHoliday>();
 		try {

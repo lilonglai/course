@@ -1,11 +1,11 @@
 package com.kevin.aeas.test.db.basic;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.basic.DbTeacherDefaultHolidayOperation;
-
-import junit.framework.TestCase;
 
 public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testGet(){
@@ -20,7 +20,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	
 	public void testGetAll(){
 		DbTeacherDefaultHolidayOperation operation = new DbTeacherDefaultHolidayOperation();
-		ArrayList<TeacherDefaultHoliday> teacherDefaultHoliday = operation.getAll();
+		List<TeacherDefaultHoliday> teacherDefaultHoliday = operation.getAll();
 	}
 
 	public void testAdd(){
@@ -35,7 +35,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testUpdate(){
 
 		DbTeacherDefaultHolidayOperation operation = new DbTeacherDefaultHolidayOperation();
-		ArrayList<TeacherDefaultHoliday> list = operation.getAll();
+		List<TeacherDefaultHoliday> list = operation.getAll();
 		for(TeacherDefaultHoliday teacherDefaultHoliday: list){
 			if(teacherDefaultHoliday.getTeacherId() == 1){
 				teacherDefaultHoliday.setWeek3(true);
@@ -48,7 +48,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	
 	public void testDelete(){
 		DbTeacherDefaultHolidayOperation operation = new DbTeacherDefaultHolidayOperation();
-		ArrayList<TeacherDefaultHoliday> list = operation.getAll();
+		List<TeacherDefaultHoliday> list = operation.getAll();
 		for(TeacherDefaultHoliday teacherDefaultHoliday: list){
 			if(teacherDefaultHoliday.getTeacherId() == 1){
 				operation.delete(teacherDefaultHoliday.getId());

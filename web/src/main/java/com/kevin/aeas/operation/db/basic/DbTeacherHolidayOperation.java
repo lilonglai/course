@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -33,7 +34,7 @@ public class DbTeacherHolidayOperation {
 		return teacherHoliday;
 	}
 	
-	public ArrayList<TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<TeacherHoliday> getByTeacherId(int teacherId) {
 		String sql = "select * from aeas_teacherholiday where teacherid = "
 				+ teacherId;
 		ArrayList<TeacherHoliday> list = new ArrayList<TeacherHoliday>();
@@ -69,7 +70,7 @@ public class DbTeacherHolidayOperation {
 
 	}
 
-	public ArrayList<TeacherHoliday> getAll() {
+	public List<TeacherHoliday> getAll() {
 		String sql = "select * from aeas_teacherholiday";
 		ArrayList<TeacherHoliday> list = new ArrayList<TeacherHoliday>();
 		try {

@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -357,7 +358,7 @@ public class ReadStudentCourse {
 				break;
 			}			
 		}
-		ArrayList<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(student.getGrade());
+		List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(student.getGrade());
 		FirstCourse firstCourse =null;
 		for(FirstCourse iFirstCourse : firstCourseList){
 			if(iFirstCourse.getName().equals(firstCourseName)){
@@ -371,7 +372,7 @@ public class ReadStudentCourse {
 			return null;
 		}
 		
-		ArrayList<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourse.getId());
+		List<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourse.getId());
 		SecondCourse result = null;
 		int value =1000;
 		for (SecondCourse secondCourse : secondCourseList) {

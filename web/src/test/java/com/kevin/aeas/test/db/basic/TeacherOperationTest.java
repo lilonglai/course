@@ -1,12 +1,12 @@
 package com.kevin.aeas.test.db.basic;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.operation.db.basic.DbTeacherOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
-
-import junit.framework.TestCase;
 
 public abstract class TeacherOperationTest extends TestCase{
 	public void testGet(){
@@ -28,17 +28,17 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testGetAll(){
 		DbTeacherOperation operation = new DbTeacherOperation();
-		ArrayList<Teacher> list = operation.getAll();
+		List<Teacher> list = operation.getAll();
 	}
 	
 	public void testGetAlive(){
 		DbTeacherOperation operation = new DbTeacherOperation();
-		ArrayList<Teacher> list = operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive(){
 		DbTeacherOperation operation = new DbTeacherOperation();
-		ArrayList<Teacher> list = operation.getNotAlive();
+		List<Teacher> list = operation.getNotAlive();
 	}
 	
 	public void testGetIdByObject(){
@@ -63,7 +63,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		DbTeacherOperation operation = new DbTeacherOperation();
-		ArrayList<Teacher> list = operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				teacher.setShortName("test2");
@@ -76,7 +76,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testDelete(){
 		DbTeacherOperation operation = new DbTeacherOperation();
-		ArrayList<Teacher> list = operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.delete(teacher.getId());;
@@ -86,7 +86,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testRetire(){
 		DbTeacherOperation operation = new DbTeacherOperation();
-		ArrayList<Teacher> list = operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.retire(teacher.getId());;

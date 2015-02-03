@@ -1,6 +1,7 @@
 package com.kevin.aeas.operation.db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -18,9 +19,9 @@ public class SecondCourseOperation {
 		
 	}
 	
-	public ArrayList<SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
+			return (List<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
 		}
 		else{
 			return DbOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
@@ -28,9 +29,9 @@ public class SecondCourseOperation {
 		
 	}
 	
-	public ArrayList<SecondCourse> getByGrade(int grade){
+	public List<SecondCourse> getByGrade(int grade){
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
+			return (List<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
 		}
 		else{
 			return DbOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
@@ -38,7 +39,7 @@ public class SecondCourseOperation {
 		
 	}
 	
-	public ArrayList<SecondCourse> getAll(){
+	public List<SecondCourse> getAll(){
 		if(ConfigurationManager.getInstance().isJpa()){
 			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getAll();
 		}

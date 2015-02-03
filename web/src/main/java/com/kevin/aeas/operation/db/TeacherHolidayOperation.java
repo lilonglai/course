@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -20,9 +21,9 @@ public class TeacherHolidayOperation {
 
 	}
 
-	public ArrayList<TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<TeacherHoliday> getByTeacherId(int teacherId) {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<TeacherHoliday>)JpaOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherId(teacherId);
+			return (List<TeacherHoliday>)JpaOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherId(teacherId);
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherHolidayOperation().getByTeacherId(teacherId);
@@ -40,9 +41,9 @@ public class TeacherHolidayOperation {
 
 	}
 
-	public ArrayList<TeacherHoliday> getAll() {
+	public List<TeacherHoliday> getAll() {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<TeacherHoliday>)JpaOperationManager.getInstance().getTeacherHolidayOperation().getAll();
+			return (List<TeacherHoliday>)JpaOperationManager.getInstance().getTeacherHolidayOperation().getAll();
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherHolidayOperation().getAll();

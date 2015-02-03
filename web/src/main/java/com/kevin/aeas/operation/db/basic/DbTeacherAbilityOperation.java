@@ -3,6 +3,7 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.utils.DatabaseHelp;
@@ -32,7 +33,7 @@ public class DbTeacherAbilityOperation {
 		return teacherAbility;
 	}
 	
-	public ArrayList<TeacherAbility> getAll() {
+	public List<TeacherAbility> getAll() {
 		String sql = "select aeas_teacherability.* from"
 				+ " aeas_teacherability,aeas_firstcourse"
 				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
@@ -51,7 +52,7 @@ public class DbTeacherAbilityOperation {
 		return list;
 	}
 	
-	public ArrayList<TeacherAbility> getByTeacherId(int teacherId) {
+	public List<TeacherAbility> getByTeacherId(int teacherId) {
 		String sql = "select aeas_teacherability.*"
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where teacherid = " + teacherId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
@@ -70,7 +71,7 @@ public class DbTeacherAbilityOperation {
 		return list;
 	}
 	
-	public ArrayList<TeacherAbility> getByCourseId(int courseId) {
+	public List<TeacherAbility> getByCourseId(int courseId) {
 		String sql = "select aeas_teacherability.*"
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where courseid = " + courseId + " and aeas_firstcourse.id=aeas_teacherability.courseid"

@@ -1,6 +1,7 @@
 package com.kevin.aeas.operation.db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.basic.DbOperationManager;
@@ -18,27 +19,27 @@ public class TeacherAbilityOperation {
 
 	}
 
-	public ArrayList<TeacherAbility> getAll() {
+	public List<TeacherAbility> getAll() {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getAll();
+			return (List<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getAll();
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherAbilityOperation().getAll();
 		}
 	}
 	
-	public ArrayList<TeacherAbility> getByTeacherId(int teacherId) {
+	public List<TeacherAbility> getByTeacherId(int teacherId) {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getByTeacherId(teacherId);
+			return (List<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getByTeacherId(teacherId);
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherAbilityOperation().getByTeacherId(teacherId);
 		}
 	}
 	
-	public ArrayList<TeacherAbility> getByCourseId(int courseId) {
+	public List<TeacherAbility> getByCourseId(int courseId) {
 		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getByCourseId(courseId);
+			return (List<TeacherAbility>)JpaOperationManager.getInstance().getTeacherAbilityOperation().getByCourseId(courseId);
 		}
 		else{
 			return DbOperationManager.getInstance().getTeacherAbilityOperation().getByCourseId(courseId);
