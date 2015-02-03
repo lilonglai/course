@@ -6,6 +6,7 @@ import junit.framework.TestCase;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.basic.DbTeacherAbilityOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 
 public abstract class TeacherAbilityOperationTest extends TestCase {
 	public void testGet() {
@@ -66,5 +67,9 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 	public void testDeleteByTeacherAndGrade() {
 		DbTeacherAbilityOperation operation = new DbTeacherAbilityOperation();
 		operation.deleteByTeacherAndGrade(1, 1);;
+	}
+	
+	protected void setUp() throws Exception{
+		DbUtils.resetDbInstance();
 	}
 }

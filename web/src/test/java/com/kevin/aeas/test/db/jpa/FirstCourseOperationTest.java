@@ -78,6 +78,6 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	}
 	
 	protected void setUp() throws Exception{
-		DbUtils.resetDbInstance();
+		DbUtils.resetJpaManager();
 	}
 }

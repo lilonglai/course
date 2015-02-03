@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.jpa.JpaTeacherAbilityOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 
 import junit.framework.TestCase;
 
@@ -66,5 +67,9 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 	public void testDeleteByTeacherAndGrade() {
 		JpaTeacherAbilityOperation operation = new JpaTeacherAbilityOperation();
 		operation.deleteByTeacherAndGrade(1, 1);;
+	}
+	
+	protected void setUp() throws Exception{
+		DbUtils.resetJpaManager();
 	}
 }

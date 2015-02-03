@@ -95,6 +95,6 @@ public abstract class TeacherOperationTest extends TestCase{
 	}
 	
 	protected void setUp() throws Exception{
-		DbUtils.resetDbInstance();
+		DbUtils.resetJpaManager();
 	}
 }

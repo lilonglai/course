@@ -6,6 +6,7 @@ import junit.framework.TestCase;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.basic.DbTeacherDefaultHolidayOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 
 public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testGet(){
@@ -60,5 +61,9 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testDeleteByTeacherId(){
 		DbTeacherDefaultHolidayOperation operation = new DbTeacherDefaultHolidayOperation();
 		operation.deleteByTeacherId(1);
+	}
+	
+	protected void setUp() throws Exception{
+		DbUtils.resetDbInstance();
 	}
 }

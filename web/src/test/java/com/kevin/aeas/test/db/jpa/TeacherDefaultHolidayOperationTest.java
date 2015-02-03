@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.jpa.JpaTeacherDefaultHolidayOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 
 import junit.framework.TestCase;
 
@@ -60,5 +61,9 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testDeleteByTeacherId(){
 		JpaTeacherDefaultHolidayOperation operation = new JpaTeacherDefaultHolidayOperation();
 		operation.deleteByTeacherId(1);
+	}
+	
+	protected void setUp() throws Exception{
+		DbUtils.resetJpaManager();
 	}
 }

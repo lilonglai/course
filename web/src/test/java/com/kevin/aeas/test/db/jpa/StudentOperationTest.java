@@ -108,6 +108,6 @@ public abstract class StudentOperationTest extends TestCase {
 	}
 	
 	protected void setUp() throws Exception{
-		DbUtils.resetDbInstance();
+		DbUtils.resetJpaManager();
 	}
 }
