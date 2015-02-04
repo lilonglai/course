@@ -3,64 +3,73 @@ package com.kevin.aeas.operation.db.basic;
 public class DbOperationManager {
 	private static DbOperationManager instance = new DbOperationManager();
 	
-	private DbTeacherOperation aeasTeacherOperation;	
-	private DbStudentOperation aeasStudentOperation;
-	private DbFirstCourseOperation aeasFirstCourseOperation;
-	private DbSecondCourseOperation aeasSecondCourseOperation;
-	private DbUserOperation aeasUserOperation;
-	private DbScheduleOperation aeasScheduleOperation;
+	private DbFirstCourseOperation firstCourseOperation;
+	private DbSecondCourseOperation secondCourseOperation;
 	
-	private DbTeacherAbilityOperation aeasTeacherAbilityOperation;
-	private DbTeacherDefaultHolidayOperation aeasTeacherDefaultHolidayOperation;
-	private DbTeacherHolidayOperation aeasTeacherHolidayOperation;
+	
+	private DbStudentOperation studentOperation;
+	private DbScheduleOperation scheduleOperation;
+	
+	private DbTeacherOperation teacherOperation;
+	private DbTeacherAbilityOperation teacherAbilityOperation;
+	private DbTeacherDefaultHolidayOperation teacherDefaultHolidayOperation;
+	private DbTeacherHolidayOperation teacherHolidayOperation;
+	
+	private DbUserOperation userOperation;
 	
 	private DbOperationManager(){
-		aeasTeacherOperation = new DbTeacherOperation();
-		aeasStudentOperation = new DbStudentOperation();
-		aeasFirstCourseOperation = new DbFirstCourseOperation();
-		aeasSecondCourseOperation = new DbSecondCourseOperation();		
-		aeasUserOperation = new DbUserOperation();
+		firstCourseOperation = new DbFirstCourseOperation();
+		secondCourseOperation = new DbSecondCourseOperation();	
+		
+		studentOperation = new DbStudentOperation();
+		scheduleOperation = new DbScheduleOperation();
+	
+		teacherOperation = new DbTeacherOperation();
+		teacherAbilityOperation = new DbTeacherAbilityOperation();
+		teacherDefaultHolidayOperation = new DbTeacherDefaultHolidayOperation();
+		teacherHolidayOperation = new DbTeacherHolidayOperation();
+		
+		userOperation = new DbUserOperation();
 	}
 	
 	public static DbOperationManager getInstance(){
 		return instance;
 	}
-	
-	public DbTeacherOperation getTeacherOperation(){
-		return aeasTeacherOperation;
-	}
-	
-	public DbStudentOperation getStudentOperation(){
-		return aeasStudentOperation;
-	}
-	
+		
 	public DbFirstCourseOperation getFirstCourseOperation(){
-		return aeasFirstCourseOperation;
+		return firstCourseOperation;
 	}
 	
 	public DbSecondCourseOperation getSecondCourseOperation(){
-		return aeasSecondCourseOperation;
+		return secondCourseOperation;
 	}
 	
-	public DbUserOperation getUserOperation(){
-		return aeasUserOperation;
+	public DbStudentOperation getStudentOperation(){
+		return studentOperation;
 	}
 
 	public DbScheduleOperation getScheduleOperation() {
-		return aeasScheduleOperation;
+		return scheduleOperation;
 	}
-
+	
+	public DbTeacherOperation getTeacherOperation(){
+		return teacherOperation;
+	}
+	
 	public DbTeacherAbilityOperation getTeacherAbilityOperation() {
-		return aeasTeacherAbilityOperation;
+		return teacherAbilityOperation;
 	}
 
 	public DbTeacherDefaultHolidayOperation getTeacherDefaultHolidayOperation() {
-		return aeasTeacherDefaultHolidayOperation;
+		return teacherDefaultHolidayOperation;
 	}
 
 	public DbTeacherHolidayOperation getTeacherHolidayOperation() {
-		return aeasTeacherHolidayOperation;
+		return teacherHolidayOperation;
 	}
-
+	
+	public DbUserOperation getUserOperation(){
+		return userOperation;
+	}
 
 }

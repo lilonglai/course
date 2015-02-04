@@ -20,7 +20,7 @@ import com.kevin.aeas.object.Schedule;
 public class MySqlSchedule extends Schedule{
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "id")
     public int getId() {
         return id;

@@ -20,7 +20,7 @@ import com.kevin.aeas.object.Student;
 public class MySqlStudent extends Student{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "id")
     public int getId() {
         return id;

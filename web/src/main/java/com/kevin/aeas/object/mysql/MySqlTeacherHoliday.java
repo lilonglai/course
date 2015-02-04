@@ -20,7 +20,7 @@ import com.kevin.aeas.object.TeacherHoliday;
 public class MySqlTeacherHoliday extends TeacherHoliday {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;

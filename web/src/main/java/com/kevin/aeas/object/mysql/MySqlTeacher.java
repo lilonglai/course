@@ -17,7 +17,7 @@ import com.kevin.aeas.object.Teacher;
 @Table(name = "aeas_teacher")
 public class MySqlTeacher extends Teacher{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "id")
     public int getId() {
         return id;

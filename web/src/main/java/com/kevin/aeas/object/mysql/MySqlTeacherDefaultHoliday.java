@@ -18,7 +18,7 @@ import com.kevin.aeas.object.TeacherDefaultHoliday;
 public class MySqlTeacherDefaultHoliday extends TeacherDefaultHoliday{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "id")
     public int getId() {
         return id;

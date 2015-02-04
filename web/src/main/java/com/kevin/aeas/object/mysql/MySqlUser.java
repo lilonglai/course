@@ -17,7 +17,7 @@ import com.kevin.aeas.object.User;
 @Table(name = "aeas_user")
 public class MySqlUser extends User{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;

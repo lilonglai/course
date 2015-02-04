@@ -3,16 +3,19 @@ package com.kevin.aeas.operation.db;
 public class OperationManager {
 	private static OperationManager instance = new OperationManager();
 	
-	private TeacherOperation teacherOperation;	
-	private StudentOperation studentOperation;
+
 	private FirstCourseOperation firstCourseOperation;
 	private SecondCourseOperation secondCourseOperation;
-	private UserOperation userOperation;
+	
+	private StudentOperation studentOperation;
 	private ScheduleOperation scheduleOperation;
 	
+	private TeacherOperation teacherOperation;	
 	private TeacherAbilityOperation teacherAbilityOperation;
 	private TeacherDefaultHolidayOperation teacherDefaultHolidayOperation;
 	private TeacherHolidayOperation teacherHolidayOperation;
+	
+	private UserOperation userOperation;
 	
 	private OperationManager(){
 		

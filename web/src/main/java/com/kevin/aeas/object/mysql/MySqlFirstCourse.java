@@ -18,7 +18,7 @@ import com.kevin.aeas.object.FirstCourse;
 @Table(name = "aeas_firstcourse")
 public class MySqlFirstCourse extends FirstCourse{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "id")
     public int getId() {
         return id;
