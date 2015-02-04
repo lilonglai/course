@@ -5,18 +5,23 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.kevin.aeas.object.SecondCourse;
+import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.mysql.MySqlSecondCourse;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleSecondCourse;
 import com.kevin.aeas.utils.ConfigurationManager;
 
 public class JpaSecondCourseOperation extends JpaBasicOperation{
+	private Class firstCourseClass;
+	
 	public JpaSecondCourseOperation(){
 		if(ConfigurationManager.getInstance().isMySql()){
 			setActualClass(MySqlSecondCourse.class);
+			firstCourseClass = MySqlFirstCourse.class;
 		}
 		else{
 			setActualClass(OracleSecondCourse.class);
+			firstCourseClass = OracleFirstCourse.class;
 		}
 	}
 	
@@ -28,7 +33,7 @@ public class JpaSecondCourseOperation extends JpaBasicOperation{
 	}
 	
 	public List getByGrade(int grade){
-		Query q = EntityManangerUtil.getInstance().createQuery("select sc from AeasFirstCourse fc, AeasSecondCourse sc  where fc.grade=:grade and sc.firstCourseId=fc.id");
+		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + firstCourseClass.getSimpleName() + " fc, "  + getActualClass().getSimpleName() + " sc  where fc.grade=:grade and sc.firstCourseId=fc.id");
 		q.setParameter("grade", grade);
 		List<OracleFirstCourse> scList = q.getResultList();
 		return scList;		

@@ -24,7 +24,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 	public void testGetByTeacherAndDate() {
 		JpaTeacherHolidayOperation operation = new JpaTeacherHolidayOperation();
 		TeacherHoliday teacherHoliday = (TeacherHoliday) operation.getByTeacherAndDate(1,
-				"1989-7-21");
+				"1989-07-21");
 	}
 
 	public void testGetAll() {

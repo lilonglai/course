@@ -45,10 +45,7 @@ public abstract class TeacherOperationTest extends TestCase{
 		JpaTeacherOperation operation = new JpaTeacherOperation();
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
-		int id = operation.getIdByObject(teacher);
-
-		
-		
+		int id = operation.getIdByObject(teacher);		
 	}
 	
 	public void testAdd(){

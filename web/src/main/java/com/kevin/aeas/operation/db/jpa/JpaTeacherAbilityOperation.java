@@ -5,17 +5,22 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.kevin.aeas.object.TeacherAbility;
+import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.mysql.MySqlTeacherAbility;
+import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 import com.kevin.aeas.utils.ConfigurationManager;
 
 public class JpaTeacherAbilityOperation extends JpaBasicOperation{
+	private Class firstCourseClass;
 	public JpaTeacherAbilityOperation(){
 		if(ConfigurationManager.getInstance().isMySql()){
 			setActualClass(MySqlTeacherAbility.class);
+			firstCourseClass = MySqlFirstCourse.class;
 		}
 		else{
 			setActualClass(OracleTeacherAbility.class);
+			firstCourseClass = OracleFirstCourse.class;
 		}
 	}
 	
@@ -35,13 +40,13 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 	
 	
 	public void deleteByTeacherId(int teacherId){
-		String sql = "delete from TeacherAbility ta where ta.teacherid = " + teacherId;
+		String sql = "delete from "  + getActualClass().getSimpleName() + " ta where ta.teacherId = " + teacherId;
 		EntityManangerUtil.getInstance().createQuery(sql);
 	}
 		
 	public void deleteByTeacherAndGrade(int teacherId,int grade){
-		String sql = "delete from TeacherAbility ta where ta.teacherid = " + teacherId
-				+ " and ta.courseId in(select c.id from FirstCourse fc where fc.grade = " + grade + ")";
+		String sql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = " + teacherId
+				+ " and ta.courseId in(select fc.id from "  + firstCourseClass.getSimpleName() + " fc where fc.grade = " + grade + ")";
 		EntityManangerUtil.getInstance().createQuery(sql);
 		
 	}
@@ -59,13 +64,7 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 		
 		return newObject;
 	}
-		
-	public static void main(String[] args) {
-		
-		
-		
-		
-	}
+	
 }
 
 

@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -30,8 +31,9 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation{
 	public Object getByTeacherAndDate(int teacherId,String date) {		
 		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId and th.adjustDate=:adjustDate");
 		q.setParameter("teacherId", teacherId);
-		q.setParameter("adjustDate", date);
+		q.setParameter("adjustDate", Date.valueOf(date));
 		List list = q.getResultList();
+		
 		return null;
 
 	}
