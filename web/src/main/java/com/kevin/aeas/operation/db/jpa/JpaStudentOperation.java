@@ -24,8 +24,8 @@ public class JpaStudentOperation extends JpaBasicOperation{
 	public Object getByName(String name) {		
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.name=:name");
 		q.setParameter("name", name);
-		List<OracleStudent> list = q.getResultList();
-		OracleStudent aeasStudent = null;
+		List<Student> list = q.getResultList();
+		Student aeasStudent = null;
 		if(list.size() >0)
 			aeasStudent = list.get(0);
 		return aeasStudent;
@@ -56,7 +56,7 @@ public class JpaStudentOperation extends JpaBasicOperation{
 	public List getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-		List<OracleStudent> list = q.getResultList();
+		List<Student> list = q.getResultList();
 		return list;
 
 	}

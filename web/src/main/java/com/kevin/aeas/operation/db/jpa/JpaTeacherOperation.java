@@ -25,8 +25,8 @@ public class JpaTeacherOperation extends JpaBasicOperation{
 	public Object getByName(String name){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.name=:name");
 		q.setParameter("name", name);
-		List<OracleTeacher> list = q.getResultList();
-		OracleTeacher aeasTeacher = null;
+		List<Teacher> list = q.getResultList();
+		Teacher aeasTeacher = null;
 		if(list.size() > 0 )
 			aeasTeacher = list.get(0);
 		return aeasTeacher;	
@@ -36,8 +36,8 @@ public class JpaTeacherOperation extends JpaBasicOperation{
 	public Object getByShortName(String shortName){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.shortName=:shortName");
 		q.setParameter("shortName", shortName);
-		List<OracleTeacher> list = q.getResultList();
-		OracleTeacher aeasTeacher = null;
+		List<Teacher> list = q.getResultList();
+		Teacher aeasTeacher = null;
 		if(list.size() > 0 )
 			aeasTeacher = list.get(0);
 		return aeasTeacher;		
