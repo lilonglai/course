@@ -12,18 +12,18 @@
         <class>com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday</class>
         <class>com.kevin.aeas.object.oracle.OracleTeacherHoliday</class>
         <class>com.kevin.aeas.object.oracle.OracleUser</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes> <!-- in order to support both mysql/oracle-->
         <properties>
             <property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.182.251.230:1521:orcl"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
             <property name="hibernate.connection.username" value="aeas"/>
             <property name="hibernate.connection.password" value="oracle"/>
-            <property name="hibernate.archive.autodetection" value="class"/>  
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
-    
+     
     <persistence-unit name="MySqlPersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>com.kevin.aeas.object.mysql.MySqlFirstCourse</class>
@@ -35,12 +35,13 @@
         <class>com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday</class>
         <class>com.kevin.aeas.object.mysql.MySqlTeacherHoliday</class>
         <class>com.kevin.aeas.object.mysql.MySqlUser</class>
+        
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/aeas"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="root"/>
-            <property name="hibernate.archive.autodetection" value="class"/>  
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hbm2ddl.auto" value="update"/>

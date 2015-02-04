@@ -27,7 +27,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testAdd(){
 		JpaTeacherDefaultHolidayOperation operation = new JpaTeacherDefaultHolidayOperation();
 		TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
-		teacherDefaultHoliday.setTeacherId(1);
+		teacherDefaultHoliday.setTeacherId(2);
 		teacherDefaultHoliday.setWeek1(true);
 		teacherDefaultHoliday.setWeek4(true);
 		operation.add(teacherDefaultHoliday);
@@ -38,7 +38,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 		JpaTeacherDefaultHolidayOperation operation = new JpaTeacherDefaultHolidayOperation();
 		ArrayList<TeacherDefaultHoliday> list = (ArrayList<TeacherDefaultHoliday>) operation.getAll();
 		for(TeacherDefaultHoliday teacherDefaultHoliday: list){
-			if(teacherDefaultHoliday.getTeacherId() == 1){
+			if(teacherDefaultHoliday.getTeacherId() == 2){
 				teacherDefaultHoliday.setWeek3(true);
 				teacherDefaultHoliday.setWeek6(true);
 				operation.update(teacherDefaultHoliday);

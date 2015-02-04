@@ -197,13 +197,13 @@ DROP TABLE IF EXISTS `aeas_teacherdefaultholiday`;
 CREATE TABLE `aeas_teacherdefaultholiday` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `teacherid` int(11) DEFAULT NULL,
-  `weak1` tinyint(1) DEFAULT '0',
-  `weak2` tinyint(1) DEFAULT '0',
-  `weak3` tinyint(1) DEFAULT '0',
-  `weak4` tinyint(1) DEFAULT '0',
-  `weak5` tinyint(1) DEFAULT '0',
-  `weak6` tinyint(1) DEFAULT '0',
-  `weak7` tinyint(1) DEFAULT '0',
+  `week1` tinyint(1) DEFAULT '0',
+  `week2` tinyint(1) DEFAULT '0',
+  `week3` tinyint(1) DEFAULT '0',
+  `week4` tinyint(1) DEFAULT '0',
+  `week5` tinyint(1) DEFAULT '0',
+  `week6` tinyint(1) DEFAULT '0',
+  `week7` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -254,3 +254,15 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2014-10-20 22:54:37
+
+CREATE TABLE aeas_user(
+  id number(11,0) NOT NULL AUTO_INCREMENT,
+  name varchar2(64) unique not NULL,
+  password varchar2(64) not NULL,
+  description varchar2(256) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+
+
+insert into aeas_user(name,password, description) values('admin', 'admin', 'admin user');
