@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.kevin.aeas.object.SecondCourse"%>
@@ -125,10 +126,10 @@
 	    
 		int studentId = (Integer.valueOf(request.getParameter("id")));
 		Student student = studentOperation.get(studentId);
-		ArrayList<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(student.getGrade());
-		ArrayList<Teacher> teacherList = teacherOperation.getAll();
+		List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(student.getGrade());
+		List<Teacher> teacherList = teacherOperation.getAll();
 		
-		ArrayList<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
+		List<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
 		
 		double totalHours = 0;
 		

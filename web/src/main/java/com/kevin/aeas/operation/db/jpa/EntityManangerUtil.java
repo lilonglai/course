@@ -11,6 +11,9 @@ public class EntityManangerUtil {
 	private static EntityManager entityManager;
 	
 	public static synchronized EntityManager getInstance(){
+		if(entityManager != null)
+			return entityManager;
+		
 		if(entityManagerFactory == null){
 			entityManagerFactory = Persistence.createEntityManagerFactory(ConfigurationManager.getInstance().getJpaName());
 		}

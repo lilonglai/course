@@ -21,7 +21,7 @@ public class JpaSecondCourseOperation extends JpaBasicOperation{
 	}
 	
 	public List getByFirstCourseId(int firstCourseId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select sc from AeasSecondCourse sc where sc.firstCourseId=:firstCourseId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + getActualClass().getSimpleName() + " sc where sc.firstCourseId=:firstCourseId");
 		q.setParameter("firstCourseId", firstCourseId);
 		List scList = q.getResultList();
 		return scList;		

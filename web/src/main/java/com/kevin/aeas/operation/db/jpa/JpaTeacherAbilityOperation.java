@@ -20,14 +20,14 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 	}
 	
 	public List getByTeacherId(int teacherId) {		
-		Query q = EntityManangerUtil.getInstance().createQuery("select ta from TeacherAbility ta where ta.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List list = q.getResultList();
 		return list;
 	}
 	
 	public List getByCourseId(int courseId) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select ta from TeacherAbility ta where ta.courseId=:courseId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.courseId=:courseId");
 		q.setParameter("courseId", courseId);
 		List list = q.getResultList();
 		return list;

@@ -20,7 +20,7 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation{
 	}
 	
 	public Object getByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select td from TeacherDefaultHoliday td where td.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select td from "  + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List list = q.getResultList();
 		if(list.size() > 0)
@@ -29,7 +29,7 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation{
 	}
 	
 	public void deleteByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select td from TeacherDefaultHoliday td where td.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select td from "  + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List list = q.getResultList();
 	}

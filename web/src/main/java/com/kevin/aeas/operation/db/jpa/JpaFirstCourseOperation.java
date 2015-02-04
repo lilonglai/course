@@ -21,7 +21,7 @@ public class JpaFirstCourseOperation extends JpaBasicOperation {
 	}
 	
 	public List getByGrade(int grade){
-		Query q = EntityManangerUtil.getInstance().createQuery("select c from AeasFirstCourse c where c.grade=:grade");
+		Query q = EntityManangerUtil.getInstance().createQuery("select c from " + getActualClass().getSimpleName() + " c where c.grade=:grade");
 		q.setParameter("grade", grade);
 		List<OracleFirstCourse> list = q.getResultList();		
 		return list;		

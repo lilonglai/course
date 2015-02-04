@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
@@ -56,7 +57,7 @@
 	    
 	    Teacher teacher = teacherOperation.get(teacherId);
 	    TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
-	    ArrayList<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
+	    List<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
 	    
 	    //Date date = new Date();
 	    Calendar calendar = Calendar.getInstance();

@@ -21,14 +21,14 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation{
 	}
 
 	public List getByTeacherId(int teacherId) {		
-		Query q = EntityManangerUtil.getInstance().createQuery("select th from TeacherHoliday th where th.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List list = q.getResultList();
 		return list;
 	}
 	
 	public Object getByTeacherAndDate(int teacherId,String date) {		
-		Query q = EntityManangerUtil.getInstance().createQuery("select th from TeacherHoliday th where th.teacherId=:teacherId and th.adjustDate=:adjustDate");
+		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId and th.adjustDate=:adjustDate");
 		q.setParameter("teacherId", teacherId);
 		q.setParameter("adjustDate", date);
 		List list = q.getResultList();
@@ -37,7 +37,7 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation{
 	}
 
 	public void deleteByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select th from TeacherHoliday th where th.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List list = q.getResultList();
 		

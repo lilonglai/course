@@ -21,7 +21,7 @@ public class JpaScheduleOperation extends JpaBasicOperation{
 	}
 	
 	public Object getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.onDate=:onDate and s.onTime=:onTime and s.studentId=:studentId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.onDate=:onDate and s.onTime=:onTime and s.studentId=:studentId");
 		q.setParameter("onDate", onDate);
 		q.setParameter("ontime", onTime);
 		q.setParameter("studentId", studentId);
@@ -32,14 +32,14 @@ public class JpaScheduleOperation extends JpaBasicOperation{
 	}
 	
 	public List getByStudentId(int studentId){		
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.studentId=:studentId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.studentId=:studentId");
 		q.setParameter("studentId", studentId);
 		List<OracleSchedule> list = q.getResultList();
 		return list;		
 	}
 	
 	public List getByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List<OracleSchedule> list = q.getResultList();
 		return list;	
@@ -48,7 +48,7 @@ public class JpaScheduleOperation extends JpaBasicOperation{
 	
 	
 	public List getByDateAndTime(Date onDate, int onTime){
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasSchedule s where s.onDate=:onDate and d.onTime=:onTime order by s.onDate,d.onTime");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.onDate=:onDate and d.onTime=:onTime order by s.onDate,d.onTime");
 		q.setParameter("onDate", onDate);
 		q.setParameter("ontime", onTime);
 		List<OracleSchedule> list = q.getResultList();			

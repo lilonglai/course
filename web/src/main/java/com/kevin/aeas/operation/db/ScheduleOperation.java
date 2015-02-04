@@ -1,7 +1,6 @@
 package com.kevin.aeas.operation.db;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.Schedule;

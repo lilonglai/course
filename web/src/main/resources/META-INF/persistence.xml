@@ -3,17 +3,17 @@
 
     <persistence-unit name="OraclePersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.kevin.aeas.object.v2.AeasFirstCourse</class>
-        <class>com.kevin.aeas.object.v2.AeasSchedule</class>
-        <class>com.kevin.aeas.object.v2.AeasSecondCourse</class>
-        <class>com.kevin.aeas.object.v2.AeasStudent</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacher</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacherAbility</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacherHoliday</class>
-        <class>com.kevin.aeas.object.v2.AeasUser</class>
+        <class>com.kevin.aeas.object.oracle.OracleFirstCourse</class>
+        <class>com.kevin.aeas.object.oracle.OracleSchedule</class>
+        <class>com.kevin.aeas.object.oracle.OracleSecondCourse</class>
+        <class>com.kevin.aeas.object.oracle.OracleStudent</class>
+        <class>com.kevin.aeas.object.oracle.OracleTeacher</class>
+        <class>com.kevin.aeas.object.oracle.OracleTeacherAbility</class>
+        <class>com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday</class>
+        <class>com.kevin.aeas.object.oracle.OracleTeacherHoliday</class>
+        <class>com.kevin.aeas.object.oracle.OracleUser</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.182.251.230:1521::orcl"/>
+            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.182.251.230:1521:orcl"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
             <property name="hibernate.connection.username" value="aeas"/>
             <property name="hibernate.connection.password" value="oracle"/>
@@ -26,15 +26,15 @@
     
     <persistence-unit name="MySqlPersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.kevin.aeas.object.v2.AeasFirstCourse</class>
-        <class>com.kevin.aeas.object.v2.AeasSchedule</class>
-        <class>com.kevin.aeas.object.v2.AeasSecondCourse</class>
-        <class>com.kevin.aeas.object.v2.AeasStudent</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacher</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacherAbility</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacherDefaultHoliday</class>
-        <class>com.kevin.aeas.object.v2.AeasTeacherHoliday</class>
-        <class>com.kevin.aeas.object.v2.AeasUser</class>
+        <class>com.kevin.aeas.object.mysql.MySqlFirstCourse</class>
+        <class>com.kevin.aeas.object.mysql.MySqlSchedule</class>
+        <class>com.kevin.aeas.object.mysql.MySqlSecondCourse</class>
+        <class>com.kevin.aeas.object.mysql.MySqlStudent</class>
+        <class>com.kevin.aeas.object.mysql.MySqlTeacher</class>
+        <class>com.kevin.aeas.object.mysql.MySqlTeacherAbility</class>
+        <class>com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday</class>
+        <class>com.kevin.aeas.object.mysql.MySqlTeacherHoliday</class>
+        <class>com.kevin.aeas.object.mysql.MySqlUser</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/aeas"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

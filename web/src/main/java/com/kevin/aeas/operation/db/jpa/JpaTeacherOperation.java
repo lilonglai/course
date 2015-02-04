@@ -24,7 +24,7 @@ public class JpaTeacherOperation extends JpaBasicOperation{
 	}
 	
 	public Object getByName(String name){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.name=:name");
+		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.name=:name");
 		q.setParameter("name", name);
 		List<OracleTeacher> list = q.getResultList();
 		OracleTeacher aeasTeacher = null;
@@ -35,7 +35,7 @@ public class JpaTeacherOperation extends JpaBasicOperation{
 	
 	
 	public Object getByShortName(String shortName){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.shortName=:shortName");
+		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.shortName=:shortName");
 		q.setParameter("shortName", shortName);
 		List<OracleTeacher> list = q.getResultList();
 		OracleTeacher aeasTeacher = null;
@@ -45,14 +45,14 @@ public class JpaTeacherOperation extends JpaBasicOperation{
 	}
 	
 	public List getAlive(){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.isAlive=:isAlive");
+		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
 		List<OracleTeacher> list = q.getResultList();
 		return list;		
 	}
 	
 	public List getNotAlive(){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from AeasTeacher t where t.isAlive=:isAlive");
+		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
 		List<OracleTeacher> list = q.getResultList();
 		return list;	

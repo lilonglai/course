@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
@@ -93,12 +94,12 @@
 		Teacher teacher = teacherOperation.get(teacherId);
 
 		
-		ArrayList<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(teacherId);
+		List<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(teacherId);
 		
 		
 
 		
-		ArrayList<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+		List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 		ArrayList<FirstCourse> selectedFirstCourseList =new ArrayList<FirstCourse>();
 		for(int i = 0; i < teacherAbilityList.size(); i++){
 			TeacherAbility teacherAbility = teacherAbilityList.get(i);

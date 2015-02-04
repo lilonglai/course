@@ -22,7 +22,7 @@ public class JpaStudentOperation extends JpaBasicOperation{
 	}
 	
 	public Object getByName(String name) {		
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.name=:name");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.name=:name");
 		q.setParameter("name", name);
 		List<OracleStudent> list = q.getResultList();
 		OracleStudent aeasStudent = null;
@@ -33,28 +33,28 @@ public class JpaStudentOperation extends JpaBasicOperation{
 	
 
 	public List getByGrade(int grade) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.grade=:grade");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.grade=:grade");
 		q.setParameter("grade", grade);
 		List list = q.getResultList();
 		return list;
 	}
 	
 	public List getAlive() {		
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.isAlive=:isAlive");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
 		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 	
 	public List getNotAlive() {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.isAlive=:isAlive");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
 		List<OracleStudent> list = q.getResultList();
 		return list;
 	}
 
 	public List getByTeacherId(int teacherId) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from AeasStudent s where s.teacherId=:teacherId");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
 		List<OracleStudent> list = q.getResultList();
 		return list;
