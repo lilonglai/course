@@ -110,7 +110,7 @@
     
    <%
        	StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
-                               TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+        TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
        %>
    
    <div class="container">

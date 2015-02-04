@@ -7,6 +7,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherOperation;
 
 @Path("/teacher")
@@ -14,10 +15,27 @@ public class TeacherService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Teacher getbyId(@QueryParam("id") int teacherId){
-		TeacherOperation teacherOperation = new TeacherOperation();
+	public Teacher get(@QueryParam("id") int teacherId){
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
 		Teacher teacher = teacherOperation.get(teacherId);
 		return teacher;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean delete(@QueryParam("id") int teacherId){
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		teacherOperation.delete(teacherId);
+		return true;
+	}
+	
+	@GET
+	@Path("/retire")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean retire(@QueryParam("id") int teacherId){
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		teacherOperation.retire(teacherId);
+		return true;
 	}
 	
 }
