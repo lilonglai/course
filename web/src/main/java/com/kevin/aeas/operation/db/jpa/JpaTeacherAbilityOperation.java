@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.jpa.JpaTeacherAbility;
+import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.object.mysql.MySqlTeacherAbility;
 import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -47,7 +47,7 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 	}
 	
 	protected  Object changeToJpa(Object t){
-		JpaTeacherAbility newObject = null;
+		TeacherAbility newObject = null;
 		if(ConfigurationManager.getInstance().isMySql()){
 			newObject = new MySqlTeacherAbility();
 		}

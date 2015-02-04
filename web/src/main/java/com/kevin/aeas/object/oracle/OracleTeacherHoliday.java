@@ -1,5 +1,8 @@
 package com.kevin.aeas.object.oracle;
 
+import java.sql.Date;
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,14 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.kevin.aeas.object.jpa.JpaTeacherHoliday;
+import com.kevin.aeas.object.TeacherHoliday;
 
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
 @Table(name = "aeas_teacherholiday")
-public class OracleTeacherHoliday extends JpaTeacherHoliday{
+public class OracleTeacherHoliday extends TeacherHoliday{
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherholiday_id")
     @SequenceGenerator(name="aeas_teacherholiday_id", sequenceName="aeas_teacherholiday_id")
@@ -23,4 +26,22 @@ public class OracleTeacherHoliday extends JpaTeacherHoliday{
     public int getId() {
         return id;
     }
+
+	@Basic
+	@Column(name = "adjustdate")
+	public Date getAdjustDate() {
+	    return adjustDate;
+	}
+
+	@Basic
+	@Column(name = "isholiday")
+	public Boolean getIsHoliday() {
+	    return isHoliday;
+	}
+
+	@Basic
+	@Column(name = "teacherId")
+	public int getTeacherId() {
+		return teacherId;
+	}
 }

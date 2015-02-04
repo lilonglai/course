@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class TeacherHoliday {
 	protected int id;
-	protected int teacherId;
-	protected Date adjustDate;
-	protected Boolean isHoliday;
+	public int teacherId;
+	public Date adjustDate;
+	public Boolean isHoliday;
 
 	public TeacherHoliday() {
 		super();

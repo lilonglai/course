@@ -5,9 +5,9 @@ package com.kevin.aeas.object;
  */
 public class User{
     protected int id;
-    protected String name;
-    protected String password;
-    protected String description;
+    public String name;
+    public String password;
+    public String description;
 
     public int getId() {
         return id;

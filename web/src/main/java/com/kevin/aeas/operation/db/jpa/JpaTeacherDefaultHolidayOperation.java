@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.kevin.aeas.object.jpa.JpaTeacherDefaultHoliday;
+import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.utils.ConfigurationManager;
@@ -36,7 +36,7 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation{
 	
 	
 	protected  Object changeToJpa(Object t){
-		JpaTeacherDefaultHoliday newObject = null;
+		TeacherDefaultHoliday newObject = null;
 		if(ConfigurationManager.getInstance().isMySql()){
 			newObject = new MySqlTeacherDefaultHoliday();
 		}

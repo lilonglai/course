@@ -4,16 +4,16 @@ import java.sql.Date;
 
 public class Student {
 	protected int id;
-	protected String name;
-	protected String shortName;
-	protected int grade;
-	protected String testScore;
-	protected String targetScore;
-	protected Date examineDate;
-	protected String examinePlace;
-	protected int teacherId;
-	protected String description;
-	protected Boolean isAlive;
+	public String name;
+	public String shortName;
+	public int grade;
+	public String testScore;
+	public String targetScore;
+	public Date examineDate;
+	public String examinePlace;
+	public int teacherId;
+	public String description;
+	public Boolean isAlive;
 
 	public Student() {
 		super();

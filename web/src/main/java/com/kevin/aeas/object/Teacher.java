@@ -2,11 +2,11 @@ package com.kevin.aeas.object;
 
 public class Teacher {
 	protected int id;
-	protected String name;
-	protected String shortName;
-	protected String phone;
-	protected Boolean isMaster;
-	protected Boolean isAlive;
+	public String name;
+	public String shortName;
+	public String phone;
+	public Boolean isMaster;
+	public Boolean isAlive;
 	
 	public Teacher() {
 		super();
