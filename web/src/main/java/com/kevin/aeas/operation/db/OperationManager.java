@@ -18,7 +18,18 @@ public class OperationManager {
 	private UserOperation userOperation;
 	
 	private OperationManager(){
+		firstCourseOperation = new FirstCourseOperation();
+		secondCourseOperation = new SecondCourseOperation();
 		
+		studentOperation = new StudentOperation();
+		scheduleOperation = new ScheduleOperation();
+		
+		teacherOperation = new TeacherOperation();
+		teacherAbilityOperation = new TeacherAbilityOperation();
+		teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
+		teacherHolidayOperation = new TeacherHolidayOperation();
+		
+		userOperation = new UserOperation();
 	}
 	
 	public static OperationManager getInstance(){

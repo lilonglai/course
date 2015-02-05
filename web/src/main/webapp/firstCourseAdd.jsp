@@ -1,3 +1,4 @@
+<%@page import="com.kevin.aeas.object.FirstCourse"%>
 <%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
@@ -30,10 +31,10 @@
 </head>
 <body>
 	<%
-		OracleFirstCourse firstCourse = null;
-			    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-			if (request.getParameter("submit") != null) {
-		firstCourse = new OracleFirstCourse();
+		FirstCourse firstCourse = null;
+		FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+		if (request.getParameter("submit") != null) {
+		firstCourse = new FirstCourse();
 		
 		firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
 		String name = request.getParameter("name");

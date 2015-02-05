@@ -58,10 +58,10 @@
 			response.sendRedirect("course.jsp" + "?grade=" + firstCourse.getGrade());
 		}	
 		
-		    String idStr = (String)request.getParameter("id");
-		    if(idStr != null){
-		    	int id = Integer.valueOf(idStr);	    	
-		    	firstCourse = firstCourseOperation.get(id);
+		String idStr = (String)request.getParameter("id");
+		if(idStr != null){
+		    int id = Integer.valueOf(idStr);	    	
+		    firstCourse = firstCourseOperation.get(id);
 	%>
 	
   <div class="container">

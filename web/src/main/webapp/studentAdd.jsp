@@ -39,7 +39,7 @@
 <body>
 	<%
 		Student student = null;
-			    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();		
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();		
 		List<Teacher> teacherList = teacherOperation.getAll();
 	%>
    <div class="container">

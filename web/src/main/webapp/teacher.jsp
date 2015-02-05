@@ -88,9 +88,9 @@
    
    	<%
       		String statusString = request.getParameter("status");
-      	      	      	    if(statusString ==null)
-      	      	      	    	statusString = "2";
-      	      	      	    int status = Integer.valueOf(statusString);
+      	    if(statusString ==null)
+      	       statusString = "2";
+      	    int status = Integer.valueOf(statusString);
       	%>
 
     
@@ -117,19 +117,19 @@
 		  </thead>
           <tbody>
 		<%
-			List<Teacher> list = null;
-				    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-				    switch(status){
-				    case 1:
-				    	list = teacherOperation.getAll();
-				    	break;
-				    case 2:
-				    	list = teacherOperation.getAlive();
-				    	break;
-				    case 3:
-				    	list = teacherOperation.getNotAlive();
-				    	break;
-				    }
+	        List<Teacher> list = null;
+		    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		    switch(status){
+		    case 1:
+		    	list = teacherOperation.getAll();
+		    	break;
+		    case 2:
+		    	list = teacherOperation.getAlive();
+		    	break;
+		    case 3:
+		    	list = teacherOperation.getNotAlive();
+		    	break;
+		    }
 			
 			int teacherCount = 1;
 			for (Teacher teacher : list) {

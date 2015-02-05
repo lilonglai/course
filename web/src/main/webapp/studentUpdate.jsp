@@ -41,12 +41,12 @@ function checkForm(){
 	<%
 		Student student = null;
 	    StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
-			    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();	
-			    String idStr = (String)request.getParameter("id");
-			    if(idStr != null){
-			    	int id = Integer.valueOf(idStr);	    	
-			    	student = studentOperation.get(id);	    	
-			    	List<Teacher> teacherList = teacherOperation.getAll();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();	
+	    String idStr = (String)request.getParameter("id");
+		if(idStr != null){
+			  int id = Integer.valueOf(idStr);	    	
+			  student = studentOperation.get(id);	    	
+			  List<Teacher> teacherList = teacherOperation.getAll();
 	%>	
 	  <div class="container">
 		<form action="studentServlet" method="get" onSubmit="return checkForm();">
