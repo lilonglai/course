@@ -13,13 +13,12 @@ import com.kevin.aeas.utils.DbNoPool;
 import com.kevin.aeas.utils.IGetConnection;
 
 public abstract class DbBaseOperation {
-	private boolean usePool = true;
+	private static IGetConnection getCon = null;
 
-	private IGetConnection getCon;
-
-	public DbBaseOperation() {
+	static {
 		String usePoolString = ConfigurationManager.getInstance().getProperty(
 				"usePool");
+		boolean usePool = true;
 		if (usePoolString != null) {
 			usePool = Boolean.valueOf(usePoolString);
 		}
@@ -29,6 +28,9 @@ public abstract class DbBaseOperation {
 		} else {
 			getCon = new DbNoPool();
 		}
+	}
+	public DbBaseOperation() {
+
 	}
 
 	protected Connection getConnection() throws SQLException {
