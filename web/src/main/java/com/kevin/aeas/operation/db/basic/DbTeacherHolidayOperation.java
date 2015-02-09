@@ -2,30 +2,28 @@ package com.kevin.aeas.operation.db.basic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.TeacherHoliday;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbTeacherHolidayOperation {
+public class DbTeacherHolidayOperation extends DbBaseOperation{
 	public TeacherHoliday get(int key) {
 		String sql = "select * from aeas_teacherholiday where id = " + key;
 		TeacherHoliday teacherHoliday = null;
+		List<TeacherHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				teacherHoliday = generateTeacherHoliday(rs);
+			list = executeSql(sql);
+			if(list.size() > 0){
+				teacherHoliday = list.get(0);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return teacherHoliday;
-
 	}
 
-	private TeacherHoliday generateTeacherHoliday(ResultSet rs) throws SQLException{
+	protected TeacherHoliday generateObject(ResultSet rs) throws SQLException{
 		TeacherHoliday teacherHoliday = new TeacherHoliday();
 		teacherHoliday.setId(rs.getInt("id"));
 		teacherHoliday.setTeacherId(rs.getInt("teacherid"));
@@ -37,55 +35,41 @@ public class DbTeacherHolidayOperation {
 	public List<TeacherHoliday> getByTeacherId(int teacherId) {
 		String sql = "select * from aeas_teacherholiday where teacherid = "
 				+ teacherId;
-		ArrayList<TeacherHoliday> list = new ArrayList<TeacherHoliday>();
+		List<TeacherHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherHoliday teacherHoliday = generateTeacherHoliday(rs);
-				list.add(teacherHoliday);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
-
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
 		String sql = "select * from aeas_teacherholiday where teacherid = " + teacherId 
 				      + " and adjustdate='" +date + "'";
 		TeacherHoliday teacherHoliday = null;
+		List<TeacherHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				teacherHoliday = generateTeacherHoliday(rs);
-
+			list = executeSql(sql);
+			if(list.size() > 0){
+				teacherHoliday = list.get(0);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return teacherHoliday;
-
 	}
 
 	public List<TeacherHoliday> getAll() {
 		String sql = "select * from aeas_teacherholiday";
-		ArrayList<TeacherHoliday> list = new ArrayList<TeacherHoliday>();
+		List<TeacherHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherHoliday teacherHoliday = generateTeacherHoliday(rs);
-
-				list.add(teacherHoliday);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
-
 	}
 
 	public void add(TeacherHoliday teacherHoliday) {
@@ -93,15 +77,11 @@ public class DbTeacherHolidayOperation {
 				+ "" + teacherHoliday.getTeacherId() + ",";
 		sql += "'" + teacherHoliday.getAdjustDate() + "',";
 		sql += teacherHoliday.getIsHoliday() + ")";
-
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	public void update(TeacherHoliday teacherHoliday) {
@@ -112,25 +92,20 @@ public class DbTeacherHolidayOperation {
 		sql += "isholiday=" + teacherHoliday.getIsHoliday();
 
 		sql += " where id = " + teacherHoliday.getId();
-
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void delete(int key) {
 		String sql = "delete from aeas_teacherholiday where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

@@ -29,7 +29,7 @@ public class DbNoPool  implements IGetConnection{
 	
 	
 	public   final   Connection   getConnection() throws SQLException{
-		if (connection != null)
+		if (connection != null && !connection.isClosed())
 			return connection;
 
 		try {

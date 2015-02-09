@@ -2,30 +2,27 @@ package com.kevin.aeas.operation.db.basic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.TeacherAbility;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbTeacherAbilityOperation {
+public class DbTeacherAbilityOperation extends DbBaseOperation{
 	public TeacherAbility get(int key) {
 		String sql = "select * from aeas_teacherability where id = " + key;
 		TeacherAbility teacherAbility = null;
+		List<TeacherAbility> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				teacherAbility = generateTeacherAbility(rs);
+			list = executeSql(sql);
+			if(list.size() > 0){
+				teacherAbility = list.get(0);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return teacherAbility;
-
 	}
 
-	private TeacherAbility generateTeacherAbility(ResultSet rs) throws SQLException{
+	protected TeacherAbility generateObject(ResultSet rs) throws SQLException{
 		TeacherAbility teacherAbility = new TeacherAbility();
 		teacherAbility.setId(rs.getInt("id"));
 		teacherAbility.setTeacherId(rs.getInt("teacherid"));
@@ -38,17 +35,12 @@ public class DbTeacherAbilityOperation {
 				+ " aeas_teacherability,aeas_firstcourse"
 				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
 				+ " order by aeas_firstcourse.grade";
-		ArrayList<TeacherAbility> list = new ArrayList<TeacherAbility>();
+		List<TeacherAbility> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherAbility teacherAbility = generateTeacherAbility(rs);
-				list.add(teacherAbility);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 	
@@ -57,17 +49,12 @@ public class DbTeacherAbilityOperation {
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where teacherid = " + teacherId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
 				+ " order by aeas_firstcourse.grade";
-		ArrayList<TeacherAbility> list = new ArrayList<TeacherAbility>();
+		List<TeacherAbility> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherAbility teacherAbility = generateTeacherAbility(rs);
-				list.add(teacherAbility);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 	
@@ -76,17 +63,12 @@ public class DbTeacherAbilityOperation {
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where courseid = " + courseId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
 				+ " order by aeas_firstcourse.grade";
-		ArrayList<TeacherAbility> list = new ArrayList<TeacherAbility>();
+		List<TeacherAbility> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				TeacherAbility teacherAbility = generateTeacherAbility(rs);
-				list.add(teacherAbility);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 	
@@ -94,16 +76,11 @@ public class DbTeacherAbilityOperation {
 		String sql = "insert into aeas_teacherability(teacherid,courseid) values("
 				+"" +teacherAbility.getTeacherId() +","
 				+"" +teacherAbility.getCourseId() +")";
-		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
 	
 	public void update(TeacherAbility teacherAbility){
@@ -112,51 +89,39 @@ public class DbTeacherAbilityOperation {
 				+ "courseid=" +"" + teacherAbility.getCourseId() +"";
 		
 		sql += " where id = " + teacherAbility.getId();
-		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	
 	public void delete(int key){
 		String sql = "delete from aeas_teacherability where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void deleteByTeacherId(int teacherId){
 		String sql = "delete from aeas_teacherability where teacherid = " + teacherId;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
 	public void deleteByTeacherAndGrade(int teacherId,int grade){
 		String sql = "delete t from aeas_teacherability t where t.teacherid = " + teacherId
 				+ " and t.courseid in(select c.id from aeas_firstcourse c where c.grade = " + grade + ")";
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

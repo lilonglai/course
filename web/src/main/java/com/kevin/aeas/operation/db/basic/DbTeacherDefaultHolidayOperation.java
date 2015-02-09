@@ -2,30 +2,28 @@ package com.kevin.aeas.operation.db.basic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbTeacherDefaultHolidayOperation {
+public class DbTeacherDefaultHolidayOperation extends DbBaseOperation{
 	public TeacherDefaultHoliday get(int key){
 		String sql = "select * from aeas_teacherdefaultholiday where id = " + key;
 		TeacherDefaultHoliday teacherDefaultHoliday = null;
+		List<TeacherDefaultHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				teacherDefaultHoliday = generateTeacherDefaultHoliday(rs);				
+			list = executeSql(sql);
+			if(list.size() > 0){
+				teacherDefaultHoliday = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return teacherDefaultHoliday;		
 	}
 	
-	private TeacherDefaultHoliday generateTeacherDefaultHoliday(ResultSet rs) throws SQLException{
+	protected TeacherDefaultHoliday generateObject(ResultSet rs) throws SQLException{
 		TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
 		teacherDefaultHoliday.setId(rs.getInt("id"));
 		teacherDefaultHoliday.setTeacherId(rs.getInt("teacherid"));
@@ -42,33 +40,26 @@ public class DbTeacherDefaultHolidayOperation {
 	public TeacherDefaultHoliday getByTeacherId(int teacherId){
 		String sql = "select * from aeas_teacherdefaultholiday where teacherid = " + teacherId;
 		TeacherDefaultHoliday teacherDefaultHoliday = null;
+		List<TeacherDefaultHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				teacherDefaultHoliday = generateTeacherDefaultHoliday(rs);
+			list = executeSql(sql);
+			if(list.size() > 0){
+				teacherDefaultHoliday = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return teacherDefaultHoliday;		
 	}
 	
 	public List<TeacherDefaultHoliday> getAll(){
 		String sql = "select * from aeas_teacherdefaultholiday";
-		ArrayList<TeacherDefaultHoliday> list = new ArrayList<TeacherDefaultHoliday>();
+		List<TeacherDefaultHoliday> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				TeacherDefaultHoliday teacherDefaultHoliday = generateTeacherDefaultHoliday(rs);
-				list.add(teacherDefaultHoliday);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return list;		
 	}
 
@@ -83,14 +74,11 @@ public class DbTeacherDefaultHolidayOperation {
 		sql += teacherDefaultHoliday.getWeek6() +",";
 		sql += teacherDefaultHoliday.getWeek7() +")";
 		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-			
+		}		
 	}
 	
 	public void update(TeacherDefaultHoliday teacherDefaultHoliday){
@@ -106,40 +94,30 @@ public class DbTeacherDefaultHolidayOperation {
 		sql += "week7=" + teacherDefaultHoliday.getWeek7();
 		
 		sql += " where id = " + teacherDefaultHoliday.getId();
-		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
 	public void delete(int key){
 		String sql = "delete from aeas_teacherdefaultholiday where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void deleteByTeacherId(int teacherId){
 		String sql = "delete from aeas_teacherdefaultholiday where teacherid = " + teacherId;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

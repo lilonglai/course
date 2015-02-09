@@ -3,31 +3,28 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbScheduleOperation {
+public class DbScheduleOperation extends DbBaseOperation{
 	public Schedule get(int key){
 		String sql = "select * from aeas_schedule where id = " + key + " order by ondate,ontime";
 		Schedule schedule = null;
+		List<Schedule> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				schedule = 	generateSchedule(rs);				
+			list = executeSql(sql);
+			if(list.size() > 0){
+				schedule = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return schedule;
-		
+		return schedule;		
 	}
 	
-	private Schedule generateSchedule(ResultSet rs) throws SQLException{
+	protected Schedule generateObject(ResultSet rs) throws SQLException{
 		Schedule schedule = new Schedule();
 		schedule.setId(rs.getInt("id"));
 		schedule.setOnDate(rs.getDate("ondate"));
@@ -44,31 +41,25 @@ public class DbScheduleOperation {
 		String sql = "select * from aeas_schedule where studentid = " + studentId 
 				+" and onDate = '" + onDate + "'" + " and onTime=" + onTime;;
 		Schedule schedule = null;
+		List<Schedule> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				schedule = 	generateSchedule(rs);		
+			list = executeSql(sql);
+			if(list.size() > 0){
+				schedule = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return schedule;
-		
+		return schedule;	
 	}
 	
 	public List<Schedule> getByStudentId(int studentId){
 		String sql = "select * from aeas_schedule where studentid = " + studentId + " order by ondate,ontime" ;
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		List<Schedule> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = generateSchedule(rs);	
-				list.add(schedule);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -78,23 +69,17 @@ public class DbScheduleOperation {
 	
 	public List<Schedule> getByTeacherId(int teacherId){
 		String sql = "select * from aeas_schedule where teacherid = " + teacherId + " order by ondate,ontime";
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		List<Schedule> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = generateSchedule(rs);	
-				list.add(schedule);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return list;
 		
 	}
-	
-	
+		
 	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
 		String sql = "select * from aeas_schedule where onDate = '" + onDate + "'";
 		if(onTime >=1){
@@ -102,15 +87,10 @@ public class DbScheduleOperation {
 		}
 		sql += " order by ondate,ontime";
 		
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		List<Schedule> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = generateSchedule(rs);	
-				list.add(schedule);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -120,15 +100,10 @@ public class DbScheduleOperation {
 	
 	public List<Schedule> getAll(){
 		String sql = "select * from aeas_schedule" + " order by ondate,ontime";
-		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		List<Schedule> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				Schedule schedule = generateSchedule(rs);	
-				list.add(schedule);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -165,11 +140,9 @@ public class DbScheduleOperation {
 			sql += "'" +  schedule.getDescription() +"')";
 		}
 		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -206,9 +179,8 @@ public class DbScheduleOperation {
 		sql += " where id = " + schedule.getId();
 		
 		try {
-			DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -218,12 +190,10 @@ public class DbScheduleOperation {
 	public void delete(int key){
 		String sql = "delete from aeas_schedule where id = " + key;
 		try {
-			 DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	public static void main(String[] args) {

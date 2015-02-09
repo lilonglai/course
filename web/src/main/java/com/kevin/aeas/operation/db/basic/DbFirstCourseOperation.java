@@ -2,32 +2,28 @@ package com.kevin.aeas.operation.db.basic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.FirstCourse;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-
-public class DbFirstCourseOperation {
-	public FirstCourse get(int key){
+public class DbFirstCourseOperation extends DbBaseOperation {
+	public FirstCourse get(int key) {
 		String sql = "select * from aeas_firstcourse where id = " + key;
 		FirstCourse firstCourse = null;
+		List<FirstCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				firstCourse = generateFirstCourse(rs);			
+			list = executeSql(sql);
+			if(list.size() > 0){
+				firstCourse = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return firstCourse;
-		
 	}
-	
-	private FirstCourse generateFirstCourse(ResultSet rs) throws SQLException{
+
+	protected FirstCourse generateObject(ResultSet rs) throws SQLException{
 		FirstCourse firstCourse = new FirstCourse();
 		firstCourse.setId(rs.getInt("id"));
 		firstCourse.setGrade(rs.getInt("grade"));
@@ -36,106 +32,84 @@ public class DbFirstCourseOperation {
 		firstCourse.setDescription(rs.getString("description"));
 		return firstCourse;
 	}
-	
-	public List<FirstCourse> getByGrade(int grade){
+
+	public List<FirstCourse> getByGrade(int grade) {
 		String sql = "select * from aeas_firstcourse where grade = " + grade;
-		ArrayList<FirstCourse> list = new ArrayList<FirstCourse>();
-		FirstCourse firstCourse = null;
+		List<FirstCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				firstCourse = generateFirstCourse(rs);
-				list.add(firstCourse);
-			}
+			list = (List<FirstCourse>) executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return list;
-		
+
 	}
-	
-	public List<FirstCourse> getAll(){
+
+	public List<FirstCourse> getAll() {
 		String sql = "select * from aeas_firstcourse";
-		ArrayList<FirstCourse> list = new ArrayList<FirstCourse>();
-		FirstCourse firstCourse = null;
+		List<FirstCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				firstCourse = generateFirstCourse(rs);	
-				list.add(firstCourse);
-			}
+			list = (List<FirstCourse>) executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
-		
 	}
-	
-	
-	public void add(FirstCourse firstCourse){
+
+	public void add(FirstCourse firstCourse) {
 		String sql = "insert into aeas_firstcourse(grade,name,shortname,description) values("
-				+ firstCourse.getGrade() +","
-				+ "'" +firstCourse.getName() +"',"
-				+"'" +firstCourse.getShortName() +"',";
-		
-		if(firstCourse.getDescription() == null){
+				+ firstCourse.getGrade()
+				+ ","
+				+ "'"
+				+ firstCourse.getName()
+				+ "'," + "'" + firstCourse.getShortName() + "',";
+
+		if (firstCourse.getDescription() == null) {
 			sql += "'" + "" + "')";
+		} else {
+			sql += "'" + firstCourse.getDescription() + "')";
 		}
-		else{
-			sql += "'" +  firstCourse.getDescription() +"')";
-		}
-		
-		int count = 0;
+
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
-	public void update(FirstCourse firstCourse){
-		String sql = "update aeas_firstcourse set "
-				+ "grade=" + firstCourse.getGrade() +","
-				+ "name=" + "'" + firstCourse.getName() +"',"
-				+ "shortname=" +"'" +firstCourse.getShortName() +"',";
-		
-		if(firstCourse.getDescription() == null){
+
+	public void update(FirstCourse firstCourse) {
+		String sql = "update aeas_firstcourse set " + "grade="
+				+ firstCourse.getGrade() + "," + "name=" + "'"
+				+ firstCourse.getName() + "'," + "shortname=" + "'"
+				+ firstCourse.getShortName() + "',";
+
+		if (firstCourse.getDescription() == null) {
 			sql += "description=" + "'" + "'";
+		} else {
+			sql += "description=" + "'" + firstCourse.getDescription() + "'";
 		}
-		else{
-			sql += "description=" + "'" + firstCourse.getDescription() +"'";
-		}
-		
-		
+
 		sql += " where id = " + firstCourse.getId();
-		
-		int count = 0;
+
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	public void delete(int key){
+
+	public void delete(int key) {
 		String sql = "delete from aeas_firstcourse where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

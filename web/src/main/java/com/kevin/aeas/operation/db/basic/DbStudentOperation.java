@@ -2,30 +2,27 @@ package com.kevin.aeas.operation.db.basic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbStudentOperation {
+public class DbStudentOperation extends DbBaseOperation{
 	public Student get(int key) {
 		String sql = "select * from aeas_student where id = " + key;
 		Student student = null;
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				student = generateStudent(rs);
+			list = executeSql(sql);
+			if(list.size() > 0){
+				student = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return student;
 	}
 	
-	private Student generateStudent(ResultSet rs) throws SQLException{
+	protected Student generateObject(ResultSet rs) throws SQLException{
 		Student student = new Student();
 		student.setId(rs.getInt("id"));
 		student.setName(rs.getString("name"));
@@ -44,49 +41,37 @@ public class DbStudentOperation {
 	public Student getByName(String name) {
 		String sql = "select * from aeas_student where name = '" + name + "'";
 		Student student = null;
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if (rs.next()) {
-				student = generateStudent(rs);
+			list = executeSql(sql);
+			if(list.size() > 0){
+				student = list.get(0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return student;
 	}
 	
 
 	public List<Student> getByGrade(int grade) {
 		String sql = "select * from aeas_student where grade = " + grade;
-		ArrayList<Student> list = new ArrayList<Student>();
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = generateStudent(rs);
-				list.add(student);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return list;
-
 	}
 
 	public List<Student> getAll() {
 		String sql = "select * from aeas_student";
-		ArrayList<Student> list = new ArrayList<Student>();
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = generateStudent(rs);
-				list.add(student);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -95,15 +80,10 @@ public class DbStudentOperation {
 	
 	public List<Student> getAlive() {
 		String sql = "select * from aeas_student" + " where isalive=true";
-		ArrayList<Student> list = new ArrayList<Student>();
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = generateStudent(rs);
-				list.add(student);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -112,15 +92,10 @@ public class DbStudentOperation {
 	
 	public List<Student> getNotAlive() {
 		String sql = "select * from aeas_student" + " where isalive=false";
-		ArrayList<Student> list = new ArrayList<Student>();
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = generateStudent(rs);
-				list.add(student);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -130,20 +105,14 @@ public class DbStudentOperation {
 	public List<Student> getByTeacherId(int teacherId) {
 		String sql = "select * from aeas_student where teacherid = "
 				+ teacherId;
-		ArrayList<Student> list = new ArrayList<Student>();
+		List<Student> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while (rs.next()) {
-				Student student = generateStudent(rs);
-				list.add(student);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return list;
-
 	}
 
 	public void add(Student student){
@@ -175,16 +144,11 @@ public class DbStudentOperation {
 		else{
 			sql += "'" +  student.getDescription() +"')";
 		}
-		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
 
 	public void update(Student student) {
@@ -218,26 +182,20 @@ public class DbStudentOperation {
 			sql += "description="+ "'" +  student.getDescription() +"'";
 		}
 		
-
 		sql += " where id = " + student.getId();
 
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void delete(int key) {
 		String sql = "delete from aeas_student where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -245,11 +203,9 @@ public class DbStudentOperation {
 	
 	public void retire(int key) {
 		String sql = "update aeas_student set isalive = false" + " where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

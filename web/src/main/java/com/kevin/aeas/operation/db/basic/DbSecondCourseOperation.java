@@ -2,30 +2,28 @@ package com.kevin.aeas.operation.db.basic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbSecondCourseOperation {
+public class DbSecondCourseOperation extends DbBaseOperation{
 	public SecondCourse get(int key){
 		String sql = "select * from aeas_secondcourse where id = " + key;
 		SecondCourse secondCourse = null;
+		List<SecondCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			if(rs.next()){
-				secondCourse = generateSecondCourse(rs);				
+			list = executeSql(sql);
+			if(list.size() > 0){
+				secondCourse = list.get(0);
 			}
-		} catch (SQLException e) {			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return secondCourse;
-		
+		return secondCourse;		
 	}
 	
-	private SecondCourse generateSecondCourse(ResultSet rs) throws SQLException{
+	protected SecondCourse generateObject(ResultSet rs) throws SQLException{
 		SecondCourse secondCourse = new SecondCourse();
 		secondCourse.setId(rs.getInt("id"));
 		secondCourse.setName(rs.getString("name"));
@@ -37,59 +35,38 @@ public class DbSecondCourseOperation {
 	
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		String sql = "select * from aeas_secondcourse where firstcourseid = " + firstCourseId;
-		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
-		SecondCourse secondCourse = null;
+		List<SecondCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				secondCourse = generateSecondCourse(rs);
-				list.add(secondCourse);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
-		return list;
-		
+		}		
+		return list;		
 	}
 	
 	public List<SecondCourse> getByGrade(int grade){
 		String sql = "select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse "
 				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = " + grade
 				+ " order by aeas_secondcourse.firstcourseid";
-		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
-		SecondCourse secondCourse = null;
+		List<SecondCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				secondCourse = generateSecondCourse(rs);
-				list.add(secondCourse);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
-		return list;
-		
+		}		
+		return list;	
 	}
 	
 	public List<SecondCourse> getAll(){
 		String sql = "select * from aeas_secondcourse"
 				+ " order by firstcourseid";
-		ArrayList<SecondCourse> list = new ArrayList<SecondCourse>();
-		SecondCourse secondCourse = null;
+		List<SecondCourse> list = null;
 		try {
-			ResultSet rs = DatabaseHelp.getInstance().executeSql(sql);
-			while(rs.next()){
-				secondCourse = generateSecondCourse(rs);
-				list.add(secondCourse);
-			}
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
-		return list;
-		
+		}		
+		return list;	
 	}
 	
 	
@@ -113,14 +90,11 @@ public class DbSecondCourseOperation {
 			sql += "'" +  secondCourse.getDescription() +"')";
 		}
 		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 	
 	public void update(SecondCourse secondCourse){
@@ -135,29 +109,24 @@ public class DbSecondCourseOperation {
 		else{
 			sql += "description=" + "'" + secondCourse.getDescription() +"'";
 		}
-		
-		
+				
 		sql += " where id = " + secondCourse.getId();
 		
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
 	public void delete(int key){
 		String sql = "delete from aeas_secondcourse where id = " + key;
-		int count = 0;
 		try {
-			count = DatabaseHelp.getInstance().executeUpdateSql(sql);
+			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static void main(String[] args) {
