@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.kevin.aeas.object.FirstCourse;
 
-public class DbFirstCourseOperation extends DbBaseOperation {
+public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 	public FirstCourse get(int key) {
 		String sql = "select * from aeas_firstcourse where id = " + key;
 		FirstCourse firstCourse = null;
@@ -37,7 +37,7 @@ public class DbFirstCourseOperation extends DbBaseOperation {
 		String sql = "select * from aeas_firstcourse where grade = " + grade;
 		List<FirstCourse> list = null;
 		try {
-			list = (List<FirstCourse>) executeSql(sql);
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ public class DbFirstCourseOperation extends DbBaseOperation {
 		String sql = "select * from aeas_firstcourse";
 		List<FirstCourse> list = null;
 		try {
-			list = (List<FirstCourse>) executeSql(sql);
+			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -12,7 +12,7 @@ import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DbNoPool;
 import com.kevin.aeas.utils.IGetConnection;
 
-public abstract class DbBaseOperation {
+public abstract class DbBaseOperation<T> {
 	private static IGetConnection getCon = null;
 
 	static {
@@ -55,20 +55,20 @@ public abstract class DbBaseOperation {
 		}
 	}
 
-	protected abstract Object generateObject(ResultSet rs) throws SQLException;
+	protected abstract T generateObject(ResultSet rs) throws SQLException;
 
-	protected List executeSql(String sql) throws SQLException {
+	protected List<T> executeSql(String sql) throws SQLException {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet rs = null;
-		ArrayList list = new ArrayList();
+		ArrayList<T> list = new ArrayList<T>();
 		try {
 			connection = getConnection();
 			statement = connection.createStatement();
 			rs = statement.executeQuery(sql);
 			while (rs.next()) {
-				Object obj = generateObject(rs);
-				list.add(obj);
+				T t = generateObject(rs);
+				list.add(t);
 			}
 		} finally {
 			closeResultSet(rs);

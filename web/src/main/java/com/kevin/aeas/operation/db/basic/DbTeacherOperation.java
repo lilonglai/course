@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.kevin.aeas.object.Teacher;
 
-public class DbTeacherOperation extends DbBaseOperation{
+public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	public Teacher get(int key){
 		String sql = "select * from aeas_teacher where id = " + key;
 		Teacher teacher = null;

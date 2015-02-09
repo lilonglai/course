@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.kevin.aeas.object.SecondCourse;
 
-public class DbSecondCourseOperation extends DbBaseOperation{
+public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	public SecondCourse get(int key){
 		String sql = "select * from aeas_secondcourse where id = " + key;
 		SecondCourse secondCourse = null;

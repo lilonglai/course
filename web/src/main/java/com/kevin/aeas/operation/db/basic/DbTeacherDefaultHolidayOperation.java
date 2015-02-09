@@ -7,7 +7,7 @@ import java.util.List;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbTeacherDefaultHolidayOperation extends DbBaseOperation{
+public class DbTeacherDefaultHolidayOperation extends DbBaseOperation<TeacherDefaultHoliday>{
 	public TeacherDefaultHoliday get(int key){
 		String sql = "select * from aeas_teacherdefaultholiday where id = " + key;
 		TeacherDefaultHoliday teacherDefaultHoliday = null;

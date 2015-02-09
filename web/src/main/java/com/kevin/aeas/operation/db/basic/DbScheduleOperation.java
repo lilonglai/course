@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.kevin.aeas.object.Schedule;
 
-public class DbScheduleOperation extends DbBaseOperation{
+public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	public Schedule get(int key){
 		String sql = "select * from aeas_schedule where id = " + key + " order by ondate,ontime";
 		Schedule schedule = null;

@@ -3,9 +3,10 @@ package com.kevin.aeas.operation.db.basic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.kevin.aeas.object.User;
 import com.kevin.aeas.utils.DatabaseHelp;
 
-public class DbUserOperation extends DbBaseOperation{
+public class DbUserOperation extends DbBaseOperation<User>{
 	public boolean isExistUser(String userName, String userPassword) {
 		String sql = "select * from User from name='" + userName + "' and u.password='" + userPassword + "'";
 		ResultSet rs = null;
@@ -19,8 +20,8 @@ public class DbUserOperation extends DbBaseOperation{
 		return true;
 	}
 	
-	protected Object generateObject(ResultSet rs) throws SQLException{
-		Object obj = null;
-		return obj;
+	protected User generateObject(ResultSet rs) throws SQLException{
+		User user = null;
+		return user;
 	}
 }
