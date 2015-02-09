@@ -97,6 +97,9 @@ public class TeacherServlet extends HttpServlet {
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		teacher = teacherOperation.get(teacherId);
 		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
+		if(teacherDefaultHoliday == null){
+			teacherDefaultHoliday = new TeacherDefaultHoliday();
+		}
 		
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso-8859-1"), "utf-8");

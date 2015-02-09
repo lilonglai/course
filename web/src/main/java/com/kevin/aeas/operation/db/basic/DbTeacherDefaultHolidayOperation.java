@@ -29,13 +29,13 @@ public class DbTeacherDefaultHolidayOperation {
 		TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
 		teacherDefaultHoliday.setId(rs.getInt("id"));
 		teacherDefaultHoliday.setTeacherId(rs.getInt("teacherid"));
-		teacherDefaultHoliday.setWeek1(rs.getBoolean("weak1"));
-		teacherDefaultHoliday.setWeek2(rs.getBoolean("weak2"));
-		teacherDefaultHoliday.setWeek3(rs.getBoolean("weak3"));
-		teacherDefaultHoliday.setWeek4(rs.getBoolean("weak4"));
-		teacherDefaultHoliday.setWeek5(rs.getBoolean("weak5"));
-		teacherDefaultHoliday.setWeek6(rs.getBoolean("weak6"));
-		teacherDefaultHoliday.setWeek7(rs.getBoolean("weak7"));
+		teacherDefaultHoliday.setWeek1(rs.getBoolean("week1"));
+		teacherDefaultHoliday.setWeek2(rs.getBoolean("week2"));
+		teacherDefaultHoliday.setWeek3(rs.getBoolean("week3"));
+		teacherDefaultHoliday.setWeek4(rs.getBoolean("week4"));
+		teacherDefaultHoliday.setWeek5(rs.getBoolean("week5"));
+		teacherDefaultHoliday.setWeek6(rs.getBoolean("week6"));
+		teacherDefaultHoliday.setWeek7(rs.getBoolean("week7"));
 		return teacherDefaultHoliday;
 	}
 	
@@ -73,7 +73,7 @@ public class DbTeacherDefaultHolidayOperation {
 	}
 
 	public void add(TeacherDefaultHoliday teacherDefaultHoliday){
-		String sql = "insert into aeas_teacherdefaultholiday(teacherid,weak1,weak2,weak3,weak4,weak5,weak6,weak7) values("
+		String sql = "insert into aeas_teacherdefaultholiday(teacherid,week1,week2,week3,week4,week5,week6,week7) values("
 				+ "" +teacherDefaultHoliday.getTeacherId() +",";
 		sql += teacherDefaultHoliday.getWeek1() +",";
 		sql += teacherDefaultHoliday.getWeek2() +",";
@@ -97,13 +97,13 @@ public class DbTeacherDefaultHolidayOperation {
 		String sql = "update aeas_teacherdefaultholiday set "
 				+ "teacherid=" + teacherDefaultHoliday.getTeacherId() +",";
 		
-		sql += "weak1=" + teacherDefaultHoliday.getWeek1() +",";
-		sql += "weak2=" + teacherDefaultHoliday.getWeek2() +",";
-		sql += "weak3=" + teacherDefaultHoliday.getWeek3() +",";
-		sql += "weak4=" + teacherDefaultHoliday.getWeek4() +",";
-		sql += "weak5=" + teacherDefaultHoliday.getWeek5() +",";
-		sql += "weak6=" + teacherDefaultHoliday.getWeek6() +",";
-		sql += "weak7=" + teacherDefaultHoliday.getWeek7();
+		sql += "week1=" + teacherDefaultHoliday.getWeek1() +",";
+		sql += "week2=" + teacherDefaultHoliday.getWeek2() +",";
+		sql += "week3=" + teacherDefaultHoliday.getWeek3() +",";
+		sql += "week4=" + teacherDefaultHoliday.getWeek4() +",";
+		sql += "week5=" + teacherDefaultHoliday.getWeek5() +",";
+		sql += "week6=" + teacherDefaultHoliday.getWeek6() +",";
+		sql += "week7=" + teacherDefaultHoliday.getWeek7();
 		
 		sql += " where id = " + teacherDefaultHoliday.getId();
 		
