@@ -60,18 +60,18 @@ public class GenerateReport {
 	private void generateWeek(WritableSheet sheet, int rowIndex){
 		try {
 			sheet.setRowView(rowIndex, 32*20);
-			WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 8,
+			WritableFont font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 8,
 					WritableFont.BOLD);
 			WritableCellFormat format = new WritableCellFormat(font);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
 			String stringValue;
 			for(int i = 0; i < 6; i++){
-				stringValue = "ÖÜ" + (i+1);
+				stringValue = "ï¿½ï¿½" + (i+1);
 				Label head = new Label(i, rowIndex, stringValue, format);
 				sheet.addCell(head);
 			}
 			
-			stringValue = "ÖÜ" + "ÈÕ";
+			stringValue = "ï¿½ï¿½" + "ï¿½ï¿½";
 			Label head = new Label(6, rowIndex, stringValue, format);
 			sheet.addCell(head);
 
@@ -100,7 +100,7 @@ public class GenerateReport {
 	
 	private void fillCourse(WritableSheet sheet, int columnIndex, int rowIndex, String value){
 		try {
-			WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 8);
+			WritableFont font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 8);
 			WritableCellFormat format = new WritableCellFormat(font);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
 			format.setWrap(true);
@@ -180,7 +180,7 @@ public class GenerateReport {
 	public void generate(OutputStream servletOutputStream){
 		try {			
 			WritableWorkbook book = Workbook.createWorkbook(servletOutputStream);
-			WritableSheet sheet = book.createSheet("µÚÒ»Ò³", 0);
+			WritableSheet sheet = book.createSheet("ï¿½ï¿½Ò»Ò³", 0);
 			generateColumnSize(sheet);
 			int rowIndex = 0 ;
 			while(startCalendar.compareTo(endCalendar) < 0){
@@ -193,9 +193,11 @@ public class GenerateReport {
 			book.close();
 			
 
-		} catch (IOException | WriteException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} catch(WriteException e){
+            e.printStackTrace();
+        }
 	}
 	
 
