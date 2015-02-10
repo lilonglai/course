@@ -9,7 +9,7 @@ import com.kevin.aeas.object.Schedule;
 
 public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	public Schedule get(int key){
-		String sql = "select * from aeas_schedule where id = " + key + " order by ondate,ontime";
+		String sql = "select * from " + getTableName() + " where id = " + key + " order by ondate,ontime";
 		Schedule schedule = null;
 		List<Schedule> list = null;
 		try {
@@ -38,7 +38,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 	
 	public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
-		String sql = "select * from aeas_schedule where studentid = " + studentId 
+		String sql = "select * from " + getTableName() + " where studentid = " + studentId 
 				+" and onDate = '" + onDate + "'" + " and onTime=" + onTime;;
 		Schedule schedule = null;
 		List<Schedule> list = null;
@@ -55,7 +55,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 	
 	public List<Schedule> getByStudentId(int studentId){
-		String sql = "select * from aeas_schedule where studentid = " + studentId + " order by ondate,ontime" ;
+		String sql = "select * from " + getTableName() + " where studentid = " + studentId + " order by ondate,ontime" ;
 		List<Schedule> list = null;
 		try {
 			list = executeSql(sql);
@@ -68,7 +68,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 	
 	public List<Schedule> getByTeacherId(int teacherId){
-		String sql = "select * from aeas_schedule where teacherid = " + teacherId + " order by ondate,ontime";
+		String sql = "select * from " + getTableName() + " where teacherid = " + teacherId + " order by ondate,ontime";
 		List<Schedule> list = null;
 		try {
 			list = executeSql(sql);
@@ -81,7 +81,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 		
 	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
-		String sql = "select * from aeas_schedule where onDate = '" + onDate + "'";
+		String sql = "select * from " + getTableName() + " where onDate = '" + onDate + "'";
 		if(onTime >=1){
 			sql += " and onTime=" + onTime;
 		}
@@ -99,7 +99,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 	
 	public List<Schedule> getAll(){
-		String sql = "select * from aeas_schedule" + " order by ondate,ontime";
+		String sql = "select * from " + getTableName() + " order by ondate,ontime";
 		List<Schedule> list = null;
 		try {
 			list = executeSql(sql);
@@ -113,7 +113,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	
 	
 	public void add(Schedule schedule){
-		String sql = "insert into aeas_schedule(ondate,ontime,studentid,courseid,teacherid,addition,description) values(";
+		String sql = "insert into " + getTableName() + "(ondate,ontime,studentid,courseid,teacherid,addition,description) values(";
 		if(schedule.getOnDate() == null){
 			sql += "" + "NULL" + ",";
 		}
@@ -149,7 +149,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 	
 	public void update(Schedule schedule){
-		String sql = "update aeas_schedule set ";
+		String sql = "update " + getTableName() + " set ";
 		if(schedule.getOnDate() == null){
 			sql += "ondate=" + "" + "NULL" + ",";
 		}else{
@@ -188,7 +188,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	
 	
 	public void delete(int key){
-		String sql = "delete from aeas_schedule where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -210,6 +210,11 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 		
 		
 		
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_schedule";
 	}
 
 }

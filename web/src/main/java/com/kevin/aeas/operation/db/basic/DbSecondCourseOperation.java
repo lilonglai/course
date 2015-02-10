@@ -8,7 +8,7 @@ import com.kevin.aeas.object.SecondCourse;
 
 public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	public SecondCourse get(int key){
-		String sql = "select * from aeas_secondcourse where id = " + key;
+		String sql = "select * from " + getTableName() + " where id = " + key;
 		SecondCourse secondCourse = null;
 		List<SecondCourse> list = null;
 		try {
@@ -34,7 +34,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	}
 	
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
-		String sql = "select * from aeas_secondcourse where firstcourseid = " + firstCourseId;
+		String sql = "select * from " + getTableName() + " where firstcourseid = " + firstCourseId;
 		List<SecondCourse> list = null;
 		try {
 			list = executeSql(sql);
@@ -58,7 +58,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	}
 	
 	public List<SecondCourse> getAll(){
-		String sql = "select * from aeas_secondcourse"
+		String sql = "select * from " + getTableName() + ""
 				+ " order by firstcourseid";
 		List<SecondCourse> list = null;
 		try {
@@ -71,7 +71,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	
 	
 	public void add(SecondCourse secondCourse){
-		String sql = "insert into aeas_secondcourse(name,shortname,firstcourseid,description) values("
+		String sql = "insert into " + getTableName() + "(name,shortname,firstcourseid,description) values("
 				+ "'" +secondCourse.getName() +"',";
 		
 		if(secondCourse.getShortName() == null){
@@ -98,7 +98,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	}
 	
 	public void update(SecondCourse secondCourse){
-		String sql = "update aeas_secondcourse set "
+		String sql = "update " + getTableName() + " set "
 				+ "name=" + "'" + secondCourse.getName() +"',"
 				+ "shortname=" +"'" +secondCourse.getShortName() +"',"
 		        + "firstcourseid=" + secondCourse.getFirstCourseId() + ",";
@@ -121,7 +121,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	
 	
 	public void delete(int key){
-		String sql = "delete from aeas_secondcourse where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -132,6 +132,11 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	public static void main(String[] args) {
 		DbSecondCourseOperation operation = new DbSecondCourseOperation();
 		System.out.println(operation.getByFirstCourseId(1));		
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_secondcourse";
 	}
 
 }

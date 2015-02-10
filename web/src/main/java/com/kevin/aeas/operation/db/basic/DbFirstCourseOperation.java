@@ -8,7 +8,7 @@ import com.kevin.aeas.object.FirstCourse;
 
 public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 	public FirstCourse get(int key) {
-		String sql = "select * from aeas_firstcourse where id = " + key;
+		String sql = "select * from " + getTableName() + " where id = " + key;
 		FirstCourse firstCourse = null;
 		List<FirstCourse> list = null;
 		try {
@@ -34,7 +34,7 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 	}
 
 	public List<FirstCourse> getByGrade(int grade) {
-		String sql = "select * from aeas_firstcourse where grade = " + grade;
+		String sql = "select * from " + getTableName() + " where grade = " + grade;
 		List<FirstCourse> list = null;
 		try {
 			list = executeSql(sql);
@@ -47,7 +47,7 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 	}
 
 	public List<FirstCourse> getAll() {
-		String sql = "select * from aeas_firstcourse";
+		String sql = "select * from " + getTableName();
 		List<FirstCourse> list = null;
 		try {
 			list = executeSql(sql);
@@ -59,7 +59,7 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 	}
 
 	public void add(FirstCourse firstCourse) {
-		String sql = "insert into aeas_firstcourse(grade,name,shortname,description) values("
+		String sql = "insert into " + getTableName() + "(grade,name,shortname,description) values("
 				+ firstCourse.getGrade()
 				+ ","
 				+ "'"
@@ -77,11 +77,10 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void update(FirstCourse firstCourse) {
-		String sql = "update aeas_firstcourse set " + "grade="
+		String sql = "update " + getTableName() + " set " + "grade="
 				+ firstCourse.getGrade() + "," + "name=" + "'"
 				+ firstCourse.getName() + "'," + "shortname=" + "'"
 				+ firstCourse.getShortName() + "',";
@@ -103,13 +102,18 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 	}
 
 	public void delete(int key) {
-		String sql = "delete from aeas_firstcourse where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_firstcourse";
 	}
 
 }

@@ -8,7 +8,7 @@ import com.kevin.aeas.object.TeacherHoliday;
 
 public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	public TeacherHoliday get(int key) {
-		String sql = "select * from aeas_teacherholiday where id = " + key;
+		String sql = "select * from " + getTableName() + " where id = " + key;
 		TeacherHoliday teacherHoliday = null;
 		List<TeacherHoliday> list = null;
 		try {
@@ -33,7 +33,7 @@ public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	}
 	
 	public List<TeacherHoliday> getByTeacherId(int teacherId) {
-		String sql = "select * from aeas_teacherholiday where teacherid = "
+		String sql = "select * from " + getTableName() + " where teacherid = "
 				+ teacherId;
 		List<TeacherHoliday> list = null;
 		try {
@@ -45,7 +45,7 @@ public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
-		String sql = "select * from aeas_teacherholiday where teacherid = " + teacherId 
+		String sql = "select * from " + getTableName() + " where teacherid = " + teacherId 
 				      + " and adjustdate='" +date + "'";
 		TeacherHoliday teacherHoliday = null;
 		List<TeacherHoliday> list = null;
@@ -62,7 +62,7 @@ public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	}
 
 	public List<TeacherHoliday> getAll() {
-		String sql = "select * from aeas_teacherholiday";
+		String sql = "select * from " + getTableName();
 		List<TeacherHoliday> list = null;
 		try {
 			list = executeSql(sql);
@@ -73,7 +73,7 @@ public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	}
 
 	public void add(TeacherHoliday teacherHoliday) {
-		String sql = "insert into aeas_teacherholiday(teacherid,adjustdate,isholiday) values("
+		String sql = "insert into " + getTableName() + "(teacherid,adjustdate,isholiday) values("
 				+ "" + teacherHoliday.getTeacherId() + ",";
 		sql += "'" + teacherHoliday.getAdjustDate() + "',";
 		sql += teacherHoliday.getIsHoliday() + ")";
@@ -85,7 +85,7 @@ public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	}
 
 	public void update(TeacherHoliday teacherHoliday) {
-		String sql = "update aeas_teacherholiday set " + "teacherid="
+		String sql = "update " + getTableName() + " set " + "teacherid="
 				+ teacherHoliday.getTeacherId() + ",";
 
 		sql += "adjustdate='" + teacherHoliday.getAdjustDate() + "',";
@@ -100,12 +100,17 @@ public class DbTeacherHolidayOperation extends DbBaseOperation<TeacherHoliday>{
 	}
 
 	public void delete(int key) {
-		String sql = "delete from aeas_teacherholiday where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_teacherholiday";
 	}
 
 }

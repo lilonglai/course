@@ -8,7 +8,7 @@ import com.kevin.aeas.object.Student;
 
 public class DbStudentOperation extends DbBaseOperation<Student>{
 	public Student get(int key) {
-		String sql = "select * from aeas_student where id = " + key;
+		String sql = "select * from " + getTableName() + " where id = " + key;
 		Student student = null;
 		List<Student> list = null;
 		try {
@@ -39,7 +39,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 	
 	public Student getByName(String name) {
-		String sql = "select * from aeas_student where name = '" + name + "'";
+		String sql = "select * from " + getTableName() + " where name = '" + name + "'";
 		Student student = null;
 		List<Student> list = null;
 		try {
@@ -55,7 +55,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	
 
 	public List<Student> getByGrade(int grade) {
-		String sql = "select * from aeas_student where grade = " + grade;
+		String sql = "select * from " + getTableName() + " where grade = " + grade;
 		List<Student> list = null;
 		try {
 			list = executeSql(sql);
@@ -67,7 +67,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 
 	public List<Student> getAll() {
-		String sql = "select * from aeas_student";
+		String sql = "select * from " + getTableName();
 		List<Student> list = null;
 		try {
 			list = executeSql(sql);
@@ -79,7 +79,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 	
 	public List<Student> getAlive() {
-		String sql = "select * from aeas_student" + " where isalive=true";
+		String sql = "select * from " + getTableName() + "" + " where isalive=true";
 		List<Student> list = null;
 		try {
 			list = executeSql(sql);
@@ -91,7 +91,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 	
 	public List<Student> getNotAlive() {
-		String sql = "select * from aeas_student" + " where isalive=false";
+		String sql = "select * from " + getTableName() + "" + " where isalive=false";
 		List<Student> list = null;
 		try {
 			list = executeSql(sql);
@@ -103,7 +103,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 
 	public List<Student> getByTeacherId(int teacherId) {
-		String sql = "select * from aeas_student where teacherid = "
+		String sql = "select * from " + getTableName() + " where teacherid = "
 				+ teacherId;
 		List<Student> list = null;
 		try {
@@ -116,7 +116,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 
 	public void add(Student student){
-		String sql = "insert into aeas_student(name,shortname,grade,testscore,targetScore,examinedate,examineplace,teacherid,description) values("
+		String sql = "insert into " + getTableName() + "(name,shortname,grade,testscore,targetScore,examinedate,examineplace,teacherid,description) values("
 				+ "'" + student.getName() +"',"
 				+ "'" +student.getShortName() +"',"
 				+"" +student.getGrade() +","
@@ -152,7 +152,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 
 	public void update(Student student) {
-		String sql = "update aeas_student set "
+		String sql = "update " + getTableName() + " set "
 				+ "name=" + "'" + student.getName() + "'," 
 				+ "shortname=" + "'" + student.getShortName() + "',"
 	            + "grade=" + student.getGrade() + ","
@@ -192,7 +192,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 
 	public void delete(int key) {
-		String sql = "delete from aeas_student where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -202,7 +202,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 	
 	public void retire(int key) {
-		String sql = "update aeas_student set isalive = false" + " where id = " + key;
+		String sql = "update " + getTableName() + " set isalive = false" + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -214,6 +214,11 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 		DbStudentOperation studentOperation = new DbStudentOperation();
 		System.out.println(studentOperation.getAll());
 		
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_student";
 	}
 
 }

@@ -8,7 +8,7 @@ import com.kevin.aeas.object.TeacherAbility;
 
 public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 	public TeacherAbility get(int key) {
-		String sql = "select * from aeas_teacherability where id = " + key;
+		String sql = "select * from " + getTableName() + " where id = " + key;
 		TeacherAbility teacherAbility = null;
 		List<TeacherAbility> list = null;
 		try {
@@ -73,7 +73,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 	}
 	
 	public void add(TeacherAbility teacherAbility){
-		String sql = "insert into aeas_teacherability(teacherid,courseid) values("
+		String sql = "insert into " + getTableName() + "(teacherid,courseid) values("
 				+"" +teacherAbility.getTeacherId() +","
 				+"" +teacherAbility.getCourseId() +")";
 		try {
@@ -84,7 +84,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 	}
 	
 	public void update(TeacherAbility teacherAbility){
-		String sql = "update aeas_teacherability set "
+		String sql = "update " + getTableName() + " set "
 				+ "teacherid=" + "" + teacherAbility.getTeacherId() +","
 				+ "courseid=" +"" + teacherAbility.getCourseId() +"";
 		
@@ -98,7 +98,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 	
 	
 	public void delete(int key){
-		String sql = "delete from aeas_teacherability where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -107,7 +107,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 	}
 	
 	public void deleteByTeacherId(int teacherId){
-		String sql = "delete from aeas_teacherability where teacherid = " + teacherId;
+		String sql = "delete from " + getTableName() + " where teacherid = " + teacherId;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -125,6 +125,11 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_teacherability";
 	}
 	
 }

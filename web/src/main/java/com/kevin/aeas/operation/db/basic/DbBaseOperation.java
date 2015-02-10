@@ -92,4 +92,6 @@ public abstract class DbBaseOperation<T> {
 			closeConnection(connection);
 		}
 	}
+	
+	protected abstract String getTableName();
 }

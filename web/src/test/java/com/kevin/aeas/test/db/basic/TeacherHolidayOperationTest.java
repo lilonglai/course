@@ -12,18 +12,18 @@ import junit.framework.TestCase;
 public abstract class TeacherHolidayOperationTest extends TestCase {
 	public void testGet() {
 		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
-		TeacherHoliday teacherHoliday = operation.get(1);
+		TeacherHoliday teacherHoliday = operation.get(2);
 	}
 
 	public void testGetByTeacherId() {
 		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getByTeacherId(1);
+		List<TeacherHoliday> list = operation.getByTeacherId(2);
 
 	}
 
 	public void testGetByTeacherAndDate() {
 		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
-		TeacherHoliday teacherHoliday = operation.getByTeacherAndDate(1,
+		TeacherHoliday teacherHoliday = operation.getByTeacherAndDate(2,
 				"1989-7-21");
 	}
 
@@ -36,7 +36,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 	public void testAdd() {
 		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
 		TeacherHoliday teacherHoliday = new TeacherHoliday();
-		teacherHoliday.setTeacherId(1);
+		teacherHoliday.setTeacherId(2);
 		teacherHoliday.setAdjustDate(new Date(1989, 07, 23));
 		teacherHoliday.setIsHoliday(true);
 		operation.add(teacherHoliday);
@@ -46,7 +46,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
 		List<TeacherHoliday> list = operation.getAll();
 		for (TeacherHoliday teacherHoliday : list) {
-			if (teacherHoliday.getTeacherId() == 1) {
+			if (teacherHoliday.getTeacherId() == 2) {
 				teacherHoliday.setAdjustDate(new Date(1989, 07, 23));
 				teacherHoliday.setIsHoliday(false);
 				operation.update(teacherHoliday);
@@ -58,7 +58,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 		DbTeacherHolidayOperation operation = new DbTeacherHolidayOperation();
 		List<TeacherHoliday> list = operation.getAll();
 		for (TeacherHoliday teacherHoliday : list) {
-			if (teacherHoliday.getTeacherId() == 1) {
+			if (teacherHoliday.getTeacherId() == 2) {
 				teacherHoliday.setAdjustDate(new Date(1989, 07, 23));
 				teacherHoliday.setIsHoliday(false);
 				operation.delete(teacherHoliday.getId());

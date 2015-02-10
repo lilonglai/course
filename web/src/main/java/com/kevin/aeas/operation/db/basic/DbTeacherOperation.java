@@ -8,7 +8,7 @@ import com.kevin.aeas.object.Teacher;
 
 public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	public Teacher get(int key){
-		String sql = "select * from aeas_teacher where id = " + key;
+		String sql = "select * from " + getTableName() + " where id = " + key;
 		Teacher teacher = null;
 		List<Teacher> list = null;
 		try {
@@ -34,7 +34,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public Teacher getByName(String name){
-		String sql = "select * from aeas_teacher where name = '" + name + "'";
+		String sql = "select * from " + getTableName() + " where name = '" + name + "'";
 		Teacher teacher = null;
 		List<Teacher> list = null;
 		try {
@@ -51,7 +51,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	
 	
 	public Teacher getByShortName(String shortName){
-		String sql = "select * from aeas_teacher where shortName = '" + shortName + "'";
+		String sql = "select * from " + getTableName() + " where shortName = '" + shortName + "'";
 		Teacher teacher = null;
 		List<Teacher> list = null;
 		try {
@@ -67,7 +67,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public List<Teacher> getAll(){
-		String sql = "select * from aeas_teacher";
+		String sql = "select * from " + getTableName();
 		List<Teacher> list = null;
 		try {
 			list = executeSql(sql);
@@ -78,7 +78,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public List<Teacher> getAlive(){
-		String sql = "select * from aeas_teacher" + " where isalive=true";
+		String sql = "select * from " + getTableName() + "" + " where isalive=true";
 		List<Teacher> list = null;
 		try {
 			list = executeSql(sql);
@@ -89,7 +89,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public List<Teacher> getNotAlive(){
-		String sql = "select * from aeas_teacher" + " where isalive=false";
+		String sql = "select * from " + getTableName() + "" + " where isalive=false";
 		List<Teacher> list = null;
 		try {
 			list = executeSql(sql);
@@ -100,7 +100,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public int getIdByObject(Teacher condition){
-		String sql = "select * from aeas_teacher where";
+		String sql = "select * from " + getTableName() + " where";
 		if(condition.getName() != null)
 			sql += " name = '" + condition.getName() + "'";
 		
@@ -127,7 +127,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public void add(Teacher teacher){
-		String sql = "insert into aeas_teacher(name,shortname,phone,ismaster) values("
+		String sql = "insert into " + getTableName() + "(name,shortname,phone,ismaster) values("
 				+ "'" +teacher.getName() +"',"
 				+"'" +teacher.getShortName() +"',";
 		if(teacher.getPhone() == null){
@@ -147,7 +147,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public void update(Teacher teacher){
-		String sql = "update aeas_teacher set "
+		String sql = "update " + getTableName() + " set "
 				+ "name=" + "'" + teacher.getName() +"',"
 				+ "shortname=" +"'" +teacher.getShortName() +"',";
 		if(teacher.getPhone() == null){
@@ -171,7 +171,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	
 	
 	public void delete(int key){
-		String sql = "delete from aeas_teacher where id = " + key;
+		String sql = "delete from " + getTableName() + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
@@ -181,12 +181,17 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 	}
 	
 	public void retire(int key){
-		String sql = "update aeas_teacher set isalive = false" + " where id = " + key;
+		String sql = "update " + getTableName() + " set isalive = false" + " where id = " + key;
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected String getTableName() {
+		return "aeas_teacher";
 	}
 	
 
