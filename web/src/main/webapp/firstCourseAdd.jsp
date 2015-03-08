@@ -1,6 +1,3 @@
-<%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -28,36 +25,11 @@
 </head>
 <body>
 	<%
-		FirstCourse firstCourse = null;
-		FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-		if (request.getParameter("submit") != null) {
-		firstCourse = new FirstCourse();
-		
-		firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
-		String name = request.getParameter("name");
-		name = new String(name.getBytes("iso-8859-1"), "utf-8");
-		firstCourse.setName(name);
-
-		String shortName = request.getParameter("shortName");
-		shortName = new String(shortName.getBytes("iso-8859-1"),
-		"utf-8");
-		firstCourse.setShortName(shortName);
-		
-		String description = request.getParameter("description");
-		description = new String(description.getBytes("iso-8859-1"),
-		"utf-8");
-		firstCourse.setDescription(description);
-
-		firstCourseOperation.add(firstCourse);
-
-		response.sendRedirect("course.jsp" + "?grade=" + firstCourse.getGrade());
-			}
-			else{
-		    String idStr = request.getParameter("id");
-		    int grade = Integer.valueOf(idStr);
+        String idStr = request.getParameter("id");
+        int grade = Integer.valueOf(idStr);
 	%>
   <div class="container" >
-	<form action="firstCourseAdd.jsp" role="form" method="get" onSubmit="return checkForm();">
+	<form action="firstCourseServlet?action=add" role="form" method="get" onSubmit="return checkForm();">
 	    <div class="form-group">
 	              年级:
 	    	 <input type="radio" name="grade" value = "1" <%= grade==1?"checked":"" %> > 4-6
@@ -83,7 +55,7 @@
 		  </div>		
 		</div>
 		<div class="form-group">
-		<input type="submit" class="btn btn-default" value="提交" name="submit" />
+		<input type="submit" class="btn btn-default" value="提交" />
 		</div>
 	</form>
      <% 

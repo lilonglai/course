@@ -34,42 +34,14 @@
     SecondCourse secondCourse = null;
     SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
     FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-    if (request.getParameter("submit") != null) {
+    String idStr = request.getParameter("id");
+    int id = Integer.valueOf(idStr);
+    secondCourse = secondCourseOperation.get(id);
 
-
-        int courseId = Integer.valueOf(request.getParameter("id"));
-        secondCourse = secondCourseOperation.get(courseId);
-
-        String name = request.getParameter("name");
-        name = new String(name.getBytes("iso-8859-1"), "utf-8");
-        secondCourse.setName(name);
-
-        String shortName = request.getParameter("shortName");
-        shortName = new String(shortName.getBytes("iso-8859-1"),
-                "utf-8");
-        secondCourse.setShortName(shortName);
-
-        int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-        FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-        secondCourse.setFirstCourseId(firstCourseId);
-
-        String description = request.getParameter("description");
-        description = new String(description.getBytes("iso-8859-1"),
-                "utf-8");
-        secondCourse.setDescription(description);
-
-        secondCourseOperation.update(secondCourse);
-
-        response.sendRedirect("course.jsp" + "?grade=" + firstCourseOperation.get(firstCourseId).getGrade());
-    } else {
-        String idStr = request.getParameter("id");
-        int id = Integer.valueOf(idStr);
-        secondCourse = secondCourseOperation.get(id);
-
-        int firstCourseId = secondCourse.getFirstCourseId();
-        FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-        int grade = firstCourse.getGrade();
-        List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+    int firstCourseId = secondCourse.getFirstCourseId();
+    FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+    int grade = firstCourse.getGrade();
+    List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 %>
 
   <div class="container">
@@ -100,11 +72,7 @@
 		  <input type="submit" class="btn btn-default" value="提交" name="submit"/>
 		</div>
 	</form>
-	
-	<%
-	    }
-	    
-	%>
+
   </div>   
 </body>
 </html>

@@ -4,11 +4,6 @@
 <%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaSecondCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,7 +25,7 @@
 		var form = document.firstCourseForm;
 		var id= form.id;
 		id.value = courseId;
-		form.action="course.jsp";
+		form.action="firstCourseServlet?action=delete";
 		form.submit();	
 	}
 	
@@ -55,7 +50,7 @@
 		var form = document.secondCourseForm;
 		var id= form.id;
 		id.value = courseId;
-		form.action="course.jsp";
+		form.action="secondCourseServlet?action=delete";
 		form.submit();	
 	}
 	
@@ -95,27 +90,15 @@
 	</div>
     
    <%
-       	int grade =3;
-                                   	if(request.getParameter("grade") != null){
-                                   		grade = Integer.valueOf(request.getParameter("grade"));
-                                   	}
-                                      
-                                   	FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-                                   	SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-                                   	
-                                      if(request.getParameter("id") != null){
-                                   	   int id = (Integer.valueOf(request.getParameter("id")));
-                                   	   int flag = (Integer.valueOf(request.getParameter("flag")));
-                                   	   if(flag==1){
-                                   		   firstCourseOperation.delete(id);
-                                   		   
-                                   	   }
-                                   	   else if(flag==2){
-                                   		   secondCourseOperation.delete(id);
-                                   	   }
-                                   	   //courseOperation.delete(id);	   	   
-                                      }
-       %>
+       int grade = 3;
+       if (request.getParameter("grade") != null) {
+           grade = Integer.valueOf(request.getParameter("grade"));
+       }
+
+       FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+       SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
+
+   %>
    
    <div class="container">
    	<form method="get" action="course.jsp" name="gradeForm" id="gradeForm">	  	
@@ -140,9 +123,9 @@
            <thead>
 		      <tbody>
 					<%
-						int firstCourseCount = 1;
-												List<FirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
-												for (FirstCourse firstCourse : FirstCourseList) {
+                        int firstCourseCount = 1;
+                        List<FirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
+                        for (FirstCourse firstCourse : FirstCourseList) {
 					%>
 			
 					<tr>
@@ -181,18 +164,18 @@
 			</thead>
 			<tbody>
 		<%
-			int secondCourseCount = 1;
-				int firstCourseId = 0;
-			List<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
-			for (SecondCourse secondCourse : secondCourseList) {
-				if(firstCourseId == secondCourse.getFirstCourseId()){
-					secondCourseCount++;
-				}else{
-					secondCourseCount = 1;
-					firstCourseId= secondCourse.getFirstCourseId();
-				}
-				
-				FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+            int secondCourseCount = 1;
+            int firstCourseId = 0;
+            List<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
+            for (SecondCourse secondCourse : secondCourseList) {
+                if (firstCourseId == secondCourse.getFirstCourseId()) {
+                    secondCourseCount++;
+                } else {
+                    secondCourseCount = 1;
+                    firstCourseId = secondCourse.getFirstCourseId();
+                }
+
+                FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 		%>
 
 		<tr>

@@ -28,41 +28,16 @@
 </head>
 <body>
 	<%
-		FirstCourse firstCourse = null;
-	    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-		if (request.getParameter("submit") != null) {		
-			
-			int courseId = Integer.valueOf(request.getParameter("id"));
-			firstCourse = firstCourseOperation.get(courseId);
-			
-			firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
-			String name = request.getParameter("name");
-			name = new String(name.getBytes("iso-8859-1"), "utf-8");
-			firstCourse.setName(name);
-
-			String shortName = request.getParameter("shortName");
-			shortName = new String(shortName.getBytes("iso-8859-1"),
-			"utf-8");
-			firstCourse.setShortName(shortName);
-			
-			String description = request.getParameter("description");
-			description = new String(description.getBytes("iso-8859-1"),
-			"utf-8");
-			firstCourse.setDescription(description);
-
-			firstCourseOperation.update(firstCourse);
-
-			response.sendRedirect("course.jsp" + "?grade=" + firstCourse.getGrade());
-		}	
-		
-		String idStr = (String)request.getParameter("id");
-		if(idStr != null){
-		    int id = Integer.valueOf(idStr);	    	
-		    firstCourse = firstCourseOperation.get(id);
+        FirstCourse firstCourse = null;
+        FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+        String idStr = request.getParameter("id");
+        if (idStr != null) {
+            int id = Integer.valueOf(idStr);
+            firstCourse = firstCourseOperation.get(id);
 	%>
 	
   <div class="container">
-	<form action="firstCourseUpdate.jsp" method="get" onSubmit="return checkForm();">
+	<form action="firstCourseServlet?action=add" method="get" onSubmit="return checkForm();">
 	    <input type="hidden" name="id" value="<%= firstCourse.getId() %>">
 		<div class="form-group">
 		年级: 
@@ -81,7 +56,7 @@
 		        <textarea rows="4" cols="25" name="description"> <%= firstCourse.getDescription() %> </textarea>
 		</div>
 		<div class="form-group">
-		<input type="submit" class="btn btn-default" value="提交" name="submit"/>
+		<input type="submit" class="btn btn-default" value="提交" />
 		</div>
 	</form>
 	

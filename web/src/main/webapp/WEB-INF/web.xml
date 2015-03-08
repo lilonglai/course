@@ -57,4 +57,26 @@
 		<servlet-name>scheduleServlet</servlet-name>
 		<url-pattern>/scheduleServlet</url-pattern>
 	</servlet-mapping>
+
+    <servlet>
+        <description>firstCourseServlet</description>
+        <display-name>firstCourseServlet</display-name>
+        <servlet-name>firstCourseServlet</servlet-name>
+        <servlet-class>com.kevin.aeas.servlet.FirstCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>firstCourseServlet</servlet-name>
+        <url-pattern>/firstCourseServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description>secondCourseServlet</description>
+        <display-name>secondCourseServlet</display-name>
+        <servlet-name>secondCourseServlet</servlet-name>
+        <servlet-class>com.kevin.aeas.servlet.SecondCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secondCourseServlet</servlet-name>
+        <url-pattern>/secondCourseServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
