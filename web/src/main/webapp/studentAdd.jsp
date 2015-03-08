@@ -2,12 +2,7 @@
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.object.Student"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
-<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,7 +33,6 @@
 </head>
 <body>
 	<%
-		Student student = null;
 		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();		
 		List<Teacher> teacherList = teacherOperation.getAll();
 	%>

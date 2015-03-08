@@ -1,8 +1,5 @@
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
 <%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
@@ -156,7 +153,7 @@
 
 	<br>
 	 <h2> 修改能力</h2>	 
-	<form action="teacherAbility.jsp" method="get" name="abilityForm" id="abilityForm" onSubmit="allSelect();"">
+	<form action="teacherAbility.jsp" method="get" name="abilityForm" id="abilityForm" onSubmit="allSelect();">
 		<input type="hidden" name="id" value="<%=teacher.getId()%>">
 		<div class="form-group">
 		选择年级: <select name="grade" onChange="gradeChanged();">

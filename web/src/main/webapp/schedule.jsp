@@ -1,6 +1,5 @@
 <%@page import="java.util.List"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="java.sql.Date"%>
 <%@page import="com.kevin.aeas.object.SecondCourse"%>
 <%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
 <%@page import="com.kevin.aeas.object.FirstCourse"%>
@@ -10,7 +9,6 @@
 <%@page import="com.kevin.aeas.operation.db.ScheduleOperation"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
 <%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.kevin.aeas.object.Student"%>
 <%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -155,7 +153,7 @@
   <div class="container">
 	学生:<%=student.getName()%>
 	<form action="exportCourse.jsp" enctype="multipart/form-data" method="get">
-	    <input type="hidden", name ="studentId" value="<%= student.getId() %>">
+	    <input type="hidden" name ="studentId" value="<%= student.getId() %>">
 		<input type="submit" value="生成课表" id="exportData">
 	</form>
 	<br>

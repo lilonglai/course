@@ -4,11 +4,6 @@
 <%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaSecondCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,49 +30,48 @@
 </script>
 </head>
 <body>
-	<%
-		        SecondCourse secondCourse = null;
-			    SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-			    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-		if (request.getParameter("submit") != null) {
-			
-			
-			int courseId = Integer.valueOf(request.getParameter("id"));
-			secondCourse = secondCourseOperation.get(courseId);
-			
-			String name = request.getParameter("name");
-			name = new String(name.getBytes("iso-8859-1"), "utf-8");
-			secondCourse.setName(name);
+<%
+    SecondCourse secondCourse = null;
+    SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
+    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+    if (request.getParameter("submit") != null) {
 
-			String shortName = request.getParameter("shortName");
-			shortName = new String(shortName.getBytes("iso-8859-1"),
-			"utf-8");
-			secondCourse.setShortName(shortName);
 
-			int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-			FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-			secondCourse.setFirstCourseId(firstCourseId);
-			
-			String description = request.getParameter("description");
-			description = new String(description.getBytes("iso-8859-1"),
-			"utf-8");
-			secondCourse.setDescription(description);
+        int courseId = Integer.valueOf(request.getParameter("id"));
+        secondCourse = secondCourseOperation.get(courseId);
 
-			secondCourseOperation.update(secondCourse);
+        String name = request.getParameter("name");
+        name = new String(name.getBytes("iso-8859-1"), "utf-8");
+        secondCourse.setName(name);
 
-			response.sendRedirect("course.jsp" + "?grade=" + firstCourseOperation.get(firstCourseId).getGrade());
-		}
-		
-		else{
-		    String idStr = (String)request.getParameter("id");
-			    	int id = Integer.valueOf(idStr);	    	
-			    	secondCourse = secondCourseOperation.get(id);
-			    	
-			    	int firstCourseId = secondCourse.getFirstCourseId();
-			    	FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-			        int grade = firstCourse.getGrade();
-			        List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
-	%>
+        String shortName = request.getParameter("shortName");
+        shortName = new String(shortName.getBytes("iso-8859-1"),
+                "utf-8");
+        secondCourse.setShortName(shortName);
+
+        int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
+        FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+        secondCourse.setFirstCourseId(firstCourseId);
+
+        String description = request.getParameter("description");
+        description = new String(description.getBytes("iso-8859-1"),
+                "utf-8");
+        secondCourse.setDescription(description);
+
+        secondCourseOperation.update(secondCourse);
+
+        response.sendRedirect("course.jsp" + "?grade=" + firstCourseOperation.get(firstCourseId).getGrade());
+    } else {
+        String idStr = request.getParameter("id");
+        int id = Integer.valueOf(idStr);
+        secondCourse = secondCourseOperation.get(id);
+
+        int firstCourseId = secondCourse.getFirstCourseId();
+        FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
+        int grade = firstCourse.getGrade();
+        List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
+%>
+
   <div class="container">
 	<form action="secondCourseUpdate.jsp" method="get" onSubmit="return checkForm();">
 	    <input type="hidden" name="id" value="<%=secondCourse.getId()%>">

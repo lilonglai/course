@@ -3,10 +3,6 @@
 <%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleFirstCourse"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaSecondCourseOperation"%>
 <%@page import="com.kevin.aeas.object.oracle.OracleSecondCourse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

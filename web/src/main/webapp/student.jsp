@@ -2,15 +2,10 @@
 <%@page import="com.kevin.aeas.object.Student"%>
 <%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
 <%@page import="com.kevin.aeas.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaStudentOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.utils.TeacherHelp"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,7 +21,7 @@
 		id.value = studentId;
 		var form = document.getElementById("studentForm");
 		form.action="studentUpdate.jsp";
-		form.submit();	
+		form.submit();
 	}
 	
 	function deleteStudent(studentId){
@@ -111,7 +106,7 @@
    <%
        	StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
         TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-       %>
+   %>
    
    <div class="container">
    	<form action="importCourse.jsp" enctype="multipart/form-data" method="post" name="importForm" id="importForm">
@@ -143,7 +138,7 @@
 		    if(statusString ==null)
 		    	statusString = "2";
 		    int status = Integer.valueOf(statusString);
-		%>
+	%>
 	<form action="student.jsp"  method="get" name="statusForm" id="statusForm">
 		<select name="status" onChange="document.getElementById('statusForm').submit()">
 			<option value="1" <%=status==1?"selected":""%> >所有学生</option>

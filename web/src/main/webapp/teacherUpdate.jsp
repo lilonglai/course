@@ -1,9 +1,4 @@
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleTeacherHoliday"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
 <%@page import="com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation"%>
 <%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
@@ -29,19 +24,18 @@
 </script>
 </head>
 <body>
-	<%
-		       Teacher teacher = null;
-			   TeacherDefaultHoliday teacherDefaultHoliday = null;
-			   	   
-			    String idStr = (String)request.getParameter("id");
-			    if(idStr != null){
-			    	int id = Integer.valueOf(idStr);
-			    	TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-			    	TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
-			    	teacher = teacherOperation.get(id);
-			    	
-			    	teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(id);
-	%>
+<%
+    Teacher teacher = null;
+    TeacherDefaultHoliday teacherDefaultHoliday = null;
+
+    String idStr = request.getParameter("id");
+    if (idStr != null) {
+        int id = Integer.valueOf(idStr);
+        TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+        TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
+        teacher = teacherOperation.get(id);
+        teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(id);
+%>
 	<div class="container">
 	<form action="teacherServlet" method="get" onSubmit="return checkForm();">
 	    <input type="hidden" name="action" value="update">

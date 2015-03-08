@@ -4,12 +4,6 @@
 <%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
 <%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleTeacher"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaTeacherOperation"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaOperationManager"%>
-<%@page import="com.kevin.aeas.operation.db.jpa.JpaStudentOperation"%>
-<%@page import="com.kevin.aeas.object.oracle.OracleStudent"%>
-<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -42,7 +36,7 @@ function checkForm(){
 		Student student = null;
 	    StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
 		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();	
-	    String idStr = (String)request.getParameter("id");
+	    String idStr = request.getParameter("id");
 		if(idStr != null){
 			  int id = Integer.valueOf(idStr);	    	
 			  student = studentOperation.get(id);	    	
