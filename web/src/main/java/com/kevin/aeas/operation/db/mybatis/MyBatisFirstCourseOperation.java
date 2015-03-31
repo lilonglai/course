@@ -6,14 +6,18 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<FirstCourse> {
+public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFirstCourse> {
+
+    public MyBatisFirstCourseOperation(){
+        super(MyBatisFirstCourse.class);
+    }
 
 	public FirstCourse get(int key) {
         FirstCourse firstCourse = null;
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(MyBatisFirstCourse.class);
+            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
             firstCourse = myBatisFirstCourse.get(key);
         }finally {
             session.close();
@@ -26,7 +30,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<FirstCours
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(MyBatisFirstCourse.class);
+            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
             list = myBatisFirstCourse.getByGrade(grade);
         }finally {
             session.close();
@@ -41,7 +45,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<FirstCours
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(MyBatisFirstCourse.class);
+            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
             list = myBatisFirstCourse.getAll();
         }finally {
             session.close();
@@ -54,7 +58,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<FirstCours
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(MyBatisFirstCourse.class);
+            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
             myBatisFirstCourse.add(firstCourse);
             session.commit();
         }catch (Exception e){
@@ -69,7 +73,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<FirstCours
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(MyBatisFirstCourse.class);
+            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
             myBatisFirstCourse.update(firstCourse);
             session.commit();
         }catch (Exception e){
@@ -84,7 +88,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<FirstCours
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(MyBatisFirstCourse.class);
+            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
             myBatisFirstCourse.delete(key);
             session.commit();
         }catch (Exception e){

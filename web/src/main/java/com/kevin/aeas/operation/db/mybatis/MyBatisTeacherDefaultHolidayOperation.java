@@ -1,22 +1,22 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherAbility;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherDefaultHoliday;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday;
 import org.apache.ibatis.session.SqlSession;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<TeacherDefaultHoliday> {
+public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<MyBatisTeacherDefaultHoliday> {
+    public MyBatisTeacherDefaultHolidayOperation(){
+        super(MyBatisTeacherDefaultHoliday.class);
+    }
+
 	public TeacherDefaultHoliday get(int key){
 		TeacherDefaultHoliday teacherDefaultHoliday = null;
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             teacherDefaultHoliday = myBatisTeacherDefaultHoliday.get(key);
         }finally {
             session.close();
@@ -29,7 +29,7 @@ public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             teacherDefaultHoliday = myBatisTeacherDefaultHoliday.getByTeacherId(teacherId);
         }finally {
             session.close();
@@ -42,7 +42,7 @@ public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             list = myBatisTeacherDefaultHoliday.getAll();
         }finally {
             session.close();
@@ -54,7 +54,7 @@ public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             myBatisTeacherDefaultHoliday.add(teacherDefaultHoliday);
             session.commit();
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             myBatisTeacherDefaultHoliday.update(teacherDefaultHoliday);
             session.commit();
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             myBatisTeacherDefaultHoliday.delete(key);
             session.commit();
         } catch (Exception e) {
@@ -97,7 +97,7 @@ public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(MyBatisTeacherDefaultHoliday.class);
+            MyBatisTeacherDefaultHoliday myBatisTeacherDefaultHoliday = session.getMapper(mybatisMapper);
             myBatisTeacherDefaultHoliday.deleteByTeacherId(teacherId);
             session.commit();
         } catch (Exception e) {

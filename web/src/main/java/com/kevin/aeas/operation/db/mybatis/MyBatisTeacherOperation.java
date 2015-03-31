@@ -1,21 +1,22 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisStudent;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacher;
 import org.apache.ibatis.session.SqlSession;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
+public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher> {
+    public MyBatisTeacherOperation(){
+        super(MyBatisTeacher.class);
+    }
+
 	public Teacher get(int key){
 		Teacher teacher = null;
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             teacher = myBatisTeacher.get(key);
         }finally {
             session.close();
@@ -29,7 +30,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             teacher = myBatisTeacher.getByName(name);
         }finally {
             session.close();
@@ -43,7 +44,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             teacher = myBatisTeacher.getByShortName(shortName);
         }finally {
             session.close();
@@ -56,7 +57,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             list = myBatisTeacher.getAll();
         }finally {
             session.close();
@@ -69,7 +70,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             list = myBatisTeacher.getAlive();
         }finally {
             session.close();
@@ -82,7 +83,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             list = myBatisTeacher.getNotAlive();
         }finally {
             session.close();
@@ -95,7 +96,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             teacher = myBatisTeacher.getByCondition(condition);
         }
         finally {
@@ -109,7 +110,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             myBatisTeacher.add(teacher);
             session.commit();
         }catch (Exception e){
@@ -124,7 +125,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             myBatisTeacher.update(teacher);
             session.commit();
         }catch (Exception e){
@@ -140,7 +141,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             myBatisTeacher.delete(key);
             session.commit();
         }catch (Exception e){
@@ -155,7 +156,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<Teacher> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(MyBatisTeacher.class);
+            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
             myBatisTeacher.retire(key);
             session.commit();
         }catch (Exception e){

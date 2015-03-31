@@ -1,21 +1,22 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisFirstCourse;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisStudent;
 import org.apache.ibatis.session.SqlSession;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
+public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent> {
+    public MyBatisStudentOperation(){
+        super(MyBatisStudent.class);
+    }
+
 	public Student get(int key) {
 		Student student = null;
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             student = myBatisStudent.get(key);
         }finally {
             session.close();
@@ -28,7 +29,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             student = myBatisStudent.getByName(name);
         }finally {
             session.close();
@@ -42,7 +43,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             list = myBatisStudent.getByGrade(grade);
         }finally {
             session.close();
@@ -55,7 +56,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             list = myBatisStudent.getAll();
         }finally {
             session.close();
@@ -68,7 +69,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             list = myBatisStudent.getAlive();
         }finally {
             session.close();
@@ -81,7 +82,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             list = myBatisStudent.getNotAlive();
         }finally {
             session.close();
@@ -94,7 +95,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             list = myBatisStudent.getByTeacherId(teacherId);
         }finally {
             session.close();
@@ -106,7 +107,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             myBatisStudent.add(student);
             session.commit();
         }catch (Exception e){
@@ -121,7 +122,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             myBatisStudent.update(student);
             session.commit();
         }catch (Exception e){
@@ -136,7 +137,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             myBatisStudent.delete(key);
             session.commit();
         }catch (Exception e){
@@ -151,7 +152,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<Student> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisStudent myBatisStudent = session.getMapper(MyBatisStudent.class);
+            MyBatisStudent myBatisStudent = session.getMapper(mybatisMapper);
             myBatisStudent.retire(key);
             session.commit();
         }catch (Exception e){

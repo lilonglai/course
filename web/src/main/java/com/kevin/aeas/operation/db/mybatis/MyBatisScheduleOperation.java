@@ -7,13 +7,18 @@ import org.apache.ibatis.session.SqlSession;
 import java.sql.Date;
 import java.util.List;
 
-public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
+public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedule> {
+
+    public MyBatisScheduleOperation(){
+        super(MyBatisSchedule.class);
+    }
+
 	public Schedule get(int key){
 		Schedule schedule = null;
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             schedule = myBatisSchedule.get(key);
         }finally {
             session.close();
@@ -26,7 +31,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             schedule = myBatisSchedule.getByStudentIdOnDateAndTime(studentId, onDate, onTime);
         }finally {
             session.close();
@@ -39,7 +44,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             list = myBatisSchedule.getByStudentId(studentId);
         }finally {
             session.close();
@@ -52,7 +57,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             list = myBatisSchedule.getByTeacherId(teacherId);
         }finally {
             session.close();
@@ -65,7 +70,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             list = myBatisSchedule.getByDateAndTime(onDate, onTime);
         }finally {
             session.close();
@@ -78,7 +83,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             list = myBatisSchedule.getAll();
         }finally {
             session.close();
@@ -91,7 +96,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             myBatisSchedule.add(schedule);
             session.commit();
         }catch (Exception e){
@@ -106,7 +111,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             myBatisSchedule.update(schedule);
             session.commit();
         }catch (Exception e){
@@ -121,7 +126,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<Schedule> {
         SqlSession session = null;
         try {
             session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(MyBatisSchedule.class);
+            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
             myBatisSchedule.delete(key);
             session.commit();
         }catch (Exception e){
