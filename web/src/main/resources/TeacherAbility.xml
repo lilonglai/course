@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherAbility">
+    <resultMap id="ListTeacherAbility" type="TeacherAbility">
+        <id column="id" property="id"/>
+        <result column="teacherid" property="teacherId"/>
+        <result column="courseid" property="courseId" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="TeacherAbility">
+        select * from aeas_teacherability where id=#{id}
+    </select>
+
+    <select id="getByTeacherId" parameterType="int" resultMap="ListTeacherAbility">
+        select aeas_teacherability.*
+        from aeas_teacherability,aeas_firstcourse
+        where teacherid = #{teacherId} and aeas_firstcourse.id=aeas_teacherability.courseid
+        order by aeas_firstcourse.grade
+    </select>
+
+    <select id="getByCourseId" parameterType="int" resultMap="ListTeacherAbility">
+        select aeas_teacherability.*
+        from aeas_teacherability,aeas_firstcourse
+        where courseid = #{courseId} and aeas_firstcourse.id=aeas_teacherability.courseid
+        order by aeas_firstcourse.grade
+    </select>
+
+    <select id="getAll"  resultMap="ListTeacherAbility">
+        select * from aeas_teacherability
+    </select>
+
+    <insert id="add" parameterType="TeacherAbility" useGeneratedKeys="true" keyProperty="id">
+        insert into aeas_teacherability(teacherid,courseid)
+        values(#{teacherId}, #{courseId})
+    </insert>
+
+    <update id="update" parameterType="TeacherAbility">
+        update aeas_teacherability
+        set teacherid=#{teacherId}, courseid=#{courseId}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_teacherability where id =#{id};
+    </delete>
+
+    <delete id="deleteByTeacherId" parameterType="int">
+        delete from aeas_teacherability where teacherid=#{teacherId}
+    </delete>
+
+    <delete id="deleteByTeacherAndGrade" parameterType="map">
+         delete t from aeas_teacherability t
+         where t.teacherid=#{teacherId}
+				and t.courseid in (select c.id from aeas_firstcourse c where c.grade=#{grade})
+    </delete>
+</mapper>

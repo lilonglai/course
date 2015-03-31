@@ -24,10 +24,10 @@
 </script>
 </head>
 <body>
-	<%
-        String idStr = request.getParameter("id");
-        int grade = Integer.valueOf(idStr);
-	%>
+<%
+    String idStr = request.getParameter("id");
+    int grade = Integer.valueOf(idStr);
+%>
   <div class="container" >
 	<form action="firstCourseServlet?action=add" role="form" method="get" onSubmit="return checkForm();">
 	    <div class="form-group">
@@ -58,9 +58,9 @@
 		<input type="submit" class="btn btn-default" value="提交" />
 		</div>
 	</form>
-     <% 
-		}
-     %>
   </div>
+    <%
+        }
+    %>
 </body>
 </html>

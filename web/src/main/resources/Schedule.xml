@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisSchedule">
+    <resultMap id="ListSchedule" type="Schedule">
+        <id column="id" property="id"/>
+        <result column="ondate" property="onDate"/>
+        <result column="ontime" property="onTime" />
+        <result column="studentid" property="studentId" />
+        <result column="courseid" property="courseId" />
+        <result column="teacherid" property="teacherId" />
+        <result column="addition" property="addition" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="Schedule">
+        select * from aeas_schedule where id=#{id}
+    </select>
+
+    <select id="getByStudentIdOnDateAndTime" parameterType="map" resultType="Schedule">
+        select * from aeas_schedule
+        where studentid=#{studentId} and ondate=#{onDate} and ontime=#{onTime}
+    </select>
+
+    <select id="getByTeacherId" parameterType="int" resultMap="ListSchedule">
+        select * from aeas_schedule where teacherid =#{teacherId}
+        order by ondate,ontime
+    </select>
+
+    <select id="getByStudentId" parameterType="int" resultMap="ListSchedule">
+        select * from aeas_schedule where studentid =#{studentId}
+        order by ondate,ontime
+    </select>
+
+    <select id="getByDateAndTime" parameterType="map" resultMap="ListSchedule">
+        select * from aeas_schedule where ondate=#{onDate} and ontime=#{onTime}
+        order by ondate,ontime
+    </select>
+
+    <select id="getAll" resultMap="ListSchedule">
+        select * from aeas_schedule
+        order by ondate,ontime
+    </select>
+
+    <insert id="add" parameterType="Schedule" useGeneratedKeys="true" keyProperty="id">
+        insert into aeas_schedule(ondate,ontime,studentid,courseid, teacherid, addition, description)
+        values(#{onDate}, #{ontime}, #{studentId}, #{courseId}, #{teacherId}, #{addition}, #{description})
+    </insert>
+
+    <update id="update" parameterType="Schedule">
+        update aeas_schedule
+        set ondate=#{onDate}, ontime=#{onTime}, studentid=#{studentId}, courseid= #{courseId}, teacherid= #{teacherId}
+            addition = #{addition}, description= #{description}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_schedule where id =#{id};
+    </delete>
+</mapper>

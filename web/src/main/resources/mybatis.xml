@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.kevin.aeas.object.FirstCourse" alias="FirstCourse" />
+        <typeAlias type="com.kevin.aeas.object.SecondCourse" alias="SecondCourse" />
+        <typeAlias type="com.kevin.aeas.object.Student" alias="Student" />
+        <typeAlias type="com.kevin.aeas.object.Teacher" alias="Teacher" />
+        <typeAlias type="com.kevin.aeas.object.TeacherAbility" alias="TeacherAbility" />
+        <typeAlias type="com.kevin.aeas.object.TeacherHoliday" alias="TeacherHoliday" />
+        <typeAlias type="com.kevin.aeas.object.TeacherDefaultHoliday" alias="TeacherDefaultHoliday" />
+        <typeAlias type="com.kevin.aeas.object.Schedule" alias="Schedule" />
+        <typeAlias type="com.kevin.aeas.object.User" alias="User" />
+    </typeAliases>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/aeas"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="FirstCourse.xml"/>
+        <mapper resource="SecondCourse.xml"/>
+        <mapper resource="Student.xml"/>
+        <mapper resource="Teacher.xml"/>
+        <mapper resource="TeacherAbility.xml"/>
+        <mapper resource="TeacherHoliday.xml"/>
+        <mapper resource="TeacherDefaultHoliday.xml"/>
+        <mapper resource="Schedule.xml"/>
+
+        <!--
+<mapper resource="User.xml"/>
+-->
+    </mappers>
+
+</configuration>

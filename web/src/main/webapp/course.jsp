@@ -102,11 +102,11 @@
    
    <div class="container">
    	<form method="get" action="course.jsp" name="gradeForm" id="gradeForm">	  	
-	                选择年级: <select name="grade" onChange="gradeChanged();">
-				<option value="1" <%=grade==1?"selected":""%>>4-6</option>
-				<option value="2" <%=grade==2?"selected":""%>>7-9</option>
-				<option value="3" <%=grade==3?"selected":""%>>10-12</option>
-			</select> 
+	 选择年级:  <select name="grade" onChange="gradeChanged();">
+				 <option value="1" <%=grade==1?"selected":""%>>4-6</option>
+				 <option value="2" <%=grade==2?"selected":""%>>7-9</option>
+				 <option value="3" <%=grade==3?"selected":""%>>10-12</option>
+			   </select>
      </form>
      <br>
 	课程分类:<br>	
@@ -186,7 +186,7 @@
 			<td><%=secondCourse.getDescription()%></td>							
 			
 			<td><input type="button" class="btn btn-default" value='修改' onclick="modifySecondCourse(<%=secondCourse.getId()%>)"> 
-			    <input type="button" class="btn btn-default" value='删除'  onclick="deleteSecondCourse(<%=secondCourse.getId()%>)">
+			    <input type="button" class="btn btn-default" value='删除' onclick="deleteSecondCourse(<%=secondCourse.getId()%>)">
 		    </td>
 		</tr>
 		<%
@@ -199,15 +199,12 @@
 	
 	<form method="get" action="course.jsp" name="firstCourseForm" id="firstCourseForm">
 	  <input type="hidden" name="id" >
-	  <input type="hidden" name="flag" value="1" >	 
 	  <input type="hidden" name="grade" value="<%=grade %>" >
 	</form>
 	
     <form method="get" action="course.jsp" name="secondCourseForm" id="secondCourseForm">
 	  <input type="hidden" name="id" >
-	   <input type="hidden" name="flag" value="2" >
 	  <input type="hidden" name="grade" value="<%=grade %>" >
-
 	</form>
 	
   </div>

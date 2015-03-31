@@ -59,11 +59,9 @@
 		<input type="submit" class="btn btn-default" value="提交" />
 		</div>
 	</form>
-	
-	<%
-	    }
-	    
-	%>
-  </div>    
+  </div>
+    <%
+        }
+    %>
 </body>
 </html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday">
+    <resultMap id="ListTeacherHoliday" type="TeacherHoliday">
+        <id column="id" property="id"/>
+        <result column="teacherid" property="teacherId"/>
+        <result column="adjustdate" property="adjustDate" />
+        <result column="isholiday" property="isHoliday" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="TeacherHoliday">
+        select * from aeas_teacherholiday where id=#{id}
+    </select>
+
+    <select id="getAll"  resultMap="ListTeacherHoliday">
+        select * from aeas_teacherholiday
+    </select>
+
+    <select id="getByTeacherId" parameterType="int" resultMap="ListTeacherHoliday">
+        select *
+        from aeas_teacherholiday
+        where teacherid =#{teacherId}
+    </select>
+
+    <select id="getByTeacherAndDate" parameterType="map" resultType="TeacherHoliday">
+        select *
+        from aeas_teacherholiday
+        where teacherid =#{teacherId} and adjustdate = #{adjustDate}
+    </select>
+
+    <insert id="add" parameterType="TeacherHoliday" useGeneratedKeys="true" keyProperty="id">
+        insert into aeas_teacherholiday(teacherid,adjustdate, isholiday)
+        values(#{teacherId}, #{adjustDate}, #{isHoliday})
+    </insert>
+
+    <update id="update" parameterType="TeacherHoliday">
+        update aeas_teacherability
+        set teacherid=#{teacherId}, adjustdate=#{adjustDate}, isholiday=#{isHoliday}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_teacherholiday where id =#{id};
+    </delete>
+
+</mapper>
