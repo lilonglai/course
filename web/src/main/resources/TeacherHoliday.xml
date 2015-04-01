@@ -29,7 +29,7 @@
         where teacherid =#{teacherId} and adjustdate = #{adjustDate}
     </select>
 
-    <insert id="add" parameterType="TeacherHoliday" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="TeacherHoliday">
         insert into aeas_teacherholiday(teacherid,adjustdate, isholiday)
         values(#{teacherId}, #{adjustDate}, #{isHoliday})
     </insert>
@@ -41,7 +41,7 @@
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_teacherholiday where id =#{id};
+        delete from aeas_teacherholiday where id =#{id}
     </delete>
 
 </mapper>

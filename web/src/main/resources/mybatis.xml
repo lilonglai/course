@@ -17,10 +17,10 @@
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/aeas"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@10.182.251.230:1521:orcl"/>
+                <property name="username" value="aeas"/>
+                <property name="password" value="oracle"/>
             </dataSource>
         </environment>
     </environments>

@@ -4,6 +4,7 @@ import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday;
 import org.apache.ibatis.session.SqlSession;
 
+import java.sql.Date;
 import java.util.List;
 
 public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatisTeacherHoliday> {
@@ -43,7 +44,7 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
         try {
             session = sqlSessionFactory.openSession();
             MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            teacherHoliday = myBatisTeacherHoliday.getByTeacherAndDate(teacherId, date);
+            teacherHoliday = myBatisTeacherHoliday.getByTeacherAndDate(teacherId, Date.valueOf(date));
         }finally {
             session.close();
         }

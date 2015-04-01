@@ -42,7 +42,7 @@
         order by ondate,ontime
     </select>
 
-    <insert id="add" parameterType="Schedule" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="Schedule">
         insert into aeas_schedule(ondate,ontime,studentid,courseid, teacherid, addition, description)
         values(#{onDate}, #{ontime}, #{studentId}, #{courseId}, #{teacherId}, #{addition}, #{description})
     </insert>
@@ -55,6 +55,6 @@
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_schedule where id =#{id};
+        delete from aeas_schedule where id =#{id}
     </delete>
 </mapper>

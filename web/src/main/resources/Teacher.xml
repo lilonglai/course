@@ -24,7 +24,17 @@
     </select>
 
     <select id="getByCondition" parameterType="Teacher" resultType="Teacher">
-        select * from aeas_teacher where name=#{name} and shortname=#{shortName} and phone=#{phone}
+        select * from aeas_teacher where 1=1
+        <if test="name != null">
+            and name=#{name}
+        </if>
+        <if test="shortName != null">
+            and shortname=#{shortName}
+        </if>
+        <if test="phone != null">
+            and phone=#{phone}
+        </if>
+
     </select>
 
     <select id="getAll"  resultMap="ListTeacher">
@@ -32,14 +42,14 @@
     </select>
 
     <select id="getAlive"  resultMap="ListTeacher">
-        select * from aeas_teacher where isalive =true
+        select * from aeas_teacher where isalive =1
     </select>
 
     <select id="getNotAlive"  resultMap="ListTeacher">
-        select * from aeas_teacher where isalive =false
+        select * from aeas_teacher where isalive =0
     </select>
 
-    <insert id="add" parameterType="Teacher" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="Teacher">
         insert into aeas_teacher(name,shortname,phone,ismaster)
         values(#{name}, #{shortName}, #{phone}, #{isMaster})
     </insert>
@@ -52,7 +62,7 @@
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_teacher where id =#{id};
+        delete from aeas_teacher where id =#{id}
     </delete>
 
     <update id="retire" parameterType="int">

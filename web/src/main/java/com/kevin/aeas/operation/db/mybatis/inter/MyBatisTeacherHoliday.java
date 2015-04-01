@@ -3,8 +3,7 @@ package com.kevin.aeas.operation.db.mybatis.inter;
 import com.kevin.aeas.object.TeacherHoliday;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public interface MyBatisTeacherHoliday {
 
     public List<TeacherHoliday> getByTeacherId(int teacherId);
 
-    public TeacherHoliday getByTeacherAndDate(@Param("teacherId")int teacherId,@Param("adjustDate") String date);
+    public TeacherHoliday getByTeacherAndDate(@Param("teacherId")int teacherId,@Param("adjustDate") Date date);
 
     public List<TeacherHoliday> getAll();
 

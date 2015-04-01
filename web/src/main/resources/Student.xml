@@ -33,18 +33,18 @@
     </select>
 
     <select id="getAlive"  resultMap="ListStudent">
-        select * from aeas_student where isalive =true
+        select * from aeas_student where isalive =1
     </select>
 
     <select id="getNotAlive"  resultMap="ListStudent">
-        select * from aeas_student where isalive =false
+        select * from aeas_student where isalive =0
     </select>
 
     <select id="getByTeacherId" parameterType="int" resultMap="ListStudent">
         select * from aeas_student where teacherid =#{teacherId}
     </select>
 
-    <insert id="add" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="Student">
         insert into aeas_student(name,shortname,grade,testscore,targetscore,examinedate,examineplace,teacherid,description)
         values(#{name}, #{shortName}, #{grade}, #{testScore}, #{targetScore}, #{examineDate}, #{examinePlace}, #{teacherId}, #{description})
     </insert>
@@ -58,7 +58,7 @@
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_student where id =#{id};
+        delete from aeas_student where id =#{id}
     </delete>
 
     <update id="retire" parameterType="int">

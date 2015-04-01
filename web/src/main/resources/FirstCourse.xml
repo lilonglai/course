@@ -14,7 +14,13 @@
         select * from aeas_firstcourse where id=#{id}
     </select>
 
+    <!--
     <select id="getByGrade" parameterType="int" resultMap="ListFirstCourse">
+        select * from aeas_firstcourse where grade =#{grade}
+    </select>
+    -->
+
+    <select id="getByGrade" parameterType="int" resultType="FirstCourse">
         select * from aeas_firstcourse where grade =#{grade}
     </select>
 
@@ -22,7 +28,7 @@
         select * from aeas_firstcourse
     </select>
 
-    <insert id="add" parameterType="FirstCourse" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="FirstCourse">
         insert into aeas_firstcourse(grade,name,shortname,description)
                values(#{grade}, #{name}, #{shortName}, #{description})
     </insert>
@@ -34,6 +40,6 @@
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_firstcourse where id =#{id};
+        delete from aeas_firstcourse where id =#{id}
     </delete>
 </mapper>

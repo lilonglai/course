@@ -29,7 +29,7 @@
         select * from aeas_secondcourse
     </select>
 
-    <insert id="add" parameterType="SecondCourse" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="SecondCourse">
         insert into aeas_secondcourse(name,shortname,firstcourseid,description)
         values(#{name}, #{shortName}, #{firstCourseId} ,#{description})
     </insert>
@@ -41,6 +41,6 @@
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_secondcourse where id =#{id};
+        delete from aeas_secondcourse where id =#{id}
     </delete>
 </mapper>

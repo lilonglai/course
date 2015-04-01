@@ -16,7 +16,7 @@ public  class TeacherOperationTest extends TestCase{
 
 	
 	public void testGetByName(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+        MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
 		Teacher teacher = operation.getByName("test");
 	}
 	
@@ -27,7 +27,7 @@ public  class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testGetAll(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+        MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
 		List<Teacher> list = operation.getAll();
 	}
 	
@@ -41,7 +41,7 @@ public  class TeacherOperationTest extends TestCase{
 		List<Teacher> list = operation.getNotAlive();
 	}
 	
-	public void testGetIdByObject(){
+	public void testGetByCondition(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
