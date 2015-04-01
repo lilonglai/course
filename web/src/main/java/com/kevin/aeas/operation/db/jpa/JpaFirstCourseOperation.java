@@ -1,16 +1,16 @@
 package com.kevin.aeas.operation.db.jpa;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
+import com.kevin.aeas.operation.db.IFirstCourseOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.Query;
+import java.util.List;
 
-public class JpaFirstCourseOperation extends JpaBasicOperation {
+
+public class JpaFirstCourseOperation extends JpaBasicOperation<FirstCourse> implements IFirstCourseOperation{
 	public JpaFirstCourseOperation(){		
 		if(ConfigurationManager.getInstance().isMySql()){
 			setActualClass(MySqlFirstCourse.class);
@@ -20,11 +20,11 @@ public class JpaFirstCourseOperation extends JpaBasicOperation {
 		}
 	}
 	
-	public List getByGrade(int grade){
+	public List<? extends FirstCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select c from " + getActualClass().getSimpleName() + " c where c.grade=:grade");
 		q.setParameter("grade", grade);
-		List<OracleFirstCourse> list = q.getResultList();		
-		return list;		
+        List<? extends FirstCourse> list = q.getResultList();
+		return list;
 	}		
 	
 	protected  Object changeToJpa(Object t){

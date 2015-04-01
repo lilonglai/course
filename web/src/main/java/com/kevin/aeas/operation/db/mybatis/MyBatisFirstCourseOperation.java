@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.FirstCourse;
+import com.kevin.aeas.operation.db.IFirstCourseOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisFirstCourse;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFirstCourse> {
+public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFirstCourse> implements IFirstCourseOperation{
 
     public MyBatisFirstCourseOperation(){
         super(MyBatisFirstCourse.class);
@@ -25,7 +26,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFir
         return firstCourse;
 	}
 
-	public List<FirstCourse> getByGrade(int grade) {
+	public List<? extends FirstCourse> getByGrade(int grade) {
 		List<FirstCourse> list = null;
         SqlSession session = null;
         try {
@@ -40,7 +41,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFir
 
 	}
 
-	public List<FirstCourse> getAll() {
+	public List<? extends FirstCourse> getAll() {
         List<FirstCourse> list = null;
         SqlSession session = null;
         try {

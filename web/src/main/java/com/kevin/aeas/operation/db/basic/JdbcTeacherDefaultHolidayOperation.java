@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.TeacherDefaultHoliday;
+import com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.TeacherDefaultHoliday;
-
-public class DbTeacherDefaultHolidayOperation extends DbBaseOperation<TeacherDefaultHoliday>{
+public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<TeacherDefaultHoliday> implements ITeacherDefaultHolidayOperation{
 	public TeacherDefaultHoliday get(int key){
 		String sql = "select * from " + getTableName() + " where id = " + key;
 		TeacherDefaultHoliday teacherDefaultHoliday = null;
@@ -51,7 +52,7 @@ public class DbTeacherDefaultHolidayOperation extends DbBaseOperation<TeacherDef
 		return teacherDefaultHoliday;		
 	}
 	
-	public List<TeacherDefaultHoliday> getAll(){
+	public List<? extends TeacherDefaultHoliday> getAll(){
 		String sql = "select * from " + getTableName();
 		List<TeacherDefaultHoliday> list = null;
 		try {

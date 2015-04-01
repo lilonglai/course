@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.operation.db.ITeacherOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacher;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher> {
+public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher> implements ITeacherOperation{
     public MyBatisTeacherOperation(){
         super(MyBatisTeacher.class);
     }
@@ -52,7 +53,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
 		return teacher;		
 	}
 	
-	public List<Teacher> getAll(){
+	public List<? extends Teacher> getAll(){
 		List<Teacher> list = null;
         SqlSession session = null;
         try {
@@ -65,7 +66,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
 		return list;		
 	}
 	
-	public List<Teacher> getAlive(){
+	public List<? extends Teacher> getAlive(){
         List<Teacher> list = null;
         SqlSession session = null;
         try {
@@ -78,7 +79,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
         return list;
 	}
 
-	public List<Teacher> getNotAlive(){
+	public List<? extends Teacher> getNotAlive(){
         List<Teacher> list = null;
         SqlSession session = null;
         try {

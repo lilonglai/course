@@ -1,9 +1,7 @@
 package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.operation.db.basic.DbStudentOperation;
 import com.kevin.aeas.operation.db.mybatis.MyBatisStudentOperation;
-import com.kevin.aeas.test.db.utils.DbUtils;
 import junit.framework.TestCase;
 
 import java.sql.Date;

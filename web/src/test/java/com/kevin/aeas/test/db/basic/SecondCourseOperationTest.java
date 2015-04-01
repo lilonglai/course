@@ -3,25 +3,25 @@ package com.kevin.aeas.test.db.basic;
 
 import java.util.List;
 
+import com.kevin.aeas.operation.db.basic.JdbcSecondCourseOperation;
 import junit.framework.TestCase;
 
 import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.operation.db.basic.DbSecondCourseOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
 
 public abstract class SecondCourseOperationTest extends TestCase{
 	public void tetGet(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		SecondCourse secondCourse = operation.get(1);
 	}
 	
 	public void testGetByFirstCourseId(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		List<SecondCourse> list = operation.getByFirstCourseId(1);
 	}
 	
 	public void testGetByGrade(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		List<SecondCourse> list = operation.getByGrade(1);
 		
 		list = operation.getByGrade(2);
@@ -30,13 +30,13 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	}
 	
 	public void testGetAll(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		List<SecondCourse> list = operation.getAll();
 	}
 	
 	
 	public void testAdd(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		SecondCourse secondCourse = new SecondCourse();
 		
 		secondCourse.setName("test");
@@ -47,7 +47,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	}
 	
 	public void testUpdate(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		List<SecondCourse> list = operation.getAll();
 		for(SecondCourse secondCourse: list){
 			if(secondCourse.getName().equals("test")){
@@ -60,7 +60,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	
 	public void testDelete(){
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		List<SecondCourse> list = operation.getAll();
 		for(SecondCourse secondCourse: list){
 			if(secondCourse.getName().equals("test")){

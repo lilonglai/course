@@ -1,4 +1,17 @@
 package com.kevin.aeas.excel;
+
+import com.kevin.aeas.object.*;
+import com.kevin.aeas.operation.db.*;
+import com.kevin.aeas.utils.GradeHelp;
+import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
+import jxl.format.Colour;
+import jxl.format.VerticalAlignment;
+import jxl.write.*;
+import jxl.write.biff.RowsExceededException;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -7,32 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-
-import jxl.Workbook;
-import jxl.format.Alignment;
-import jxl.format.Border;
-import jxl.format.BorderLineStyle;
-import jxl.format.Colour;
-import jxl.format.VerticalAlignment;
-import jxl.write.Label;
-import jxl.write.WritableCellFormat;
-import jxl.write.WritableFont;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-
-import com.kevin.aeas.object.FirstCourse;
-import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.object.Student;
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.FirstCourseOperation;
-import com.kevin.aeas.operation.db.ScheduleOperation;
-import com.kevin.aeas.operation.db.SecondCourseOperation;
-import com.kevin.aeas.operation.db.StudentOperation;
-import com.kevin.aeas.operation.db.TeacherOperation;
-import com.kevin.aeas.utils.GradeHelp;
 
 public class GenerateStudentCourse {
 
@@ -60,16 +47,16 @@ public class GenerateStudentCourse {
 	
 	public static HashMap<String, Colour> colourMap = new HashMap<String, Colour>();
 	static {
-		colourMap.put("¿ÚÓï", SPEAK_COLOUR);
-		colourMap.put("ÌýÁ¦", LISTEN_COLOUR);
-		colourMap.put("ÔÄ¶Á", READ_COLOUR);
-		colourMap.put("Ð´×÷", WRITE_COLOUR);
-		colourMap.put("´Ê»ã", VOCABULARY_COLOUR);
-		colourMap.put("ÊýÑ§ºÍÂß¼­", MATH_COLOUR);
-		colourMap.put("ÖÕÄ£", Colour.WHITE);
-		colourMap.put("³å´Ì", Colour.WHITE);
-		colourMap.put("Óï·¨", Colour.WHITE);
-		colourMap.put("°àÖ÷ÈÎ²¹¿Î", Colour.WHITE);
+		colourMap.put("ï¿½ï¿½ï¿½ï¿½", SPEAK_COLOUR);
+		colourMap.put("ï¿½ï¿½ï¿½ï¿½", LISTEN_COLOUR);
+		colourMap.put("ï¿½Ä¶ï¿½", READ_COLOUR);
+		colourMap.put("Ð´ï¿½ï¿½", WRITE_COLOUR);
+		colourMap.put("ï¿½Ê»ï¿½", VOCABULARY_COLOUR);
+		colourMap.put("ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ß¼ï¿½", MATH_COLOUR);
+		colourMap.put("ï¿½ï¿½Ä£", Colour.WHITE);
+		colourMap.put("ï¿½ï¿½ï¿½", Colour.WHITE);
+		colourMap.put("ï¿½ï·¨", Colour.WHITE);
+		colourMap.put("ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½", Colour.WHITE);
 	}
 	
 	
@@ -112,18 +99,18 @@ public class GenerateStudentCourse {
 		try {			
 			TeacherOperation teacherOperation = new TeacherOperation();
 			Teacher teacher = teacherOperation.get(student.getTeacherId());
-			String studentInfo = "Ñ§ÉúÐÕÃû:" + student.getName()
-					           + "    ÈËÊý:1"
-					           + "    Äê¼¶:Level " + GradeHelp.getStringByNumber(student.getGrade())
-					           + "    ²âÊÔÔ­³É¼¨:" + student.getTestScore()
-					           + "    ¿¼ÊÔÊ±¼ä:" + student.getExamineDate() + "(" + student.getExaminePlace() + ")";
+			String studentInfo = "Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + student.getName()
+					           + "    ï¿½ï¿½ï¿½ï¿½:1"
+					           + "    ï¿½ê¼¶:Level " + GradeHelp.getStringByNumber(student.getGrade())
+					           + "    ï¿½ï¿½ï¿½ï¿½Ô­ï¿½É¼ï¿½:" + student.getTestScore()
+					           + "    ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½:" + student.getExamineDate() + "(" + student.getExaminePlace() + ")";
 			if(teacher != null){
-				studentInfo += "    °àÖ÷ÈÎ:" + teacher.getShortName()+ ":" + teacher.getPhone();
+				studentInfo += "    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + teacher.getShortName()+ ":" + teacher.getPhone();
 			}else{
-				studentInfo += "    °àÖ÷ÈÎ:" + "´ý¶¨";
+				studentInfo += "    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + "ï¿½ï¿½";
 			}
 			
-			WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"),
+			WritableFont font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"),
 					10, WritableFont.BOLD);
 			WritableCellFormat format = new WritableCellFormat(font);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -149,7 +136,7 @@ public class GenerateStudentCourse {
 					WritableFont.BOLD, true);
 			font.setColour(Colour.RED);
 			WritableCellFormat format = new WritableCellFormat(font);
-			String stringHours = "AEAS" + totalHours + "¿ÎÊ±°à";
+			String stringHours = "AEAS" + totalHours + "ï¿½ï¿½Ê±ï¿½ï¿½";
 			Label head = new Label(0, 1, stringHours, format);
 			sheet.addCell(head);
 			sheet.mergeCells(0, 1, 16, 1);
@@ -163,18 +150,18 @@ public class GenerateStudentCourse {
 
 	private void generateTarget(WritableSheet sheet) {
 		try {
-			WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10,WritableFont.BOLD);
+			WritableFont font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10,WritableFont.BOLD);
 			WritableCellFormat format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
 			Label head = new Label(
 					0,
 					2,
-					"Ä¿±ê·ÖÊý:",
+					"Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½:",
 					format);
 			sheet.addCell(head);
 			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10,WritableFont.BOLD);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10,WritableFont.BOLD);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.LEFT);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -227,7 +214,7 @@ public class GenerateStudentCourse {
 			Schedule[] scheduleArray = entry.getValue();
 			dayHours = 0;
 			// 4 row information : Day 1(9-8)			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10, WritableFont.BOLD);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -249,7 +236,7 @@ public class GenerateStudentCourse {
 			sheet.addCell(head);
 			sheet.mergeCells(columnIndex, 4, columnIndex, 5);
 			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -259,7 +246,7 @@ public class GenerateStudentCourse {
 				SecondCourse secondCourse = secondCourseOperation.get(scheduleArray[0].getCourseId());
 				Teacher teacher = teacherOperation.get(scheduleArray[0].getTeacherId());
 				if(secondCourse == null){
-					stringValue = "´ý¶¨" + "(" + teacher.getShortName() + ")";
+					stringValue = "ï¿½ï¿½" + "(" + teacher.getShortName() + ")";
 				}
 				else {
 				    stringValue = secondCourse.getName() + "(" + teacher.getShortName() + ")";
@@ -268,7 +255,7 @@ public class GenerateStudentCourse {
 				dayHours += 2.5;
 				
 			}else{
-				stringValue = "ÐÝÏ¢";
+				stringValue = "ï¿½ï¿½Ï¢";
 			}
 			head = new Label(columnIndex+1, 4, stringValue, format);
 			sheet.addCell(head);
@@ -283,12 +270,12 @@ public class GenerateStudentCourse {
 			head = new Label(columnIndex, 6, stringValue, format);
 			sheet.addCell(head);
 			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10, WritableFont.BOLD);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
 			format.setBorder(Border.ALL, BorderLineStyle.THIN);
-			stringValue = "ÐÝÏ¢";
+			stringValue = "ï¿½ï¿½Ï¢";
 			head = new Label(columnIndex+1, 6, stringValue, format);
 			sheet.addCell(head);
 			
@@ -301,7 +288,7 @@ public class GenerateStudentCourse {
 			head = new Label(columnIndex, 7, stringValue, format);
 			sheet.addCell(head);
 			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -311,7 +298,7 @@ public class GenerateStudentCourse {
 				SecondCourse secondCourse = secondCourseOperation.get(scheduleArray[1].getCourseId());
 				Teacher teacher = teacherOperation.get(scheduleArray[1].getTeacherId());
 				if(secondCourse == null){
-					stringValue = "´ý¶¨" + "(" + teacher.getShortName() + ")";
+					stringValue = "ï¿½ï¿½" + "(" + teacher.getShortName() + ")";
 				}
 				else{
 				    stringValue = secondCourse.getName() + "(" + teacher.getShortName() + ")";
@@ -320,7 +307,7 @@ public class GenerateStudentCourse {
 				dayHours += 2;
 				
 			}else{
-				stringValue = "ÐÝÏ¢";
+				stringValue = "ï¿½ï¿½Ï¢";
 			}
 			head = new Label(columnIndex+1, 7, stringValue, format);
 			sheet.addCell(head);
@@ -334,7 +321,7 @@ public class GenerateStudentCourse {
 			head = new Label(columnIndex, 8, stringValue, format);
 			sheet.addCell(head);
 			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -344,7 +331,7 @@ public class GenerateStudentCourse {
 				SecondCourse secondCourse = secondCourseOperation.get(scheduleArray[2].getCourseId());
 				Teacher teacher = teacherOperation.get(scheduleArray[2].getTeacherId());
 				if(secondCourse == null){
-					stringValue = "´ý¶¨" + "(" + teacher.getShortName() + ")";
+					stringValue = "ï¿½ï¿½" + "(" + teacher.getShortName() + ")";
 				}
 				else{
 				    stringValue = secondCourse.getName() + "(" + teacher.getShortName() + ")";
@@ -353,7 +340,7 @@ public class GenerateStudentCourse {
 				dayHours += 2;
 				
 			}else{
-				stringValue = "ÐÝÏ¢";
+				stringValue = "ï¿½ï¿½Ï¢";
 			}
 			head = new Label(columnIndex+1, 8, stringValue, format);
 			sheet.addCell(head);
@@ -367,17 +354,17 @@ public class GenerateStudentCourse {
 			head = new Label(columnIndex, 9, stringValue, format);
 			sheet.addCell(head);
 			
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10, WritableFont.BOLD);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
 			format.setBorder(Border.ALL, BorderLineStyle.THIN);
-			stringValue = "ÐÝÏ¢";
+			stringValue = "ï¿½ï¿½Ï¢";
 			head = new Label(columnIndex+1, 9, stringValue, format);
 			sheet.addCell(head);
 			
 			// 11 row hour calculation
-			font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);
+			font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10, WritableFont.BOLD);
 			format = new WritableCellFormat(font);
 			format.setAlignment(Alignment.CENTRE);
 			format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -391,7 +378,7 @@ public class GenerateStudentCourse {
 		}
 		
 		//total hours
-		font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);
+		font = new WritableFont(WritableFont.createFont("ï¿½ï¿½ï¿½ï¿½"), 10, WritableFont.BOLD);
 		format = new WritableCellFormat(font);
 		format.setAlignment(Alignment.CENTRE);
 		format.setVerticalAlignment(VerticalAlignment.CENTRE);
@@ -411,17 +398,17 @@ public class GenerateStudentCourse {
 
 			jxl.write.Number note1 = new jxl.write.Number(1, 11, 1, format);
 			Label noteMessage1 = new Label(2, 11,
-					"ÒÔÉÏÊÇÑ§Éú°²ÅÅµÄ¸öÐÔ»¯×÷Ï¢±í£¬°üº¬¶ÌÆÚÅàÑµµÄËùÓÐ¿Î³ÌÊ±¼ä°²ÅÅ¡£");
+					"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ÅµÄ¸ï¿½ï¿½Ô»ï¿½ï¿½ï¿½Ï¢ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½ï¿½ï¿½Ð¿Î³ï¿½Ê±ï¿½ä°²ï¿½Å¡ï¿½");
 			sheet.addCell(note1);
 			sheet.addCell(noteMessage1);
 
 			jxl.write.Number note2 = new jxl.write.Number(1, 12, 2, format);
-			Label noteMessage2 = new Label(2, 12, "²ÎÓëÒÔÉÏ¿ÎÊ±Ìá¹©Îç·¹£¬±ê×¼15Ôª/²Í¡£");
+			Label noteMessage2 = new Label(2, 12, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½Ê±ï¿½á¹©ï¿½ç·¹ï¿½ï¿½ï¿½ï¿½×¼15Ôª/ï¿½Í¡ï¿½");
 			sheet.addCell(note2);
 			sheet.addCell(noteMessage2);
 
 			jxl.write.Number note3 = new jxl.write.Number(1, 13, 3, format);
-			Label noteMessage3 = new Label(2, 13, "Ìá¹©Ãâ·ÑËÍ¿¼·þÎñ£¨ÉÏº£¿¼³¡¿¼Éú£©¡£");
+			Label noteMessage3 = new Label(2, 13, "ï¿½á¹©ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			sheet.addCell(note3);
 			sheet.addCell(noteMessage3);
 
@@ -445,7 +432,7 @@ public class GenerateStudentCourse {
 			long currentTime = System.currentTimeMillis();
 			String filePath = "c:/btm/aeas" + "/" + "temp/" + currentTime + ".xls";
 			WritableWorkbook book = Workbook.createWorkbook(new File(filePath));
-			WritableSheet sheet = book.createSheet("µÚÒ»Ò³", 0);
+			WritableSheet sheet = book.createSheet("ï¿½ï¿½Ò»Ò³", 0);
 
 			generateRowSize(sheet);
 			generateColumnSize(sheet);
@@ -473,7 +460,7 @@ public class GenerateStudentCourse {
 	public void exportCourse(OutputStream servletOutputStream){
 		try {			
 			WritableWorkbook book = Workbook.createWorkbook(servletOutputStream);
-			WritableSheet sheet = book.createSheet("µÚÒ»Ò³", 0);
+			WritableSheet sheet = book.createSheet("ï¿½ï¿½Ò»Ò³", 0);
 
 			generateRowSize(sheet);
 			generateColumnSize(sheet);

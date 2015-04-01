@@ -1,17 +1,17 @@
 package com.kevin.aeas.operation.db.jpa;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.mysql.MySqlTeacherAbility;
 import com.kevin.aeas.object.oracle.OracleFirstCourse;
 import com.kevin.aeas.object.oracle.OracleTeacherAbility;
+import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-public class JpaTeacherAbilityOperation extends JpaBasicOperation{
+import javax.persistence.Query;
+import java.util.List;
+
+public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility> implements ITeacherAbilityOperation{
 	private Class firstCourseClass;
 	public JpaTeacherAbilityOperation(){
 		if(ConfigurationManager.getInstance().isMySql()){
@@ -24,17 +24,17 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation{
 		}
 	}
 	
-	public List getByTeacherId(int teacherId) {		
+	public List<? extends TeacherAbility> getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-		List list = q.getResultList();
+        List<? extends TeacherAbility> list = q.getResultList();
 		return list;
 	}
 	
-	public List getByCourseId(int courseId) {
+	public List<? extends TeacherAbility> getByCourseId(int courseId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.courseId=:courseId");
 		q.setParameter("courseId", courseId);
-		List list = q.getResultList();
+        List<? extends TeacherAbility> list = q.getResultList();
 		return list;
 	}
 	

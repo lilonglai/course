@@ -1,115 +1,66 @@
 package com.kevin.aeas.operation.db;
 
+import com.kevin.aeas.object.Schedule;
+import com.kevin.aeas.operation.db.basic.JdbcScheduleOperation;
+import com.kevin.aeas.operation.db.jpa.JpaScheduleOperation;
+import com.kevin.aeas.operation.db.mybatis.MyBatisScheduleOperation;
+import com.kevin.aeas.utils.ConfigurationManager;
+
 import java.sql.Date;
 import java.util.List;
 
-import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.operation.db.basic.DbOperationManager;
-import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
-import com.kevin.aeas.utils.ConfigurationManager;
-
 public class ScheduleOperation {
+
+    private IScheduleOperation scheduleDao;
+    public ScheduleOperation(){
+        if(ConfigurationManager.getInstance().isJpa()){
+            scheduleDao = new JpaScheduleOperation();
+        }
+        else if(ConfigurationManager.getInstance().isMyBatis()){
+            scheduleDao = new MyBatisScheduleOperation();
+        }
+        else{
+            scheduleDao = new JdbcScheduleOperation();
+        }
+    }
+
 	public Schedule get(int key){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (Schedule)JpaOperationManager.getInstance().getScheduleOperation().get(key);
-		}
-		else{
-			return DbOperationManager.getInstance().getScheduleOperation().get(key);
-		}
-		
+        return scheduleDao.get(key);
 	}
 	
 	public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (Schedule)JpaOperationManager.getInstance().getScheduleOperation().getByStudentIdOnDateAndTime(studentId, onDate, onTime);
-		}
-		else{
-			return DbOperationManager.getInstance().getScheduleOperation().getByStudentIdOnDateAndTime(studentId, onDate, onTime);
-		}
-		
+		return scheduleDao.getByStudentIdOnDateAndTime(studentId, onDate, onTime);
 	}
 	
-	public List<Schedule> getByStudentId(int studentId){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
-		}
-		else{
-			return DbOperationManager.getInstance().getScheduleOperation().getByStudentId(studentId);
-		}
-		
+	public List<? extends Schedule> getByStudentId(int studentId){
+        return scheduleDao.getByStudentId(studentId);
 	}
 	
-	public List<Schedule> getByTeacherId(int teacherId){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
-		}
-		else{
-			return DbOperationManager.getInstance().getScheduleOperation().getByTeacherId(teacherId);
-		}
-		
+	public List<? extends Schedule> getByTeacherId(int teacherId){
+        return scheduleDao.getByTeacherId(teacherId);
 	}
 	
 	
-	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
-		}
-		else{
-			return DbOperationManager.getInstance().getScheduleOperation().getByDateAndTime(onDate, onTime);
-		}
-		
+	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
+        return scheduleDao.getByDateAndTime(onDate, onTime);
 	}
 	
-	public List<Schedule> getAll(){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Schedule>)JpaOperationManager.getInstance().getScheduleOperation().getAll();
-		}
-		else{
-			return DbOperationManager.getInstance().getScheduleOperation().getAll();
-		}
-		
+	public List<? extends Schedule> getAll(){
+        return scheduleDao.getAll();
 	}
 	
 	
 	public void add(Schedule schedule){
-		if(ConfigurationManager.getInstance().isJpa()){
-			 JpaOperationManager.getInstance().getScheduleOperation().add(schedule);
-		}
-		else{
-			 DbOperationManager.getInstance().getScheduleOperation().add(schedule);
-		}
+        scheduleDao.add(schedule);
 	}
 	
 	public void update(Schedule schedule){
-		if(ConfigurationManager.getInstance().isJpa()){
-			 JpaOperationManager.getInstance().getScheduleOperation().update(schedule);
-		}
-		else{
-			 DbOperationManager.getInstance().getScheduleOperation().update(schedule);
-		}
+        scheduleDao.update(schedule);
 	}
 	
 	
 	public void delete(int key){
-		if(ConfigurationManager.getInstance().isJpa()){
-			 JpaOperationManager.getInstance().getScheduleOperation().delete(key);
-		}
-		else{
-			 DbOperationManager.getInstance().getScheduleOperation().delete(key);
-		}
-	}
-	
-	public static void main(String[] args) {
-		ScheduleOperation operation = new ScheduleOperation();
-		Schedule schedule = new Schedule();
-		schedule.setOnDate(Date.valueOf("2014-10-2"));
-		schedule.setId(10);
-		schedule.setOnTime(2);
-		schedule.setStudentId(3);
-		schedule.setTeacherId(3);
-		schedule.setAddition("5-1");
-		operation.update(schedule);
-				
+        scheduleDao.delete(key);
 	}
 
 }

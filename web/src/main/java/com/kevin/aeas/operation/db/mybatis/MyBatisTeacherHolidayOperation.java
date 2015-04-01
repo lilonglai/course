@@ -1,13 +1,14 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.TeacherHoliday;
+import com.kevin.aeas.operation.db.ITeacherHolidayOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday;
 import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Date;
 import java.util.List;
 
-public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatisTeacherHoliday> {
+public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatisTeacherHoliday> implements ITeacherHolidayOperation{
     public MyBatisTeacherHolidayOperation(){
         super(MyBatisTeacherHoliday.class);
     }
@@ -25,7 +26,7 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
 		return teacherHoliday;
 	}
 	
-	public List<TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<? extends TeacherHoliday> getByTeacherId(int teacherId) {
 		List<TeacherHoliday> list = null;
         SqlSession session = null;
         try {
@@ -51,7 +52,7 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
 		return teacherHoliday;
 	}
 
-	public List<TeacherHoliday> getAll() {
+	public List<? extends TeacherHoliday> getAll() {
 		List<TeacherHoliday> list = null;
         SqlSession session = null;
         try {

@@ -1,91 +1,56 @@
 package com.kevin.aeas.operation.db;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.operation.db.basic.DbOperationManager;
-import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.operation.db.basic.JdbcSecondCourseOperation;
+import com.kevin.aeas.operation.db.jpa.JpaSecondCourseOperation;
+import com.kevin.aeas.operation.db.mybatis.MyBatisSecondCourseOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import java.util.List;
+
 public class SecondCourseOperation {
+    private ISecondCourseOperation secondCourseDao;
+
+    public SecondCourseOperation(){
+        if(ConfigurationManager.getInstance().isJpa()){
+            secondCourseDao = new JpaSecondCourseOperation();
+        }
+        else if(ConfigurationManager.getInstance().isMyBatis()){
+            secondCourseDao = new MyBatisSecondCourseOperation();
+        }
+        else{
+            secondCourseDao = new JdbcSecondCourseOperation();
+        }
+    }
+
 	public SecondCourse get(int key){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (SecondCourse)JpaOperationManager.getInstance().getSecondCourseOperation().get(key);
-		}
-		else{
-			return DbOperationManager.getInstance().getSecondCourseOperation().get(key);
-		}
-		
+        return secondCourseDao.get(key);
 	}
 	
-	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
-		}
-		else{
-			return DbOperationManager.getInstance().getSecondCourseOperation().getByFirstCourseId(firstCourseId);
-		}
-		
+	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
+        return secondCourseDao.getByFirstCourseId(firstCourseId);
 	}
 	
-	public List<SecondCourse> getByGrade(int grade){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
-		}
-		else{
-			return DbOperationManager.getInstance().getSecondCourseOperation().getByGrade(grade);
-		}
-		
+	public List<? extends SecondCourse> getByGrade(int grade){
+        return secondCourseDao.getByGrade(grade);
 	}
 	
-	public List<SecondCourse> getAll(){
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (ArrayList<SecondCourse>)JpaOperationManager.getInstance().getSecondCourseOperation().getAll();
-		}
-		else{
-			return DbOperationManager.getInstance().getSecondCourseOperation().getAll();
-		}
-		
+	public List<? extends SecondCourse> getAll(){
+        return secondCourseDao.getAll();
 	}
 	
 	
 	public void add(SecondCourse secondCourse){
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getSecondCourseOperation().add(secondCourse);
-		}
-		else{
-			DbOperationManager.getInstance().getSecondCourseOperation().add(secondCourse);
-		}
-		
+        secondCourseDao.add(secondCourse);
 	}
 	
 	public void update(SecondCourse secondCourse){
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getSecondCourseOperation().update(secondCourse);
-		}
-		else{
-			DbOperationManager.getInstance().getSecondCourseOperation().update(secondCourse);
-		}
+        secondCourseDao.update(secondCourse);
 	}
 	
 	
 	public void delete(int key){
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getSecondCourseOperation().delete(key);
-		}
-		else{
-			DbOperationManager.getInstance().getSecondCourseOperation().delete(key);
-		}
-	}
-	
-	public static void main(String[] args) {
-		SecondCourseOperation operation = new SecondCourseOperation();
-		System.out.println(operation.getByFirstCourseId(1));
-		
-		
-		
-		
+        secondCourseDao.delete(key);
 	}
 
 }

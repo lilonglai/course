@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.Student;
+import com.kevin.aeas.operation.db.IStudentOperation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.Student;
-
-public class DbStudentOperation extends DbBaseOperation<Student>{
+public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements IStudentOperation{
 	public Student get(int key) {
 		String sql = "select * from " + getTableName() + " where id = " + key;
 		Student student = null;
@@ -54,7 +55,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 	
 
-	public List<Student> getByGrade(int grade) {
+	public List<? extends Student> getByGrade(int grade) {
 		String sql = "select * from " + getTableName() + " where grade = " + grade;
 		List<Student> list = null;
 		try {
@@ -66,7 +67,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 		return list;
 	}
 
-	public List<Student> getAll() {
+	public List<? extends Student> getAll() {
 		String sql = "select * from " + getTableName();
 		List<Student> list = null;
 		try {
@@ -78,7 +79,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 		return list;
 	}
 	
-	public List<Student> getAlive() {
+	public List<? extends Student> getAlive() {
 		String sql = "select * from " + getTableName() + "" + " where isalive=true";
 		List<Student> list = null;
 		try {
@@ -90,7 +91,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 		return list;
 	}
 	
-	public List<Student> getNotAlive() {
+	public List<? extends Student> getNotAlive() {
 		String sql = "select * from " + getTableName() + "" + " where isalive=false";
 		List<Student> list = null;
 		try {
@@ -102,7 +103,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 		return list;
 	}
 
-	public List<Student> getByTeacherId(int teacherId) {
+	public List<? extends Student> getByTeacherId(int teacherId) {
 		String sql = "select * from " + getTableName() + " where teacherid = "
 				+ teacherId;
 		List<Student> list = null;
@@ -211,7 +212,7 @@ public class DbStudentOperation extends DbBaseOperation<Student>{
 	}
 
 	public static void main(String[] args) {
-		DbStudentOperation studentOperation = new DbStudentOperation();
+		JdbcStudentOperation studentOperation = new JdbcStudentOperation();
 		System.out.println(studentOperation.getAll());
 		
 	}

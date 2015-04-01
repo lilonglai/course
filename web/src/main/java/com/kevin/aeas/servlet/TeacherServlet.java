@@ -1,13 +1,5 @@
 package com.kevin.aeas.servlet;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacher;
@@ -15,8 +7,13 @@ import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.db.TeacherOperation;
-import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
-import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * this servlet is used to operate teacher user can add/delete/retire teacher
@@ -27,12 +24,12 @@ import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
 public class TeacherServlet extends HttpServlet {
 
 	private void delete(int id) {		
-		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
 		teacherOperation.delete(id);
 	}
 
 	private void retire(int id) {
-		JpaTeacherOperation teacherOperation = JpaOperationManager.getInstance().getTeacherOperation();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
 		teacherOperation.retire(id);
 	}
 

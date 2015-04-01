@@ -1,10 +1,10 @@
 package com.kevin.aeas.utils;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class C3Pool implements IGetConnection {
 	private   ComboPooledDataSource   dataSource;

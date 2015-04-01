@@ -1,10 +1,7 @@
 package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.TeacherHoliday;
-import com.kevin.aeas.operation.db.basic.DbTeacherHolidayOperation;
 import com.kevin.aeas.operation.db.mybatis.MyBatisTeacherHolidayOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday;
-import com.kevin.aeas.test.db.utils.DbUtils;
 import junit.framework.TestCase;
 
 import java.sql.Date;

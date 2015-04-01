@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.TeacherAbility;
+import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherAbility;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatisTeacherAbility> {
+public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatisTeacherAbility> implements ITeacherAbilityOperation{
     public MyBatisTeacherAbilityOperation(){
         super(MyBatisTeacherAbility.class);
     }
@@ -24,7 +25,7 @@ public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatis
 		return teacherAbility;
 	}
 	
-	public List<TeacherAbility> getAll() {
+	public List<? extends TeacherAbility> getAll() {
 		List<TeacherAbility> list = null;
         SqlSession session = null;
         try {
@@ -37,7 +38,7 @@ public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatis
 		return list;
 	}
 	
-	public List<TeacherAbility> getByTeacherId(int teacherId) {
+	public List<? extends TeacherAbility> getByTeacherId(int teacherId) {
 		List<TeacherAbility> list = null;
         SqlSession session = null;
         try {
@@ -50,7 +51,7 @@ public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatis
 		return list;
 	}
 	
-	public List<TeacherAbility> getByCourseId(int courseId) {
+	public List<? extends TeacherAbility> getByCourseId(int courseId) {
         List<TeacherAbility> list = null;
         SqlSession session = null;
         try {

@@ -1,10 +1,10 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.utils.ConfigurationManager;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import com.kevin.aeas.utils.ConfigurationManager;
 
 public class EntityManangerUtil {
 	private static EntityManagerFactory entityManagerFactory;

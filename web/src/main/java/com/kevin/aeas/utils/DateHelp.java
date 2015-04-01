@@ -1,11 +1,11 @@
 package com.kevin.aeas.utils;
 
+import com.kevin.aeas.object.TeacherDefaultHoliday;
+import com.kevin.aeas.object.TeacherHoliday;
+
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
-
-import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.object.TeacherHoliday;
 
 public class DateHelp {
 	public static int getWeek(Calendar calendar) {
@@ -27,7 +27,7 @@ public class DateHelp {
 	}
 
 	public static boolean isHoliday(Calendar calendar,
-			TeacherDefaultHoliday teacherDefaultHoliday,List<TeacherHoliday> holidayList) {
+			TeacherDefaultHoliday teacherDefaultHoliday,List<? extends TeacherHoliday> holidayList) {
 		int week = getWeek(calendar);
 		boolean flag = false;
 		switch (week) {

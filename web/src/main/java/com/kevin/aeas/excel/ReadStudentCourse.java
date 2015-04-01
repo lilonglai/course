@@ -1,5 +1,15 @@
 package com.kevin.aeas.excel;
 
+import com.kevin.aeas.object.*;
+import com.kevin.aeas.operation.db.*;
+import com.kevin.aeas.utils.GradeHelp;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.format.CellFormat;
+import jxl.read.biff.BiffException;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -9,26 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.format.CellFormat;
-import jxl.read.biff.BiffException;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.kevin.aeas.object.FirstCourse;
-import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.object.Student;
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.FirstCourseOperation;
-import com.kevin.aeas.operation.db.ScheduleOperation;
-import com.kevin.aeas.operation.db.SecondCourseOperation;
-import com.kevin.aeas.operation.db.StudentOperation;
-import com.kevin.aeas.operation.db.TeacherOperation;
-import com.kevin.aeas.utils.GradeHelp;
 
 public class ReadStudentCourse {
 
@@ -53,38 +43,38 @@ public class ReadStudentCourse {
 	
 	static HashMap<String, String> keyWorldMap = new HashMap<String, String>();
 	static{
-		keyWorldMap.put("´Ê»ã", "´Ê»ã");
-		keyWorldMap.put("µ¥´Ê", "´Ê»ã");
-		keyWorldMap.put("V", "´Ê»ã");
+		keyWorldMap.put("ï¿½Ê»ï¿½", "ï¿½Ê»ï¿½");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½", "ï¿½Ê»ï¿½");
+		keyWorldMap.put("V", "ï¿½Ê»ï¿½");
 		
-		keyWorldMap.put("ÌýÁ¦", "ÌýÁ¦");
-		keyWorldMap.put("L", "ÌýÁ¦");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½");
+		keyWorldMap.put("L", "ï¿½ï¿½ï¿½ï¿½");
 		
-		keyWorldMap.put("¿ÚÓï", "¿ÚÓï");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½");
 		
-		keyWorldMap.put("ÔÄ¶Á", "ÔÄ¶Á");
-		keyWorldMap.put("R", "ÔÄ¶Á");
+		keyWorldMap.put("ï¿½Ä¶ï¿½", "ï¿½Ä¶ï¿½");
+		keyWorldMap.put("R", "ï¿½Ä¶ï¿½");
 		
-		keyWorldMap.put("Ð´×÷", "Ð´×÷");
-		keyWorldMap.put("W", "Ð´×÷");
+		keyWorldMap.put("Ð´ï¿½ï¿½", "Ð´ï¿½ï¿½");
+		keyWorldMap.put("W", "Ð´ï¿½ï¿½");
 		
-		keyWorldMap.put("ÊýÑ§ºÍÂß¼­", "ÊýÑ§ºÍÂß¼­");
-		keyWorldMap.put("Âß¼­", "ÊýÑ§ºÍÂß¼­");
-		keyWorldMap.put("ÊýÑ§", "ÊýÑ§ºÍÂß¼­");
-		keyWorldMap.put("M", "ÊýÑ§ºÍÂß¼­");
+		keyWorldMap.put("ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ß¼ï¿½", "ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ß¼ï¿½");
+		keyWorldMap.put("ï¿½ß¼ï¿½", "ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ß¼ï¿½");
+		keyWorldMap.put("ï¿½ï¿½Ñ§", "ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ß¼ï¿½");
+		keyWorldMap.put("M", "ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ß¼ï¿½");
 		
-		keyWorldMap.put("ÖÕÄ£", "ÖÕÄ£");
-		keyWorldMap.put("ÖÕ1", "ÖÕÄ£");
-		keyWorldMap.put("ÖÕ2", "ÖÕÄ£");
-		keyWorldMap.put("·ÖÎö", "ÖÕÄ£");
+		keyWorldMap.put("ï¿½ï¿½Ä£", "ï¿½ï¿½Ä£");
+		keyWorldMap.put("ï¿½ï¿½1", "ï¿½ï¿½Ä£");
+		keyWorldMap.put("ï¿½ï¿½2", "ï¿½ï¿½Ä£");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½Ä£");
 		
-		keyWorldMap.put("³å´Ì", "³å´Ì");
+		keyWorldMap.put("ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½");
 		
-		keyWorldMap.put("Óï·¨", "Óï·¨");
-		keyWorldMap.put("Òô±ê", "Óï·¨");
+		keyWorldMap.put("ï¿½ï·¨", "ï¿½ï·¨");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï·¨");
 		
-		keyWorldMap.put("°àÖ÷ÈÎ²¹¿Î", "°àÖ÷ÈÎ²¹¿Î");
-		keyWorldMap.put("°àÖ÷ÈÎ", "°àÖ÷ÈÎ²¹¿Î");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½");
+		keyWorldMap.put("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½");
 	}
 
 	public ReadStudentCourse(String filePath) {
@@ -94,20 +84,20 @@ public class ReadStudentCourse {
 	private void analyzeFirstRow(String rowString) {
 		String[] splits = rowString.split(" ");
 		for (int i = 0; i < splits.length; i++) {
-			String[] property = splits[i].split("[£º:]");
+			String[] property = splits[i].split("[ï¿½ï¿½:]");
 			if (property.length == 2) {
 				String propertyName = property[0];
-				if (propertyName.indexOf("Ñ§ÉúÐÕÃû") != -1) {
+				if (propertyName.indexOf("Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½") != -1) {
 					studentName = property[1];
-				} else if (propertyName.indexOf("ÈËÊý") != -1) {
+				} else if (propertyName.indexOf("ï¿½ï¿½ï¿½ï¿½") != -1) {
 					studentCount = property[1];
-				} else if (propertyName.indexOf("Äê¼¶") != -1) {
+				} else if (propertyName.indexOf("ï¿½ê¼¶") != -1) {
 					i++;
 					studentGrade = splits[i];
 
-				} else if (propertyName.indexOf("²âÊÔÔ­³É¼¨") != -1) {
+				} else if (propertyName.indexOf("ï¿½ï¿½ï¿½ï¿½Ô­ï¿½É¼ï¿½") != -1) {
 					studentTestScore = property[1];
-				} else if (propertyName.indexOf("¿¼ÊÔÊ±¼ä") != -1) {
+				} else if (propertyName.indexOf("ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½") != -1) {
 					int beginIndex = property[1].indexOf("(");
 					int endIndex = property[1].indexOf(")");
 					if(beginIndex == -1 || endIndex == -1){
@@ -118,9 +108,9 @@ public class ReadStudentCourse {
 					    studentExaminedate = property[1].substring(0, beginIndex);
 					    studentExaminePlace = property[1].substring(beginIndex + 1, endIndex);
 					}
-				} else if (propertyName.indexOf("°àÖ÷ÈÎ") != -1) {
+				} else if (propertyName.indexOf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½") != -1) {
 					int beginIndex = 0;
-					int endIndex = property[1].indexOf("ÀÏÊ¦");
+					int endIndex = property[1].indexOf("ï¿½ï¿½Ê¦");
 					if(endIndex >= 0){
 						masterName = property[1].substring(beginIndex, endIndex);
 						beginIndex = endIndex + 2;
@@ -138,7 +128,7 @@ public class ReadStudentCourse {
 					}
 				}
 			} else if (property.length == 3) {
-				int endIndex = property[1].indexOf("ÀÏÊ¦");
+				int endIndex = property[1].indexOf("ï¿½ï¿½Ê¦");
 				masterName = property[1].substring(0, endIndex);
 				masterPhone = property[2];
 
@@ -148,7 +138,7 @@ public class ReadStudentCourse {
 	}
 
 	private void analyzeSecondRow(String rowString) {
-		int endIndex = rowString.indexOf("¿ÎÊ±");
+		int endIndex = rowString.indexOf("ï¿½ï¿½Ê±");
 		//String strNumber = rowString.substring(4, endIndex);
 		//totalHours = Double.valueOf(strNumber);
 	}
@@ -159,7 +149,7 @@ public class ReadStudentCourse {
 		}else{
 			int index = rowString1.lastIndexOf(":");
 			if(index == -1){
-				index = rowString1.lastIndexOf("£º");
+				index = rowString1.lastIndexOf("ï¿½ï¿½");
 			}
 			if(index != -1){
 				studentTargetScore = rowString1.substring(index+1);
@@ -169,10 +159,10 @@ public class ReadStudentCourse {
 
 	private Date anaylyzeDate(String cellString) {
 		int beginIndex = cellString.indexOf("(");
-		int endIndex = cellString.indexOf("ÔÂ");
+		int endIndex = cellString.indexOf("ï¿½ï¿½");
 		String month = cellString.substring(beginIndex + 1, endIndex).trim();
 		beginIndex = endIndex + 1;
-		endIndex = cellString.indexOf("ÈÕ");
+		endIndex = cellString.indexOf("ï¿½ï¿½");
 		String day = cellString.substring(beginIndex, endIndex).trim();		
 		if(firstDate == null){
 			String firstYear;
@@ -210,7 +200,7 @@ public class ReadStudentCourse {
 			try{
 			    analyzeFirstRow(rowString);
 			}catch(Exception e){
-				System.out.println("Ñ§ÉúÐÅÏ¢ÓÐÎÊÌâ");
+				System.out.println("Ñ§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 
 			// second row value
@@ -236,7 +226,7 @@ public class ReadStudentCourse {
 				try{
 				    date = anaylyzeDate(dateString);
 				}catch(Exception e){
-					System.out.println("ÈÕÆÚÓÐÎÊÌâ");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					column += 2;
 					cell = sheet.getCell(column, 3);
 					dateString = cell.getContents();
@@ -297,7 +287,7 @@ public class ReadStudentCourse {
 				}
 				student.setTeacherId(teacher.getId());
 			}catch(Exception e){
-				System.out.println("½âÎöÑ§ÉúÐÅÏ¢´æÔÚÎÊÌâ" + studentName);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + studentName);
 			}
 			studentOperation.add(student);
 			student = studentOperation.getByName(studentName);
@@ -314,7 +304,7 @@ public class ReadStudentCourse {
 				}
 				student.setTeacherId(teacher.getId());
 			}catch(Exception e){
-				System.out.println("½âÎöÑ§ÉúÐÅÏ¢´æÔÚÎÊÌâ" + studentName);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + studentName);
 			}
 			studentOperation.update(student);
 		}
@@ -344,9 +334,9 @@ public class ReadStudentCourse {
 	
 	private SecondCourse findSecondCourse(Student student, String courseName) {
 		// preprocess the courseName;
-		courseName = courseName.replace("£¬", ",");
-		courseName = courseName.replace("£¨", "(");
-		courseName = courseName.replace("£©", ")");
+		courseName = courseName.replace("ï¿½ï¿½", ",");
+		courseName = courseName.replace("ï¿½ï¿½", "(");
+		courseName = courseName.replace("ï¿½ï¿½", ")");
 		
 		SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
 		FirstCourseOperation firstCourseOperation = new FirstCourseOperation();
@@ -407,20 +397,20 @@ public class ReadStudentCourse {
 			String[] arrayString = entry.getValue();
 			for (int i = 0; i < arrayString.length; i++) {
 				int onTime = i + 1;
-				if (arrayString[i].equals("ÐÝÏ¢") || arrayString[i].equals(""))
+				if (arrayString[i].equals("ï¿½ï¿½Ï¢") || arrayString[i].equals(""))
 					continue;
 				int beginIndex = arrayString[i].lastIndexOf("(");
 				if (beginIndex == -1) {
-					beginIndex = arrayString[i].lastIndexOf("£¨");
+					beginIndex = arrayString[i].lastIndexOf("ï¿½ï¿½");
 				}
 
 				int endIndex = arrayString[i].lastIndexOf(")");
 				if (endIndex == -1) {
-					endIndex = arrayString[i].lastIndexOf("£©");
+					endIndex = arrayString[i].lastIndexOf("ï¿½ï¿½");
 				}
 				
 				if(beginIndex == -1 || endIndex == -1){
-					//Ã»ÓÐÀÏÊ¦ÉÏ¿ÎµÄÅÅ¿ÎÐÅÏ¢
+					//Ã»ï¿½ï¿½ï¿½ï¿½Ê¦ï¿½Ï¿Îµï¿½ï¿½Å¿ï¿½ï¿½ï¿½Ï¢
 					/*
 					Schedule schedule = scheduleOperation
 							.getByStudentIdOnDateAndTime(student.getId(),
@@ -440,8 +430,8 @@ public class ReadStudentCourse {
 				}
 				String courseName = arrayString[i].substring(0, beginIndex);
 				String teacherName = arrayString[i].substring(beginIndex + 1, endIndex);
-				if(teacherName.endsWith("¼à¿¼")){
-					endIndex = teacherName.lastIndexOf("¼à¿¼");
+				if(teacherName.endsWith("ï¿½à¿¼")){
+					endIndex = teacherName.lastIndexOf("ï¿½à¿¼");
 					teacherName = teacherName.substring(0, endIndex);
 				}
 				teacherName = teacherName.trim();
@@ -479,12 +469,12 @@ public class ReadStudentCourse {
 	}
 	
 	public static void main(String[] args){
-		String directoryPath = "C:/btm/aeas/Ñ§Éú¿Î±í";
+		String directoryPath = "C:/btm/aeas/Ñ§ï¿½ï¿½Î±ï¿½";
 		File directory = new File(directoryPath);
 		File[] files =directory.listFiles(new FilenameFilter() {			
 			@Override
 			public boolean accept(File dir, String name) {
-				if(name.indexOf("ºóÆÚ") >= 0)
+				if(name.indexOf("ï¿½ï¿½ï¿½ï¿½") >= 0)
 				    return false;
 				else 
 					return true;
@@ -496,7 +486,7 @@ public class ReadStudentCourse {
 			    ReadStudentCourse readStudentCourse = new ReadStudentCourse(file.getAbsolutePath());
 			    readStudentCourse.importCourse();
 			}catch(Exception e){
-				System.out.println("µ¼ÈëÎÄ¼þ´æÔÚÎÊÌâ:" + file.getAbsolutePath());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + file.getAbsolutePath());
 			}
 		}
 		

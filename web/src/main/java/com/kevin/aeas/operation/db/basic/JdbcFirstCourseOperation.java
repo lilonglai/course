@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.FirstCourse;
+import com.kevin.aeas.operation.db.IFirstCourseOperation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.FirstCourse;
-
-public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
+public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> implements IFirstCourseOperation {
 	public FirstCourse get(int key) {
 		String sql = "select * from " + getTableName() + " where id = " + key;
 		FirstCourse firstCourse = null;
@@ -33,7 +34,7 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 		return firstCourse;
 	}
 
-	public List<FirstCourse> getByGrade(int grade) {
+	public List<? extends FirstCourse> getByGrade(int grade) {
 		String sql = "select * from " + getTableName() + " where grade = " + grade;
 		List<FirstCourse> list = null;
 		try {
@@ -46,7 +47,7 @@ public class DbFirstCourseOperation extends DbBaseOperation<FirstCourse> {
 
 	}
 
-	public List<FirstCourse> getAll() {
+	public List<? extends FirstCourse> getAll() {
 		String sql = "select * from " + getTableName();
 		List<FirstCourse> list = null;
 		try {

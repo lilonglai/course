@@ -1,13 +1,14 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Schedule;
+import com.kevin.aeas.operation.db.IScheduleOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisSchedule;
 import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Date;
 import java.util.List;
 
-public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedule> {
+public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedule> implements IScheduleOperation{
 
     public MyBatisScheduleOperation(){
         super(MyBatisSchedule.class);
@@ -39,7 +40,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return schedule;	
 	}
 	
-	public List<Schedule> getByStudentId(int studentId){ ;
+	public List<? extends Schedule> getByStudentId(int studentId){ ;
 		List<Schedule> list = null;
         SqlSession session = null;
         try {
@@ -52,7 +53,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return list;
 	}
 	
-	public List<Schedule> getByTeacherId(int teacherId){
+	public List<? extends Schedule> getByTeacherId(int teacherId){
 		List<Schedule> list = null;
         SqlSession session = null;
         try {
@@ -65,7 +66,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return list;
 	}
 		
-	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
 		List<Schedule> list = null;
         SqlSession session = null;
         try {
@@ -78,7 +79,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return list;
 	}
 	
-	public List<Schedule> getAll(){
+	public List<? extends Schedule> getAll(){
 		List<Schedule> list = null;
         SqlSession session = null;
         try {

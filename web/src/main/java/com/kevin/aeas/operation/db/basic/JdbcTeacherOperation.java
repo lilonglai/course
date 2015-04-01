@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.Teacher;
+import com.kevin.aeas.operation.db.ITeacherOperation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.Teacher;
-
-public class DbTeacherOperation extends DbBaseOperation<Teacher>{
+public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements ITeacherOperation{
 	public Teacher get(int key){
 		String sql = "select * from " + getTableName() + " where id = " + key;
 		Teacher teacher = null;
@@ -66,7 +67,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 		return teacher;		
 	}
 	
-	public List<Teacher> getAll(){
+	public List<? extends Teacher> getAll(){
 		String sql = "select * from " + getTableName();
 		List<Teacher> list = null;
 		try {
@@ -77,7 +78,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 		return list;		
 	}
 	
-	public List<Teacher> getAlive(){
+	public List<? extends Teacher> getAlive(){
 		String sql = "select * from " + getTableName() + "" + " where isalive=true";
 		List<Teacher> list = null;
 		try {
@@ -88,7 +89,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 		return list;		
 	}
 	
-	public List<Teacher> getNotAlive(){
+	public List<? extends Teacher> getNotAlive(){
 		String sql = "select * from " + getTableName() + "" + " where isalive=false";
 		List<Teacher> list = null;
 		try {
@@ -99,7 +100,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 		return list;
 	}
 	
-	public int getIdByObject(Teacher condition){
+	public Teacher getByCondition(Teacher condition){
 		String sql = "select * from " + getTableName() + " where";
 		if(condition.getName() != null)
 			sql += " name = '" + condition.getName() + "'";
@@ -122,7 +123,7 @@ public class DbTeacherOperation extends DbBaseOperation<Teacher>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return id;
+		return teacher;
 		
 	}
 	

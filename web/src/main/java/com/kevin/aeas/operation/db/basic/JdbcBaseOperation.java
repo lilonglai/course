@@ -1,5 +1,10 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.utils.C3Pool;
+import com.kevin.aeas.utils.ConfigurationManager;
+import com.kevin.aeas.utils.DbNoPool;
+import com.kevin.aeas.utils.IGetConnection;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,12 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kevin.aeas.utils.C3Pool;
-import com.kevin.aeas.utils.ConfigurationManager;
-import com.kevin.aeas.utils.DbNoPool;
-import com.kevin.aeas.utils.IGetConnection;
-
-public abstract class DbBaseOperation<T> {
+public abstract class JdbcBaseOperation<T> {
 	private static IGetConnection getCon = null;
 
 	static {
@@ -29,7 +29,7 @@ public abstract class DbBaseOperation<T> {
 			getCon = new DbNoPool();
 		}
 	}
-	public DbBaseOperation() {
+	public JdbcBaseOperation() {
 
 	}
 

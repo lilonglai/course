@@ -2,47 +2,47 @@ package com.kevin.aeas.test.db.basic;
 
 import java.util.List;
 
+import com.kevin.aeas.operation.db.basic.JdbcTeacherOperation;
 import junit.framework.TestCase;
 
 import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.basic.DbTeacherOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
 
 public abstract class TeacherOperationTest extends TestCase{
 	public void testGet(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		Teacher teacher = operation.get(1);
 	}
 
 	
 	public void testGetByName(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		Teacher teacher = operation.getByName("test");
 	}
 	
 	
 	public void testGetByShortName(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		Teacher teacher = operation.getByShortName("test");
 	}
 	
 	public void testGetAll(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		List<Teacher> list = operation.getAll();
 	}
 	
 	public void testGetAlive(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		List<Teacher> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		List<Teacher> list = operation.getNotAlive();
 	}
 	
 	public void testGetIdByObject(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
 		int id = operation.getIdByObject(teacher);
@@ -52,7 +52,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testAdd(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
 		teacher.setShortName("test");
@@ -62,7 +62,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testUpdate(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
@@ -75,7 +75,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	
 	public void testDelete(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
@@ -85,7 +85,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testRetire(){
-		DbTeacherOperation operation = new DbTeacherOperation();
+		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){

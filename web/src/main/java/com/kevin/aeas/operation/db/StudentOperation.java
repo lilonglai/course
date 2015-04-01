@@ -1,121 +1,69 @@
 package com.kevin.aeas.operation.db;
 
-import java.util.List;
-
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.operation.db.basic.DbOperationManager;
-import com.kevin.aeas.operation.db.jpa.JpaOperationManager;
+import com.kevin.aeas.operation.db.basic.JdbcStudentOperation;
+import com.kevin.aeas.operation.db.jpa.JpaStudentOperation;
+import com.kevin.aeas.operation.db.mybatis.MyBatisStudentOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import java.util.List;
+
 public class StudentOperation {
+    private IStudentOperation studentDao;
+    public StudentOperation(){
+        if(ConfigurationManager.getInstance().isJpa()){
+            studentDao = new JpaStudentOperation();
+        }
+        else if(ConfigurationManager.getInstance().isMyBatis()){
+            studentDao = new MyBatisStudentOperation();
+        }
+        else{
+            studentDao = new JdbcStudentOperation();
+        }
+    }
+
 	public Student get(int key) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (Student)JpaOperationManager.getInstance().getStudentOperation().get(key);
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().get(key);
-		}
+        return studentDao.get(key);
 	}
 	
 	public Student getByName(String name) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (Student)JpaOperationManager.getInstance().getStudentOperation().getByName(name);
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().getByName(name);
-		}
+        return studentDao.getByName(name);
 	}
 	
 
-	public List<Student> getByGrade(int grade) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getByGrade(grade);
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().getByGrade(grade);
-		}
-
+	public List<? extends Student> getByGrade(int grade) {
+        return studentDao.getByGrade(grade);
 	}
 
-	public List<Student> getAll() {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getAll();
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().getAll();
-		}
-
+	public List<? extends Student> getAll() {
+        return studentDao.getAll();
 	}
 	
-	public List<Student> getAlive() {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getAlive();
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().getAlive();
-		}
+	public List<? extends Student> getAlive() {
+        return studentDao.getAlive();
 	}
 	
-	public List<Student> getNotAlive() {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getNotAlive();
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().getNotAlive();
-		}
+	public List<? extends Student> getNotAlive() {
+        return studentDao.getNotAlive();
 	}
 
-	public List<Student> getByTeacherId(int teacherId) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			return (List<Student>)JpaOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);
-		}
-		else{
-			return DbOperationManager.getInstance().getStudentOperation().getByTeacherId(teacherId);
-		}
-
+	public List<? extends Student> getByTeacherId(int teacherId) {
+        return studentDao.getByTeacherId(teacherId);
 	}
 
 	public void add(Student student){
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getStudentOperation().add(student);
-		}
-		else{
-			DbOperationManager.getInstance().getStudentOperation().add(student);
-		}
-		
+        studentDao.add(student);
 	}
 
 	public void update(Student student) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getStudentOperation().update(student);
-		}
-		else{
-			DbOperationManager.getInstance().getStudentOperation().update(student);
-		}
+        studentDao.update(student);
 	}
 
 	public void delete(int key) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getStudentOperation().delete(key);
-		}
-		else{
-			DbOperationManager.getInstance().getStudentOperation().delete(key);
-		}
+        studentDao.delete(key);
 	}
 	
 	public void retire(int key) {
-		if(ConfigurationManager.getInstance().isJpa()){
-			JpaOperationManager.getInstance().getStudentOperation().retire(key);
-		}
-		else{
-			DbOperationManager.getInstance().getStudentOperation().retire(key);
-		}
+        studentDao.retire(key);
 	}
-
-	public static void main(String[] args) {
-		StudentOperation studentOperation = new StudentOperation();
-		System.out.println(studentOperation.getAll());
-		
-	}
-
 }

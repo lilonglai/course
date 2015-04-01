@@ -1,13 +1,9 @@
 package com.kevin.aeas.operation.db.mybatis;
 
-import com.kevin.aeas.object.User;
+import com.kevin.aeas.operation.db.IUserOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisUser;
-import com.kevin.aeas.utils.DatabaseHelp;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class MyBatisUserOperation extends MyBatisBaseOperation<MyBatisUser> {
+public class MyBatisUserOperation extends MyBatisBaseOperation<MyBatisUser> implements IUserOperation{
     public MyBatisUserOperation(){
         super(MyBatisUser.class);
     }

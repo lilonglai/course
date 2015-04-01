@@ -1,15 +1,15 @@
 package com.kevin.aeas.operation.db.jpa;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
 import com.kevin.aeas.object.User;
 import com.kevin.aeas.object.mysql.MySqlUser;
 import com.kevin.aeas.object.oracle.OracleUser;
+import com.kevin.aeas.operation.db.IUserOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-public class JpaUserOperation extends JpaBasicOperation {
+import javax.persistence.Query;
+import java.util.List;
+
+public class JpaUserOperation extends JpaBasicOperation<User> implements IUserOperation {
 	public JpaUserOperation() {
 		if(ConfigurationManager.getInstance().isMySql()){
 			setActualClass(MySqlUser.class);

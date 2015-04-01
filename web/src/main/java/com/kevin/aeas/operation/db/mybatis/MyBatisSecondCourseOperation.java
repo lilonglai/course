@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.SecondCourse;
+import com.kevin.aeas.operation.db.ISecondCourseOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisSecondCourse;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSecondCourse> {
+public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSecondCourse> implements ISecondCourseOperation{
     public MyBatisSecondCourseOperation(){
         super(MyBatisSecondCourse.class);
     }
@@ -26,7 +27,7 @@ public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSe
 	}
 
 	
-	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
 		List<SecondCourse> list = null;
         SqlSession session = null;
         try {
@@ -39,7 +40,7 @@ public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSe
 		return list;
 	}
 	
-	public List<SecondCourse> getByGrade(int grade){
+	public List<? extends SecondCourse> getByGrade(int grade){
         List<SecondCourse> list = null;
         SqlSession session = null;
         try {
@@ -52,7 +53,7 @@ public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSe
 		return list;	
 	}
 	
-	public List<SecondCourse> getAll(){
+	public List<? extends SecondCourse> getAll(){
         List<SecondCourse> list = null;
         SqlSession session = null;
         try {

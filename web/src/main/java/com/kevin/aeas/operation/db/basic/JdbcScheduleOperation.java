@@ -1,13 +1,14 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.Schedule;
+import com.kevin.aeas.operation.db.IScheduleOperation;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.Schedule;
-
-public class DbScheduleOperation extends DbBaseOperation<Schedule>{
+public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implements IScheduleOperation{
 	public Schedule get(int key){
 		String sql = "select * from " + getTableName() + " where id = " + key + " order by ondate,ontime";
 		Schedule schedule = null;
@@ -54,7 +55,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 		return schedule;	
 	}
 	
-	public List<Schedule> getByStudentId(int studentId){
+	public List<? extends Schedule> getByStudentId(int studentId){
 		String sql = "select * from " + getTableName() + " where studentid = " + studentId + " order by ondate,ontime" ;
 		List<Schedule> list = null;
 		try {
@@ -67,7 +68,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 		
 	}
 	
-	public List<Schedule> getByTeacherId(int teacherId){
+	public List<? extends Schedule> getByTeacherId(int teacherId){
 		String sql = "select * from " + getTableName() + " where teacherid = " + teacherId + " order by ondate,ontime";
 		List<Schedule> list = null;
 		try {
@@ -80,7 +81,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 		
 	}
 		
-	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
 		String sql = "select * from " + getTableName() + " where onDate = '" + onDate + "'";
 		if(onTime >=1){
 			sql += " and onTime=" + onTime;
@@ -98,7 +99,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 		
 	}
 	
-	public List<Schedule> getAll(){
+	public List<? extends Schedule> getAll(){
 		String sql = "select * from " + getTableName() + " order by ondate,ontime";
 		List<Schedule> list = null;
 		try {
@@ -197,7 +198,7 @@ public class DbScheduleOperation extends DbBaseOperation<Schedule>{
 	}
 	
 	public static void main(String[] args) {
-		DbScheduleOperation operation = new DbScheduleOperation();
+		JdbcScheduleOperation operation = new JdbcScheduleOperation();
 		Schedule schedule = new Schedule();
 		schedule.setOnDate(Date.valueOf("2014-10-2"));
 		schedule.setId(10);

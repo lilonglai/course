@@ -11,6 +11,7 @@ dbUser=root
 dbPassword=root
 
 
-jpa=false
+# jdbc, jpa, mybatis
+daoWay=mybatis
 usePool=true
 jpaName=MySqlPersistenceUnit

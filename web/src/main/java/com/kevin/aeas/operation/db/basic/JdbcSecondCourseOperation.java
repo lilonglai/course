@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.SecondCourse;
+import com.kevin.aeas.operation.db.ISecondCourseOperation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.SecondCourse;
-
-public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
+public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> implements ISecondCourseOperation{
 	public SecondCourse get(int key){
 		String sql = "select * from " + getTableName() + " where id = " + key;
 		SecondCourse secondCourse = null;
@@ -33,7 +34,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 		return secondCourse;
 	}
 	
-	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
 		String sql = "select * from " + getTableName() + " where firstcourseid = " + firstCourseId;
 		List<SecondCourse> list = null;
 		try {
@@ -44,7 +45,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 		return list;		
 	}
 	
-	public List<SecondCourse> getByGrade(int grade){
+	public List<? extends SecondCourse> getByGrade(int grade){
 		String sql = "select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse "
 				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = " + grade
 				+ " order by aeas_secondcourse.firstcourseid";
@@ -57,7 +58,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 		return list;	
 	}
 	
-	public List<SecondCourse> getAll(){
+	public List<? extends SecondCourse> getAll(){
 		String sql = "select * from " + getTableName() + ""
 				+ " order by firstcourseid";
 		List<SecondCourse> list = null;
@@ -130,7 +131,7 @@ public class DbSecondCourseOperation extends DbBaseOperation<SecondCourse>{
 	}
 	
 	public static void main(String[] args) {
-		DbSecondCourseOperation operation = new DbSecondCourseOperation();
+		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
 		System.out.println(operation.getByFirstCourseId(1));		
 	}
 

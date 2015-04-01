@@ -2,33 +2,33 @@ package com.kevin.aeas.test.db.basic;
 
 import java.util.List;
 
+import com.kevin.aeas.operation.db.basic.JdbcFirstCourseOperation;
 import junit.framework.TestCase;
 
 import com.kevin.aeas.object.FirstCourse;
-import com.kevin.aeas.operation.db.basic.DbFirstCourseOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
 
 
 public abstract class  FirstCourseOperationTest extends TestCase{
 	public void  testGet(){
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
+		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		FirstCourse firstCourse = operation.get(1);
 	}
 	
 	
 	public void testGetByGrade(){
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
+		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		List<FirstCourse> list = operation.getByGrade(1);
 	}
 	
 	public void testGetAll(){
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
+		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		List<FirstCourse> list = operation.getAll();
 	}
 	
 	
 	public void  testAdd(){
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
+		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		FirstCourse firstCourse = new FirstCourse();
 		
 		//* add grade 1 first course
@@ -54,7 +54,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	}
 	
 	public void testUpdate(){
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
+		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
@@ -66,7 +66,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	}
 		
 	public void testDelete(){
-		DbFirstCourseOperation operation = new DbFirstCourseOperation();
+		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){

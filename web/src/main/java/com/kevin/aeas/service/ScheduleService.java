@@ -1,32 +1,16 @@
 package com.kevin.aeas.service;
 
+import com.kevin.aeas.object.*;
+import com.kevin.aeas.operation.db.*;
+import com.kevin.aeas.utils.DateHelp;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
-import com.kevin.aeas.object.Schedule;
-import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.object.TeacherAbility;
-import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.object.TeacherHoliday;
-import com.kevin.aeas.operation.db.ScheduleOperation;
-import com.kevin.aeas.operation.db.SecondCourseOperation;
-import com.kevin.aeas.operation.db.TeacherAbilityOperation;
-import com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation;
-import com.kevin.aeas.operation.db.TeacherHolidayOperation;
-import com.kevin.aeas.operation.db.TeacherOperation;
-import com.kevin.aeas.utils.DateHelp;
 
 @Path("/schedule")
 public class ScheduleService {
@@ -37,8 +21,8 @@ public class ScheduleService {
 	private List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
 		SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		List<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
-		List<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
+		List<? extends SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
+		List<? extends Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
 		List<SecondCourse> resultList = new ArrayList<SecondCourse>();
 		for(SecondCourse secondCourse : secondCourseList){
 			if(isScheduled(secondCourse, scheduleList)){
@@ -47,10 +31,10 @@ public class ScheduleService {
 			resultList.add(secondCourse);
 		}
 		
-		return secondCourseList;		
+		return resultList;
 	}
 	
-	private boolean isScheduled(SecondCourse secondCourse, List<Schedule> scheduleList){
+	private boolean isScheduled(SecondCourse secondCourse, List<? extends Schedule> scheduleList){
 		for(Schedule schedule : scheduleList){
 			if(secondCourse.getId() == schedule.getCourseId()){
 				return true;
@@ -66,10 +50,10 @@ public class ScheduleService {
 
 		TeacherOperation teacherOperation = new TeacherOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		List<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
+		List<? extends TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
 		
 		List<Teacher> teacherList = new ArrayList<Teacher>();
-	    List<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
+	    List< ? extends Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
 		
 		for(TeacherAbility teacherAbility:teacherAbilityList){
 			int teacherId = teacherAbility.getTeacherId();
@@ -96,7 +80,7 @@ public class ScheduleService {
 		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
 		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
 		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
-		List<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
+		List<? extends TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
 	    if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
 	    	return true;
 	    }
@@ -109,7 +93,7 @@ public class ScheduleService {
 	 * @param teacherId the teacher identification.
 	 * @param Schedule the arranged list
 	 */
-	private boolean isScheduled(int teacherId, List<Schedule> scheduleList){
+	private boolean isScheduled(int teacherId, List<? extends Schedule> scheduleList){
 		for(Schedule schedule : scheduleList){
 			if(schedule.getTeacherId() == teacherId){
 				return true;
@@ -122,8 +106,8 @@ public class ScheduleService {
 	private ArrayList<Teacher> getAvailableTeacherList(Date onDate, int onTime){
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
 		TeacherOperation teacherOperation = new TeacherOperation();
-		List<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
-		List<Teacher> teacherList = teacherOperation.getAll();
+		List<? extends Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
+		List<? extends Teacher> teacherList = teacherOperation.getAll();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(onDate);

@@ -30,13 +30,36 @@ public class ConfigurationManager {
 	public void setProperty(String propertyName, String propertyValue){
 		prop.setProperty(propertyName, propertyValue);		
 	}
-	
+
+    public boolean isJdbc(){
+        String jpa = prop.getProperty("daoWay");
+        if(jpa == null)
+            return false;
+        if(jpa.equals("jdbc")){
+            return true;
+        }
+        return false;
+    }
+
 	public boolean isJpa(){
-		String jpa = prop.getProperty("jpa");
+		String jpa = prop.getProperty("daoWay");
 		if(jpa == null)
 			return false;
-		return Boolean.valueOf(jpa);
+        if(jpa.equals("jpa")){
+            return true;
+        }
+		return false;
 	}
+
+    public boolean isMyBatis(){
+        String jpa = prop.getProperty("daoWay");
+        if(jpa == null)
+            return false;
+        if(jpa.equals("mybatis")){
+            return true;
+        }
+        return false;
+    }
 	
 	public String getJpaName(){
 		return prop.getProperty("jpaName");

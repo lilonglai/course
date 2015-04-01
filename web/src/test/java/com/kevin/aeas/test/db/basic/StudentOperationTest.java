@@ -3,48 +3,48 @@ package com.kevin.aeas.test.db.basic;
 import java.sql.Date;
 import java.util.List;
 
+import com.kevin.aeas.operation.db.basic.JdbcStudentOperation;
 import junit.framework.TestCase;
 
 import com.kevin.aeas.object.Student;
-import com.kevin.aeas.operation.db.basic.DbStudentOperation;
 import com.kevin.aeas.test.db.utils.DbUtils;
 
 public abstract class StudentOperationTest extends TestCase {
 	public void testGet() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		Student student = operation.get(1);
 	}
 
 	
 	public void testGetByName() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		Student student = operation.getByName("test");
 	}
 	
 
 	public void testGetByGrade() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getByGrade(1);
 
 	}
 
 	public void testGetAll() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getAll();
 	}
 	
 	public void testGetAlive() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getNotAlive();
 	}
 
 	public void testGetByTeacherId() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getByTeacherId(1);
 
 	}
@@ -53,7 +53,7 @@ public abstract class StudentOperationTest extends TestCase {
 	 * 
 	 */
 	public void testAdd(){
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		Student student = new Student();
 		
 		student.setName("test");
@@ -70,7 +70,7 @@ public abstract class StudentOperationTest extends TestCase {
 	}
 
 	public void testUpdate() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
@@ -83,7 +83,7 @@ public abstract class StudentOperationTest extends TestCase {
 	}
 
 	public void testDelete() {		
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
@@ -96,7 +96,7 @@ public abstract class StudentOperationTest extends TestCase {
 	}
 	
 	public void testRetire() {
-		DbStudentOperation operation = new DbStudentOperation();
+		JdbcStudentOperation operation = new JdbcStudentOperation();
 	    List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){

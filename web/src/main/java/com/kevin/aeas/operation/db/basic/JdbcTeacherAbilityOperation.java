@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.TeacherAbility;
+import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.kevin.aeas.object.TeacherAbility;
-
-public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
+public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbility> implements ITeacherAbilityOperation{
 	public TeacherAbility get(int key) {
 		String sql = "select * from " + getTableName() + " where id = " + key;
 		TeacherAbility teacherAbility = null;
@@ -30,7 +31,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 		return teacherAbility;
 	}
 	
-	public List<TeacherAbility> getAll() {
+	public List<? extends TeacherAbility> getAll() {
 		String sql = "select aeas_teacherability.* from"
 				+ " aeas_teacherability,aeas_firstcourse"
 				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
@@ -44,7 +45,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 		return list;
 	}
 	
-	public List<TeacherAbility> getByTeacherId(int teacherId) {
+	public List<? extends TeacherAbility> getByTeacherId(int teacherId) {
 		String sql = "select aeas_teacherability.*"
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where teacherid = " + teacherId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
@@ -58,7 +59,7 @@ public class DbTeacherAbilityOperation extends DbBaseOperation<TeacherAbility>{
 		return list;
 	}
 	
-	public List<TeacherAbility> getByCourseId(int courseId) {
+	public List<? extends TeacherAbility> getByCourseId(int courseId) {
 		String sql = "select aeas_teacherability.*"
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where courseid = " + courseId + " and aeas_firstcourse.id=aeas_teacherability.courseid"

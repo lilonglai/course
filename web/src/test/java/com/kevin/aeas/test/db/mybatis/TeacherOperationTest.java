@@ -1,9 +1,7 @@
 package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.basic.DbTeacherOperation;
 import com.kevin.aeas.operation.db.mybatis.MyBatisTeacherOperation;
-import com.kevin.aeas.test.db.utils.DbUtils;
 import junit.framework.TestCase;
 
 import java.util.List;

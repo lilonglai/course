@@ -1,10 +1,9 @@
 package com.kevin.aeas.operation.db.mybatis.inter;
 
 import com.kevin.aeas.object.TeacherAbility;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by loli on 2015/3/30.

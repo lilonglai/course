@@ -1,12 +1,13 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Student;
+import com.kevin.aeas.operation.db.IStudentOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisStudent;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent> {
+public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent> implements IStudentOperation{
     public MyBatisStudentOperation(){
         super(MyBatisStudent.class);
     }
@@ -38,7 +39,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 	}
 	
 
-	public List<Student> getByGrade(int grade) {
+	public List<? extends Student> getByGrade(int grade) {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -51,7 +52,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 
-	public List<Student> getAll() {
+	public List<? extends Student> getAll() {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -64,7 +65,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 	
-	public List<Student> getAlive() {
+	public List<? extends Student> getAlive() {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -77,7 +78,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 	
-	public List<Student> getNotAlive() {
+	public List<? extends Student> getNotAlive() {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -90,7 +91,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 
-	public List<Student> getByTeacherId(int teacherId) {
+	public List<? extends Student> getByTeacherId(int teacherId) {
 		List<Student> list = null;
         SqlSession session = null;
         try {
