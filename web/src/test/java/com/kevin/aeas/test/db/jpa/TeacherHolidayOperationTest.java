@@ -65,8 +65,5 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 			}
 		}
 	}
-	
-	protected void setUp() throws Exception{
-		DbUtils.resetJpaManager();
-	}
+
 }

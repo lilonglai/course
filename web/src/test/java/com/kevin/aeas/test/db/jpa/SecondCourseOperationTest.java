@@ -2,6 +2,7 @@ package com.kevin.aeas.test.db.jpa;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.operation.db.jpa.JpaSecondCourseOperation;
@@ -12,26 +13,26 @@ import junit.framework.TestCase;
 public abstract class SecondCourseOperationTest extends TestCase{
 	public void tetGet(){
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		SecondCourse secondCourse = (SecondCourse) operation.get(1);
+		SecondCourse secondCourse = operation.get(1);
 	}
 	
 	public void testGetByFirstCourseId(){
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		ArrayList<SecondCourse> list = (ArrayList<SecondCourse>) operation.getByFirstCourseId(1);
+		List<SecondCourse> list = operation.getByFirstCourseId(1);
 	}
 	
 	public void testGetByGrade(){
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		ArrayList<SecondCourse> list = (ArrayList<SecondCourse>) operation.getByGrade(1);
+		List<SecondCourse> list = operation.getByGrade(1);
 		
-		list = (ArrayList<SecondCourse>) operation.getByGrade(2);
+		list = operation.getByGrade(2);
 		
-		list = (ArrayList<SecondCourse>) operation.getByGrade(3);
+		list = operation.getByGrade(3);
 	}
 	
 	public void testGetAll(){
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		ArrayList<SecondCourse> list = (ArrayList<SecondCourse>) operation.getAll();
+		List<SecondCourse> list =  operation.getAll();
 	}
 	
 	
@@ -48,7 +49,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		ArrayList<SecondCourse> list = (ArrayList<SecondCourse>) operation.getAll();
+		List<SecondCourse> list = operation.getAll();
 		for(SecondCourse secondCourse: list){
 			if(secondCourse.getName().equals("test")){
 				secondCourse.setShortName("test 2");
@@ -61,7 +62,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	public void testDelete(){
 		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		ArrayList<SecondCourse> list = (ArrayList<SecondCourse>) operation.getAll();
+		List<SecondCourse> list = operation.getAll();
 		for(SecondCourse secondCourse: list){
 			if(secondCourse.getName().equals("test")){
 				secondCourse.setShortName("test 2");
@@ -70,9 +71,6 @@ public abstract class SecondCourseOperationTest extends TestCase{
 			}
 		}
 	}
-	
-	protected void setUp() throws Exception{
-		DbUtils.resetJpaManager();
-	}
+
 	
 }

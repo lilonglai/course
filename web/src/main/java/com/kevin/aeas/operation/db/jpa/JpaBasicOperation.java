@@ -34,24 +34,37 @@ public abstract class JpaBasicOperation<T> {
 	
 	public void add(T t){
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
-		transaction.begin();
-		EntityManangerUtil.getInstance().persist(changeToJpa(t));
-		transaction.commit();
+        transaction.begin();
+        try {
+            EntityManangerUtil.getInstance().persist(changeToJpa(t));
+            transaction.commit();
+        }catch(Exception e){
+            transaction.rollback();
+        }
+
 	}
 
 	public void update(T t) {
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
-		transaction.begin();
-		EntityManangerUtil.getInstance().merge(changeToJpa(t));
-		transaction.commit();
+        transaction.begin();
+        try {
+            EntityManangerUtil.getInstance().merge(changeToJpa(t));
+            transaction.commit();
+        }catch(Exception e){
+            transaction.rollback();
+        }
 	}
 
 	public void delete(int key) {
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
-		transaction.begin();
-		Object t = EntityManangerUtil.getInstance().find(actualClass, key);
-		EntityManangerUtil.getInstance().remove(t);
-		transaction.commit();
+        transaction.begin();
+        try {
+            Object t = EntityManangerUtil.getInstance().find(actualClass, key);
+            EntityManangerUtil.getInstance().remove(t);
+            transaction.commit();
+        }catch(Exception e){
+            transaction.rollback();
+        }
 	}
 	
 	protected void setValueByObject(Object from, Object to) {

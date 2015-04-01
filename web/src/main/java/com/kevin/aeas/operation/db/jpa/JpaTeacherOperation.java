@@ -22,21 +22,21 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	public Teacher getByName(String name){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.name=:name");
 		q.setParameter("name", name);
-		List<? extends Teacher> list = q.getResultList();
-		Teacher teacher = null;
-		if(list.size() > 0 )
-            teacher = list.get(0);
-		return teacher;
+        try {
+            return (Teacher) q.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
 	}
 
 	public Teacher getByShortName(String shortName){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.shortName=:shortName");
 		q.setParameter("shortName", shortName);
-		List<? extends Teacher> list = q.getResultList();
-		Teacher teacher = null;
-		if(list.size() > 0 )
-            teacher = list.get(0);
-		return teacher;
+        try {
+            return (Teacher) q.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
 	}
 	
 	public List<Teacher> getAlive(){
@@ -49,8 +49,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	public List<Teacher> getNotAlive(){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
-        List<Teacher> list = q.getResultList();
-		return list;
+        return q.getResultList();
 	}
 	
 	public Teacher getByCondition(Teacher condition){

@@ -2,6 +2,7 @@ package com.kevin.aeas.test.db.jpa;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.jpa.JpaStudentOperation;
@@ -24,28 +25,28 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testGetByGrade() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getByGrade(1);
+		List<Student> list =  operation.getByGrade(1);
 
 	}
 
 	public void testGetAll() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getAll();
+		List<Student> list = operation.getAll();
 	}
 	
 	public void testGetAlive() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getAlive();
+		List<Student> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getNotAlive();
+		List<Student> list = operation.getNotAlive();
 	}
 
 	public void testGetByTeacherId() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getByTeacherId(1);
+		List<Student> list = operation.getByTeacherId(1);
 
 	}
 
@@ -71,7 +72,7 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testUpdate() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getAll();
+		List<Student> list =  operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -84,7 +85,7 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testDelete() {		
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getAll();
+		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -97,7 +98,7 @@ public abstract class StudentOperationTest extends TestCase {
 	
 	public void testRetire() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		ArrayList<Student> list = (ArrayList<Student>) operation.getAll();
+		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -106,8 +107,5 @@ public abstract class StudentOperationTest extends TestCase {
 			}
 		}
 	}
-	
-	protected void setUp() throws Exception{
-		DbUtils.resetJpaManager();
-	}
+
 }

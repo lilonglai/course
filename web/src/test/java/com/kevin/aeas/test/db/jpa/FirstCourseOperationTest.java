@@ -13,18 +13,18 @@ import junit.framework.TestCase;
 public abstract class  FirstCourseOperationTest extends TestCase{
 	public void  testGet(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		FirstCourse firstCourse = (FirstCourse)operation.get(1);
+		FirstCourse firstCourse = operation.get(1);
 	}
 	
 	
 	public void testGetByGrade(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		List<FirstCourse> list = (ArrayList<FirstCourse>)operation.getByGrade(1);
+		List<FirstCourse> list = operation.getByGrade(1);
 	}
 	
 	public void testGetAll(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		List<FirstCourse> list = (ArrayList<FirstCourse>) operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 	}
 	
 	
@@ -56,7 +56,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		List<FirstCourse> list = (List<FirstCourse>)operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
@@ -68,7 +68,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		
 	public void testDelete(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		ArrayList<FirstCourse> list = (ArrayList<FirstCourse>)operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
@@ -77,8 +77,5 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 			}
 		}
 	}
-	
-	protected void setUp() throws Exception{
-		DbUtils.resetJpaManager();
-	}
+
 }

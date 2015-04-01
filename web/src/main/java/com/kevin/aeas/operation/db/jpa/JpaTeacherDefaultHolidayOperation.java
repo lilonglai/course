@@ -7,6 +7,7 @@ import com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -23,7 +24,11 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation<Teacher
 	public TeacherDefaultHoliday getByTeacherId(int teacherId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select td from "  + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        return (TeacherDefaultHoliday)q.getSingleResult();
+        try {
+            return (TeacherDefaultHoliday) q.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
 	}
 	
 	public void deleteByTeacherId(int teacherId){

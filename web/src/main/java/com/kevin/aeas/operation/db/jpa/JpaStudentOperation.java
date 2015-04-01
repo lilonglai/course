@@ -8,6 +8,7 @@ import com.kevin.aeas.operation.db.IStudentOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +26,11 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	public Student getByName(String name) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.name=:name");
 		q.setParameter("name", name);
-        return (Student)q.getSingleResult();
+        try {
+            return (Student) q.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
 	}
 
 	public List<Student> getByGrade(int grade) {

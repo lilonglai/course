@@ -1,6 +1,7 @@
 package com.kevin.aeas.test.db.jpa;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.operation.db.jpa.JpaTeacherOperation;
@@ -11,34 +12,34 @@ import junit.framework.TestCase;
 public abstract class TeacherOperationTest extends TestCase{
 	public void testGet(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		Teacher teacher = (Teacher) operation.get(1);
+		Teacher teacher = operation.get(1);
 	}
 
 	
 	public void testGetByName(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		Teacher teacher = (Teacher) operation.getByName("test");
+		Teacher teacher = operation.getByName("test");
 	}
 	
 	
 	public void testGetByShortName(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		Teacher teacher = (Teacher) operation.getByShortName("test");
+		Teacher teacher = operation.getByShortName("test");
 	}
 	
 	public void testGetAll(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getAll();
+		List<Teacher> list =  operation.getAll();
 	}
 	
 	public void testGetAlive(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getAlive();
+		List<Teacher> list =  operation.getAlive();
 	}
 	
 	public void testGetNotAlive(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getNotAlive();
+		List<Teacher> list =  operation.getNotAlive();
 	}
 	
 	public void testGetByCondition(){
@@ -60,7 +61,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				teacher.setShortName("test2");
@@ -73,7 +74,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testDelete(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getAlive();
+		List<Teacher> list = operation.getAll();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.delete(teacher.getId());;
@@ -83,15 +84,12 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testRetire(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
-		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.retire(teacher.getId());;
 			}
 		}
 	}
-	
-	protected void setUp() throws Exception{
-		DbUtils.resetJpaManager();
-	}
+
 }
