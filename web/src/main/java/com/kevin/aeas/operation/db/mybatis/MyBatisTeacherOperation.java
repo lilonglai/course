@@ -53,7 +53,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
 		return teacher;		
 	}
 	
-	public List<? extends Teacher> getAll(){
+	public List<Teacher> getAll(){
 		List<Teacher> list = null;
         SqlSession session = null;
         try {
@@ -66,7 +66,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
 		return list;		
 	}
 	
-	public List<? extends Teacher> getAlive(){
+	public List<Teacher> getAlive(){
         List<Teacher> list = null;
         SqlSession session = null;
         try {
@@ -79,7 +79,7 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
         return list;
 	}
 
-	public List<? extends Teacher> getNotAlive(){
+	public List<Teacher> getNotAlive(){
         List<Teacher> list = null;
         SqlSession session = null;
         try {

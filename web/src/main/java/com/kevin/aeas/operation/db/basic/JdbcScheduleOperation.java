@@ -55,7 +55,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 		return schedule;	
 	}
 	
-	public List<? extends Schedule> getByStudentId(int studentId){
+	public List<Schedule> getByStudentId(int studentId){
 		String sql = "select * from " + getTableName() + " where studentid = " + studentId + " order by ondate,ontime" ;
 		List<Schedule> list = null;
 		try {
@@ -68,7 +68,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 		
 	}
 	
-	public List<? extends Schedule> getByTeacherId(int teacherId){
+	public List<Schedule> getByTeacherId(int teacherId){
 		String sql = "select * from " + getTableName() + " where teacherid = " + teacherId + " order by ondate,ontime";
 		List<Schedule> list = null;
 		try {
@@ -81,7 +81,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 		
 	}
 		
-	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
 		String sql = "select * from " + getTableName() + " where onDate = '" + onDate + "'";
 		if(onTime >=1){
 			sql += " and onTime=" + onTime;
@@ -99,7 +99,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 		
 	}
 	
-	public List<? extends Schedule> getAll(){
+	public List<Schedule> getAll(){
 		String sql = "select * from " + getTableName() + " order by ondate,ontime";
 		List<Schedule> list = null;
 		try {

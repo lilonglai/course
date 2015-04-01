@@ -27,7 +27,7 @@ public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSe
 	}
 
 	
-	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		List<SecondCourse> list = null;
         SqlSession session = null;
         try {
@@ -40,7 +40,7 @@ public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSe
 		return list;
 	}
 	
-	public List<? extends SecondCourse> getByGrade(int grade){
+	public List<SecondCourse> getByGrade(int grade){
         List<SecondCourse> list = null;
         SqlSession session = null;
         try {
@@ -53,7 +53,7 @@ public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSe
 		return list;	
 	}
 	
-	public List<? extends SecondCourse> getAll(){
+	public List<SecondCourse> getAll(){
         List<SecondCourse> list = null;
         SqlSession session = null;
         try {

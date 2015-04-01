@@ -26,17 +26,17 @@ public  class TeacherOperationTest extends TestCase{
 	
 	public void testGetAll(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
-		List<Teacher> list = operation.getAll();
+		List<? extends Teacher> list = operation.getAll();
 	}
 	
 	public void testGetAlive(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
-		List<Teacher> list = operation.getNotAlive();
+		List<? extends Teacher> list = operation.getNotAlive();
 	}
 	
 	public void testGetByCondition(){
@@ -58,7 +58,7 @@ public  class TeacherOperationTest extends TestCase{
 	
 	public void testUpdate(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				teacher.setShortName("test2");
@@ -71,7 +71,7 @@ public  class TeacherOperationTest extends TestCase{
 	
 	public void testDelete(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
-		List<Teacher> list = operation.getAll();
+		List<? extends Teacher> list = operation.getAll();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.delete(teacher.getId());;
@@ -81,7 +81,7 @@ public  class TeacherOperationTest extends TestCase{
 	
 	public void testRetire(){
         MyBatisTeacherOperation operation = new MyBatisTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.retire(teacher.getId());;

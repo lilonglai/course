@@ -12,15 +12,15 @@ public interface IStudentOperation {
 
     public Student getByName(String name);
 
-    public List<? extends Student> getByGrade(int grade);
+    public List<Student> getByGrade(int grade);
 
-    public List<? extends Student> getAll();
+    public List<Student> getAll();
 
-    public List<? extends Student> getAlive();
+    public List<Student> getAlive();
 
-    public List<? extends Student> getNotAlive();
+    public List<Student> getNotAlive();
 
-    public List<? extends Student> getByTeacherId(int teacherId);
+    public List<Student> getByTeacherId(int teacherId);
 
     public void add(Student student);
 

@@ -20,11 +20,11 @@ public class JpaFirstCourseOperation extends JpaBasicOperation<FirstCourse> impl
 		}
 	}
 	
-	public List<? extends FirstCourse> getByGrade(int grade){
+	public List<FirstCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select c from " + getActualClass().getSimpleName() + " c where c.grade=:grade");
 		q.setParameter("grade", grade);
-        List<? extends FirstCourse> list = q.getResultList();
-		return list;
+        List<FirstCourse> list = q.getResultList();
+		return null;
 	}		
 	
 	protected  Object changeToJpa(Object t){

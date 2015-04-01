@@ -34,7 +34,7 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 		return secondCourse;
 	}
 	
-	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		String sql = "select * from " + getTableName() + " where firstcourseid = " + firstCourseId;
 		List<SecondCourse> list = null;
 		try {
@@ -45,7 +45,7 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 		return list;		
 	}
 	
-	public List<? extends SecondCourse> getByGrade(int grade){
+	public List<SecondCourse> getByGrade(int grade){
 		String sql = "select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse "
 				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = " + grade
 				+ " order by aeas_secondcourse.firstcourseid";
@@ -58,7 +58,7 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 		return list;	
 	}
 	
-	public List<? extends SecondCourse> getAll(){
+	public List<SecondCourse> getAll(){
 		String sql = "select * from " + getTableName() + ""
 				+ " order by firstcourseid";
 		List<SecondCourse> list = null;

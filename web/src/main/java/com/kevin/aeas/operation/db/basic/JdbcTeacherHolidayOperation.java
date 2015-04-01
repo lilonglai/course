@@ -33,7 +33,7 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 		return teacherHoliday;
 	}
 	
-	public List<? extends TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<TeacherHoliday> getByTeacherId(int teacherId) {
 		String sql = "select * from " + getTableName() + " where teacherid = "
 				+ teacherId;
 		List<TeacherHoliday> list = null;
@@ -62,7 +62,7 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 		return teacherHoliday;
 	}
 
-	public List<? extends TeacherHoliday> getAll() {
+	public List<TeacherHoliday> getAll() {
 		String sql = "select * from " + getTableName();
 		List<TeacherHoliday> list = null;
 		try {

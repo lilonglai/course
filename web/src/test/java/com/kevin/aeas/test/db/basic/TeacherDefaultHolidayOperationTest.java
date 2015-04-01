@@ -21,7 +21,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	
 	public void testGetAll(){
 		JdbcTeacherDefaultHolidayOperation operation = new JdbcTeacherDefaultHolidayOperation();
-		List<TeacherDefaultHoliday> teacherDefaultHoliday = operation.getAll();
+		List<? extends TeacherDefaultHoliday> teacherDefaultHoliday = operation.getAll();
 	}
 
 	public void testAdd(){
@@ -36,7 +36,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testUpdate(){
 
 		JdbcTeacherDefaultHolidayOperation operation = new JdbcTeacherDefaultHolidayOperation();
-		List<TeacherDefaultHoliday> list = operation.getAll();
+		List<? extends TeacherDefaultHoliday> list = operation.getAll();
 		for(TeacherDefaultHoliday teacherDefaultHoliday: list){
 			if(teacherDefaultHoliday.getTeacherId() == 2){
 				teacherDefaultHoliday.setWeek3(true);
@@ -49,7 +49,7 @@ public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	
 	public void testDelete(){
 		JdbcTeacherDefaultHolidayOperation operation = new JdbcTeacherDefaultHolidayOperation();
-		List<TeacherDefaultHoliday> list = operation.getAll();
+		List<? extends TeacherDefaultHoliday> list = operation.getAll();
 		for(TeacherDefaultHoliday teacherDefaultHoliday: list){
 			if(teacherDefaultHoliday.getTeacherId() == 2){
 				operation.delete(teacherDefaultHoliday.getId());

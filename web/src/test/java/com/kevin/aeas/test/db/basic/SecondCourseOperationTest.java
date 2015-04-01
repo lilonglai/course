@@ -17,12 +17,12 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	public void testGetByFirstCourseId(){
 		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
-		List<SecondCourse> list = operation.getByFirstCourseId(1);
+		List<? extends SecondCourse> list = operation.getByFirstCourseId(1);
 	}
 	
 	public void testGetByGrade(){
 		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
-		List<SecondCourse> list = operation.getByGrade(1);
+		List<? extends SecondCourse> list = operation.getByGrade(1);
 		
 		list = operation.getByGrade(2);
 		
@@ -31,7 +31,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	public void testGetAll(){
 		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
-		List<SecondCourse> list = operation.getAll();
+		List<? extends SecondCourse> list = operation.getAll();
 	}
 	
 	
@@ -48,7 +48,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
-		List<SecondCourse> list = operation.getAll();
+		List<? extends SecondCourse> list = operation.getAll();
 		for(SecondCourse secondCourse: list){
 			if(secondCourse.getName().equals("test")){
 				secondCourse.setShortName("test 2");
@@ -61,7 +61,7 @@ public abstract class SecondCourseOperationTest extends TestCase{
 	
 	public void testDelete(){
 		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
-		List<SecondCourse> list = operation.getAll();
+		List<? extends SecondCourse> list = operation.getAll();
 		for(SecondCourse secondCourse: list){
 			if(secondCourse.getName().equals("test")){
 				secondCourse.setShortName("test 2");

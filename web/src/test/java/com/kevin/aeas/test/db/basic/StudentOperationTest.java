@@ -24,28 +24,28 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testGetByGrade() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getByGrade(1);
+		List<? extends Student> list = operation.getByGrade(1);
 
 	}
 
 	public void testGetAll() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getAll();
+		List<? extends Student> list = operation.getAll();
 	}
 	
 	public void testGetAlive() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getAlive();
+		List<? extends Student> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getNotAlive();
+		List<? extends Student> list = operation.getNotAlive();
 	}
 
 	public void testGetByTeacherId() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getByTeacherId(1);
+		List<? extends Student> list = operation.getByTeacherId(1);
 
 	}
 
@@ -71,7 +71,7 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testUpdate() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getAll();
+		List<? extends Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -84,7 +84,7 @@ public abstract class StudentOperationTest extends TestCase {
 
 	public void testDelete() {		
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-		List<Student> list = operation.getAll();
+		List<? extends Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -97,7 +97,7 @@ public abstract class StudentOperationTest extends TestCase {
 	
 	public void testRetire() {
 		JdbcStudentOperation operation = new JdbcStudentOperation();
-	    List<Student> list = operation.getAll();
+	    List<? extends Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");

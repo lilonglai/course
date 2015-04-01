@@ -14,17 +14,17 @@ public class TeacherAbilityOperationTest extends TestCase {
 
 	public void testGetAll() {
         MyBatisTeacherAbilityOperation operation = new MyBatisTeacherAbilityOperation();
-		List<TeacherAbility> list=operation.getAll();
+		List<? extends TeacherAbility> list=operation.getAll();
 	}
 
 	public void testGetByTeacherId() {
         MyBatisTeacherAbilityOperation operation = new MyBatisTeacherAbilityOperation();
-		List<TeacherAbility> list = operation.getByTeacherId(1);
+		List<? extends TeacherAbility> list = operation.getByTeacherId(1);
 	}
 
 	public void testGetByCourseId() {
         MyBatisTeacherAbilityOperation operation = new MyBatisTeacherAbilityOperation();
-		List<TeacherAbility> list = operation.getByCourseId(1);
+		List<? extends TeacherAbility> list = operation.getByCourseId(1);
 	}
 
 	public void testAdd() {
@@ -37,7 +37,7 @@ public class TeacherAbilityOperationTest extends TestCase {
 
 	public void testUpdate() {
         MyBatisTeacherAbilityOperation operation = new MyBatisTeacherAbilityOperation();
-		List<TeacherAbility> list=operation.getAll();
+		List<? extends TeacherAbility> list=operation.getAll();
 		for(TeacherAbility teacherAbility: list){
 			if(teacherAbility.getTeacherId() == 25){
 				teacherAbility.setCourseId(26);

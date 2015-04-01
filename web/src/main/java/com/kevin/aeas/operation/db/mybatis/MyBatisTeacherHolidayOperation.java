@@ -26,7 +26,7 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
 		return teacherHoliday;
 	}
 	
-	public List<? extends TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<TeacherHoliday> getByTeacherId(int teacherId) {
 		List<TeacherHoliday> list = null;
         SqlSession session = null;
         try {
@@ -52,7 +52,7 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
 		return teacherHoliday;
 	}
 
-	public List<? extends TeacherHoliday> getAll() {
+	public List<TeacherHoliday> getAll() {
 		List<TeacherHoliday> list = null;
         SqlSession session = null;
         try {

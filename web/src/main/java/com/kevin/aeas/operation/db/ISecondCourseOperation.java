@@ -10,11 +10,11 @@ import java.util.List;
 public interface ISecondCourseOperation {
     public SecondCourse get(int key);
 
-    public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId);
+    public List<SecondCourse> getByFirstCourseId(int firstCourseId);
 
-    public List<? extends SecondCourse> getByGrade(int grade);
+    public List<SecondCourse> getByGrade(int grade);
 
-    public List<? extends SecondCourse> getAll();
+    public List<SecondCourse> getAll();
 
     public void add(SecondCourse secondCourse);
 

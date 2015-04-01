@@ -67,7 +67,7 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		return teacher;		
 	}
 	
-	public List<? extends Teacher> getAll(){
+	public List<Teacher> getAll(){
 		String sql = "select * from " + getTableName();
 		List<Teacher> list = null;
 		try {
@@ -78,7 +78,7 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		return list;		
 	}
 	
-	public List<? extends Teacher> getAlive(){
+	public List<Teacher> getAlive(){
 		String sql = "select * from " + getTableName() + "" + " where isalive=true";
 		List<Teacher> list = null;
 		try {
@@ -89,7 +89,7 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		return list;		
 	}
 	
-	public List<? extends Teacher> getNotAlive(){
+	public List<Teacher> getNotAlive(){
 		String sql = "select * from " + getTableName() + "" + " where isalive=false";
 		List<Teacher> list = null;
 		try {

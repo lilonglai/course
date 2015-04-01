@@ -40,7 +40,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return schedule;	
 	}
 	
-	public List<? extends Schedule> getByStudentId(int studentId){ ;
+	public List<Schedule> getByStudentId(int studentId){ ;
 		List<Schedule> list = null;
         SqlSession session = null;
         try {
@@ -53,7 +53,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return list;
 	}
 	
-	public List<? extends Schedule> getByTeacherId(int teacherId){
+	public List<Schedule> getByTeacherId(int teacherId){
 		List<Schedule> list = null;
         SqlSession session = null;
         try {
@@ -66,7 +66,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return list;
 	}
 		
-	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
 		List<Schedule> list = null;
         SqlSession session = null;
         try {
@@ -79,7 +79,7 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
 		return list;
 	}
 	
-	public List<? extends Schedule> getAll(){
+	public List<Schedule> getAll(){
 		List<Schedule> list = null;
         SqlSession session = null;
         try {

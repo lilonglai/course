@@ -26,7 +26,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFir
         return firstCourse;
 	}
 
-	public List<? extends FirstCourse> getByGrade(int grade) {
+	public List<FirstCourse> getByGrade(int grade) {
 		List<FirstCourse> list = null;
         SqlSession session = null;
         try {
@@ -41,7 +41,7 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFir
 
 	}
 
-	public List<? extends FirstCourse> getAll() {
+	public List<FirstCourse> getAll() {
         List<FirstCourse> list = null;
         SqlSession session = null;
         try {

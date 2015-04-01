@@ -19,7 +19,7 @@ public abstract class JpaBasicOperation<T> {
 		return actualClass;
 	}
 	
-	public List<? extends T> getAll(){
+	public List<T> getAll(){
 		String hsql = "select t from " + actualClass.getSimpleName() +" t";
 		Query q = EntityManangerUtil.getInstance().createQuery(hsql);
 		List list = q.getResultList();				

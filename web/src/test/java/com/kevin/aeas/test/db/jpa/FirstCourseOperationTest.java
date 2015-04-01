@@ -1,6 +1,7 @@
 package com.kevin.aeas.test.db.jpa;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.jpa.JpaFirstCourseOperation;
@@ -18,12 +19,12 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	
 	public void testGetByGrade(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		ArrayList<FirstCourse> list = (ArrayList<FirstCourse>)operation.getByGrade(1);
+		List<FirstCourse> list = (ArrayList<FirstCourse>)operation.getByGrade(1);
 	}
 	
 	public void testGetAll(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		ArrayList<FirstCourse> list = (ArrayList<FirstCourse>) operation.getAll();
+		List<FirstCourse> list = (ArrayList<FirstCourse>) operation.getAll();
 	}
 	
 	
@@ -55,7 +56,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		ArrayList<FirstCourse> list = (ArrayList<FirstCourse>)operation.getAll();
+		List<FirstCourse> list = (List<FirstCourse>)operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");

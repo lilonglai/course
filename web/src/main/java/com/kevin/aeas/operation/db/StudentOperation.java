@@ -31,23 +31,23 @@ public class StudentOperation {
 	}
 	
 
-	public List<? extends Student> getByGrade(int grade) {
+	public List<Student> getByGrade(int grade) {
         return studentDao.getByGrade(grade);
 	}
 
-	public List<? extends Student> getAll() {
+	public List<Student> getAll() {
         return studentDao.getAll();
 	}
 	
-	public List<? extends Student> getAlive() {
+	public List<Student> getAlive() {
         return studentDao.getAlive();
 	}
 	
-	public List<? extends Student> getNotAlive() {
+	public List<Student> getNotAlive() {
         return studentDao.getNotAlive();
 	}
 
-	public List<? extends Student> getByTeacherId(int teacherId) {
+	public List<Student> getByTeacherId(int teacherId) {
         return studentDao.getByTeacherId(teacherId);
 	}
 

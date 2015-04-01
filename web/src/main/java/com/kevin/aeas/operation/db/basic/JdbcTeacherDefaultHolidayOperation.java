@@ -52,7 +52,7 @@ public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<Teache
 		return teacherDefaultHoliday;		
 	}
 	
-	public List<? extends TeacherDefaultHoliday> getAll(){
+	public List<TeacherDefaultHoliday> getAll(){
 		String sql = "select * from " + getTableName();
 		List<TeacherDefaultHoliday> list = null;
 		try {

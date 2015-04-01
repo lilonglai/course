@@ -22,34 +22,31 @@ public class StudentOperationTest extends TestCase {
 
 	public void testGetByGrade() {
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
-		List<Student> list = operation.getByGrade(1);
+		List<? extends Student> list = operation.getByGrade(1);
 
 	}
 
 	public void testGetAll() {
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
-		List<Student> list = operation.getAll();
+		List<? extends Student> list = operation.getAll();
 	}
 	
 	public void testGetAlive() {
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
-		List<Student> list = operation.getAlive();
+		List<? extends Student> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive() {
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
-		List<Student> list = operation.getNotAlive();
+		List<? extends Student> list = operation.getNotAlive();
 	}
 
 	public void testGetByTeacherId() {
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
-		List<Student> list = operation.getByTeacherId(1);
+		List<? extends Student> list = operation.getByTeacherId(1);
 
 	}
 
-	/**
-	 * 
-	 */
 	public void testAdd(){
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
 		Student student = new Student();
@@ -69,7 +66,7 @@ public class StudentOperationTest extends TestCase {
 
 	public void testUpdate() {
         MyBatisStudentOperation operation = new MyBatisStudentOperation();
-		List<Student> list = operation.getAll();
+		List<? extends Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");

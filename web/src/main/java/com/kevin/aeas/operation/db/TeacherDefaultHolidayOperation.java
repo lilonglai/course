@@ -30,7 +30,7 @@ public class TeacherDefaultHolidayOperation {
         return teacherDefaultHolidayDao.getByTeacherId(teacherId);
 	}
 	
-	public List<? extends TeacherDefaultHoliday> getAll(){
+	public List<TeacherDefaultHoliday> getAll(){
         return teacherDefaultHolidayDao.getAll();
 	}
 

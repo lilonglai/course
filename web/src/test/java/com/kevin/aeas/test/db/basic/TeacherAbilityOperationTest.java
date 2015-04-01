@@ -16,17 +16,17 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 
 	public void testGetAll() {
 		JdbcTeacherAbilityOperation operation = new JdbcTeacherAbilityOperation();
-		List<TeacherAbility> list=operation.getAll();
+		List<? extends TeacherAbility> list=operation.getAll();
 	}
 
 	public void testGetByTeacherId() {
 		JdbcTeacherAbilityOperation operation = new JdbcTeacherAbilityOperation();
-		List<TeacherAbility> list = operation.getByTeacherId(1);
+		List<? extends TeacherAbility> list = operation.getByTeacherId(1);
 	}
 
 	public void testGetByCourseId() {
 		JdbcTeacherAbilityOperation operation = new JdbcTeacherAbilityOperation();
-		List<TeacherAbility> list = operation.getByCourseId(1);
+		List<? extends TeacherAbility> list = operation.getByCourseId(1);
 	}
 
 	public void testAdd() {
@@ -39,7 +39,7 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 
 	public void testUpdate() {
 		JdbcTeacherAbilityOperation operation = new JdbcTeacherAbilityOperation();
-		List<TeacherAbility> list=operation.getAll();
+		List<? extends TeacherAbility> list=operation.getAll();
 		for(TeacherAbility teacherAbility: list){
 			if(teacherAbility.getTeacherId() == 25){
 				teacherAbility.setCourseId(26);
@@ -50,7 +50,7 @@ public abstract class TeacherAbilityOperationTest extends TestCase {
 
 	public void testDelete() {
 		JdbcTeacherAbilityOperation operation = new JdbcTeacherAbilityOperation();
-		List<TeacherAbility> list=operation.getAll();
+		List<? extends TeacherAbility> list=operation.getAll();
 		for(TeacherAbility teacherAbility: list){
 			if(teacherAbility.getTeacherId() == 25){
 				teacherAbility.setCourseId(26);

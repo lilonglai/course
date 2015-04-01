@@ -10,11 +10,11 @@ import java.util.List;
 public interface ITeacherHolidayOperation {
     public TeacherHoliday get(int key);
 
-    public List<? extends TeacherHoliday> getByTeacherId(int teacherId);
+    public List<TeacherHoliday> getByTeacherId(int teacherId);
 
     public TeacherHoliday getByTeacherAndDate( int teacherId, String date);
 
-    public List<? extends TeacherHoliday> getAll();
+    public List<TeacherHoliday> getAll();
 
     public void add(TeacherHoliday teacherHoliday);
 

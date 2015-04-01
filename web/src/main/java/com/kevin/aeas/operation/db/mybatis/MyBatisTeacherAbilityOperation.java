@@ -25,7 +25,7 @@ public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatis
 		return teacherAbility;
 	}
 	
-	public List<? extends TeacherAbility> getAll() {
+	public List<TeacherAbility> getAll() {
 		List<TeacherAbility> list = null;
         SqlSession session = null;
         try {
@@ -38,7 +38,7 @@ public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatis
 		return list;
 	}
 	
-	public List<? extends TeacherAbility> getByTeacherId(int teacherId) {
+	public List<TeacherAbility> getByTeacherId(int teacherId) {
 		List<TeacherAbility> list = null;
         SqlSession session = null;
         try {
@@ -51,7 +51,7 @@ public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatis
 		return list;
 	}
 	
-	public List<? extends TeacherAbility> getByCourseId(int courseId) {
+	public List<TeacherAbility> getByCourseId(int courseId) {
         List<TeacherAbility> list = null;
         SqlSession session = null;
         try {

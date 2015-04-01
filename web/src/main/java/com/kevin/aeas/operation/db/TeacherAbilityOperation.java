@@ -26,15 +26,15 @@ public class TeacherAbilityOperation {
         return teacherAbilityDao.get(key);
 	}
 
-	public List<? extends TeacherAbility> getAll() {
+	public List<TeacherAbility> getAll() {
         return teacherAbilityDao.getAll();
 	}
 	
-	public List<? extends TeacherAbility> getByTeacherId(int teacherId) {
+	public List<TeacherAbility> getByTeacherId(int teacherId) {
         return teacherAbilityDao.getByTeacherId(teacherId);
 	}
 	
-	public List<? extends TeacherAbility> getByCourseId(int courseId) {
+	public List<TeacherAbility> getByCourseId(int courseId) {
         return teacherAbilityDao.getByCourseId(courseId);
 	}
 	

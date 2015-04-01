@@ -17,7 +17,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 
 	public void testGetByTeacherId() {
 		JdbcTeacherHolidayOperation operation = new JdbcTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getByTeacherId(2);
+		List<? extends TeacherHoliday> list = operation.getByTeacherId(2);
 
 	}
 
@@ -29,7 +29,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 
 	public void testGetAll() {
 		JdbcTeacherHolidayOperation operation = new JdbcTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getAll();
+		List<? extends TeacherHoliday> list = operation.getAll();
 
 	}
 
@@ -44,7 +44,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 
 	public void testUpdate() {
 		JdbcTeacherHolidayOperation operation = new JdbcTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getAll();
+		List<? extends TeacherHoliday> list = operation.getAll();
 		for (TeacherHoliday teacherHoliday : list) {
 			if (teacherHoliday.getTeacherId() == 2) {
 				teacherHoliday.setAdjustDate(new Date(1989, 07, 23));
@@ -56,7 +56,7 @@ public abstract class TeacherHolidayOperationTest extends TestCase {
 
 	public void testDelete() {
 		JdbcTeacherHolidayOperation operation = new JdbcTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getAll();
+		List<? extends TeacherHoliday> list = operation.getAll();
 		for (TeacherHoliday teacherHoliday : list) {
 			if (teacherHoliday.getTeacherId() == 2) {
 				teacherHoliday.setAdjustDate(new Date(1989, 07, 23));

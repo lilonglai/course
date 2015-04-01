@@ -55,7 +55,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 	}
 	
 
-	public List<? extends Student> getByGrade(int grade) {
+	public List<Student> getByGrade(int grade) {
 		String sql = "select * from " + getTableName() + " where grade = " + grade;
 		List<Student> list = null;
 		try {
@@ -67,7 +67,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		return list;
 	}
 
-	public List<? extends Student> getAll() {
+	public List<Student> getAll() {
 		String sql = "select * from " + getTableName();
 		List<Student> list = null;
 		try {
@@ -79,7 +79,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		return list;
 	}
 	
-	public List<? extends Student> getAlive() {
+	public List<Student> getAlive() {
 		String sql = "select * from " + getTableName() + "" + " where isalive=true";
 		List<Student> list = null;
 		try {
@@ -91,7 +91,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		return list;
 	}
 	
-	public List<? extends Student> getNotAlive() {
+	public List<Student> getNotAlive() {
 		String sql = "select * from " + getTableName() + "" + " where isalive=false";
 		List<Student> list = null;
 		try {
@@ -103,7 +103,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		return list;
 	}
 
-	public List<? extends Student> getByTeacherId(int teacherId) {
+	public List<Student> getByTeacherId(int teacherId) {
 		String sql = "select * from " + getTableName() + " where teacherid = "
 				+ teacherId;
 		List<Student> list = null;

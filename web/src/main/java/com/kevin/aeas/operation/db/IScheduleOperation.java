@@ -13,13 +13,13 @@ public interface IScheduleOperation {
 
     public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime);
 
-    public List<? extends Schedule> getByStudentId(int studentId);
+    public List<Schedule> getByStudentId(int studentId);
 
-    public List<? extends Schedule> getByTeacherId(int teacherId);
+    public List<Schedule> getByTeacherId(int teacherId);
 
-    public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime);
+    public List<Schedule> getByDateAndTime(Date onDate, int onTime);
 
-    public List<? extends Schedule> getAll();
+    public List<Schedule> getAll();
 
     public void add(Schedule schedule);
 

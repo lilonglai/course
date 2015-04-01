@@ -34,7 +34,7 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
 		return firstCourse;
 	}
 
-	public List<? extends FirstCourse> getByGrade(int grade) {
+	public List<FirstCourse> getByGrade(int grade) {
 		String sql = "select * from " + getTableName() + " where grade = " + grade;
 		List<FirstCourse> list = null;
 		try {
@@ -47,7 +47,7 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
 
 	}
 
-	public List<? extends FirstCourse> getAll() {
+	public List<FirstCourse> getAll() {
 		String sql = "select * from " + getTableName();
 		List<FirstCourse> list = null;
 		try {

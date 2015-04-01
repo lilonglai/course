@@ -32,31 +32,31 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	}
 	
 
-	public List<? extends Student> getByGrade(int grade) {
+	public List<Student> getByGrade(int grade) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.grade=:grade");
 		q.setParameter("grade", grade);
-        List<? extends Student> list = q.getResultList();
+        List<Student> list = q.getResultList();
 		return list;
 	}
 	
-	public List<? extends Student> getAlive() {
+	public List<Student> getAlive() {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
-        List<? extends Student> list = q.getResultList();
+        List<Student> list = q.getResultList();
 		return list;
 	}
 	
-	public List<? extends Student> getNotAlive() {
+	public List<Student> getNotAlive() {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
-        List<? extends Student> list = q.getResultList();
+        List<Student> list = q.getResultList();
 		return list;
 	}
 
-	public List<? extends Student> getByTeacherId(int teacherId) {
+	public List<Student> getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        List<? extends Student> list = q.getResultList();
+        List<Student> list = q.getResultList();
 		return list;
 
 	}

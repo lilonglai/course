@@ -27,15 +27,15 @@ public class SecondCourseOperation {
         return secondCourseDao.get(key);
 	}
 	
-	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
         return secondCourseDao.getByFirstCourseId(firstCourseId);
 	}
 	
-	public List<? extends SecondCourse> getByGrade(int grade){
+	public List<SecondCourse> getByGrade(int grade){
         return secondCourseDao.getByGrade(grade);
 	}
 	
-	public List<? extends SecondCourse> getAll(){
+	public List<SecondCourse> getAll(){
         return secondCourseDao.getAll();
 	}
 	

@@ -32,20 +32,20 @@ public class ScheduleOperation {
 		return scheduleDao.getByStudentIdOnDateAndTime(studentId, onDate, onTime);
 	}
 	
-	public List<? extends Schedule> getByStudentId(int studentId){
+	public List<Schedule> getByStudentId(int studentId){
         return scheduleDao.getByStudentId(studentId);
 	}
 	
-	public List<? extends Schedule> getByTeacherId(int teacherId){
+	public List<Schedule> getByTeacherId(int teacherId){
         return scheduleDao.getByTeacherId(teacherId);
 	}
 	
 	
-	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
         return scheduleDao.getByDateAndTime(onDate, onTime);
 	}
 	
-	public List<? extends Schedule> getAll(){
+	public List<Schedule> getAll(){
         return scheduleDao.getAll();
 	}
 	

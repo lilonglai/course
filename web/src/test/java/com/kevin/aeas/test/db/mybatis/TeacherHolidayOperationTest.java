@@ -15,7 +15,7 @@ public class TeacherHolidayOperationTest extends TestCase {
 
 	public void testGetByTeacherId() {
         MyBatisTeacherHolidayOperation operation = new MyBatisTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getByTeacherId(2);
+		List<? extends TeacherHoliday> list = operation.getByTeacherId(2);
 
 	}
 
@@ -27,7 +27,7 @@ public class TeacherHolidayOperationTest extends TestCase {
 
 	public void testGetAll() {
         MyBatisTeacherHolidayOperation operation = new MyBatisTeacherHolidayOperation();
-		List<TeacherHoliday> list = operation.getAll();
+		List<? extends TeacherHoliday> list = operation.getAll();
 
 	}
 

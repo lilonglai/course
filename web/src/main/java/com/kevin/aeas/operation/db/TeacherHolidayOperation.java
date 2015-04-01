@@ -26,7 +26,7 @@ public class TeacherHolidayOperation {
         return teacherHolidayDao.get(key);
 	}
 
-	public List<? extends TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<TeacherHoliday> getByTeacherId(int teacherId) {
         return teacherHolidayDao.getByTeacherId(teacherId);
 	}
 	
@@ -34,7 +34,7 @@ public class TeacherHolidayOperation {
         return teacherHolidayDao.getByTeacherAndDate(teacherId, date);
 	}
 
-	public List<? extends TeacherHoliday> getAll() {
+	public List<TeacherHoliday> getAll() {
         return teacherHolidayDao.getAll();
 	}
 

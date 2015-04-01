@@ -31,7 +31,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		return teacherAbility;
 	}
 	
-	public List<? extends TeacherAbility> getAll() {
+	public List<TeacherAbility> getAll() {
 		String sql = "select aeas_teacherability.* from"
 				+ " aeas_teacherability,aeas_firstcourse"
 				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
@@ -45,7 +45,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		return list;
 	}
 	
-	public List<? extends TeacherAbility> getByTeacherId(int teacherId) {
+	public List<TeacherAbility> getByTeacherId(int teacherId) {
 		String sql = "select aeas_teacherability.*"
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where teacherid = " + teacherId + " and aeas_firstcourse.id=aeas_teacherability.courseid"
@@ -59,7 +59,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		return list;
 	}
 	
-	public List<? extends TeacherAbility> getByCourseId(int courseId) {
+	public List<TeacherAbility> getByCourseId(int courseId) {
 		String sql = "select aeas_teacherability.*"
 				+ " from aeas_teacherability,aeas_firstcourse"
 				+ " where courseid = " + courseId + " and aeas_firstcourse.id=aeas_teacherability.courseid"

@@ -10,9 +10,9 @@ import java.util.List;
 public interface IFirstCourseOperation {
     public FirstCourse get(int key);
 
-    public List<? extends FirstCourse> getByGrade(int grade);
+    public List<FirstCourse> getByGrade(int grade);
 
-    public List<? extends FirstCourse> getAll();
+    public List<FirstCourse> getAll();
 
     public void add(FirstCourse firstCourse);
 

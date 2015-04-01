@@ -39,7 +39,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 	}
 	
 
-	public List<? extends Student> getByGrade(int grade) {
+	public List<Student> getByGrade(int grade) {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -52,7 +52,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 
-	public List<? extends Student> getAll() {
+	public List<Student> getAll() {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -65,7 +65,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 	
-	public List<? extends Student> getAlive() {
+	public List<Student> getAlive() {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -78,7 +78,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 	
-	public List<? extends Student> getNotAlive() {
+	public List<Student> getNotAlive() {
 		List<Student> list = null;
         SqlSession session = null;
         try {
@@ -91,7 +91,7 @@ public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent
 		return list;
 	}
 
-	public List<? extends Student> getByTeacherId(int teacherId) {
+	public List<Student> getByTeacherId(int teacherId) {
 		List<Student> list = null;
         SqlSession session = null;
         try {

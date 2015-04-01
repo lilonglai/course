@@ -31,27 +31,27 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 		return null;		
 	}
 	
-	public List<? extends Schedule> getByStudentId(int studentId){
+	public List<Schedule> getByStudentId(int studentId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.studentId=:studentId");
 		q.setParameter("studentId", studentId);
-        List<? extends Schedule> list = q.getResultList();
+        List<Schedule> list = q.getResultList();
 		return list;		
 	}
 	
-	public List<? extends Schedule> getByTeacherId(int teacherId){
+	public List<Schedule> getByTeacherId(int teacherId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        List<? extends Schedule> list = q.getResultList();
+        List<Schedule> list = q.getResultList();
 		return list;	
 		
 	}
 	
 	
-	public List<? extends Schedule> getByDateAndTime(Date onDate, int onTime){
+	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.onDate=:onDate and d.onTime=:onTime order by s.onDate,d.onTime");
 		q.setParameter("onDate", onDate);
 		q.setParameter("ontime", onTime);
-        List<? extends Schedule> list = q.getResultList();
+        List<Schedule> list = q.getResultList();
 		return list;		
 	}
 	
@@ -67,10 +67,6 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 		setValueByObject(t, newObject);
 		
 		return newObject;
-	}
-	public static void main(String[] args) {
-		JpaScheduleOperation operation = new JpaScheduleOperation();
-		
 	}
 
 }

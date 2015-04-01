@@ -35,15 +35,15 @@ public class TeacherOperation {
         return teacherDao.getByShortName(shortName);
 	}
 	
-	public List<? extends Teacher> getAll(){
+	public List<Teacher> getAll(){
         return teacherDao.getAll();
 	}
 	
-	public List<? extends Teacher> getAlive(){
+	public List<Teacher> getAlive(){
         return teacherDao.getAlive();
 	}
 	
-	public List<? extends Teacher> getNotAlive(){
+	public List<Teacher> getNotAlive(){
         return teacherDao.getNotAlive();
 	}
 	

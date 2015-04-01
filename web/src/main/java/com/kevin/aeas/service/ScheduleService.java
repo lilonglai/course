@@ -21,8 +21,8 @@ public class ScheduleService {
 	private List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
 		SecondCourseOperation secondCourseOperation = new SecondCourseOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		List<? extends SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
-		List<? extends Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
+		List<SecondCourse> secondCourseList = secondCourseOperation.getByFirstCourseId(firstCourseId);
+		List<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
 		List<SecondCourse> resultList = new ArrayList<SecondCourse>();
 		for(SecondCourse secondCourse : secondCourseList){
 			if(isScheduled(secondCourse, scheduleList)){
@@ -34,7 +34,7 @@ public class ScheduleService {
 		return resultList;
 	}
 	
-	private boolean isScheduled(SecondCourse secondCourse, List<? extends Schedule> scheduleList){
+	private boolean isScheduled(SecondCourse secondCourse, List<Schedule> scheduleList){
 		for(Schedule schedule : scheduleList){
 			if(secondCourse.getId() == schedule.getCourseId()){
 				return true;
@@ -50,10 +50,10 @@ public class ScheduleService {
 
 		TeacherOperation teacherOperation = new TeacherOperation();
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
-		List<? extends TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
+		List<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByCourseId(firstCourseId);
 		
 		List<Teacher> teacherList = new ArrayList<Teacher>();
-	    List< ? extends Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
+	    List< Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
 		
 		for(TeacherAbility teacherAbility:teacherAbilityList){
 			int teacherId = teacherAbility.getTeacherId();
@@ -80,7 +80,7 @@ public class ScheduleService {
 		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayOperation();
 		TeacherHolidayOperation teacherHolidayOperation = new TeacherHolidayOperation();
 		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
-		List<? extends TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
+		List<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
 	    if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
 	    	return true;
 	    }
@@ -93,7 +93,7 @@ public class ScheduleService {
 	 * @param teacherId the teacher identification.
 	 * @param Schedule the arranged list
 	 */
-	private boolean isScheduled(int teacherId, List<? extends Schedule> scheduleList){
+	private boolean isScheduled(int teacherId, List<Schedule> scheduleList){
 		for(Schedule schedule : scheduleList){
 			if(schedule.getTeacherId() == teacherId){
 				return true;
@@ -106,8 +106,8 @@ public class ScheduleService {
 	private ArrayList<Teacher> getAvailableTeacherList(Date onDate, int onTime){
 		ScheduleOperation scheduleOperation = new ScheduleOperation();
 		TeacherOperation teacherOperation = new TeacherOperation();
-		List<? extends Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
-		List<? extends Teacher> teacherList = teacherOperation.getAll();
+		List<Schedule> scheduleList = scheduleOperation.getByDateAndTime(onDate, onTime);
+		List<Teacher> teacherList = teacherOperation.getAll();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(onDate);

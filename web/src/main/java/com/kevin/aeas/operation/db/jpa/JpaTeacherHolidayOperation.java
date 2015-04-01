@@ -21,10 +21,10 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday
 		}
 	}
 
-	public List<? extends TeacherHoliday> getByTeacherId(int teacherId) {
+	public List<TeacherHoliday> getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        List<? extends TeacherHoliday> list = q.getResultList();
+        List<TeacherHoliday> list = q.getResultList();
 		return list;
 	}
 	
@@ -41,8 +41,7 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday
 	public void deleteByTeacherId(int teacherId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        List<? extends TeacherHoliday> list = q.getResultList();
-		
+        List<TeacherHoliday> list = q.getResultList();
 	}
 
 	protected  Object changeToJpa(Object t){

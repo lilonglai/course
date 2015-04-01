@@ -14,11 +14,11 @@ public interface ITeacherOperation {
 
     public Teacher getByShortName(String shortName);
 
-    public List<? extends Teacher> getAll();
+    public List<Teacher> getAll();
 
-    public List<? extends Teacher> getAlive();
+    public List<Teacher> getAlive();
 
-    public List<? extends Teacher> getNotAlive();
+    public List<Teacher> getNotAlive();
 
     public Teacher getByCondition(Teacher condition);
 

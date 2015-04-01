@@ -27,13 +27,12 @@ public class FirstCourseOperation {
         return firstCourseDao.get(key);
 	}
 	
-	public List<? extends FirstCourse> getByGrade(int grade){
+	public List<FirstCourse> getByGrade(int grade){
         return firstCourseDao.getByGrade(grade);
 	}
 	
-	public List<? extends FirstCourse> getAll(){
+	public List<FirstCourse> getAll(){
         return firstCourseDao.getAll();
-		
 	}
 	
 	

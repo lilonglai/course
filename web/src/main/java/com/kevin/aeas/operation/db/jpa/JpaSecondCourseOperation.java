@@ -25,17 +25,17 @@ public class JpaSecondCourseOperation extends JpaBasicOperation<SecondCourse> im
 		}
 	}
 	
-	public List<? extends SecondCourse> getByFirstCourseId(int firstCourseId){
+	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + getActualClass().getSimpleName() + " sc where sc.firstCourseId=:firstCourseId");
 		q.setParameter("firstCourseId", firstCourseId);
-        List<? extends SecondCourse> scList = q.getResultList();
+        List<SecondCourse> scList = q.getResultList();
 		return scList;		
 	}
 	
-	public List<? extends SecondCourse> getByGrade(int grade){
+	public List<SecondCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + firstCourseClass.getSimpleName() + " fc, "  + getActualClass().getSimpleName() + " sc  where fc.grade=:grade and sc.firstCourseId=fc.id");
 		q.setParameter("grade", grade);
-		List<? extends SecondCourse> scList = q.getResultList();
+		List<SecondCourse> scList = q.getResultList();
 		return scList;		
 	}
 	

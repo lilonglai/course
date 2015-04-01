@@ -40,17 +40,17 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 		return teacher;
 	}
 	
-	public List<? extends Teacher> getAlive(){
+	public List<Teacher> getAlive(){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", true);
-        List<? extends Teacher> list = q.getResultList();
+        List<Teacher> list = q.getResultList();
 		return list;		
 	}
 	
-	public List<? extends Teacher> getNotAlive(){
+	public List<Teacher> getNotAlive(){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
-        List<? extends Teacher> list = q.getResultList();
+        List<Teacher> list = q.getResultList();
 		return list;	
 		
 	}

@@ -10,11 +10,11 @@ import java.util.List;
 public interface ITeacherAbilityOperation {
     public TeacherAbility get(int key);
 
-    public List<? extends TeacherAbility> getAll();
+    public List<TeacherAbility> getAll();
 
-    public List<? extends TeacherAbility> getByTeacherId(int teacherId);
+    public List<TeacherAbility> getByTeacherId(int teacherId);
 
-    public List<? extends TeacherAbility> getByCourseId(int courseId);
+    public List<TeacherAbility> getByCourseId(int courseId);
 
     public void add(TeacherAbility teacherAbility);
 

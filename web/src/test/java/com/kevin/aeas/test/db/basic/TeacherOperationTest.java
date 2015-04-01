@@ -28,27 +28,24 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testGetAll(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
-		List<Teacher> list = operation.getAll();
+		List<? extends Teacher> list = operation.getAll();
 	}
 	
 	public void testGetAlive(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 	}
 	
 	public void testGetNotAlive(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
-		List<Teacher> list = operation.getNotAlive();
+		List<? extends Teacher> list = operation.getNotAlive();
 	}
 	
 	public void testGetIdByObject(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
-		int id = operation.getIdByObject(teacher);
-
-		
-		
+        operation.getByCondition(teacher);
 	}
 	
 	public void testAdd(){
@@ -63,7 +60,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testUpdate(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				teacher.setShortName("test2");
@@ -76,7 +73,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testDelete(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.delete(teacher.getId());;
@@ -86,7 +83,7 @@ public abstract class TeacherOperationTest extends TestCase{
 	
 	public void testRetire(){
 		JdbcTeacherOperation operation = new JdbcTeacherOperation();
-		List<Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.retire(teacher.getId());;

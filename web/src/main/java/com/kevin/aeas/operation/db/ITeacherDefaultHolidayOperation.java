@@ -12,7 +12,7 @@ public interface ITeacherDefaultHolidayOperation {
 
     public TeacherDefaultHoliday getByTeacherId(int teacherId);
 
-    public List<? extends TeacherDefaultHoliday> getAll();
+    public List<TeacherDefaultHoliday> getAll();
 
     public void add(TeacherDefaultHoliday teacherDefaultHoliday);
 
