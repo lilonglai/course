@@ -28,8 +28,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
             teacher = list.get(0);
 		return teacher;
 	}
-	
-	
+
 	public Teacher getByShortName(String shortName){
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.shortName=:shortName");
 		q.setParameter("shortName", shortName);
@@ -51,8 +50,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
 		q.setParameter("isAlive", false);
         List<Teacher> list = q.getResultList();
-		return list;	
-		
+		return list;
 	}
 	
 	public Teacher getByCondition(Teacher condition){
@@ -67,22 +65,13 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 		else{
 			newObject = new OracleTeacher();
 		}
-		
 		setValueByObject(t, newObject);
-		
 		return newObject;
 	}
-	
-	
-	public void retire(int key){
-		OracleTeacher aeasTeacher = EntityManangerUtil.getInstance().find(OracleTeacher.class, key);
-		aeasTeacher.setIsAlive(false);
-		EntityManangerUtil.getInstance().merge(aeasTeacher);
-	}
-	
-	public static void main(String[] args) {
-		JpaTeacherOperation operation = new JpaTeacherOperation();
-		System.out.println(operation.getAll());		
-	}
 
+	public void retire(int key){
+		Teacher teacher = (Teacher)EntityManangerUtil.getInstance().find(getActualClass(), key);
+        teacher.setIsAlive(false);
+		EntityManangerUtil.getInstance().merge(teacher);
+	}
 }

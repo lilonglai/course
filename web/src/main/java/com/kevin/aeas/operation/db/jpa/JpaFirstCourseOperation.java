@@ -23,26 +23,18 @@ public class JpaFirstCourseOperation extends JpaBasicOperation<FirstCourse> impl
 	public List<FirstCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select c from " + getActualClass().getSimpleName() + " c where c.grade=:grade");
 		q.setParameter("grade", grade);
-        List<FirstCourse> list = q.getResultList();
-		return null;
+        return q.getResultList();
 	}		
 	
 	protected  Object changeToJpa(Object t){
-		FirstCourse newObject = null;
+		FirstCourse newObject;
 		if(ConfigurationManager.getInstance().isMySql()){
 			newObject = new MySqlFirstCourse();
 		}
 		else{
 			newObject = new OracleFirstCourse();
 		}
-		
 		setValueByObject(t, newObject);
-		
 		return newObject;
 	}
-	public static void main(String[] args) {
-		JpaFirstCourseOperation operation = new JpaFirstCourseOperation();
-		System.out.println(operation.getAll());		
-	}
-
 }

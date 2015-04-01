@@ -20,9 +20,10 @@ public class JpaUserOperation extends JpaBasicOperation<User> implements IUserOp
 	}
 
 	public boolean isExistUser(String userName, String userPassword) {
-		String hsql = "select u from AeasUser u where u.name='" + userName
-				+ "' and u.password='" + userPassword + "'";
+		String hsql = "select u from " + getActualClass() + " u where u.name=:userName and u.password=:userPassword";
 		Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+        q.setParameter("userName", userName);
+        q.setParameter("userPassword", userPassword);
 		List list = q.getResultList();
 		if (list.isEmpty())
 			return false;

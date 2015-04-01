@@ -12,13 +12,13 @@ import junit.framework.TestCase;
 public abstract class StudentOperationTest extends TestCase {
 	public void testGet() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		Student student = (Student) operation.get(1);
+		Student student = operation.get(1);
 	}
 
 	
 	public void testGetByName() {
 		JpaStudentOperation operation = new JpaStudentOperation();
-		Student student = (Student) operation.getByName("test");
+		Student student = operation.getByName("test");
 	}
 	
 

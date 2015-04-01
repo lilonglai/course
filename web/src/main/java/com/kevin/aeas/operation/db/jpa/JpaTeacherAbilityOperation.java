@@ -8,6 +8,7 @@ import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -27,29 +28,45 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 	public List<TeacherAbility> getByTeacherId(int teacherId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        List<TeacherAbility> list = q.getResultList();
-		return list;
+        return q.getResultList();
 	}
 	
 	public List<TeacherAbility> getByCourseId(int courseId) {
 		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.courseId=:courseId");
 		q.setParameter("courseId", courseId);
-        List< TeacherAbility> list = q.getResultList();
-		return list;
+        return q.getResultList();
 	}
 	
 	
 	public void deleteByTeacherId(int teacherId){
-		String sql = "delete from "  + getActualClass().getSimpleName() + " ta where ta.teacherId = " + teacherId;
-		EntityManangerUtil.getInstance().createQuery(sql);
+        EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
+        transaction.begin();
+        try {
+            String sql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = :teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(sql);
+            q.setParameter("teacherId", teacherId);
+            q.executeUpdate();
+            transaction.commit();
+        }catch(Exception e){
+            transaction.rollback();
+        }
 	}
 		
 	public void deleteByTeacherAndGrade(int teacherId,int grade){
-		String sql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = " + teacherId
-				+ " and ta.courseId in(select fc.id from "  + firstCourseClass.getSimpleName() + " fc where fc.grade = " + grade + ")";
-		EntityManangerUtil.getInstance().createQuery(sql);
-		
-	}
+        EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
+        transaction.begin();
+        try {
+            String sql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = :teacherId"
+                    + " and ta.courseId in(select fc.id from " + firstCourseClass.getSimpleName() + " fc where fc.grade = :grade)";
+            Query q = EntityManangerUtil.getInstance().createQuery(sql);
+            q.setParameter("teacherId", teacherId);
+            q.setParameter("grade", grade);
+            q.executeUpdate();
+            transaction.commit();
+        }catch(Exception e) {
+            transaction.rollback();
+        }
+    }
 	
 	protected  Object changeToJpa(Object t){
 		TeacherAbility newObject = null;
@@ -59,9 +76,7 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 		else{
 			newObject = new OracleTeacherAbility();
 		}
-		
 		setValueByObject(t, newObject);
-		
 		return newObject;
 	}
 	

@@ -41,11 +41,11 @@ public abstract class TeacherOperationTest extends TestCase{
 		ArrayList<Teacher> list = (ArrayList<Teacher>) operation.getNotAlive();
 	}
 	
-	public void testGetIdByObject(){
+	public void testGetByCondition(){
 		JpaTeacherOperation operation = new JpaTeacherOperation();
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
-		int id = operation.getIdByObject(teacher);		
+		operation.getByCondition(teacher);
 	}
 	
 	public void testAdd(){

@@ -6,6 +6,7 @@ import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -22,19 +23,21 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation<Teacher
 	public TeacherDefaultHoliday getByTeacherId(int teacherId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select td from "  + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-		List<? extends TeacherDefaultHoliday> list = q.getResultList();
-		if(list.size() > 0)
-			return list.get(0);
-		return null;
+        return (TeacherDefaultHoliday)q.getSingleResult();
 	}
 	
 	public void deleteByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select td from "  + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
-		q.setParameter("teacherId", teacherId);
-		List list = q.getResultList();
+        EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
+        transaction.begin();
+        try {
+            Query q = EntityManangerUtil.getInstance().createQuery("select td from " + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
+            q.setParameter("teacherId", teacherId);
+            q.executeUpdate();
+        }catch(Exception e){
+            transaction.rollback();
+        }
 	}
-	
-	
+
 	protected  Object changeToJpa(Object t){
 		TeacherDefaultHoliday newObject = null;
 		if(ConfigurationManager.getInstance().isMySql()){
@@ -43,15 +46,7 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation<Teacher
 		else{
 			newObject = new OracleTeacherDefaultHoliday();
 		}
-		
 		setValueByObject(t, newObject);
-		
 		return newObject;
-	}
-	
-	
-	public static void main(String[] args) {
-		JpaTeacherDefaultHolidayOperation operation = new JpaTeacherDefaultHolidayOperation();
-		System.out.println(operation.getAll());		
 	}
 }

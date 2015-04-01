@@ -23,49 +23,40 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 	public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.onDate=:onDate and s.onTime=:onTime and s.studentId=:studentId");
 		q.setParameter("onDate", onDate);
-		q.setParameter("ontime", onTime);
+		q.setParameter("onTime", onTime);
 		q.setParameter("studentId", studentId);
-		List<? extends Schedule> list = q.getResultList();
-		if(list.size() > 0)
-			return list.get(0);
-		return null;		
+		return (Schedule)q.getSingleResult();
 	}
 	
 	public List<Schedule> getByStudentId(int studentId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.studentId=:studentId");
 		q.setParameter("studentId", studentId);
-        List<Schedule> list = q.getResultList();
-		return list;		
+        return q.getResultList();
 	}
 	
 	public List<Schedule> getByTeacherId(int teacherId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
 		q.setParameter("teacherId", teacherId);
-        List<Schedule> list = q.getResultList();
-		return list;	
-		
+        return q.getResultList();
 	}
 	
 	
 	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.onDate=:onDate and d.onTime=:onTime order by s.onDate,d.onTime");
+		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.onDate=:onDate and s.onTime=:onTime order by s.onDate,s.onTime");
 		q.setParameter("onDate", onDate);
-		q.setParameter("ontime", onTime);
-        List<Schedule> list = q.getResultList();
-		return list;		
+		q.setParameter("onTime", onTime);
+        return q.getResultList();
 	}
 	
 	protected  Object changeToJpa(Object t){
-		Schedule newObject = null;
+		Schedule newObject;
 		if(ConfigurationManager.getInstance().isMySql()){
 			newObject = new MySqlSchedule();
 		}
 		else{
 			newObject = new OracleSchedule();
 		}
-		
 		setValueByObject(t, newObject);
-		
 		return newObject;
 	}
 

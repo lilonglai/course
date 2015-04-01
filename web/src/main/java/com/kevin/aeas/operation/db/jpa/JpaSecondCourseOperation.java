@@ -28,34 +28,24 @@ public class JpaSecondCourseOperation extends JpaBasicOperation<SecondCourse> im
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + getActualClass().getSimpleName() + " sc where sc.firstCourseId=:firstCourseId");
 		q.setParameter("firstCourseId", firstCourseId);
-        List<SecondCourse> scList = q.getResultList();
-		return scList;		
+        return q.getResultList();
 	}
 	
 	public List<SecondCourse> getByGrade(int grade){
 		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + firstCourseClass.getSimpleName() + " fc, "  + getActualClass().getSimpleName() + " sc  where fc.grade=:grade and sc.firstCourseId=fc.id");
 		q.setParameter("grade", grade);
-		List<SecondCourse> scList = q.getResultList();
-		return scList;		
+		return q.getResultList();
 	}
 	
 	protected  Object changeToJpa(Object t){
-		SecondCourse newObject = null;
+		SecondCourse newObject;
 		if(ConfigurationManager.getInstance().isMySql()){
 			newObject = new MySqlSecondCourse();
 		}
 		else{
 			newObject = new OracleSecondCourse();
 		}
-		
 		setValueByObject(t, newObject);
-		
 		return newObject;
 	}
-	
-	public static void main(String[] args) {
-		JpaSecondCourseOperation operation = new JpaSecondCourseOperation();
-		System.out.println(operation.getByFirstCourseId(1));		
-	}
-
 }
