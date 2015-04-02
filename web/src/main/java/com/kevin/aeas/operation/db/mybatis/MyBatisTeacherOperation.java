@@ -13,158 +13,49 @@ public class MyBatisTeacherOperation extends MyBatisBaseOperation<MyBatisTeacher
     }
 
 	public Teacher get(int key){
-		Teacher teacher = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            teacher = myBatisTeacher.get(key);
-        }finally {
-            session.close();
-        }
-		return teacher;
+        return proxy.get(key);
 	}
 
 	
 	public Teacher getByName(String name){
-        Teacher teacher = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            teacher = myBatisTeacher.getByName(name);
-        }finally {
-            session.close();
-        }
-		return teacher;		
+        return proxy.getByName(name);
 	}
 	
 	
 	public Teacher getByShortName(String shortName){
-        Teacher teacher = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            teacher = myBatisTeacher.getByShortName(shortName);
-        }finally {
-            session.close();
-        }
-		return teacher;		
+        return proxy.getByShortName(shortName);
 	}
 	
 	public List<Teacher> getAll(){
-		List<Teacher> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            list = myBatisTeacher.getAll();
-        }finally {
-            session.close();
-        }
-		return list;		
+        return proxy.getAll();
 	}
 	
 	public List<Teacher> getAlive(){
-        List<Teacher> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            list = myBatisTeacher.getAlive();
-        }finally {
-            session.close();
-        }
-        return list;
+        return proxy.getAlive();
 	}
 
 	public List<Teacher> getNotAlive(){
-        List<Teacher> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            list = myBatisTeacher.getNotAlive();
-        }finally {
-            session.close();
-        }
-        return list;
+        return proxy.getNotAlive();
 	}
 	
 	public Teacher getByCondition(Teacher condition){
-        Teacher teacher = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            teacher = myBatisTeacher.getByCondition(condition);
-        }
-        finally {
-            session.close();
-        }
-		return teacher;
-		
+		return proxy.getByCondition(condition);
 	}
 	
 	public void add(Teacher teacher){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            myBatisTeacher.add(teacher);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.add(teacher);
 	}
 	
 	public void update(Teacher teacher){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            myBatisTeacher.update(teacher);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.update(teacher);
 	}
 	
 	
 	public void delete(int key){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            myBatisTeacher.delete(key);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.delete(key);
 	}
 	
 	public void retire(int key){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacher myBatisTeacher = session.getMapper(mybatisMapper);
-            myBatisTeacher.retire(key);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.retire(key);
 	}
 }

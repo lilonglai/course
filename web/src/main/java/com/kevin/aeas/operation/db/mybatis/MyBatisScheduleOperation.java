@@ -15,127 +15,40 @@ public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedu
     }
 
 	public Schedule get(int key){
-		Schedule schedule = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            schedule = myBatisSchedule.get(key);
-        }finally {
-            session.close();
-        }
-		return schedule;		
+        return proxy.get(key);
 	}
 	
 	public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
-		Schedule schedule = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            schedule = myBatisSchedule.getByStudentIdOnDateAndTime(studentId, onDate, onTime);
-        }finally {
-            session.close();
-        }
-		return schedule;	
+        return proxy.getByStudentIdOnDateAndTime(studentId, onDate, onTime);
 	}
 	
-	public List<Schedule> getByStudentId(int studentId){ ;
-		List<Schedule> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            list = myBatisSchedule.getByStudentId(studentId);
-        }finally {
-            session.close();
-        }
-		return list;
+	public List<Schedule> getByStudentId(int studentId){
+        return proxy.getByStudentId(studentId);
 	}
 	
 	public List<Schedule> getByTeacherId(int teacherId){
-		List<Schedule> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            list = myBatisSchedule.getByTeacherId(teacherId);
-        }finally {
-            session.close();
-        }
-		return list;
+        return proxy.getByTeacherId(teacherId);
 	}
 		
 	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
-		List<Schedule> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            list = myBatisSchedule.getByDateAndTime(onDate, onTime);
-        }finally {
-            session.close();
-        }
-		return list;
+        return proxy.getByDateAndTime(onDate, onTime);
 	}
 	
 	public List<Schedule> getAll(){
-		List<Schedule> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            list = myBatisSchedule.getAll();
-        }finally {
-            session.close();
-        }
-		return list;
+        return proxy.getAll();
 	}
 	
 	
 	public void add(Schedule schedule){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            myBatisSchedule.add(schedule);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.add(schedule);
 	}
 	
 	public void update(Schedule schedule){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            myBatisSchedule.update(schedule);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.update(schedule);
 	}
 
 	public void delete(int key){
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisSchedule myBatisSchedule = session.getMapper(mybatisMapper);
-            myBatisSchedule.delete(key);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.delete(key);
 	}
 
 }

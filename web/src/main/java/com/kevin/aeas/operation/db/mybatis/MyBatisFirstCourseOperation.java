@@ -14,90 +14,27 @@ public class MyBatisFirstCourseOperation extends MyBatisBaseOperation<MyBatisFir
     }
 
 	public FirstCourse get(int key) {
-        FirstCourse firstCourse = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
-            firstCourse = myBatisFirstCourse.get(key);
-        }finally {
-            session.close();
-        }
-        return firstCourse;
+        return proxy.get(key);
 	}
 
 	public List<FirstCourse> getByGrade(int grade) {
-		List<FirstCourse> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
-            list = myBatisFirstCourse.getByGrade(grade);
-        }finally {
-            session.close();
-        }
-
-		return list;
-
+        return proxy.getByGrade(grade);
 	}
 
 	public List<FirstCourse> getAll() {
-        List<FirstCourse> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
-            list = myBatisFirstCourse.getAll();
-        }finally {
-            session.close();
-        }
-
-        return list;
+        return proxy.getAll();
 	}
 
 	public void add(FirstCourse firstCourse) {
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
-            myBatisFirstCourse.add(firstCourse);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }
-        finally {
-            session.close();
-        }
+        proxy.add(firstCourse);
 	}
 
 	public void update(FirstCourse firstCourse) {
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
-            myBatisFirstCourse.update(firstCourse);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }finally {
-            session.close();
-        }
-
+        proxy.update(firstCourse);
 	}
 
 	public void delete(int key) {
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisFirstCourse myBatisFirstCourse = session.getMapper(mybatisMapper);
-            myBatisFirstCourse.delete(key);
-            session.commit();
-        }catch (Exception e){
-            session.rollback();
-        }finally {
-            session.close();
-        }
-
+        proxy.delete(key);
 	}
 
 }

@@ -14,97 +14,31 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
     }
 
 	public TeacherHoliday get(int key) {
-		TeacherHoliday teacherHoliday = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            teacherHoliday = myBatisTeacherHoliday.get(key);
-        }finally {
-            session.close();
-        }
-		return teacherHoliday;
+        return proxy.get(key);
 	}
 	
 	public List<TeacherHoliday> getByTeacherId(int teacherId) {
-		List<TeacherHoliday> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            list = myBatisTeacherHoliday.getByTeacherId(teacherId);
-        }finally {
-            session.close();
-        }
-		return list;
+        return proxy.getByTeacherId(teacherId);
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
-		TeacherHoliday teacherHoliday = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            teacherHoliday = myBatisTeacherHoliday.getByTeacherAndDate(teacherId, Date.valueOf(date));
-        }finally {
-            session.close();
-        }
-		return teacherHoliday;
+        return proxy.getByTeacherAndDate(teacherId,Date.valueOf(date));
 	}
 
 	public List<TeacherHoliday> getAll() {
-		List<TeacherHoliday> list = null;
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            list = myBatisTeacherHoliday.getAll();
-        }finally {
-            session.close();
-        }
-		return list;
+        return proxy.getAll();
 	}
 
 	public void add(TeacherHoliday teacherHoliday) {
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            myBatisTeacherHoliday.add(teacherHoliday);
-            session.commit();
-        } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
-        }
+        proxy.add(teacherHoliday);
 	}
 
 	public void update(TeacherHoliday teacherHoliday) {
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            myBatisTeacherHoliday.update(teacherHoliday);
-            session.commit();
-        } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
-        }
+        proxy.update(teacherHoliday);
 	}
 
 	public void delete(int key) {
-        SqlSession session = null;
-        try {
-            session = sqlSessionFactory.openSession();
-            MyBatisTeacherHoliday myBatisTeacherHoliday = session.getMapper(mybatisMapper);
-            myBatisTeacherHoliday.delete(key);
-            session.commit();
-        } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
-        }
+        proxy.delete(key);
 	}
 
 }
