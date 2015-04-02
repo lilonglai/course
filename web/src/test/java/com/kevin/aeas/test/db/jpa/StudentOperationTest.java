@@ -1,14 +1,11 @@
 package com.kevin.aeas.test.db.jpa;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.jpa.JpaStudentOperation;
-import com.kevin.aeas.test.db.utils.DbUtils;
-
 import junit.framework.TestCase;
+
+import java.sql.Date;
+import java.util.List;
 
 public abstract class StudentOperationTest extends TestCase {
 	public void testGet() {

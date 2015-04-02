@@ -1,12 +1,11 @@
 package com.kevin.aeas.test.db.basic;
 
-import java.util.List;
-
+import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.basic.JdbcTeacherDefaultHolidayOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 import junit.framework.TestCase;
 
-import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.test.db.utils.DbUtils;
+import java.util.List;
 
 public abstract class TeacherDefaultHolidayOperationTest extends TestCase{
 	public void testGet(){

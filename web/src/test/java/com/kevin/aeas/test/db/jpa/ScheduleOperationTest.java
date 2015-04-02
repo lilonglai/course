@@ -2,7 +2,6 @@ package com.kevin.aeas.test.db.jpa;
 
 import com.kevin.aeas.object.Schedule;
 import com.kevin.aeas.operation.db.jpa.JpaScheduleOperation;
-import com.kevin.aeas.operation.db.mybatis.MyBatisScheduleOperation;
 import junit.framework.TestCase;
 
 import java.sql.Date;

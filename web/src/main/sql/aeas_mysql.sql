@@ -259,6 +259,8 @@ CREATE TABLE aeas_user(
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(64) unique not NULL,
   password varchar(64) not NULL,
+  email varchar(64) not NULL,
+  phone varchar(64) DEFAULT NULL,
   description varchar(256) DEFAULT NULL,
   PRIMARY KEY (id)
 );

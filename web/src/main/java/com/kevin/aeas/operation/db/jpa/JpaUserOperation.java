@@ -6,8 +6,6 @@ import com.kevin.aeas.object.oracle.OracleUser;
 import com.kevin.aeas.operation.db.IUserOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-import javax.persistence.Query;
-import java.util.List;
 
 public class JpaUserOperation extends JpaBasicOperation<User> implements IUserOperation {
 	public JpaUserOperation() {
@@ -19,17 +17,9 @@ public class JpaUserOperation extends JpaBasicOperation<User> implements IUserOp
 		}
 	}
 
-	public boolean isExistUser(String userName, String userPassword) {
-		String hsql = "select u from " + getActualClass() + " u where u.name=:userName and u.password=:userPassword";
-		Query q = EntityManangerUtil.getInstance().createQuery(hsql);
-        q.setParameter("userName", userName);
-        q.setParameter("userPassword", userPassword);
-		List list = q.getResultList();
-		if (list.isEmpty())
-			return false;
-		return true;
-	}
-
+    public User get(String userName, String userPassword){
+        return null;
+    }
 	protected  Object changeToJpa(Object t){
 		User newObject = null;
 		if(ConfigurationManager.getInstance().isMySql()){

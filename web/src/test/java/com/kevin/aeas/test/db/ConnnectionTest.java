@@ -1,13 +1,11 @@
 package com.kevin.aeas.test.db;
 
-import java.lang.reflect.Field;
-import java.sql.SQLException;
-
 import com.kevin.aeas.test.db.utils.DbUtils;
 import com.kevin.aeas.utils.ConfigurationManager;
 import com.kevin.aeas.utils.DatabaseHelp;
-
 import junit.framework.TestCase;
+
+import java.sql.SQLException;
 
 public class ConnnectionTest extends TestCase {
 	public void testMySqlConnection() {

@@ -44,10 +44,7 @@
         <mapper resource="TeacherHoliday.xml"/>
         <mapper resource="TeacherDefaultHoliday.xml"/>
         <mapper resource="Schedule.xml"/>
-
-        <!--
-<mapper resource="User.xml"/>
--->
+        <mapper resource="User.xml"/>
     </mappers>
 
 </configuration>

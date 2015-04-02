@@ -1,9 +1,9 @@
 package com.kevin.aeas.test.db.utils;
 
-import java.lang.reflect.Field;
-
 import com.kevin.aeas.operation.db.jpa.EntityManangerUtil;
 import com.kevin.aeas.utils.DatabaseHelp;
+
+import java.lang.reflect.Field;
 
 public class DbUtils {
 	public static void resetDbInstance(){

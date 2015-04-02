@@ -3,7 +3,6 @@ package com.kevin.aeas.test.db.basic;
 
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.operation.db.basic.JdbcSecondCourseOperation;
-import com.kevin.aeas.operation.db.mybatis.MyBatisSecondCourseOperation;
 import junit.framework.TestCase;
 
 import java.util.List;

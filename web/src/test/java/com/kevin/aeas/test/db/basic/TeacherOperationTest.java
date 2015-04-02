@@ -1,12 +1,11 @@
 package com.kevin.aeas.test.db.basic;
 
-import java.util.List;
-
+import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.operation.db.basic.JdbcTeacherOperation;
+import com.kevin.aeas.test.db.utils.DbUtils;
 import junit.framework.TestCase;
 
-import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.test.db.utils.DbUtils;
+import java.util.List;
 
 public abstract class TeacherOperationTest extends TestCase{
 	public void testGet(){
