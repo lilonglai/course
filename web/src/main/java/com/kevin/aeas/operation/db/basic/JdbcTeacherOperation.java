@@ -5,25 +5,11 @@ import com.kevin.aeas.operation.db.ITeacherOperation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements ITeacherOperation{
-	public Teacher get(int key){
-		String sql = "select * from " + getTableName() + " where id = " + key;
-		Teacher teacher = null;
-		List<Teacher> list = null;
-		try {
-			list = executeSql(sql);
-			if(list.size() > 0){
-				teacher = list.get(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return teacher;		
-	}
-	
 	protected Teacher generateObject(ResultSet rs) throws SQLException{
 		Teacher teacher = new Teacher();
 		teacher.setId(rs.getInt("id"));
@@ -35,47 +21,38 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 	}
 	
 	public Teacher getByName(String name){
-		String sql = "select * from " + getTableName() + " where name = '" + name + "'";
+		String sql = "select * from " + getTableName() + " where name = :name";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name);
 		Teacher teacher = null;
-		List<Teacher> list = null;
+		List<Teacher> list;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 			if(list.size() > 0){
 				teacher = list.get(0);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-				
 		return teacher;		
 	}
 	
 	
 	public Teacher getByShortName(String shortName){
-		String sql = "select * from " + getTableName() + " where shortName = '" + shortName + "'";
+		String sql = "select * from " + getTableName() + " where shortName = :shortName";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("shortName", shortName);
 		Teacher teacher = null;
-		List<Teacher> list = null;
+		List<Teacher> list;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 			if(list.size() > 0){
 				teacher = list.get(0);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return teacher;		
-	}
-	
-	public List<Teacher> getAll(){
-		String sql = "select * from " + getTableName();
-		List<Teacher> list = null;
-		try {
-			list = executeSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;		
 	}
 	
 	public List<Teacher> getAlive(){
@@ -101,24 +78,35 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 	}
 	
 	public Teacher getByCondition(Teacher condition){
-		String sql = "select * from " + getTableName() + " where";
-		if(condition.getName() != null)
-			sql += " name = '" + condition.getName() + "'";
+		String sql = "select * from " + getTableName() + " where ";
+        boolean andFlag = false;
+		if(condition.getName() != null) {
+            sql += "name = :name ";
+            andFlag = true;
+        }
 		
-		if(condition.getShortName() != null)			
-			sql +=  " && shortname = '" + condition.getShortName() + "'";
+		if(condition.getShortName() != null) {
+            sql += andFlag? "and ":"";
+            sql += "shortname=:shortName ";
+            andFlag = true;
+        }
 		
-		if(condition.getPhone() != null)
-			sql +=  " && phone = '" + condition.getPhone() + "'";
-		
-		int id = 0;
+		if(condition.getPhone() != null) {
+            sql += andFlag? "and ":"";
+            sql += "phone = :phone";
+        }
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", condition.getName());
+        map.put("shortName", condition.getShortName());
+        map.put("phone", condition.getPhone());
+
 		Teacher teacher = null;
-		List<Teacher> list = null;
+		List<Teacher> list;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 			if(list.size() > 0){
 				teacher = list.get(0);
-				id = teacher.getId();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -128,61 +116,32 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 	}
 	
 	public void add(Teacher teacher){
-		String sql = "insert into " + getTableName() + "(name,shortname,phone,ismaster) values("
-				+ "'" +teacher.getName() +"',"
-				+"'" +teacher.getShortName() +"',";
-		if(teacher.getPhone() == null){
-			sql += "'" + "" + "',";
-		}
-		else{
-			sql += "'" +  teacher.getPhone() +"',";
-		}
-		
-		sql += teacher.getIsMaster() +")";
-		
+		String sql = "insert into " + getTableName() + "(name,shortname,phone,ismaster) values("+
+                ":name, :shortName, :phone, :isMaster)";
+        Map<String, Object> map = createMap(teacher);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void update(Teacher teacher){
-		String sql = "update " + getTableName() + " set "
-				+ "name=" + "'" + teacher.getName() +"',"
-				+ "shortname=" +"'" +teacher.getShortName() +"',";
-		if(teacher.getPhone() == null){
-			sql += "phone=" + "'" + "',";
-		}
-		else{
-			sql += "phone=" + "'" + teacher.getPhone() +"',";
-		}
-		
-		sql += "ismaster=" + teacher.getIsMaster() +"";
-		
-		sql += " where id = " + teacher.getId();
-		
+		String sql = "update " + getTableName() + " set name=:name, shortname=:shortName, phone=:phone, ismaster= :isMaster " +
+                " where id = :id";
+        Map<String, Object> map = createMap(teacher);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-	}
-	
-	
-	public void delete(int key){
-		String sql = "delete from " + getTableName() + " where id = " + key;
-		try {
-			executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 	}
 	
 	public void retire(int key){
-		String sql = "update " + getTableName() + " set isalive = false" + " where id = " + key;
+		String sql = "update " + getTableName() + " set isalive = false" + " where id = :id";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", key);
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {

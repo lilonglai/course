@@ -5,23 +5,11 @@ import com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<TeacherDefaultHoliday> implements ITeacherDefaultHolidayOperation{
-	public TeacherDefaultHoliday get(int key){
-		String sql = "select * from " + getTableName() + " where id = " + key;
-		TeacherDefaultHoliday teacherDefaultHoliday = null;
-		List<TeacherDefaultHoliday> list = null;
-		try {
-			list = executeSql(sql);
-			if(list.size() > 0){
-				teacherDefaultHoliday = list.get(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return teacherDefaultHoliday;		
-	}
 	
 	protected TeacherDefaultHoliday generateObject(ResultSet rs) throws SQLException{
 		TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
@@ -38,11 +26,13 @@ public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<Teache
 	}
 	
 	public TeacherDefaultHoliday getByTeacherId(int teacherId){
-		String sql = "select * from " + getTableName() + " where teacherid = " + teacherId;
+		String sql = "select * from " + getTableName() + " where teacherid = :teacherId";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("teacherId", teacherId);
 		TeacherDefaultHoliday teacherDefaultHoliday = null;
 		List<TeacherDefaultHoliday> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 			if(list.size() > 0){
 				teacherDefaultHoliday = list.get(0);
 			}
@@ -51,31 +41,13 @@ public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<Teache
 		}
 		return teacherDefaultHoliday;		
 	}
-	
-	public List<TeacherDefaultHoliday> getAll(){
-		String sql = "select * from " + getTableName();
-		List<TeacherDefaultHoliday> list = null;
-		try {
-			list = executeSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;		
-	}
 
 	public void add(TeacherDefaultHoliday teacherDefaultHoliday){
 		String sql = "insert into " + getTableName() + "(teacherid,week1,week2,week3,week4,week5,week6,week7) values("
-				+ "" +teacherDefaultHoliday.getTeacherId() +",";
-		sql += teacherDefaultHoliday.getWeek1() +",";
-		sql += teacherDefaultHoliday.getWeek2() +",";
-		sql += teacherDefaultHoliday.getWeek3() +",";
-		sql += teacherDefaultHoliday.getWeek4() +",";
-		sql += teacherDefaultHoliday.getWeek5() +",";
-		sql += teacherDefaultHoliday.getWeek6() +",";
-		sql += teacherDefaultHoliday.getWeek7() +")";
-		
+				+ ":teacherId, :week1,:week2,:week3,:week4,:week5,:week6,:week7)";
+        Map<String, Object> map = createMap(teacherDefaultHoliday);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
@@ -83,38 +55,22 @@ public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<Teache
 	
 	public void update(TeacherDefaultHoliday teacherDefaultHoliday){
 		String sql = "update " + getTableName() + " set "
-				+ "teacherid=" + teacherDefaultHoliday.getTeacherId() +",";
-		
-		sql += "week1=" + teacherDefaultHoliday.getWeek1() +",";
-		sql += "week2=" + teacherDefaultHoliday.getWeek2() +",";
-		sql += "week3=" + teacherDefaultHoliday.getWeek3() +",";
-		sql += "week4=" + teacherDefaultHoliday.getWeek4() +",";
-		sql += "week5=" + teacherDefaultHoliday.getWeek5() +",";
-		sql += "week6=" + teacherDefaultHoliday.getWeek6() +",";
-		sql += "week7=" + teacherDefaultHoliday.getWeek7();
-		
-		sql += " where id = " + teacherDefaultHoliday.getId();
+				+ "teacherid=:teacherId, week1=:week1, week2=:week2, week3=:week3, week4=:week4, " +
+                "week5=:week5, week6=:week6, week7=:week7 where id = :id";
+        Map<String, Object> map = createMap(teacherDefaultHoliday);
 		try {
-			executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public void delete(int key){
-		String sql = "delete from " + getTableName() + " where id = " + key;
-		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void deleteByTeacherId(int teacherId){
-		String sql = "delete from " + getTableName() + " where teacherid = " + teacherId;
+		String sql = "delete from " + getTableName() + " where teacherid = :teacherId";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("teacherId", teacherId);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

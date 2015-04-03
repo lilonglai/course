@@ -1,9 +1,9 @@
 package com.kevin.aeas.test.db.basic.oracle;
 
-import com.kevin.aeas.test.db.basic.SecondCourseOperationTest;
+import com.kevin.aeas.test.db.basic.ScheduleOperationTest;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-public class OracleScheduleOperationTest extends SecondCourseOperationTest{
+public class OracleScheduleOperationTest extends ScheduleOperationTest {
 	@Override
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub

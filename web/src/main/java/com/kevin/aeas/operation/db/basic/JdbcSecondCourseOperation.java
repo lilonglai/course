@@ -5,25 +5,11 @@ import com.kevin.aeas.operation.db.ISecondCourseOperation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> implements ISecondCourseOperation{
-	public SecondCourse get(int key){
-		String sql = "select * from " + getTableName() + " where id = " + key;
-		SecondCourse secondCourse = null;
-		List<SecondCourse> list = null;
-		try {
-			list = executeSql(sql);
-			if(list.size() > 0){
-				secondCourse = list.get(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return secondCourse;		
-	}
-	
 	protected SecondCourse generateObject(ResultSet rs) throws SQLException{
 		SecondCourse secondCourse = new SecondCourse();
 		secondCourse.setId(rs.getInt("id"));
@@ -35,10 +21,12 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 	}
 	
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
-		String sql = "select * from " + getTableName() + " where firstcourseid = " + firstCourseId;
+		String sql = "select * from " + getTableName() + " where firstcourseid = :firstCourseId";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("firstCourseId", firstCourseId);
 		List<SecondCourse> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
@@ -47,52 +35,25 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 	
 	public List<SecondCourse> getByGrade(int grade){
 		String sql = "select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse "
-				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = " + grade
+				+ "where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = :grade"
 				+ " order by aeas_secondcourse.firstcourseid";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("grade", grade);
 		List<SecondCourse> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
 		return list;	
 	}
-	
-	public List<SecondCourse> getAll(){
-		String sql = "select * from " + getTableName() + ""
-				+ " order by firstcourseid";
-		List<SecondCourse> list = null;
-		try {
-			list = executeSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-		return list;	
-	}
-	
 	
 	public void add(SecondCourse secondCourse){
 		String sql = "insert into " + getTableName() + "(name,shortname,firstcourseid,description) values("
-				+ "'" +secondCourse.getName() +"',";
-		
-		if(secondCourse.getShortName() == null){
-			sql += "'" + "" + "',";
-		}
-		else{
-			sql += "'" +  secondCourse.getShortName() +"',";
-		}
-		
-		sql += secondCourse.getFirstCourseId() + ",";
-				
-		if(secondCourse.getDescription() == null){
-			sql += "'" + "" + "')";
-		}
-		else{
-			sql += "'" +  secondCourse.getDescription() +"')";
-		}
-		
+				+ ":name, :shortName, :firstCourseId, :description)";
+        Map<String, Object> map = createMap(secondCourse);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
@@ -100,39 +61,14 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 	
 	public void update(SecondCourse secondCourse){
 		String sql = "update " + getTableName() + " set "
-				+ "name=" + "'" + secondCourse.getName() +"',"
-				+ "shortname=" +"'" +secondCourse.getShortName() +"',"
-		        + "firstcourseid=" + secondCourse.getFirstCourseId() + ",";
-		
-		if(secondCourse.getDescription() == null){
-			sql += "description=" + "'" + "'";
-		}
-		else{
-			sql += "description=" + "'" + secondCourse.getDescription() +"'";
-		}
-				
-		sql += " where id = " + secondCourse.getId();
-		
+				+ "name=:name,shortname=:shortName, firstcourseid=:firstCourseId, description=:description "
+                + "where id = :id";
+        Map<String, Object> map = createMap(secondCourse);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	public void delete(int key){
-		String sql = "delete from " + getTableName() + " where id = " + key;
-		try {
-			executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main(String[] args) {
-		JdbcSecondCourseOperation operation = new JdbcSecondCourseOperation();
-		System.out.println(operation.getByFirstCourseId(1));		
 	}
 
 	@Override

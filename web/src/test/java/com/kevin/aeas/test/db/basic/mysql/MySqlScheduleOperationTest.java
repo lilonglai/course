@@ -1,9 +1,11 @@
 package com.kevin.aeas.test.db.basic.mysql;
 
+import com.kevin.aeas.object.Schedule;
+import com.kevin.aeas.test.db.basic.ScheduleOperationTest;
 import com.kevin.aeas.test.db.basic.TeacherOperationTest;
 import com.kevin.aeas.utils.ConfigurationManager;
 
-public class MySqlScheduleOperationTest extends TeacherOperationTest{
+public class MySqlScheduleOperationTest extends ScheduleOperationTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

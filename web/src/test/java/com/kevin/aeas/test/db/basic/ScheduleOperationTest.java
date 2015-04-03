@@ -58,11 +58,11 @@ public class ScheduleOperationTest extends TestCase {
         schedule.setStudentId(1);
         schedule.setCourseId(1);
         schedule.setTeacherId(1);
-        operation.add(schedule);
+        operation.update(schedule);
     }
 
     public void testDelete(){
-        MyBatisScheduleOperation operation = new MyBatisScheduleOperation();
+        JdbcScheduleOperation operation = new JdbcScheduleOperation();
         operation.delete(1);
     }
 

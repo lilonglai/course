@@ -17,12 +17,12 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 	
 	public void testGetByGrade(){
 		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
-		List<? extends FirstCourse> list = operation.getByGrade(1);
+		List<FirstCourse> list = operation.getByGrade(1);
 	}
 	
 	public void testGetAll(){
 		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
-		List<? extends FirstCourse> list = operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 	}
 	
 	
@@ -47,14 +47,14 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		// add grade 3 first course
 		firstCourse.setName("test");
 		firstCourse.setShortName("test");
-		firstCourse.setGrade(2);
+		firstCourse.setGrade(3);
 		firstCourse.setDescription("this is the test case for first course");		
 		operation.add(firstCourse);
 	}
 	
 	public void testUpdate(){
 		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
-		List<? extends FirstCourse> list = operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
@@ -66,7 +66,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		
 	public void testDelete(){
 		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
-		List<? extends FirstCourse> list = operation.getAll();
+		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
 			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");

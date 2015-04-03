@@ -5,25 +5,11 @@ import com.kevin.aeas.operation.db.ITeacherHolidayOperation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHoliday> implements ITeacherHolidayOperation{
-	public TeacherHoliday get(int key) {
-		String sql = "select * from " + getTableName() + " where id = " + key;
-		TeacherHoliday teacherHoliday = null;
-		List<TeacherHoliday> list = null;
-		try {
-			list = executeSql(sql);
-			if(list.size() > 0){
-				teacherHoliday = list.get(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return teacherHoliday;
-	}
-
 	protected TeacherHoliday generateObject(ResultSet rs) throws SQLException{
 		TeacherHoliday teacherHoliday = new TeacherHoliday();
 		teacherHoliday.setId(rs.getInt("id"));
@@ -34,24 +20,27 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 	}
 	
 	public List<TeacherHoliday> getByTeacherId(int teacherId) {
-		String sql = "select * from " + getTableName() + " where teacherid = "
-				+ teacherId;
+		String sql = "select * from " + getTableName() + " where teacherid = :teacherId";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("teacherId", teacherId);
 		List<TeacherHoliday> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 	
-	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
-		String sql = "select * from " + getTableName() + " where teacherid = " + teacherId 
-				      + " and adjustdate='" +date + "'";
+	public TeacherHoliday getByTeacherAndDate(int teacherId,String adjustDate) {
+		String sql = "select * from " + getTableName() + " where teacherid = :teacherId and adjustdate=:adjustDate";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("teacherId", teacherId);
+        map.put("adjustDate", adjustDate);
 		TeacherHoliday teacherHoliday = null;
-		List<TeacherHoliday> list = null;
+		List<TeacherHoliday> list;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 			if(list.size() > 0){
 				teacherHoliday = list.get(0);
 			}
@@ -62,48 +51,23 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 		return teacherHoliday;
 	}
 
-	public List<TeacherHoliday> getAll() {
-		String sql = "select * from " + getTableName();
-		List<TeacherHoliday> list = null;
-		try {
-			list = executeSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
 	public void add(TeacherHoliday teacherHoliday) {
-		String sql = "insert into " + getTableName() + "(teacherid,adjustdate,isholiday) values("
-				+ "" + teacherHoliday.getTeacherId() + ",";
-		sql += "'" + teacherHoliday.getAdjustDate() + "',";
-		sql += teacherHoliday.getIsHoliday() + ")";
+		String sql = "insert into " + getTableName() + "(teacherid,adjustdate,isholiday) values(" +
+                ":teacherid, :adjustDate, :isHoliday)";
+        Map<String, Object> map = createMap(teacherHoliday);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void update(TeacherHoliday teacherHoliday) {
-		String sql = "update " + getTableName() + " set " + "teacherid="
-				+ teacherHoliday.getTeacherId() + ",";
-
-		sql += "adjustdate='" + teacherHoliday.getAdjustDate() + "',";
-		sql += "isholiday=" + teacherHoliday.getIsHoliday();
-
-		sql += " where id = " + teacherHoliday.getId();
+		String sql = "update " + getTableName() + " set teacherid=:teacherId, adjustdate=:adjustDate, isholiday=:isHoliday " +
+                "where id = :id";
+        Map<String, Object> map = createMap(teacherHoliday);
 		try {
-			executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void delete(int key) {
-		String sql = "delete from " + getTableName() + " where id = " + key;
-		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

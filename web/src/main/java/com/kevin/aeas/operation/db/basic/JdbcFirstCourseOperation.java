@@ -5,25 +5,11 @@ import com.kevin.aeas.operation.db.IFirstCourseOperation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> implements IFirstCourseOperation {
-	public FirstCourse get(int key) {
-		String sql = "select * from " + getTableName() + " where id = " + key;
-		FirstCourse firstCourse = null;
-		List<FirstCourse> list = null;
-		try {
-			list = executeSql(sql);
-			if(list.size() > 0){
-				firstCourse = list.get(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return firstCourse;
-	}
-
 	protected FirstCourse generateObject(ResultSet rs) throws SQLException{
 		FirstCourse firstCourse = new FirstCourse();
 		firstCourse.setId(rs.getInt("id"));
@@ -35,77 +21,35 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
 	}
 
 	public List<FirstCourse> getByGrade(int grade) {
-		String sql = "select * from " + getTableName() + " where grade = " + grade;
+		String sql = "select * from " + getTableName() + " where grade = :grade";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("grade", grade);
 		List<FirstCourse> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return list;
 
-	}
-
-	public List<FirstCourse> getAll() {
-		String sql = "select * from " + getTableName();
-		List<FirstCourse> list = null;
-		try {
-			list = executeSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return list;
 	}
 
 	public void add(FirstCourse firstCourse) {
-		String sql = "insert into " + getTableName() + "(grade,name,shortname,description) values("
-				+ firstCourse.getGrade()
-				+ ","
-				+ "'"
-				+ firstCourse.getName()
-				+ "'," + "'" + firstCourse.getShortName() + "',";
-
-		if (firstCourse.getDescription() == null) {
-			sql += "'" + "" + "')";
-		} else {
-			sql += "'" + firstCourse.getDescription() + "')";
-		}
-
-		try {
-			executeUpdateSql(sql);
+        String sql = "insert into " + getTableName() + "(grade,name,shortname,description) values(:grade, :name, :shortName, :description)";
+        Map<String, Object> map = createMap(firstCourse);
+        try {
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void update(FirstCourse firstCourse) {
-		String sql = "update " + getTableName() + " set " + "grade="
-				+ firstCourse.getGrade() + "," + "name=" + "'"
-				+ firstCourse.getName() + "'," + "shortname=" + "'"
-				+ firstCourse.getShortName() + "',";
-
-		if (firstCourse.getDescription() == null) {
-			sql += "description=" + "'" + "'";
-		} else {
-			sql += "description=" + "'" + firstCourse.getDescription() + "'";
-		}
-
-		sql += " where id = " + firstCourse.getId();
-
-		try {
-			executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void delete(int key) {
-		String sql = "delete from " + getTableName() + " where id = " + key;
-		try {
-			executeUpdateSql(sql);
+        String sql = "update " + getTableName() + " set grade=:grade, name=:name, shortname=:shortName, description=:description where id=:id";
+        Map<String, Object> map = createMap(firstCourse);
+        try {
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

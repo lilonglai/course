@@ -5,24 +5,11 @@ import com.kevin.aeas.operation.db.IStudentOperation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements IStudentOperation{
-	public Student get(int key) {
-		String sql = "select * from " + getTableName() + " where id = " + key;
-		Student student = null;
-		List<Student> list = null;
-		try {
-			list = executeSql(sql);
-			if(list.size() > 0){
-				student = list.get(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return student;
-	}
-	
 	protected Student generateObject(ResultSet rs) throws SQLException{
 		Student student = new Student();
 		student.setId(rs.getInt("id"));
@@ -30,7 +17,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		student.setShortName(rs.getString("shortname"));
 		student.setGrade(rs.getInt("grade"));
 		student.setTestScore(rs.getString("testscore"));
-		student.setTargetScore(rs.getString("targetScore"));
+		student.setTargetScore(rs.getString("targetscore"));
 
 		student.setExamineDate(rs.getDate("examinedate"));
 		student.setExaminePlace(rs.getString("examineplace"));
@@ -40,11 +27,13 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 	}
 	
 	public Student getByName(String name) {
-		String sql = "select * from " + getTableName() + " where name = '" + name + "'";
+		String sql = "select * from " + getTableName() + " where name = :name";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name);
 		Student student = null;
-		List<Student> list = null;
+		List<Student> list;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 			if(list.size() > 0){
 				student = list.get(0);
 			}
@@ -56,26 +45,15 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 	
 
 	public List<Student> getByGrade(int grade) {
-		String sql = "select * from " + getTableName() + " where grade = " + grade;
+		String sql = "select * from " + getTableName() + " where grade = :grade";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("grade", grade);
 		List<Student> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return list;
-	}
-
-	public List<Student> getAll() {
-		String sql = "select * from " + getTableName();
-		List<Student> list = null;
-		try {
-			list = executeSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 		return list;
 	}
 	
@@ -87,28 +65,27 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 	
 	public List<Student> getNotAlive() {
-		String sql = "select * from " + getTableName() + "" + " where isalive=false";
+		String sql = "select * from " + getTableName() + " where isalive=false";
 		List<Student> list = null;
 		try {
 			list = executeSql(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 
 	public List<Student> getByTeacherId(int teacherId) {
-		String sql = "select * from " + getTableName() + " where teacherid = "
-				+ teacherId;
+		String sql = "select * from " + getTableName() + " where teacherid = :teacherId";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("teacherId", teacherId);
 		List<Student> list = null;
 		try {
-			list = executeSql(sql);
+			list = executeSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -117,36 +94,11 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 	}
 
 	public void add(Student student){
-		String sql = "insert into " + getTableName() + "(name,shortname,grade,testscore,targetScore,examinedate,examineplace,teacherid,description) values("
-				+ "'" + student.getName() +"',"
-				+ "'" +student.getShortName() +"',"
-				+"" +student.getGrade() +","
-		        +"'" +student.getTestScore() +"'," 
-				+"'" +student.getTargetScore() +"',";;
-		if(student.getExamineDate() == null){
-			sql += "" + "NULL" + ",";
-		}
-		else{
-			sql += "'" +  student.getExamineDate() +"',";
-		}
-		
-		if(student.getExaminePlace() == null){
-			sql += "'" + "" + "',";
-		}
-		else{
-			sql += "'" +  student.getExaminePlace() +"',";
-		}
-		
-		sql += "" +student.getTeacherId() +",";
-		
-		if(student.getDescription() == null){
-			sql += "'" + "" + "')";
-		}
-		else{
-			sql += "'" +  student.getDescription() +"')";
-		}
+		String sql = "insert into " + getTableName() + "(name,shortname,grade,testscore,targetscore,examinedate,examineplace,teacherid,description) values("
+                +":name,:shortName,:grade,:testScore,:targetScore,:examineDate,:examinePlace,teacherId,description)";
+        Map<String, Object> map = createMap(student);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -154,67 +106,27 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 
 	public void update(Student student) {
 		String sql = "update " + getTableName() + " set "
-				+ "name=" + "'" + student.getName() + "'," 
-				+ "shortname=" + "'" + student.getShortName() + "',"
-	            + "grade=" + student.getGrade() + ","
-		        + "testscore='" + student.getTestScore() + "',"
-	            +"targetScore='" + student.getTargetScore() + "',";
-		
-		if(student.getExamineDate() == null){
-			sql += "examinedate =" + "" + "NULL" + ",";
-		}
-		else{
-			sql += "examinedate =" + "'" +  student.getExamineDate() +"',";
-		}
-		
-		if(student.getExaminePlace() == null){
-			sql += "examineplace=" + "'" + "" + "',";
-		}
-		else{
-			sql += "examineplace=" + "'" +  student.getExaminePlace() +"',";
-		}
-		
-		sql += "teacherid=" +student.getTeacherId() +",";
-		
-		if(student.getDescription() == null){
-			sql += "description="+ "'" + "" + "'";
-		}
-		else{
-			sql += "description="+ "'" +  student.getDescription() +"'";
-		}
-		
-		sql += " where id = " + student.getId();
+				+ "name=:name, shortname=:shortName, grade=:grade, testscore=:testScore, targetscore=:targetScore, examinedate=:examineDate, examinePlace=:examinePlace, "
+                + "teacherid =:teacherId, description=:description "
+                + "where id = :id";
 
+        Map<String, Object> map = createMap(student);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void delete(int key) {
-		String sql = "delete from " + getTableName() + " where id = " + key;
-		try {
-			executeUpdateSql(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 	}
 	
 	public void retire(int key) {
-		String sql = "update " + getTableName() + " set isalive = false" + " where id = " + key;
+		String sql = "update " + getTableName() + " set isalive = false" + " where id = :id";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", key);
 		try {
-			executeUpdateSql(sql);
+			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		JdbcStudentOperation studentOperation = new JdbcStudentOperation();
-		System.out.println(studentOperation.getAll());
-		
 	}
 
 	@Override
