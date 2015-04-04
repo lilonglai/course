@@ -1,41 +1,62 @@
 package com.kevin.aeas.service;
 
 import com.kevin.aeas.object.Teacher;
-import com.kevin.aeas.operation.db.OperationManager;
-import com.kevin.aeas.operation.db.TeacherOperation;
+import com.kevin.aeas.operation.business.TeacherBusinessOperation;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/teacher")
 public class TeacherService {
+    TeacherBusinessOperation businessOperation = new TeacherBusinessOperation();
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public void add(Teacher teacher){
+        businessOperation.add(teacher);
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public void update(Teacher teacher){
+        businessOperation.update(teacher);
+    }
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Teacher get(@QueryParam("id") int teacherId){
-		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-		Teacher teacher = teacherOperation.get(teacherId);
-		return teacher;
+		return businessOperation.get(teacherId);
 	}
 	
-	@GET
+	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean delete(@QueryParam("id") int teacherId){
-		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-		teacherOperation.delete(teacherId);
-		return true;
+	public void delete(@QueryParam("id") int teacherId){
+        businessOperation.delete(teacherId);
 	}
 	
 	@GET
 	@Path("/retire")
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean retire(@QueryParam("id") int teacherId){
-		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-		teacherOperation.retire(teacherId);
-		return true;
+	public void retire(@QueryParam("id") int teacherId){
+        businessOperation.retire(teacherId);
 	}
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Teacher> getAll(){
+        return businessOperation.getAll();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Teacher> getAlive(){
+        return businessOperation.getAlive();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Teacher> getNotAlive(){
+        return businessOperation.getNotAlive();
+    }
 	
 }

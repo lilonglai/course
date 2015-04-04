@@ -41,6 +41,7 @@ public class ScheduleOperationTest extends TestCase {
 
     public void testAdd(){
         JdbcScheduleOperation operation = new JdbcScheduleOperation();
+
         Schedule schedule = new Schedule();
         schedule.setOnDate(new Date(1989, 07, 23));
         schedule.setOnTime(1);

@@ -56,7 +56,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
-			if(firstCourse.getName().equals("test")){
+			if("test".equals(firstCourse.getName())){
 				firstCourse.setShortName("test 2");
 				firstCourse.setDescription("change the test case for first course");
 				operation.update(firstCourse);
@@ -68,7 +68,7 @@ public abstract class  FirstCourseOperationTest extends TestCase{
 		JdbcFirstCourseOperation operation = new JdbcFirstCourseOperation();
 		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
-			if(firstCourse.getName().equals("test")){
+			if("test".equals(firstCourse.getName())){
 				firstCourse.setShortName("test 2");
 				firstCourse.setDescription("change the test case for first course");
 				operation.delete(firstCourse.getId());

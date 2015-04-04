@@ -1,32 +1,44 @@
 package com.kevin.aeas.service;
 
 import com.kevin.aeas.object.SecondCourse;
-import com.kevin.aeas.operation.db.OperationManager;
-import com.kevin.aeas.operation.db.SecondCourseOperation;
+import com.kevin.aeas.operation.business.SecondCourseBusinessOperation;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/secondcourse")
 public class SecondCourseService {
+    SecondCourseBusinessOperation businessOperation = new SecondCourseBusinessOperation();
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public void add(SecondCourse secondCourse){
+        businessOperation.add(secondCourse);
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public void update(SecondCourse secondCourse){
+        businessOperation.update(secondCourse);
+    }
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public SecondCourse get(@QueryParam("id") int secondCourseId){
-		SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-		SecondCourse secondCourse = secondCourseOperation.get(secondCourseId);
-		return secondCourse;
+		return businessOperation.get(secondCourseId);
 	}
 	
-	@GET
+	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean delete(@QueryParam("id") int secondCourseId){
-		SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-		secondCourseOperation.delete(secondCourseId);
-		return true;
+	public void delete(@QueryParam("id") int secondCourseId){
+        businessOperation.delete(secondCourseId);
 	}
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<SecondCourse> getAll(){
+        return businessOperation.getAll();
+    }
 	
 }
