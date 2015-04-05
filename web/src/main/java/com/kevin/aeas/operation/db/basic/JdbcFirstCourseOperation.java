@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.IFirstCourseOperation;
 
@@ -24,14 +25,13 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
 		String sql = "select * from " + getTableName() + " where grade = :grade";
         HashMap<String, Object> map = new HashMap<>();
         map.put("grade", grade);
-		List<FirstCourse> list = null;
 		try {
-			list = executeSql(sql, map);
+            return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 
-		return list;
+
 
 	}
 
@@ -41,7 +41,7 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
         try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 
@@ -51,7 +51,7 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
         try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 
 	}

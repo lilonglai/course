@@ -1,8 +1,7 @@
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
+<%@ page import="com.kevin.aeas.operation.business.TeacherBusinessOperation" %>
+<%@ page import="com.kevin.aeas.operation.business.TeacherDefaultHolidayBusinessOperation" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,8 +30,8 @@
     String idStr = request.getParameter("id");
     if (idStr != null) {
         int id = Integer.valueOf(idStr);
-        TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-        TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
+        TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+        TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayBusinessOperation();
         teacher = teacherOperation.get(id);
         teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(id);
 %>

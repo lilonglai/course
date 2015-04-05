@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.mybatis;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisFirstCourse;
 import org.apache.ibatis.io.Resources;
@@ -56,6 +57,7 @@ public abstract class MyBatisBaseOperation<T> {
                 session.commit();
             }catch (Exception e){
                 session.rollback();
+                throw new BasicException(e);
             }finally {
                 session.close();
             }
@@ -69,6 +71,8 @@ public abstract class MyBatisBaseOperation<T> {
                 session = sqlSessionFactory.openSession();
                 T myBatisInstance = session.getMapper(mybatisMapper);
                 result = method.invoke(myBatisInstance, args);
+            }catch(Exception e){
+                throw new BasicException(e);
             }finally {
                 session.close();
             }

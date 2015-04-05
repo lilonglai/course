@@ -19,15 +19,15 @@ public class StudentBusinessOperation {
         studentOperation.update(student);
     }
 
-	public Student get(@QueryParam("id") int id){
+	public Student get(int id){
 		return studentOperation.get(id);
 	}
 
-	public void delete(@QueryParam("id") int id){
+	public void delete(int id){
 		studentOperation.delete(id);
 	}
 
-	public void retire(@QueryParam("id") int id){
+	public void retire(int id){
 		studentOperation.retire(id);
 	}
 

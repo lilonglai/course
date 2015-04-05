@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.mysql.MySqlTeacherAbility;
@@ -26,15 +27,25 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 	}
 	
 	public List<TeacherAbility> getByTeacherId(int teacherId) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.teacherId=:teacherId");
-		q.setParameter("teacherId", teacherId);
-        return q.getResultList();
+        try {
+            String hsql = "select ta from " + getActualClass().getSimpleName() + " ta where ta.teacherId=:teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("teacherId", teacherId);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public List<TeacherAbility> getByCourseId(int courseId) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select ta from "  + getActualClass().getSimpleName() + " ta where ta.courseId=:courseId");
-		q.setParameter("courseId", courseId);
-        return q.getResultList();
+        try {
+            String hsql = "select ta from " + getActualClass().getSimpleName() + " ta where ta.courseId=:courseId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("courseId", courseId);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	
@@ -49,6 +60,7 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
             transaction.commit();
         }catch(Exception e){
             transaction.rollback();
+            throw new BasicException(e);
         }
 	}
 		
@@ -56,30 +68,18 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
         EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
         transaction.begin();
         try {
-            String sql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = :teacherId"
+            String hsql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = :teacherId"
                     + " and ta.courseId in(select fc.id from " + firstCourseClass.getSimpleName() + " fc where fc.grade = :grade)";
-            Query q = EntityManangerUtil.getInstance().createQuery(sql);
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             q.setParameter("grade", grade);
             q.executeUpdate();
             transaction.commit();
         }catch(Exception e) {
             transaction.rollback();
+            throw new BasicException(e);
         }
     }
-	
-	protected  Object changeToJpa(Object t){
-		TeacherAbility newObject = null;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlTeacherAbility();
-		}
-		else{
-			newObject = new OracleTeacherAbility();
-		}
-		setValueByObject(t, newObject);
-		return newObject;
-	}
-	
 }
 
 

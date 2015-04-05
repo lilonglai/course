@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.operation.db.ISecondCourseOperation;
 
@@ -24,13 +25,11 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 		String sql = "select * from " + getTableName() + " where firstcourseid = :firstCourseId";
         HashMap<String, Object> map = new HashMap<>();
         map.put("firstCourseId", firstCourseId);
-		List<SecondCourse> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-		return list;		
+            throw new BasicException(e);
+		}
 	}
 	
 	public List<SecondCourse> getByGrade(int grade){
@@ -39,13 +38,11 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 				+ " order by aeas_secondcourse.firstcourseid";
         HashMap<String, Object> map = new HashMap<>();
         map.put("grade", grade);
-		List<SecondCourse> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-		return list;	
+            throw new BasicException(e);
+		}
 	}
 	
 	public void add(SecondCourse secondCourse){
@@ -55,7 +52,7 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}		
 	}
 	
@@ -67,7 +64,7 @@ public class JdbcSecondCourseOperation extends JdbcBaseOperation<SecondCourse> i
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 

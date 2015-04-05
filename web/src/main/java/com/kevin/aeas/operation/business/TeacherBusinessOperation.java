@@ -21,16 +21,16 @@ public class TeacherBusinessOperation {
     }
 
 
-	public Teacher get(@QueryParam("id") int teacherId){
+	public Teacher get(int teacherId){
 		return teacherOperation.get(teacherId);
 	}
 	
 
-	public void delete(@QueryParam("id") int teacherId){
+	public void delete(int teacherId){
 		teacherOperation.delete(teacherId);
 	}
 
-	public void retire(@QueryParam("id") int teacherId){
+	public void retire(int teacherId){
 		teacherOperation.retire(teacherId);
 	}
 

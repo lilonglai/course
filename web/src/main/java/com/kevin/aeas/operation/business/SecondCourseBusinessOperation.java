@@ -19,11 +19,11 @@ public class SecondCourseBusinessOperation {
         secondCourseOperation.update(secondCourse);
     }
 
-	public SecondCourse get(@QueryParam("id") int secondCourseId){
+	public SecondCourse get(int secondCourseId){
 		return secondCourseOperation.get(secondCourseId);
 	}
 
-	public void delete(@QueryParam("id") int secondCourseId){
+	public void delete(int secondCourseId){
 		secondCourseOperation.delete(secondCourseId);
 	}
 

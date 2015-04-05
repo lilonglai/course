@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
 
@@ -23,13 +24,11 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
                 " from aeas_teacherability,aeas_firstcourse"
 				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
 				+ " order by aeas_firstcourse.grade";
-		List<TeacherAbility> list = null;
 		try {
-			list = executeSql(sql);
+			return executeSql(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public List<TeacherAbility> getByTeacherId(int teacherId) {
@@ -39,13 +38,11 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 				+ " order by aeas_firstcourse.grade";
         HashMap<String, Object> map = new HashMap<>();
         map.put("teacherId", teacherId);
-		List<TeacherAbility> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public List<TeacherAbility> getByCourseId(int courseId) {
@@ -55,13 +52,11 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 				+ " order by aeas_firstcourse.grade";
         HashMap<String, Object> map = new HashMap<>();
         map.put("courseId", courseId);
-		List<TeacherAbility> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public void add(TeacherAbility teacherAbility){
@@ -70,7 +65,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}	
 	}
 
@@ -82,7 +77,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 	
@@ -93,7 +88,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 	
@@ -107,7 +102,7 @@ public class JdbcTeacherAbilityOperation extends JdbcBaseOperation<TeacherAbilit
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 		
 	}

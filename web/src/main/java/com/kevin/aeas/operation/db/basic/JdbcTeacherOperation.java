@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.operation.db.ITeacherOperation;
 
@@ -24,17 +25,12 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		String sql = "select * from " + getTableName() + " where name = :name";
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", name);
-		Teacher teacher = null;
-		List<Teacher> list;
 		try {
-			list = executeSql(sql, map);
-			if(list.size() > 0){
-				teacher = list.get(0);
-			}
+            List<Teacher> list = executeSql(sql, map);
+            return list.size() > 0? list.get(0): null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return teacher;		
 	}
 	
 	
@@ -42,39 +38,30 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		String sql = "select * from " + getTableName() + " where shortName = :shortName";
         HashMap<String, Object> map = new HashMap<>();
         map.put("shortName", shortName);
-		Teacher teacher = null;
-		List<Teacher> list;
 		try {
-			list = executeSql(sql, map);
-			if(list.size() > 0){
-				teacher = list.get(0);
-			}
+            List<Teacher> list = executeSql(sql, map);
+            return list.size() > 0? list.get(0): null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return teacher;		
 	}
 	
 	public List<Teacher> getAlive(){
 		String sql = "select * from " + getTableName() + "" + " where isalive=true";
-		List<Teacher> list = null;
 		try {
-			list = executeSql(sql);
+			return executeSql(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;		
 	}
 	
 	public List<Teacher> getNotAlive(){
 		String sql = "select * from " + getTableName() + "" + " where isalive=false";
-		List<Teacher> list = null;
 		try {
-			list = executeSql(sql);
+			return executeSql(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public Teacher getByCondition(Teacher condition){
@@ -101,18 +88,12 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
         map.put("shortName", condition.getShortName());
         map.put("phone", condition.getPhone());
 
-		Teacher teacher = null;
-		List<Teacher> list;
 		try {
-			list = executeSql(sql, map);
-			if(list.size() > 0){
-				teacher = list.get(0);
-			}
+            List<Teacher> list = executeSql(sql, map);
+            return list.size() > 0? list.get(0): null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return teacher;
-		
 	}
 	
 	public void add(Teacher teacher){
@@ -122,7 +103,7 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 	
@@ -145,7 +126,7 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 		try {
 			executeUpdateSql(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 

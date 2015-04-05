@@ -1,9 +1,8 @@
-<%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
-<%@page import="com.kevin.aeas.object.Student"%>
-<%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
+<%@ page import="com.kevin.aeas.object.Student" %>
+<%@ page import="com.kevin.aeas.operation.business.StudentBusinessOperation" %>
+<%@ page import="com.kevin.aeas.operation.business.TeacherBusinessOperation" %>
+<%@ page import="com.kevin.aeas.object.Teacher" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,12 +33,12 @@ function checkForm(){
 <body>
 	<%
 		Student student = null;
-	    StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
-		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();	
+	    StudentBusinessOperation studentOperation = new StudentBusinessOperation();
+		TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
 	    String idStr = request.getParameter("id");
 		if(idStr != null){
 			  int id = Integer.valueOf(idStr);	    	
-			  student = studentOperation.get(id);	    	
+			  student = studentOperation.get(id);
 			  List<Teacher> teacherList = teacherOperation.getAll();
 	%>	
 	  <div class="container">

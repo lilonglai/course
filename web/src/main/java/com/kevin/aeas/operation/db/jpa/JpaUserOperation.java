@@ -20,24 +20,5 @@ public class JpaUserOperation extends JpaBasicOperation<User> implements IUserOp
     public User get(String userName, String userPassword){
         return null;
     }
-	protected  Object changeToJpa(Object t){
-		User newObject = null;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlUser();
-		}
-		else{
-			newObject = new OracleUser();
-		}
-		
-		setValueByObject(t, newObject);
-		
-		return newObject;
-	}
-	
-	
-	public static void main(String[] args) {
-		JpaUserOperation operation = new JpaUserOperation();
-		System.out.println(operation.getAll());
-	}
 
 }

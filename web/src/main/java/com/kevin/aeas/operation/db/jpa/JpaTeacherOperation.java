@@ -1,11 +1,13 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.mysql.MySqlTeacher;
 import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.operation.db.ITeacherOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -20,57 +22,65 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	}
 	
 	public Teacher getByName(String name){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.name=:name");
-		q.setParameter("name", name);
         try {
+            String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.name=:name";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("name", name);
             return (Teacher) q.getSingleResult();
-        }catch(Exception e){
+        }catch(NoResultException e){
             return null;
+        }catch(Exception e){
+            throw new BasicException(e);
         }
 	}
 
 	public Teacher getByShortName(String shortName){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.shortName=:shortName");
-		q.setParameter("shortName", shortName);
         try {
+            String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.shortName=:shortName";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("shortName", shortName);
             return (Teacher) q.getSingleResult();
-        }catch(Exception e){
+        }catch(NoResultException e){
             return null;
+        }catch(Exception e){
+            throw new BasicException(e);
         }
 	}
 	
 	public List<Teacher> getAlive(){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
-		q.setParameter("isAlive", true);
-        List<Teacher> list = q.getResultList();
-		return list;		
+        try {
+            String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("isAlive", true);
+            List<Teacher> list = q.getResultList();
+            return list;
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public List<Teacher> getNotAlive(){
-		Query q = EntityManangerUtil.getInstance().createQuery("select t from "  + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive");
-		q.setParameter("isAlive", false);
-        return q.getResultList();
-	}
+        try {
+            String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("isAlive", false);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
+    }
 	
 	public Teacher getByCondition(Teacher condition){
 		return null;
 	}
-	
-	protected  Object changeToJpa(Object t){
-		Teacher newObject = null;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlTeacher();
-		}
-		else{
-			newObject = new OracleTeacher();
-		}
-		setValueByObject(t, newObject);
-		return newObject;
-	}
 
 	public void retire(int key){
-		Teacher teacher = (Teacher)EntityManangerUtil.getInstance().find(getActualClass(), key);
-        teacher.setIsAlive(false);
-		EntityManangerUtil.getInstance().merge(teacher);
+        try {
+            Teacher teacher = (Teacher) EntityManangerUtil.getInstance().find(getActualClass(), key);
+            teacher.setIsAlive(false);
+            EntityManangerUtil.getInstance().merge(teacher);
+        }catch(Exception e){
+            new BasicException(e);
+        }
 	}
 }

@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.mysql.MySqlStudent;
 import com.kevin.aeas.object.oracle.OracleStudent;
@@ -24,55 +25,70 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	}
 	
 	public Student getByName(String name) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.name=:name");
-		q.setParameter("name", name);
         try {
+            String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.name=:name";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("name", name);
             return (Student) q.getSingleResult();
         }catch (NoResultException e){
             return null;
+        }catch(Exception e){
+            throw new BasicException(e);
         }
 	}
 
 	public List<Student> getByGrade(int grade) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.grade=:grade");
-		q.setParameter("grade", grade);
-        return q.getResultList();
+        try {
+            String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.grade=:grade";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("grade", grade);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public List<Student> getAlive() {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive");
-		q.setParameter("isAlive", true);
-        return q.getResultList();
+        try {
+            String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("isAlive", true);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public List<Student> getNotAlive() {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive");
-		q.setParameter("isAlive", false);
-        List<Student> list = q.getResultList();
-		return list;
+        try {
+            String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("isAlive", false);
+            List<Student> list = q.getResultList();
+            return list;
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 
 	public List<Student> getByTeacherId(int teacherId) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select s from "  + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId");
-		q.setParameter("teacherId", teacherId);
-        return q.getResultList();
+        try {
+            String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("teacherId", teacherId);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public void retire(int key) {
-        Student student = (Student) EntityManangerUtil.getInstance().find(getActualClass(), key);
-        student.setIsAlive(false);
-        EntityManangerUtil.getInstance().merge(student);
-	}
-
-	protected  Object changeToJpa(Object t){
-		Student newObject;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlStudent();
-		}
-		else{
-			newObject = new OracleStudent();
-		}
-		setValueByObject(t, newObject);
-		return newObject;
+        try {
+            Student student = (Student) EntityManangerUtil.getInstance().find(getActualClass(), key);
+            student.setIsAlive(false);
+            EntityManangerUtil.getInstance().merge(student);
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 }

@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.object.mysql.MySqlTeacherHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacherHoliday;
@@ -23,37 +24,39 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday
 	}
 
 	public List<TeacherHoliday> getByTeacherId(int teacherId) {
-		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId");
-		q.setParameter("teacherId", teacherId);
-        return q.getResultList();
+        try {
+            String hsql = "select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("teacherId", teacherId);
+            return q.getResultList();
+        }catch(Exception e){
+           throw new BasicException(e);
+        }
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
-        Query q = EntityManangerUtil.getInstance().createQuery("select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId and th.adjustDate=:adjustDate");
-        q.setParameter("teacherId", teacherId);
-        q.setParameter("adjustDate", Date.valueOf(date));
         try{
-        return (TeacherHoliday) q.getSingleResult();
+            String hsql = "select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId and th.adjustDate=:adjustDate";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("teacherId", teacherId);
+            q.setParameter("adjustDate", Date.valueOf(date));
+            return (TeacherHoliday) q.getSingleResult();
         }catch(NoResultException e){
             return null;
+        }catch(Exception e){
+            throw new BasicException(e);
         }
 	}
 
 	public void deleteByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select th from "  + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId");
-		q.setParameter("teacherId", teacherId);
-        q.executeUpdate();
+        try {
+            String hsql = "select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("teacherId", teacherId);
+            q.executeUpdate();
+        }catch(Exception e){
+            new BasicException(e);
+        }
 	}
 
-	protected  Object changeToJpa(Object t){
-		TeacherHoliday newObject;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlTeacherHoliday();
-		}
-		else{
-			newObject = new OracleTeacherHoliday();
-		}
-		setValueByObject(t, newObject);
-		return newObject;
-	}
 }

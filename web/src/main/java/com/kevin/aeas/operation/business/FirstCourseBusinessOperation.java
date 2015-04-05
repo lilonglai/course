@@ -9,26 +9,30 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 public class FirstCourseBusinessOperation {
-    FirstCourseOperation firstCourseService = OperationManager.getInstance().getFirstCourseOperation();
+    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
 
     public void add(FirstCourse firstCourse){
-        firstCourseService.add(firstCourse);
+        firstCourseOperation.add(firstCourse);
     }
 
     public void update(FirstCourse firstCourse){
-        firstCourseService.update(firstCourse);
+        firstCourseOperation.update(firstCourse);
     }
 
-	public FirstCourse get(@QueryParam("id") int firstCourseId){
-		return firstCourseService.get(firstCourseId);
+	public FirstCourse get(int firstCourseId){
+		return firstCourseOperation.get(firstCourseId);
 	}
 
-	public void delete(@QueryParam("id") int firstCourseId){
-		firstCourseService.delete(firstCourseId);
+	public void delete(int firstCourseId){
+        firstCourseOperation.delete(firstCourseId);
 	}
 
     public List<FirstCourse> getAll(){
-        return firstCourseService.getAll();
+        return firstCourseOperation.getAll();
+    }
+
+    public List<FirstCourse> getByGrade(int grade){
+        return firstCourseOperation.getByGrade(grade);
     }
 
 }

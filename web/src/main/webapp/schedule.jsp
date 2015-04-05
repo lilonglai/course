@@ -11,6 +11,7 @@
 <%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
 <%@page import="com.kevin.aeas.object.Student"%>
 <%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
+<%@ page import="com.kevin.aeas.operation.business.*" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -116,11 +117,11 @@
 <body>
 	<%
 	
-	    StudentOperation studentOperation = OperationManager.getInstance().getStudentOperation();
-	    FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-	    SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-	    TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-	    ScheduleOperation scheduleOperation = OperationManager.getInstance().getScheduleOperation();
+	    StudentBusinessOperation studentOperation = new StudentBusinessOperation();
+	    FirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
+	    SecondCourseBusinessOperation secondCourseOperation = new SecondCourseBusinessOperation();
+	    TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+	    ScheduleBusinessOperation scheduleOperation = new ScheduleBusinessOperation();
 	    
 		int studentId = (Integer.valueOf(request.getParameter("id")));
 		Student student = studentOperation.get(studentId);

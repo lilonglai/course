@@ -29,16 +29,20 @@ public class ScheduleBusinessOperation {
         scheduleOperation.update(schedule);
     }
 
-    public Schedule get(@QueryParam("id") int id){
+    public Schedule get(int id){
         return  scheduleOperation.get(id);
     }
 
-    public void delete(@QueryParam("id") int id){
+    public void delete(int id){
         scheduleOperation.delete(id);
     }
 
     public List<Schedule> getAll(){
         return scheduleOperation.getAll();
+    }
+
+    public List<Schedule> getByStudentId(int studentId){
+        return scheduleOperation.getByStudentId(studentId);
     }
 
     public List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){

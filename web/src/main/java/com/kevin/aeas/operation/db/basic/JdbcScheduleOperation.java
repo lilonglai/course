@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.Schedule;
 import com.kevin.aeas.operation.db.IScheduleOperation;
 
@@ -30,44 +31,35 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
         map.put("studentId", studentId);
         map.put("onDate", onDate);
         map.put("onTime", onTime);
-        Schedule schedule = null;
 		List<Schedule> list;
 		try {
 			list = executeSql(sql, map);
-			if(list.size() > 0){
-				schedule = list.get(0);
-			}
+			return list.size() > 0?list.get(0): null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		
-		return schedule;	
 	}
 	
 	public List<Schedule> getByStudentId(int studentId){
 		String sql = "select * from " + getTableName() + " where studentid = :studentId order by ondate,ontime";
         HashMap<String, Object> map = new HashMap<>();
         map.put("studentId", studentId);
-		List<Schedule> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public List<Schedule> getByTeacherId(int teacherId){
 		String sql = "select * from " + getTableName() + " where teacherid = :teacherId order by ondate,ontime";
         HashMap<String, Object> map = new HashMap<>();
         map.put("teacherId", teacherId);
-		List<Schedule> list = null;
 		try {
-			list = executeSql(sql, map);
+           return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 		
 	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
@@ -79,14 +71,13 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
             map.put("onTime", onTime);
 		}
 		sql += "order by ondate,ontime";
-		
-		List<Schedule> list = null;
+
 		try {
-			list = executeSql(sql, map);
+            return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
+
 	}
 	
 	
@@ -97,7 +88,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 	
@@ -109,7 +100,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 		
 	}

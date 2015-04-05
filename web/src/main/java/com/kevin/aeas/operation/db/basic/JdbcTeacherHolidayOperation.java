@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.ITeacherHolidayOperation;
 
@@ -23,13 +24,11 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 		String sql = "select * from " + getTableName() + " where teacherid = :teacherId";
         HashMap<String, Object> map = new HashMap<>();
         map.put("teacherId", teacherId);
-		List<TeacherHoliday> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String adjustDate) {
@@ -37,18 +36,12 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
         HashMap<String, Object> map = new HashMap<>();
         map.put("teacherId", teacherId);
         map.put("adjustDate", adjustDate);
-		TeacherHoliday teacherHoliday = null;
-		List<TeacherHoliday> list;
 		try {
-			list = executeSql(sql, map);
-			if(list.size() > 0){
-				teacherHoliday = list.get(0);
-			}
+            List<TeacherHoliday> list = executeSql(sql, map);
+            return list.size() > 0? list.get(0): null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		
-		return teacherHoliday;
 	}
 
 	public void add(TeacherHoliday teacherHoliday) {
@@ -58,7 +51,7 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 
@@ -69,7 +62,7 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 

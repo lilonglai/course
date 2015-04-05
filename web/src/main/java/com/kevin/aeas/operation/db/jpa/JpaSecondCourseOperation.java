@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.object.mysql.MySqlFirstCourse;
 import com.kevin.aeas.object.mysql.MySqlSecondCourse;
@@ -26,26 +27,24 @@ public class JpaSecondCourseOperation extends JpaBasicOperation<SecondCourse> im
 	}
 	
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + getActualClass().getSimpleName() + " sc where sc.firstCourseId=:firstCourseId");
-		q.setParameter("firstCourseId", firstCourseId);
-        return q.getResultList();
+        try {
+            String hsql="select sc from " + getActualClass().getSimpleName() + " sc where sc.firstCourseId=:firstCourseId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("firstCourseId", firstCourseId);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public List<SecondCourse> getByGrade(int grade){
-		Query q = EntityManangerUtil.getInstance().createQuery("select sc from "  + firstCourseClass.getSimpleName() + " fc, "  + getActualClass().getSimpleName() + " sc  where fc.grade=:grade and sc.firstCourseId=fc.id");
-		q.setParameter("grade", grade);
-		return q.getResultList();
-	}
-	
-	protected  Object changeToJpa(Object t){
-		SecondCourse newObject;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlSecondCourse();
-		}
-		else{
-			newObject = new OracleSecondCourse();
-		}
-		setValueByObject(t, newObject);
-		return newObject;
+        try {
+            String hsql="select sc from " + firstCourseClass.getSimpleName() + " fc, " + getActualClass().getSimpleName() + " sc  where fc.grade=:grade and sc.firstCourseId=fc.id";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("grade", grade);
+            return q.getResultList();
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 }

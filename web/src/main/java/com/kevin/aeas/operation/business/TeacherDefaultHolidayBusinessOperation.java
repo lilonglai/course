@@ -19,15 +19,19 @@ public class TeacherDefaultHolidayBusinessOperation {
         teacherDefaultHolidayOperation.update(teacherDefaultHoliday);
     }
 
-	public TeacherDefaultHoliday get(@QueryParam("id") int id){
+	public TeacherDefaultHoliday get(int id){
 		return teacherDefaultHolidayOperation.get(id);
 	}
 
-	public void delete(@QueryParam("id") int id){
+	public void delete(int id){
         teacherDefaultHolidayOperation.delete(id);
 	}
 
     public List<TeacherDefaultHoliday> getAll(){
         return teacherDefaultHolidayOperation.getAll();
+    }
+
+    public TeacherDefaultHoliday getByTeacherId(int teacherId){
+        return teacherDefaultHolidayOperation.getByTeacherId(teacherId);
     }
 }

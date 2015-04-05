@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday;
 import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
@@ -22,12 +23,15 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation<Teacher
 	}
 	
 	public TeacherDefaultHoliday getByTeacherId(int teacherId){
-		Query q = EntityManangerUtil.getInstance().createQuery("select td from "  + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
-		q.setParameter("teacherId", teacherId);
         try {
+            String hsql = "select td from " + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            q.setParameter("teacherId", teacherId);
             return (TeacherDefaultHoliday) q.getSingleResult();
         }catch(NoResultException e){
             return null;
+        }catch(Exception e){
+            throw new BasicException(e);
         }
 	}
 	
@@ -35,23 +39,14 @@ public class JpaTeacherDefaultHolidayOperation extends JpaBasicOperation<Teacher
         EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
         transaction.begin();
         try {
-            Query q = EntityManangerUtil.getInstance().createQuery("select td from " + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId");
+            String hsql = "select td from " + getActualClass().getSimpleName() + " td where td.teacherId=:teacherId";
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             q.executeUpdate();
         }catch(Exception e){
             transaction.rollback();
+            throw new BasicException(e);
         }
 	}
 
-	protected  Object changeToJpa(Object t){
-		TeacherDefaultHoliday newObject = null;
-		if(ConfigurationManager.getInstance().isMySql()){
-			newObject = new MySqlTeacherDefaultHoliday();
-		}
-		else{
-			newObject = new OracleTeacherDefaultHoliday();
-		}
-		setValueByObject(t, newObject);
-		return newObject;
-	}
 }

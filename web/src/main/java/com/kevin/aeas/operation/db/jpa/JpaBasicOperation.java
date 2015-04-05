@@ -1,5 +1,7 @@
 package com.kevin.aeas.operation.db.jpa;
 
+import com.kevin.aeas.object.BasicException;
+
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.lang.reflect.Method;
@@ -21,16 +23,18 @@ public abstract class JpaBasicOperation<T> {
 	
 	public List<T> getAll(){
 		String hsql = "select t from " + actualClass.getSimpleName() +" t";
-		Query q = EntityManangerUtil.getInstance().createQuery(hsql);
-		List list = q.getResultList();				
-		return list;
+        try {
+            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            List list = q.getResultList();
+            return list;
+        }catch(Exception e){
+            throw new BasicException(e);
+        }
 	}
 	
 	public T get(int key){
 		return (T)EntityManangerUtil.getInstance().find(actualClass, key);
 	}
-	
-	protected abstract Object changeToJpa(Object t);
 	
 	public void add(T t){
 		EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
@@ -40,6 +44,7 @@ public abstract class JpaBasicOperation<T> {
             transaction.commit();
         }catch(Exception e){
             transaction.rollback();
+            throw new BasicException(e);
         }
 
 	}
@@ -52,6 +57,7 @@ public abstract class JpaBasicOperation<T> {
             transaction.commit();
         }catch(Exception e){
             transaction.rollback();
+            throw new BasicException(e);
         }
 	}
 
@@ -64,10 +70,12 @@ public abstract class JpaBasicOperation<T> {
             transaction.commit();
         }catch(Exception e){
             transaction.rollback();
+            throw new BasicException(e);
         }
 	}
 	
-	protected void setValueByObject(Object from, Object to) {
+	protected Object changeToJpa(Object from) throws Exception {
+        Object to = getActualClass().newInstance();
 		Class fromClass = from.getClass();
 		Class toClass = to.getClass();
 		Method[] toMethods = toClass.getMethods();
@@ -75,17 +83,12 @@ public abstract class JpaBasicOperation<T> {
 			if (toMethod.getName().startsWith("set")) {
 				String fromMethodName = "get" + toMethod.getName().substring(3);
 				Method fromMethod = null;
-				try {
-					fromMethod = fromClass.getMethod(fromMethodName);
-					Object value = fromMethod.invoke(from);
-					toMethod.invoke(to, value);
-				} catch (Exception e) {
-					fromMethod = null;
-					e.printStackTrace();
-				}
+                fromMethod = fromClass.getMethod(fromMethodName);
+                Object value = fromMethod.invoke(from);
+                toMethod.invoke(to, value);
 			}
 		}
-
+        return to;
 	}
 	
 }

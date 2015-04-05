@@ -1,5 +1,6 @@
 package com.kevin.aeas.operation.db.basic;
 
+import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.IStudentOperation;
 
@@ -30,17 +31,12 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		String sql = "select * from " + getTableName() + " where name = :name";
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", name);
-		Student student = null;
-		List<Student> list;
 		try {
-			list = executeSql(sql, map);
-			if(list.size() > 0){
-				student = list.get(0);
-			}
+            List<Student> list = executeSql(sql, map);
+            return list.size() > 0? list.get(0): null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return student;
 	}
 	
 
@@ -48,49 +44,40 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		String sql = "select * from " + getTableName() + " where grade = :grade";
         HashMap<String, Object> map = new HashMap<>();
         map.put("grade", grade);
-		List<Student> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public List<Student> getAlive() {
 		String sql = "select * from " + getTableName() + "" + " where isalive=true";
-		List<Student> list = null;
 		try {
-			list = executeSql(sql);
+			return executeSql(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 	
 	public List<Student> getNotAlive() {
 		String sql = "select * from " + getTableName() + " where isalive=false";
-		List<Student> list = null;
 		try {
-			list = executeSql(sql);
+			return executeSql(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-		return list;
 	}
 
 	public List<Student> getByTeacherId(int teacherId) {
 		String sql = "select * from " + getTableName() + " where teacherid = :teacherId";
         HashMap<String, Object> map = new HashMap<>();
         map.put("teacherId", teacherId);
-		List<Student> list = null;
 		try {
-			list = executeSql(sql, map);
+			return executeSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
-
-		return list;
 	}
 
 	public void add(Student student){
@@ -100,7 +87,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}	
 	}
 
@@ -114,7 +101,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 	
@@ -125,7 +112,7 @@ public class JdbcStudentOperation extends JdbcBaseOperation<Student> implements 
 		try {
 			executeUpdateSql(sql, map);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new BasicException(e);
 		}
 	}
 

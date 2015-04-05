@@ -1,16 +1,13 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.kevin.aeas.object.TeacherHoliday"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherHolidayOperation"%>
-<%@page import="java.io.PrintWriter"%>
 <%@page import="com.kevin.aeas.utils.DateHelp"%>
 <%@page import="com.kevin.aeas.object.TeacherDefaultHoliday"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
+<%@ page import="com.kevin.aeas.operation.business.TeacherBusinessOperation" %>
+<%@ page import="com.kevin.aeas.operation.business.TeacherDefaultHolidayBusinessOperation" %>
+<%@ page import="com.kevin.aeas.operation.business.TeacherHolidayBusinessOperation" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,14 +21,14 @@
 
 </head>
 <body>
+
   <div class="container">
 	<%
-	    //PrintWriter out = response.getWriter();
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		
-		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
-		TeacherHolidayOperation teacherHolidayOperation =  OperationManager.getInstance().getTeacherHolidayOperation();
+		TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+		TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayBusinessOperation();
+		TeacherHolidayBusinessOperation teacherHolidayOperation = new TeacherHolidayBusinessOperation();
 		
 		if (request.getParameter("submit") != null) {
 			String control_date  = request.getParameter("control_date");
@@ -50,11 +47,7 @@
 		        }
 			}
 		}
-		
-	    
-	    
-	    
-	    
+
 	    Teacher teacher = teacherOperation.get(teacherId);
 	    TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
 	    List<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
