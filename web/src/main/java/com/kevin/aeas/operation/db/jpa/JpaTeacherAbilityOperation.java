@@ -9,6 +9,7 @@ import com.kevin.aeas.object.oracle.OracleTeacherAbility;
 import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
@@ -29,7 +30,7 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 	public List<TeacherAbility> getByTeacherId(int teacherId) {
         try {
             String hsql = "select ta from " + getActualClass().getSimpleName() + " ta where ta.teacherId=:teacherId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             return q.getResultList();
         }catch(Exception e){
@@ -40,7 +41,7 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 	public List<TeacherAbility> getByCourseId(int courseId) {
         try {
             String hsql = "select ta from " + getActualClass().getSimpleName() + " ta where ta.courseId=:courseId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("courseId", courseId);
             return q.getResultList();
         }catch(Exception e){
@@ -50,11 +51,12 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 	
 	
 	public void deleteByTeacherId(int teacherId){
-        EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         try {
             String sql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = :teacherId";
-            Query q = EntityManangerUtil.getInstance().createQuery(sql);
+            Query q = entityManager.createQuery(sql);
             q.setParameter("teacherId", teacherId);
             q.executeUpdate();
             transaction.commit();
@@ -65,12 +67,13 @@ public class JpaTeacherAbilityOperation extends JpaBasicOperation<TeacherAbility
 	}
 		
 	public void deleteByTeacherAndGrade(int teacherId,int grade){
-        EntityTransaction transaction = EntityManangerUtil.getInstance().getTransaction();
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         try {
             String hsql = "delete from " + getActualClass().getSimpleName() + " ta where ta.teacherId = :teacherId"
                     + " and ta.courseId in(select fc.id from " + firstCourseClass.getSimpleName() + " fc where fc.grade = :grade)";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = entityManager.createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             q.setParameter("grade", grade);
             q.executeUpdate();

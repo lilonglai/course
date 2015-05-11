@@ -24,7 +24,7 @@ public class JpaFirstCourseOperation extends JpaBasicOperation<FirstCourse> impl
 	public List<FirstCourse> getByGrade(int grade){
         try {
             String hsql = "select c from " + getActualClass().getSimpleName() + " c where c.grade=:grade";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("grade", grade);
             return q.getResultList();
         }catch(Exception e){

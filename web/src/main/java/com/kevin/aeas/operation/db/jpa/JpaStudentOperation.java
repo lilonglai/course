@@ -4,14 +4,13 @@ import com.kevin.aeas.object.BasicException;
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.object.mysql.MySqlStudent;
 import com.kevin.aeas.object.oracle.OracleStudent;
-import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.operation.db.IStudentOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
-import com.kevin.aeas.utils.DatabaseHelp;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import java.sql.SQLException;
 import java.util.List;
 
 public class JpaStudentOperation extends JpaBasicOperation<Student> implements IStudentOperation{
@@ -27,7 +26,7 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	public Student getByName(String name) {
         try {
             String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.name=:name";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("name", name);
             return (Student) q.getSingleResult();
         }catch (NoResultException e){
@@ -40,7 +39,7 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	public List<Student> getByGrade(int grade) {
         try {
             String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.grade=:grade";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("grade", grade);
             return q.getResultList();
         }catch(Exception e){
@@ -51,7 +50,7 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	public List<Student> getAlive() {
         try {
             String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("isAlive", true);
             return q.getResultList();
         }catch(Exception e){
@@ -62,7 +61,7 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	public List<Student> getNotAlive() {
         try {
             String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.isAlive=:isAlive";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("isAlive", false);
             List<Student> list = q.getResultList();
             return list;
@@ -74,7 +73,7 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	public List<Student> getByTeacherId(int teacherId) {
         try {
             String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             return q.getResultList();
         }catch(Exception e){
@@ -83,11 +82,16 @@ public class JpaStudentOperation extends JpaBasicOperation<Student> implements I
 	}
 	
 	public void retire(int key) {
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         try {
-            Student student = (Student) EntityManangerUtil.getInstance().find(getActualClass(), key);
+            Student student = (Student) entityManager.find(getActualClass(), key);
             student.setIsAlive(false);
-            EntityManangerUtil.getInstance().merge(student);
+            entityManager.merge(student);
+            transaction.commit();
         }catch(Exception e){
+            transaction.commit();
             throw new BasicException(e);
         }
 	}

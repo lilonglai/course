@@ -1,4 +1,3 @@
 allprojects{
   apply plugin: 'idea'
-  sourceCompatibility = 1.7
 }

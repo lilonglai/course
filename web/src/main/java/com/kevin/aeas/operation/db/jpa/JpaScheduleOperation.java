@@ -25,7 +25,7 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 	public Schedule getByStudentIdOnDateAndTime(int studentId, Date onDate, int onTime){
         try {
             String hsql="select s from " + getActualClass().getSimpleName() + " s where s.onDate=:onDate and s.onTime=:onTime and s.studentId=:studentId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("onDate", onDate);
             q.setParameter("onTime", onTime);
             q.setParameter("studentId", studentId);
@@ -41,7 +41,7 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 	public List<Schedule> getByStudentId(int studentId){
         try {
             String hsql = "select s from " + getActualClass().getSimpleName() + " s where s.studentId=:studentId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("studentId", studentId);
             return q.getResultList();
         }catch(Exception e){
@@ -52,7 +52,7 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 	public List<Schedule> getByTeacherId(int teacherId){
         try {
             String hsql="select s from " + getActualClass().getSimpleName() + " s where s.teacherId=:teacherId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             return q.getResultList();
         }catch(Exception e){
@@ -64,7 +64,7 @@ public class JpaScheduleOperation extends JpaBasicOperation<Schedule> implements
 	public List<Schedule> getByDateAndTime(Date onDate, int onTime){
         try {
             String hsql="select s from " + getActualClass().getSimpleName() + " s where s.onDate=:onDate and s.onTime=:onTime order by s.onDate,s.onTime";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("onDate", onDate);
             q.setParameter("onTime", onTime);
             return q.getResultList();

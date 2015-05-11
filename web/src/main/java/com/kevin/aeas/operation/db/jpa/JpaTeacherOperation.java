@@ -7,6 +7,8 @@ import com.kevin.aeas.object.oracle.OracleTeacher;
 import com.kevin.aeas.operation.db.ITeacherOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
@@ -24,7 +26,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	public Teacher getByName(String name){
         try {
             String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.name=:name";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("name", name);
             return (Teacher) q.getSingleResult();
         }catch(NoResultException e){
@@ -37,7 +39,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	public Teacher getByShortName(String shortName){
         try {
             String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.shortName=:shortName";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("shortName", shortName);
             return (Teacher) q.getSingleResult();
         }catch(NoResultException e){
@@ -50,7 +52,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	public List<Teacher> getAlive(){
         try {
             String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("isAlive", true);
             List<Teacher> list = q.getResultList();
             return list;
@@ -62,7 +64,7 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	public List<Teacher> getNotAlive(){
         try {
             String hsql = "select t from " + getActualClass().getSimpleName() + " t where t.isAlive=:isAlive";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("isAlive", false);
             return q.getResultList();
         }catch(Exception e){
@@ -75,11 +77,16 @@ public class JpaTeacherOperation extends JpaBasicOperation<Teacher> implements I
 	}
 
 	public void retire(int key){
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         try {
-            Teacher teacher = (Teacher) EntityManangerUtil.getInstance().find(getActualClass(), key);
+            Teacher teacher = (Teacher) getEntityManager().find(getActualClass(), key);
             teacher.setIsAlive(false);
-            EntityManangerUtil.getInstance().merge(teacher);
+            getEntityManager().merge(teacher);
+            transaction.commit();
         }catch(Exception e){
+            transaction.rollback();
             new BasicException(e);
         }
 	}

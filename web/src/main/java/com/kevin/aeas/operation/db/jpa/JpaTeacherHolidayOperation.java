@@ -7,6 +7,8 @@ import com.kevin.aeas.object.oracle.OracleTeacherHoliday;
 import com.kevin.aeas.operation.db.ITeacherHolidayOperation;
 import com.kevin.aeas.utils.ConfigurationManager;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.sql.Date;
@@ -26,7 +28,7 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday
 	public List<TeacherHoliday> getByTeacherId(int teacherId) {
         try {
             String hsql = "select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             return q.getResultList();
         }catch(Exception e){
@@ -37,7 +39,7 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
         try{
             String hsql = "select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId and th.adjustDate=:adjustDate";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             q.setParameter("adjustDate", Date.valueOf(date));
             return (TeacherHoliday) q.getSingleResult();
@@ -49,12 +51,17 @@ public class JpaTeacherHolidayOperation extends JpaBasicOperation<TeacherHoliday
 	}
 
 	public void deleteByTeacherId(int teacherId){
+        EntityManager entityManager = getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         try {
-            String hsql = "select th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            String hsql = "delete th from " + getActualClass().getSimpleName() + " th where th.teacherId=:teacherId";
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("teacherId", teacherId);
             q.executeUpdate();
+            transaction.commit();
         }catch(Exception e){
+            transaction.rollback();
             new BasicException(e);
         }
 	}

@@ -29,7 +29,7 @@ public class JpaSecondCourseOperation extends JpaBasicOperation<SecondCourse> im
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
         try {
             String hsql="select sc from " + getActualClass().getSimpleName() + " sc where sc.firstCourseId=:firstCourseId";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("firstCourseId", firstCourseId);
             return q.getResultList();
         }catch(Exception e){
@@ -40,7 +40,7 @@ public class JpaSecondCourseOperation extends JpaBasicOperation<SecondCourse> im
 	public List<SecondCourse> getByGrade(int grade){
         try {
             String hsql="select sc from " + firstCourseClass.getSimpleName() + " fc, " + getActualClass().getSimpleName() + " sc  where fc.grade=:grade and sc.firstCourseId=fc.id";
-            Query q = EntityManangerUtil.getInstance().createQuery(hsql);
+            Query q = getEntityManager().createQuery(hsql);
             q.setParameter("grade", grade);
             return q.getResultList();
         }catch(Exception e){
