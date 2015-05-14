@@ -1,6 +1,6 @@
 package com.kevin.aeas.test.db.utils;
 
-import com.kevin.aeas.operation.db.jpa.EntityManagerUtil;
+import com.kevin.aeas.operation.db.jpa.JpaBasicOperation;
 import com.kevin.aeas.utils.DatabaseHelp;
 
 import java.lang.reflect.Field;
@@ -28,13 +28,10 @@ public class DbUtils {
 	
 	public static void resetJpaManager(){
 	    try {
-			Field entityManagerFactoryField = EntityManagerUtil.class.getDeclaredField("entityManagerFactory");
+			Field entityManagerFactoryField = JpaBasicOperation.class.getDeclaredField("entityManagerFactory");
 			entityManagerFactoryField.setAccessible(true);
 			entityManagerFactoryField.set(null, null);
-			
-			Field entityManagerField = EntityManagerUtil.class.getDeclaredField("entityManager");
-			entityManagerField.setAccessible(true);
-			entityManagerField.set(null, null);
+
 			
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
