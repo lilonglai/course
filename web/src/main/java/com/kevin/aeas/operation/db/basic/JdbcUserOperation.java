@@ -2,7 +2,6 @@ package com.kevin.aeas.operation.db.basic;
 
 import com.kevin.aeas.object.User;
 import com.kevin.aeas.operation.db.IUserOperation;
-import com.kevin.aeas.utils.DatabaseHelp;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

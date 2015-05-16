@@ -5,6 +5,7 @@ import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.operation.db.FirstCourseOperation;
 import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.SecondCourseOperation;
+import com.kevin.aeas.utils.HttpRequestUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,53 +26,28 @@ public class SecondCourseServlet extends HttpServlet {
     private void add(HttpServletRequest request) throws UnsupportedEncodingException{
         SecondCourse secondCourse = null;
         SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-        FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
         secondCourse = new SecondCourse();
-        int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
+        setObject(request, secondCourse);
+        secondCourseOperation.add(secondCourse);
+    }
+
+    private void setObject(HttpServletRequest request, SecondCourse secondCourse) throws UnsupportedEncodingException{
+        FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
+        int firstCourseId = HttpRequestUtil.getInt(request, "firstCourseId");
         FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
 
         secondCourse.setFirstCourseId(firstCourse.getId());
-        String name = request.getParameter("name");
-        name = new String(name.getBytes("iso-8859-1"), "utf-8");
-        secondCourse.setName(name);
-
-        String shortName = request.getParameter("shortName");
-        shortName = new String(shortName.getBytes("iso-8859-1"),
-                "utf-8");
-        secondCourse.setShortName(shortName);
-
-        String description = request.getParameter("description");
-        description = new String(description.getBytes("iso-8859-1"),
-                "utf-8");
-        secondCourse.setDescription(description);
-
-        secondCourseOperation.add(secondCourse);
+        secondCourse.setName(HttpRequestUtil.getString(request, "name"));
+        secondCourse.setShortName(HttpRequestUtil.getString(request, "shortName"));
+        secondCourse.setDescription(HttpRequestUtil.getString(request, "description"));
     }
 
     private void update(HttpServletRequest request) throws UnsupportedEncodingException{
         SecondCourse secondCourse = null;
         SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
-        FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-        int courseId = Integer.valueOf(request.getParameter("id"));
+        int courseId = HttpRequestUtil.getInt(request, "id");
         secondCourse = secondCourseOperation.get(courseId);
-
-        String name = request.getParameter("name");
-        name = new String(name.getBytes("iso-8859-1"), "utf-8");
-        secondCourse.setName(name);
-
-        String shortName = request.getParameter("shortName");
-        shortName = new String(shortName.getBytes("iso-8859-1"),
-                "utf-8");
-        secondCourse.setShortName(shortName);
-
-        int firstCourseId = Integer.valueOf((request.getParameter("firstCourseId")));
-        FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-        secondCourse.setFirstCourseId(firstCourseId);
-
-        String description = request.getParameter("description");
-        description = new String(description.getBytes("iso-8859-1"),
-                "utf-8");
-        secondCourse.setDescription(description);
+        setObject(request, secondCourse);
 
         secondCourseOperation.update(secondCourse);
 

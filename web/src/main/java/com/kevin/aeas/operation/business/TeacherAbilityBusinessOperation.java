@@ -4,8 +4,7 @@ import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherAbilityOperation;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 public class TeacherAbilityBusinessOperation {

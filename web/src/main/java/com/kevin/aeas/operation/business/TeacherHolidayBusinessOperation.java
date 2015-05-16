@@ -4,8 +4,6 @@ import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherHolidayOperation;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 public class TeacherHolidayBusinessOperation {

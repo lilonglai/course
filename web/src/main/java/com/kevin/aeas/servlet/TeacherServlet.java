@@ -7,6 +7,7 @@ import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.db.TeacherOperation;
+import com.kevin.aeas.utils.HttpRequestUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,30 +34,18 @@ public class TeacherServlet extends HttpServlet {
 		teacherOperation.retire(id);
 	}
 
-	private void add(HttpServletRequest request)
-			throws UnsupportedEncodingException {
-		OracleTeacher teacher = new OracleTeacher();
-		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
-		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
-		String name = request.getParameter("name");
-		name = new String(name.getBytes("iso-8859-1"), "utf-8");
-		teacher.setName(name);
-
-		String shortName = request.getParameter("shortName");
-		shortName = new String(shortName.getBytes("iso-8859-1"), "utf-8");
-		teacher.setShortName(shortName);
-
+	private void setObject(HttpServletRequest request, Teacher teacher) throws UnsupportedEncodingException{
+		teacher.setName(HttpRequestUtil.getString(request, "name"));
+		teacher.setShortName(HttpRequestUtil.getString(request, "shortName"));
 		teacher.setPhone(request.getParameter("phone"));
 		if (request.getParameter("isMaster") != null)
 			teacher.setIsMaster(true);
 		else
 			teacher.setIsMaster(false);
+	}
 
-		OracleTeacherDefaultHoliday teacherDefaultHoliday = new OracleTeacherDefaultHoliday();
-
-
+	private void setObject(HttpServletRequest request, TeacherDefaultHoliday teacherDefaultHoliday) throws UnsupportedEncodingException{
 		String[] weeks = request.getParameterValues("weeks");
-
 		if (weeks != null) {
 			for (String week : weeks) {
 				if ("week1".equals(week))
@@ -76,11 +65,24 @@ public class TeacherServlet extends HttpServlet {
 				else {
 					throw new IllegalArgumentException("week must between 1-7");
 				}
+
 			}
 		}
-		
+	}
+
+	private void add(HttpServletRequest request)
+			throws UnsupportedEncodingException {
+		Teacher teacher = new Teacher();
+		TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
+		TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
+		setObject(request, teacher);
 		teacher.setIsAlive(true);
 		teacherOperation.add(teacher);
+
+		teacher = teacherOperation.getByName(teacher.getName());
+		TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
+		teacherDefaultHoliday.setTeacherId(teacher.getId());
+		setObject(request, teacherDefaultHoliday);
 		teacherDefaultHolidayOperation.add(teacherDefaultHoliday);
 	}
 
@@ -93,66 +95,26 @@ public class TeacherServlet extends HttpServlet {
 		
 		int teacherId = Integer.valueOf(request.getParameter("id"));
 		teacher = teacherOperation.get(teacherId);
+		setObject(request, teacher);
+		teacherOperation.update(teacher);
+
 		TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
 		if(teacherDefaultHoliday == null){
 			teacherDefaultHoliday = new TeacherDefaultHoliday();
 		}
-		
-		String name = request.getParameter("name");
-		name = new String(name.getBytes("iso-8859-1"), "utf-8");
-		teacher.setName(name);
-
-		String shortName = request.getParameter("shortName");
-		shortName = new String(shortName.getBytes("iso-8859-1"), "utf-8");
-		teacher.setShortName(shortName);
-
-		teacher.setPhone(request.getParameter("phone"));
-		if (request.getParameter("isMaster") != null)
-			teacher.setIsMaster(true);
-		else
-			teacher.setIsMaster(false);
-
-
-		String[] weeks = request.getParameterValues("weeks");
-
-		if (weeks != null) {
-			for (String week : weeks) {
-				if ("week1".equals(week))
-					teacherDefaultHoliday.setWeek1(true);
-				else if ("week2".equals(week))
-					teacherDefaultHoliday.setWeek2(true);
-				else if ("week3".equals(week))
-					teacherDefaultHoliday.setWeek3(true);
-				else if ("week4".equals(week))
-					teacherDefaultHoliday.setWeek4(true);
-				else if ("week5".equals(week))
-					teacherDefaultHoliday.setWeek5(true);
-				else if ("week6".equals(week))
-					teacherDefaultHoliday.setWeek6(true);
-				else if ("week7".equals(week))
-					teacherDefaultHoliday.setWeek7(true);
-				else {
-					throw new IllegalArgumentException("week must between 1-7");
-				}
-
-			}
-		}
-		
-		teacherOperation.update(teacher);
-		
+		setObject(request, teacherDefaultHoliday);
+		teacherDefaultHolidayOperation.update(teacherDefaultHoliday);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		if (action.equals("delete")) {
 			int teacherId = Integer.valueOf(request.getParameter("id"));

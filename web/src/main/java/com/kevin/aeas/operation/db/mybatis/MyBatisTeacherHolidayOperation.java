@@ -3,7 +3,6 @@ package com.kevin.aeas.operation.db.mybatis;
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.ITeacherHolidayOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday;
-import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Date;
 import java.util.List;

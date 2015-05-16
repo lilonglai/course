@@ -3,6 +3,7 @@ package com.kevin.aeas.servlet;
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.FirstCourseOperation;
 import com.kevin.aeas.operation.db.OperationManager;
+import com.kevin.aeas.utils.HttpRequestUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,47 +25,24 @@ public class FirstCourseServlet extends HttpServlet {
         FirstCourse firstCourse = null;
         FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
         firstCourse = new FirstCourse();
-
-        firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
-        String name = request.getParameter("name");
-        name = new String(name.getBytes("iso-8859-1"), "utf-8");
-        firstCourse.setName(name);
-
-        String shortName = request.getParameter("shortName");
-        shortName = new String(shortName.getBytes("iso-8859-1"),
-                "utf-8");
-        firstCourse.setShortName(shortName);
-
-        String description = request.getParameter("description");
-        description = new String(description.getBytes("iso-8859-1"),
-                "utf-8");
-        firstCourse.setDescription(description);
-
+        setObject(request, firstCourse);
         firstCourseOperation.add(firstCourse);
 
+    }
+
+    private void setObject(HttpServletRequest request, FirstCourse firstCourse) throws UnsupportedEncodingException{
+        firstCourse.setGrade(HttpRequestUtil.getInt(request,"grade"));
+        firstCourse.setName(HttpRequestUtil.getString(request,"name"));
+        firstCourse.setShortName(HttpRequestUtil.getString(request, "shortName"));
+        firstCourse.setDescription(HttpRequestUtil.getString(request, "description"));
     }
 
     private void update(HttpServletRequest request) throws UnsupportedEncodingException{
         FirstCourse firstCourse = null;
         FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-        int courseId = Integer.valueOf(request.getParameter("id"));
+        int courseId = HttpRequestUtil.getInt(request, "id");
         firstCourse = firstCourseOperation.get(courseId);
-
-        firstCourse.setGrade(Integer.valueOf(request.getParameter("grade")));
-        String name = request.getParameter("name");
-        name = new String(name.getBytes("iso-8859-1"), "utf-8");
-        firstCourse.setName(name);
-
-        String shortName = request.getParameter("shortName");
-        shortName = new String(shortName.getBytes("iso-8859-1"),
-                "utf-8");
-        firstCourse.setShortName(shortName);
-
-        String description = request.getParameter("description");
-        description = new String(description.getBytes("iso-8859-1"),
-                "utf-8");
-        firstCourse.setDescription(description);
-
+        setObject(request, firstCourse);
         firstCourseOperation.update(firstCourse);
 
     }

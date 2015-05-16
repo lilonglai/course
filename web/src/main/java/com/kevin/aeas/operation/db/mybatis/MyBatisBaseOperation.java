@@ -1,8 +1,6 @@
 package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.BasicException;
-import com.kevin.aeas.object.FirstCourse;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisFirstCourse;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -3,7 +3,6 @@ package com.kevin.aeas.operation.db.mybatis;
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.IStudentOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisStudent;
-import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 

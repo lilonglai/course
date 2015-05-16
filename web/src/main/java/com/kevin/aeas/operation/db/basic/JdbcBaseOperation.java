@@ -6,7 +6,6 @@ import com.kevin.aeas.utils.DbNoPool;
 import com.kevin.aeas.utils.IGetConnection;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;

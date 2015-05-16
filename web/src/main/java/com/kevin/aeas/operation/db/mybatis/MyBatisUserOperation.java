@@ -1,11 +1,8 @@
 package com.kevin.aeas.operation.db.mybatis;
 
-import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.object.User;
 import com.kevin.aeas.operation.db.IUserOperation;
 import com.kevin.aeas.operation.db.mybatis.inter.MyBatisUser;
-
-import java.util.List;
 
 public class MyBatisUserOperation extends MyBatisBaseOperation<MyBatisUser> implements IUserOperation{
     public MyBatisUserOperation(){
