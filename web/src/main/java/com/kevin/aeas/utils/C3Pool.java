@@ -15,7 +15,7 @@ public class C3Pool implements IGetConnection {
 	private String dbPassword;
 	
 	public C3Pool(){
-		dataSource=new   ComboPooledDataSource(); 
+		dataSource=new  ComboPooledDataSource ();
 		
 		dbUser = ConfigurationManager.getInstance().getProperty("dbUser");
 		dbPassword = ConfigurationManager.getInstance().getProperty(

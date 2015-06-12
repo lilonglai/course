@@ -2,11 +2,11 @@ package com.kevin.aeas.object;
 
 public class FirstCourse {
     protected int id;
-    public int grade;
-    public String name;
-    public String shortName;
-    public String description;
-    public Boolean isAlive;
+    protected int grade;
+    protected String name;
+    protected String shortName;
+    protected String description;
+    protected Boolean isAlive;
 
 	public FirstCourse() {
 		super();

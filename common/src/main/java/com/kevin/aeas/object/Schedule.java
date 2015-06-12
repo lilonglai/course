@@ -2,16 +2,16 @@ package com.kevin.aeas.object;
 
 import java.sql.Date;
 
-public class Schedule {	
-    protected int id;
-    public Date onDate;
-    public int onTime;
-    public String addition;
-    public String description;
-    
-    public int studentId;
-    public int courseId;
-    public int teacherId;
+public class Schedule {
+	protected int id;
+	protected Date onDate;
+	protected int onTime;
+	protected String addition;
+	protected String description;
+
+	protected int studentId;
+	protected int courseId;
+	protected int teacherId;
 
 	public Schedule() {
 		super();

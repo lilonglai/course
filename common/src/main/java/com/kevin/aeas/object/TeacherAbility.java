@@ -2,8 +2,8 @@ package com.kevin.aeas.object;
 
 public class TeacherAbility {
 	protected int id;
-	public int teacherId;
-	public int courseId;
+	protected int teacherId;
+	protected int courseId;
 
 	public TeacherAbility() {
 		super();

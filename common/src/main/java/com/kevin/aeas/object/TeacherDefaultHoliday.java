@@ -2,14 +2,14 @@ package com.kevin.aeas.object;
 
 public class TeacherDefaultHoliday {
 	protected int id;
-	public int teacherId;
-	public Boolean week1;
-	public Boolean week2;
-	public Boolean week3;
-	public Boolean week4;
-	public Boolean week5;
-	public Boolean week6;
-	public Boolean week7;
+	protected int teacherId;
+	protected Boolean week1;
+	protected Boolean week2;
+	protected Boolean week3;
+	protected Boolean week4;
+	protected Boolean week5;
+	protected Boolean week6;
+	protected Boolean week7;
 
 	public TeacherDefaultHoliday() {
 		super();

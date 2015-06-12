@@ -71,13 +71,13 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
             sql += "name = :name ";
             andFlag = true;
         }
-		
+
 		if(condition.getShortName() != null) {
             sql += andFlag? "and ":"";
             sql += "shortname=:shortName ";
             andFlag = true;
         }
-		
+
 		if(condition.getPhone() != null) {
             sql += andFlag? "and ":"";
             sql += "phone = :phone";
