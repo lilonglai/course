@@ -19,7 +19,7 @@ public class ScheduleOperationTest extends TestCase {
 
     IScheduleOperation operation;
     public ScheduleOperationTest(){
-        ApplicationContext context = ApplicationContextUtils.getInstance();
+        ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
         operation = (IScheduleOperation)context.getBean("jdbcScheduleDao");
     }
 
@@ -73,7 +73,7 @@ public class ScheduleOperationTest extends TestCase {
     }
 
     protected  void setUp(){
-        ApplicationContext context = ApplicationContextUtils.getInstance();
+        ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
 
         ITeacherOperation teacherOperation = (ITeacherOperation) context.getBean("jdbcTeacherDao");
         teacher = new Teacher();
@@ -98,7 +98,7 @@ public class ScheduleOperationTest extends TestCase {
     }
 
     protected void tearDown(){
-        ApplicationContext context = ApplicationContextUtils.getInstance();
+        ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
         ITeacherOperation teacherOperation = (ITeacherOperation) context.getBean("jdbcTeacherDao");
         teacherOperation.delete(teacher.getId());
         IStudentOperation studentOperation = (IStudentOperation) context.getBean("jdbcStudentDao");

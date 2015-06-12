@@ -1,4 +1,4 @@
-package com.kevin.aeas.test.db.basic;
+package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
@@ -8,13 +8,12 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
-public  class TeacherAbilityOperationTest extends TestCase {
+public class TeacherAbilityOperationTest extends TestCase {
 	ITeacherAbilityOperation operation;
 	public TeacherAbilityOperationTest(){
-        ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
-		operation = (ITeacherAbilityOperation)context.getBean("jdbcTeacherAbilityDao");
+		ApplicationContext context = ApplicationContextUtils.getMybatisInstance();
+		operation = (ITeacherAbilityOperation)context.getBean("myBatisTeacherAbilityDao");
 	}
-
 	public void testGet() {
 		TeacherAbility teacher = operation.get(1);
 	}
@@ -49,7 +48,7 @@ public  class TeacherAbilityOperationTest extends TestCase {
 	}
 
 	public void testDelete() {
-		List<? extends TeacherAbility> list=operation.getAll();
+		List<TeacherAbility> list=operation.getAll();
 		for(TeacherAbility teacherAbility: list){
 			if(teacherAbility.getTeacherId() == 25){
 				teacherAbility.setCourseId(26);

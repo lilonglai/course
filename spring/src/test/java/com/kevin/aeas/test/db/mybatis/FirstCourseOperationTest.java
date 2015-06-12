@@ -1,4 +1,4 @@
-package com.kevin.aeas.test.db.basic;
+package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.FirstCourse;
 import com.kevin.aeas.operation.db.IFirstCourseOperation;
@@ -9,11 +9,11 @@ import org.springframework.context.ApplicationContext;
 import java.util.List;
 
 
-public class  FirstCourseOperationTest extends TestCase{
+public class FirstCourseOperationTest extends TestCase{
 	IFirstCourseOperation operation;
 	public FirstCourseOperationTest(){
-		ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
-		operation = (IFirstCourseOperation)context.getBean("jdbcFirstCourseDao");
+		ApplicationContext context = ApplicationContextUtils.getMybatisInstance();
+		operation = (IFirstCourseOperation)context.getBean("myBatisFirstCourseDao");
 	}
 	public void  testGet(){
 		FirstCourse firstCourse = operation.get(1);
@@ -43,13 +43,13 @@ public class  FirstCourseOperationTest extends TestCase{
 		firstCourse.setName("test");
 		firstCourse.setShortName("test");
 		firstCourse.setGrade(2);
-		firstCourse.setDescription("this is the test case for first course");
+		firstCourse.setDescription("this is the test case for first course");		
 		operation.add(firstCourse);
 		
 		// add grade 3 first course
 		firstCourse.setName("test");
 		firstCourse.setShortName("test");
-		firstCourse.setGrade(3);
+		firstCourse.setGrade(2);
 		firstCourse.setDescription("this is the test case for first course");		
 		operation.add(firstCourse);
 	}
@@ -57,7 +57,7 @@ public class  FirstCourseOperationTest extends TestCase{
 	public void testUpdate(){
 		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
-			if("test".equals(firstCourse.getName())){
+			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
 				firstCourse.setDescription("change the test case for first course");
 				operation.update(firstCourse);
@@ -68,11 +68,15 @@ public class  FirstCourseOperationTest extends TestCase{
 	public void testDelete(){
 		List<FirstCourse> list = operation.getAll();
 		for(FirstCourse firstCourse: list){
-			if("test".equals(firstCourse.getName())){
+			if(firstCourse.getName().equals("test")){
 				firstCourse.setShortName("test 2");
 				firstCourse.setDescription("change the test case for first course");
 				operation.delete(firstCourse.getId());
 			}
 		}
 	}
+
+    protected void setUp() throws Exception{
+        super.setUp();
+    }
 }

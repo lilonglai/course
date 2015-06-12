@@ -1,4 +1,4 @@
-package com.kevin.aeas.test.db.basic;
+package com.kevin.aeas.test.db.mybatis;
 
 
 import com.kevin.aeas.object.SecondCourse;
@@ -10,11 +10,10 @@ import org.springframework.context.ApplicationContext;
 import java.util.List;
 
 public class SecondCourseOperationTest extends TestCase{
-
 	ISecondCourseOperation operation;
 	public SecondCourseOperationTest(){
-		ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
-		operation = (ISecondCourseOperation)context.getBean("jdbcSecondCourseDao");
+		ApplicationContext context = ApplicationContextUtils.getMybatisInstance();
+		operation = (ISecondCourseOperation)context.getBean("myBatisSecondCourseDao");
 	}
 	public void tetGet(){
 		SecondCourse secondCourse = operation.get(1);
@@ -68,6 +67,10 @@ public class SecondCourseOperationTest extends TestCase{
 				operation.delete(secondCourse.getId());
 			}
 		}
+	}
+	
+	protected void setUp() throws Exception{
+
 	}
 	
 }

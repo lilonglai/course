@@ -7,9 +7,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Created by loli on 2015/6/12.
  */
 public class ApplicationContextUtils {
-    private static ApplicationContext applicationContext= new ClassPathXmlApplicationContext("spring.xml");
+    private static ApplicationContext jdbcApplicationContext= new ClassPathXmlApplicationContext("spring-basic.xml");
+    private static ApplicationContext myBatisApplicationContext= new ClassPathXmlApplicationContext("spring-mybatis.xml");
 
-    public static ApplicationContext getInstance(){
-        return applicationContext;
+    public static ApplicationContext getJdbcInstance(){
+        return jdbcApplicationContext;
+    }
+
+    public static ApplicationContext getMybatisInstance(){
+        return myBatisApplicationContext;
     }
 }

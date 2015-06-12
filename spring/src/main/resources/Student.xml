@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.IStudentOperation">
+    <resultMap id="ListStudent" type="Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="shortname" property="shortName" />
+        <result column="grade" property="grade" />
+        <result column="testscore" property="testScore" />
+        <result column="targetscore" property="targetScore" />
+        <result column="examinedate" property="examineDate" />
+        <result column="examineplace" property="examinePlace" />
+        <result column="teacherid" property="teacherId" />
+        <result column="description" property="description" />
+        <result column="isalive" property="isAlive" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="Student">
+        select * from aeas_student where id=#{id}
+    </select>
+
+    <select id="getByName" parameterType="String" resultType="Student">
+        select * from aeas_student where name=#{name}
+    </select>
+
+    <select id="getByGrade" parameterType="int" resultMap="ListStudent">
+        select * from aeas_student where grade =#{grade}
+    </select>
+
+    <select id="getAll"  resultMap="ListStudent">
+        select * from aeas_student
+    </select>
+
+    <select id="getAlive"  resultMap="ListStudent">
+        select * from aeas_student where isalive =1
+    </select>
+
+    <select id="getNotAlive"  resultMap="ListStudent">
+        select * from aeas_student where isalive =0
+    </select>
+
+    <select id="getByTeacherId" parameterType="int" resultMap="ListStudent">
+        select * from aeas_student where teacherid =#{teacherId}
+    </select>
+
+    <insert id="add" parameterType="Student">
+        insert into aeas_student(name,shortname,grade,testscore,targetscore,examinedate,examineplace,teacherid,description)
+        values(#{name}, #{shortName}, #{grade}, #{testScore}, #{targetScore}, #{examineDate}, #{examinePlace}, #{teacherId}, #{description})
+    </insert>
+
+    <update id="update" parameterType="Student">
+        update aeas_student
+        set name=#{name}, shortname=#{shortName}, grade=#{grade},
+            testscore=#{testScore},targetscore=#{targetScore},examinedate=#{examineDate},examineplace=#{examinePlace},
+            teacherid=#{teacherId}, description= #{description}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_student where id =#{id}
+    </delete>
+
+    <update id="retire" parameterType="int">
+        update aeas_student set isalive = false where id=#{id}
+    </update>
+</mapper>

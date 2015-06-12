@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.ITeacherOperation">
+    <resultMap id="ListTeacher" type="Teacher">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="shortname" property="shortName" />
+        <result column="phone" property="phone"/>
+        <result column="ismaster" property="isMaster" />
+        <result column="isalive" property="isAlive" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="Teacher">
+        select * from aeas_teacher where id=#{id}
+    </select>
+
+    <select id="getByName" parameterType="String" resultType="Teacher">
+        select * from aeas_teacher where name=#{name}
+    </select>
+
+    <select id="getByShortName" parameterType="String" resultType="Teacher">
+        select * from aeas_teacher where shortname=#{shortName}
+    </select>
+
+    <select id="getByCondition" parameterType="Teacher" resultType="Teacher">
+        select * from aeas_teacher where 1=1
+        <if test="name != null">
+            and name=#{name}
+        </if>
+        <if test="shortName != null">
+            and shortname=#{shortName}
+        </if>
+        <if test="phone != null">
+            and phone=#{phone}
+        </if>
+
+    </select>
+
+    <select id="getAll"  resultMap="ListTeacher">
+        select * from aeas_teacher
+    </select>
+
+    <select id="getAlive"  resultMap="ListTeacher">
+        select * from aeas_teacher where isalive =1
+    </select>
+
+    <select id="getNotAlive"  resultMap="ListTeacher">
+        select * from aeas_teacher where isalive =0
+    </select>
+
+    <insert id="add" parameterType="Teacher">
+        insert into aeas_teacher(name,shortname,phone,ismaster)
+        values(#{name}, #{shortName}, #{phone}, #{isMaster})
+    </insert>
+
+    <update id="update" parameterType="Teacher">
+        update aeas_teacher
+        set name=#{name}, shortname=#{shortName},
+        phone =#{phone}, ismaster=#{isMaster}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_teacher where id =#{id}
+    </delete>
+
+    <update id="retire" parameterType="int">
+        update aeas_teacher set isalive = false where id=#{id}
+    </update>
+</mapper>

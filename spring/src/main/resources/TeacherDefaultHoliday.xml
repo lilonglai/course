@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation">
+    <resultMap id="ListTeacherDefaultHoliday" type="TeacherDefaultHoliday">
+        <id column="id" property="id"/>
+        <result column="teacherid" property="teacherId"/>
+        <result column="week1" property="week1" />
+        <result column="week2" property="week2" />
+        <result column="week3" property="week3" />
+        <result column="week4" property="week4" />
+        <result column="week5" property="week5" />
+        <result column="week6" property="week6" />
+        <result column="week7" property="week7" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="TeacherDefaultHoliday">
+        select * from aeas_teacherdefaultholiday where id=#{id}
+    </select>
+
+    <select id="getAll"  resultMap="ListTeacherDefaultHoliday">
+        select * from aeas_teacherdefaultholiday
+    </select>
+
+    <select id="getByTeacherId" parameterType="int" resultType="TeacherDefaultHoliday">
+        select *
+        from aeas_teacherdefaultholiday
+        where teacherid =#{teacherId}
+    </select>
+
+    <insert id="add" parameterType="TeacherDefaultHoliday">
+        insert into aeas_teacherdefaultholiday(teacherid,week1, week2,week3,week4,week5,week6,week7)
+        values(#{teacherId}, #{week1}, #{week2},#{week3},#{week4},#{week5},#{week6},#{week7})
+    </insert>
+
+    <update id="update" parameterType="TeacherDefaultHoliday">
+        update aeas_teacherdefaultholiday
+        set teacherid=#{teacherId}, week1=#{week1},  week2=#{week2}, week3=#{week3}, week4=#{week4},
+                                    week5=#{week5}, week7=#{week6}, week6=#{week7}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_teacherdefaultholiday where id =#{id};
+    </delete>
+</mapper>

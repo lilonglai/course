@@ -1,4 +1,4 @@
-package com.kevin.aeas.test.db.basic;
+package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.operation.db.ITeacherOperation;
@@ -11,10 +11,9 @@ import java.util.List;
 public  class TeacherOperationTest extends TestCase{
 	ITeacherOperation operation;
 	public TeacherOperationTest(){
-        ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
-		operation = (ITeacherOperation)context.getBean("jdbcTeacherDao");
+		ApplicationContext context = ApplicationContextUtils.getMybatisInstance();
+		operation = (ITeacherOperation)context.getBean("myBatisTeacherDao");
 	}
-
 	public void testGet(){
 		Teacher teacher = operation.get(1);
 	}
@@ -41,10 +40,10 @@ public  class TeacherOperationTest extends TestCase{
 		List<? extends Teacher> list = operation.getNotAlive();
 	}
 	
-	public void testGetIdByObject(){
+	public void testGetByCondition(){
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
-        operation.getByCondition(teacher);
+        teacher = operation.getByCondition(teacher);
 	}
 	
 	public void testAdd(){
@@ -69,7 +68,7 @@ public  class TeacherOperationTest extends TestCase{
 	
 	
 	public void testDelete(){
-		List<? extends Teacher> list = operation.getAlive();
+		List<? extends Teacher> list = operation.getAll();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.delete(teacher.getId());;

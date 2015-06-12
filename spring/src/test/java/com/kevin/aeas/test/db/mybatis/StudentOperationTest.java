@@ -1,4 +1,4 @@
-package com.kevin.aeas.test.db.basic;
+package com.kevin.aeas.test.db.mybatis;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.IStudentOperation;
@@ -9,13 +9,12 @@ import org.springframework.context.ApplicationContext;
 import java.sql.Date;
 import java.util.List;
 
-public  class StudentOperationTest extends TestCase {
+public class StudentOperationTest extends TestCase {
 	IStudentOperation operation;
 	public StudentOperationTest(){
-		ApplicationContext context = ApplicationContextUtils.getJdbcInstance();
-		operation = (IStudentOperation)context.getBean("jdbcStudentDao");
+		ApplicationContext context = ApplicationContextUtils.getMybatisInstance();
+		operation = (IStudentOperation)context.getBean("myBatisStudentDao");
 	}
-
 	public void testGet() {
 		Student student = operation.get(1);
 	}
@@ -48,9 +47,6 @@ public  class StudentOperationTest extends TestCase {
 
 	}
 
-	/**
-	 * 
-	 */
 	public void testAdd(){
 		Student student = new Student();
 		
@@ -80,7 +76,7 @@ public  class StudentOperationTest extends TestCase {
 	}
 
 	public void testDelete() {
-		List<? extends Student> list = operation.getAll();
+		List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");
@@ -92,7 +88,7 @@ public  class StudentOperationTest extends TestCase {
 	}
 	
 	public void testRetire() {
-	    List<? extends Student> list = operation.getAll();
+	    List<Student> list = operation.getAll();
 		for(Student student: list){
 			if(student.getName().equals("test")){
 				student.setShortName("test 2");

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisFirstCourse">
+    <resultMap id="ListFirstCourse" type="FirstCourse">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="shortname" property="shortName" />
+        <result column="grade" property="grade" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <select id="get" parameterType="int" resultType="FirstCourse">
+        select * from aeas_firstcourse where id=#{id}
+    </select>
+
+    <!--
+    <select id="getByGrade" parameterType="int" resultMap="ListFirstCourse">
+        select * from aeas_firstcourse where grade =#{grade}
+    </select>
+    -->
+
+    <select id="getByGrade" parameterType="int" resultType="FirstCourse">
+        select * from aeas_firstcourse where grade =#{grade}
+    </select>
+
+    <select id="getAll" parameterType="int" resultMap="ListFirstCourse">
+        select * from aeas_firstcourse
+    </select>
+
+    <insert id="add" parameterType="FirstCourse">
+        insert into aeas_firstcourse(grade,name,shortname,description)
+               values(#{grade}, #{name}, #{shortName}, #{description})
+    </insert>
+
+    <update id="update" parameterType="FirstCourse">
+        update aeas_firstcourse
+        set grade=#{grade}, name=#{name}, shortname=#{shortName}, description= #{description}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from aeas_firstcourse where id =#{id}
+    </delete>
+</mapper>
