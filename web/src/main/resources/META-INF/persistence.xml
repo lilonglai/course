@@ -3,15 +3,15 @@
 
     <persistence-unit name="OraclePersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.kevin.aeas.object.oracle.OracleFirstCourse</class>
-        <class>com.kevin.aeas.object.oracle.OracleSchedule</class>
-        <class>com.kevin.aeas.object.oracle.OracleSecondCourse</class>
-        <class>com.kevin.aeas.object.oracle.OracleStudent</class>
-        <class>com.kevin.aeas.object.oracle.OracleTeacher</class>
-        <class>com.kevin.aeas.object.oracle.OracleTeacherAbility</class>
-        <class>com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday</class>
-        <class>com.kevin.aeas.object.oracle.OracleTeacherHoliday</class>
-        <class>com.kevin.aeas.object.oracle.OracleUser</class>
+        <class>com.kevin.course.object.oracle.OracleFirstCourse</class>
+        <class>com.kevin.course.object.oracle.OracleSchedule</class>
+        <class>com.kevin.course.object.oracle.OracleSecondCourse</class>
+        <class>com.kevin.course.object.oracle.OracleStudent</class>
+        <class>com.kevin.course.object.oracle.OracleTeacher</class>
+        <class>com.kevin.course.object.oracle.OracleTeacherAbility</class>
+        <class>com.kevin.course.object.oracle.OracleTeacherDefaultHoliday</class>
+        <class>com.kevin.course.object.oracle.OracleTeacherHoliday</class>
+        <class>com.kevin.course.object.oracle.OracleUser</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes> <!-- in order to support both mysql/oracle-->
         <properties>
             <property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.182.251.230:1521:orcl"/>
@@ -26,15 +26,15 @@
      
     <persistence-unit name="MySqlPersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.kevin.aeas.object.mysql.MySqlFirstCourse</class>
-        <class>com.kevin.aeas.object.mysql.MySqlSchedule</class>
-        <class>com.kevin.aeas.object.mysql.MySqlSecondCourse</class>
-        <class>com.kevin.aeas.object.mysql.MySqlStudent</class>
-        <class>com.kevin.aeas.object.mysql.MySqlTeacher</class>
-        <class>com.kevin.aeas.object.mysql.MySqlTeacherAbility</class>
-        <class>com.kevin.aeas.object.mysql.MySqlTeacherDefaultHoliday</class>
-        <class>com.kevin.aeas.object.mysql.MySqlTeacherHoliday</class>
-        <class>com.kevin.aeas.object.mysql.MySqlUser</class>
+        <class>com.kevin.course.object.mysql.MySqlFirstCourse</class>
+        <class>com.kevin.course.object.mysql.MySqlSchedule</class>
+        <class>com.kevin.course.object.mysql.MySqlSecondCourse</class>
+        <class>com.kevin.course.object.mysql.MySqlStudent</class>
+        <class>com.kevin.course.object.mysql.MySqlTeacher</class>
+        <class>com.kevin.course.object.mysql.MySqlTeacherAbility</class>
+        <class>com.kevin.course.object.mysql.MySqlTeacherDefaultHoliday</class>
+        <class>com.kevin.course.object.mysql.MySqlTeacherHoliday</class>
+        <class>com.kevin.course.object.mysql.MySqlUser</class>
         
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>

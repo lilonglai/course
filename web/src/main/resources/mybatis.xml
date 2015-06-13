@@ -2,15 +2,15 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.kevin.aeas.object.FirstCourse" alias="FirstCourse" />
-        <typeAlias type="com.kevin.aeas.object.SecondCourse" alias="SecondCourse" />
-        <typeAlias type="com.kevin.aeas.object.Student" alias="Student" />
-        <typeAlias type="com.kevin.aeas.object.Teacher" alias="Teacher" />
-        <typeAlias type="com.kevin.aeas.object.TeacherAbility" alias="TeacherAbility" />
-        <typeAlias type="com.kevin.aeas.object.TeacherHoliday" alias="TeacherHoliday" />
-        <typeAlias type="com.kevin.aeas.object.TeacherDefaultHoliday" alias="TeacherDefaultHoliday" />
-        <typeAlias type="com.kevin.aeas.object.Schedule" alias="Schedule" />
-        <typeAlias type="com.kevin.aeas.object.User" alias="User" />
+        <typeAlias type="com.kevin.course.object.FirstCourse" alias="FirstCourse" />
+        <typeAlias type="com.kevin.course.object.SecondCourse" alias="SecondCourse" />
+        <typeAlias type="com.kevin.course.object.Student" alias="Student" />
+        <typeAlias type="com.kevin.course.object.Teacher" alias="Teacher" />
+        <typeAlias type="com.kevin.course.object.TeacherAbility" alias="TeacherAbility" />
+        <typeAlias type="com.kevin.course.object.TeacherHoliday" alias="TeacherHoliday" />
+        <typeAlias type="com.kevin.course.object.TeacherDefaultHoliday" alias="TeacherDefaultHoliday" />
+        <typeAlias type="com.kevin.course.object.Schedule" alias="Schedule" />
+        <typeAlias type="com.kevin.course.object.User" alias="User" />
     </typeAliases>
     
     <environments default="mysqlEnv">

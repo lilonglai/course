@@ -1,11 +1,11 @@
-<%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.object.SecondCourse"%>
-<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
+<%@page import="com.kevin.course.object.FirstCourse"%>
+<%@page import="com.kevin.course.object.SecondCourse"%>
+<%@page import="com.kevin.course.operation.db.FirstCourseOperation"%>
+<%@page import="com.kevin.course.operation.db.SecondCourseOperation"%>
+<%@page import="com.kevin.course.operation.db.OperationManager"%>
 <%@page import="java.util.List"%>
-<%@ page import="com.kevin.aeas.operation.business.SecondCourseBusinessOperation" %>
-<%@ page import="com.kevin.aeas.operation.business.FirstCourseBusinessOperation" %>
+<%@ page import="com.kevin.course.operation.business.SecondCourseBusinessOperation" %>
+<%@ page import="com.kevin.course.operation.business.FirstCourseBusinessOperation" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

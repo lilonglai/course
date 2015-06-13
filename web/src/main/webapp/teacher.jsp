@@ -1,6 +1,6 @@
-<%@page import="com.kevin.aeas.object.Teacher"%>
+<%@page import="com.kevin.course.object.Teacher"%>
 <%@page import="java.util.List"%>
-<%@ page import="com.kevin.aeas.operation.business.TeacherBusinessOperation" %>
+<%@ page import="com.kevin.course.operation.business.TeacherBusinessOperation" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

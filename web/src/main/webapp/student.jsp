@@ -1,9 +1,9 @@
-<%@page import="com.kevin.aeas.object.Student"%>
-<%@page import="com.kevin.aeas.utils.GradeHelp"%>
+<%@page import="com.kevin.course.object.Student"%>
+<%@page import="com.kevin.course.utils.GradeHelp"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.utils.TeacherHelp"%>
-<%@ page import="com.kevin.aeas.operation.business.StudentBusinessOperation" %>
-<%@ page import="com.kevin.aeas.operation.business.TeacherBusinessOperation" %>
+<%@page import="com.kevin.course.utils.TeacherHelp"%>
+<%@ page import="com.kevin.course.operation.business.StudentBusinessOperation" %>
+<%@ page import="com.kevin.course.operation.business.TeacherBusinessOperation" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

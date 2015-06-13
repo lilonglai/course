@@ -1,8 +1,8 @@
-<%@page import="com.kevin.aeas.object.SecondCourse"%>
-<%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
-<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
+<%@page import="com.kevin.course.object.SecondCourse"%>
+<%@page import="com.kevin.course.object.FirstCourse"%>
+<%@page import="com.kevin.course.operation.db.OperationManager"%>
+<%@page import="com.kevin.course.operation.db.SecondCourseOperation"%>
+<%@page import="com.kevin.course.operation.db.FirstCourseOperation"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

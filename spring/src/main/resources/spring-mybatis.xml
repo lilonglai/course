@@ -49,42 +49,42 @@
     </bean>
 
     <bean id="myBatisFirstCourseDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.IFirstCourseOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.IFirstCourseOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisSecondCourseDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.ISecondCourseOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.ISecondCourseOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisTeacherDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.ITeacherOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.ITeacherOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisTeacherDefaultHolidayDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.ITeacherDefaultHolidayOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisTeacherHolidayDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.ITeacherHolidayOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.ITeacherHolidayOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisTeacherAbilityDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.ITeacherAbilityOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.ITeacherAbilityOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisStudentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.IStudentOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.IStudentOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
     <bean id="myBatisScheduleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.kevin.aeas.operation.db.IScheduleOperation" />
+        <property name="mapperInterface" value="com.kevin.course.operation.db.IScheduleOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 

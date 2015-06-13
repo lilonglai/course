@@ -31,7 +31,7 @@
 
 	<servlet>
 		<servlet-name>teacherServlet</servlet-name>
-		<servlet-class>com.kevin.aeas.servlet.TeacherServlet</servlet-class>
+		<servlet-class>com.kevin.course.servlet.TeacherServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>teacherServlet</servlet-name>
@@ -40,7 +40,7 @@
 
 	<servlet>
 		<servlet-name>studentServlet</servlet-name>
-		<servlet-class>com.kevin.aeas.servlet.StudentServlet</servlet-class>
+		<servlet-class>com.kevin.course.servlet.StudentServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>studentServlet</servlet-name>
@@ -51,7 +51,7 @@
 		<description></description>
 		<display-name>scheduleServlet</display-name>
 		<servlet-name>scheduleServlet</servlet-name>
-		<servlet-class>com.kevin.aeas.servlet.ScheduleServlet</servlet-class>
+		<servlet-class>com.kevin.course.servlet.ScheduleServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>scheduleServlet</servlet-name>
@@ -62,7 +62,7 @@
         <description>firstCourseServlet</description>
         <display-name>firstCourseServlet</display-name>
         <servlet-name>firstCourseServlet</servlet-name>
-        <servlet-class>com.kevin.aeas.servlet.FirstCourseServlet</servlet-class>
+        <servlet-class>com.kevin.course.servlet.FirstCourseServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>firstCourseServlet</servlet-name>
@@ -73,7 +73,7 @@
         <description>secondCourseServlet</description>
         <display-name>secondCourseServlet</display-name>
         <servlet-name>secondCourseServlet</servlet-name>
-        <servlet-class>com.kevin.aeas.servlet.SecondCourseServlet</servlet-class>
+        <servlet-class>com.kevin.course.servlet.SecondCourseServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>secondCourseServlet</servlet-name>

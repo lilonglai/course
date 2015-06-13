@@ -43,35 +43,35 @@
         </property>
     </bean>
 
-    <bean id="jdbcFirstCourseDao" class="com.kevin.aeas.operation.db.basic.JdbcFirstCourseDao">
+    <bean id="jdbcFirstCourseDao" class="com.kevin.course.operation.db.basic.JdbcFirstCourseDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcSecondCourseDao" class="com.kevin.aeas.operation.db.basic.JdbcSecondCourseDao">
+    <bean id="jdbcSecondCourseDao" class="com.kevin.course.operation.db.basic.JdbcSecondCourseDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcTeacherDao" class="com.kevin.aeas.operation.db.basic.JdbcTeacherDao">
+    <bean id="jdbcTeacherDao" class="com.kevin.course.operation.db.basic.JdbcTeacherDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcTeacherDefaultHolidayDao" class="com.kevin.aeas.operation.db.basic.JdbcTeacherDefaultHolidayDao">
+    <bean id="jdbcTeacherDefaultHolidayDao" class="com.kevin.course.operation.db.basic.JdbcTeacherDefaultHolidayDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcTeacherHolidayDao" class="com.kevin.aeas.operation.db.basic.JdbcTeacherHolidayDao">
+    <bean id="jdbcTeacherHolidayDao" class="com.kevin.course.operation.db.basic.JdbcTeacherHolidayDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcTeacherAbilityDao" class="com.kevin.aeas.operation.db.basic.JdbcTeacherAbilityDao">
+    <bean id="jdbcTeacherAbilityDao" class="com.kevin.course.operation.db.basic.JdbcTeacherAbilityDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcStudentDao" class="com.kevin.aeas.operation.db.basic.JdbcStudentDao">
+    <bean id="jdbcStudentDao" class="com.kevin.course.operation.db.basic.JdbcStudentDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="jdbcScheduleDao" class="com.kevin.aeas.operation.db.basic.JdbcScheduleDao">
+    <bean id="jdbcScheduleDao" class="com.kevin.course.operation.db.basic.JdbcScheduleDao">
         <property name="dataSource" ref="dataSource" />
     </bean>
 

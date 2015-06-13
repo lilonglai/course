@@ -1,17 +1,18 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kevin.aeas.operation.db.OperationManager"%>
-<%@page import="com.kevin.aeas.object.SecondCourse"%>
-<%@page import="com.kevin.aeas.operation.db.SecondCourseOperation"%>
-<%@page import="com.kevin.aeas.object.FirstCourse"%>
-<%@page import="com.kevin.aeas.operation.db.FirstCourseOperation"%>
-<%@page import="com.kevin.aeas.utils.TimeHelp"%>
-<%@page import="com.kevin.aeas.object.Schedule"%>
-<%@page import="com.kevin.aeas.operation.db.ScheduleOperation"%>
-<%@page import="com.kevin.aeas.object.Teacher"%>
-<%@page import="com.kevin.aeas.operation.db.TeacherOperation"%>
-<%@page import="com.kevin.aeas.object.Student"%>
-<%@page import="com.kevin.aeas.operation.db.StudentOperation"%>
+<%@page import="com.kevin.course.operation.db.OperationManager"%>
+<%@page import="com.kevin.course.object.SecondCourse"%>
+<%@page import="com.kevin.course.operation.db.SecondCourseOperation"%>
+<%@page import="com.kevin.course.object.FirstCourse"%>
+<%@page import="com.kevin.course.operation.db.FirstCourseOperation"%>
+<%@page import="com.kevin.course.utils.TimeHelp"%>
+<%@page import="com.kevin.course.object.Schedule"%>
+<%@page import="com.kevin.course.operation.db.ScheduleOperation"%>
+<%@page import="com.kevin.course.object.Teacher"%>
+<%@page import="com.kevin.course.operation.db.TeacherOperation"%>
+<%@page import="com.kevin.course.object.Student"%>
+<%@page import="com.kevin.course.operation.db.StudentOperation"%>
 <%@ page import="com.kevin.aeas.operation.business.*" %>
+<%@ page import="com.kevin.course.operation.business.*" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
