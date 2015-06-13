@@ -2,8 +2,6 @@ package com.kevin.aeas.servlet;
 
 import com.kevin.aeas.object.Teacher;
 import com.kevin.aeas.object.TeacherDefaultHoliday;
-import com.kevin.aeas.object.oracle.OracleTeacher;
-import com.kevin.aeas.object.oracle.OracleTeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.OperationManager;
 import com.kevin.aeas.operation.db.TeacherDefaultHolidayOperation;
 import com.kevin.aeas.operation.db.TeacherOperation;

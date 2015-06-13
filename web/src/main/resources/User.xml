@@ -6,7 +6,7 @@
         select * from aeas_user where name=#{name} and password=password(#{password})
     </select>
 
-    <insert id="add" parameterType="User">
+    <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_user(name,password, email, phone, description)
         values(#{name}, password(#{password}), #{email}, #{phone}, #{description})
     </insert>

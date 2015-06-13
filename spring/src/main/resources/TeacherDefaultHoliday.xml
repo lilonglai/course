@@ -43,4 +43,8 @@
     <delete id="delete" parameterType="int">
         delete from aeas_teacherdefaultholiday where id =#{id};
     </delete>
+
+    <delete id="deleteByTeacherId" parameterType="int">
+        delete from aeas_teacherdefaultholiday where teacherid =#{teacherId};
+    </delete>
 </mapper>

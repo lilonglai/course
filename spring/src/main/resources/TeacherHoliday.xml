@@ -24,9 +24,13 @@
     </select>
 
     <select id="getByTeacherAndDate" parameterType="map" resultType="TeacherHoliday">
+    <!--
+        #{teacherId} is for #{0}
+        #{adjustDate} is for #{1}
+    -->
         select *
         from aeas_teacherholiday
-        where teacherid =#{teacherId} and adjustdate = #{adjustDate}
+        where teacherid =#{0} and adjustdate = #{1}
     </select>
 
     <insert id="add" parameterType="TeacherHoliday" useGeneratedKeys="true" keyProperty="id">

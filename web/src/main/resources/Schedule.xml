@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisSchedule">
+<mapper namespace="com.kevin.aeas.operation.db.IScheduleOperation">
     <resultMap id="ListSchedule" type="Schedule">
         <id column="id" property="id"/>
         <result column="ondate" property="onDate"/>
@@ -18,8 +18,12 @@
     </select>
 
     <select id="getByStudentIdOnDateAndTime" parameterType="map" resultType="Schedule">
+        <!--#{studentId} is for the #{0}
+            #{onDate}  is for the #{1}
+            #{onTime} is for the #{2}
+        -->
         select * from aeas_schedule
-        where studentid=#{studentId} and ondate=#{onDate} and ontime=#{onTime}
+        where studentid=#{0} and ondate=#{1} and ontime=#{2}
     </select>
 
     <select id="getByTeacherId" parameterType="int" resultMap="ListSchedule">
@@ -33,7 +37,10 @@
     </select>
 
     <select id="getByDateAndTime" parameterType="map" resultMap="ListSchedule">
-        select * from aeas_schedule where ondate=#{onDate} and ontime=#{onTime}
+          <!-- #{onDate}  is for the #{0}
+              #{onTime} is for the #{1}
+          -->
+        select * from aeas_schedule where ondate=#{0} and ontime=#{1}
         order by ondate,ontime
     </select>
 
@@ -42,9 +49,9 @@
         order by ondate,ontime
     </select>
 
-    <insert id="add" parameterType="Schedule">
+    <insert id="add" parameterType="Schedule" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_schedule(ondate,ontime,studentid,courseid, teacherid, addition, description)
-        values(#{onDate}, #{ontime}, #{studentId}, #{courseId}, #{teacherId}, #{addition}, #{description})
+        values(#{onDate}, #{onTime}, #{studentId}, #{courseId}, #{teacherId}, #{addition}, #{description})
     </insert>
 
     <update id="update" parameterType="Schedule">

@@ -50,8 +50,12 @@
     </delete>
 
     <delete id="deleteByTeacherAndGrade" parameterType="map">
+    <!--
+        #{teacherId} is for #{0}
+        #{grade} is for #{1}
+    -->
          delete t from aeas_teacherability t
-         where t.teacherid=#{teacherId}
-				and t.courseid in (select c.id from aeas_firstcourse c where c.grade=#{grade})
+         where t.teacherid=#{0}
+				and t.courseid in (select c.id from aeas_firstcourse c where c.grade=#{1})
     </delete>
 </mapper>

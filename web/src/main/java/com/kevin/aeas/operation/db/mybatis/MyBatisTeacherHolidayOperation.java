@@ -2,14 +2,13 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.TeacherHoliday;
 import com.kevin.aeas.operation.db.ITeacherHolidayOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday;
 
 import java.sql.Date;
 import java.util.List;
 
-public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatisTeacherHoliday> implements ITeacherHolidayOperation{
+public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<ITeacherHolidayOperation> implements ITeacherHolidayOperation{
     public MyBatisTeacherHolidayOperation(){
-        super(MyBatisTeacherHoliday.class);
+        super(ITeacherHolidayOperation.class);
     }
 
 	public TeacherHoliday get(int key) {
@@ -21,7 +20,7 @@ public class MyBatisTeacherHolidayOperation extends MyBatisBaseOperation<MyBatis
 	}
 	
 	public TeacherHoliday getByTeacherAndDate(int teacherId,String date) {
-        return proxy.getByTeacherAndDate(teacherId,Date.valueOf(date));
+        return proxy.getByTeacherAndDate(teacherId,date);
 	}
 
 	public List<TeacherHoliday> getAll() {

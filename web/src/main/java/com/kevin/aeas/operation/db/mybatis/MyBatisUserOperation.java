@@ -2,11 +2,10 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.User;
 import com.kevin.aeas.operation.db.IUserOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisUser;
 
-public class MyBatisUserOperation extends MyBatisBaseOperation<MyBatisUser> implements IUserOperation{
+public class MyBatisUserOperation extends MyBatisBaseOperation<IUserOperation> implements IUserOperation{
     public MyBatisUserOperation(){
-        super(MyBatisUser.class);
+        super(IUserOperation.class);
     }
 
     public User get(String name, String password) {

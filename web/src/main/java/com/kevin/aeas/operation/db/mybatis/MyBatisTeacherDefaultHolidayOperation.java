@@ -2,13 +2,12 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.TeacherDefaultHoliday;
 import com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherDefaultHoliday;
 
 import java.util.List;
 
-public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<MyBatisTeacherDefaultHoliday> implements ITeacherDefaultHolidayOperation{
+public class MyBatisTeacherDefaultHolidayOperation extends MyBatisBaseOperation<ITeacherDefaultHolidayOperation> implements ITeacherDefaultHolidayOperation{
     public MyBatisTeacherDefaultHolidayOperation(){
-        super(MyBatisTeacherDefaultHoliday.class);
+        super(ITeacherDefaultHolidayOperation.class);
     }
 
 	public TeacherDefaultHoliday get(int key){

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherDefaultHoliday">
+<mapper namespace="com.kevin.aeas.operation.db.ITeacherDefaultHolidayOperation">
     <resultMap id="ListTeacherDefaultHoliday" type="TeacherDefaultHoliday">
         <id column="id" property="id"/>
         <result column="teacherid" property="teacherId"/>
@@ -28,7 +28,7 @@
         where teacherid =#{teacherId}
     </select>
 
-    <insert id="add" parameterType="TeacherDefaultHoliday">
+    <insert id="add" parameterType="TeacherDefaultHoliday" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_teacherdefaultholiday(teacherid,week1, week2,week3,week4,week5,week6,week7)
         values(#{teacherId}, #{week1}, #{week2},#{week3},#{week4},#{week5},#{week6},#{week7})
     </insert>
@@ -42,5 +42,9 @@
 
     <delete id="delete" parameterType="int">
         delete from aeas_teacherdefaultholiday where id =#{id};
+    </delete>
+
+    <delete id="deleteByTeacherId" parameterType="int">
+        delete from aeas_teacherdefaultholiday where teacherid =#{teacherId};
     </delete>
 </mapper>

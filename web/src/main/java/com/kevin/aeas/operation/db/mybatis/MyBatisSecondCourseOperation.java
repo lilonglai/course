@@ -2,13 +2,12 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.SecondCourse;
 import com.kevin.aeas.operation.db.ISecondCourseOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisSecondCourse;
 
 import java.util.List;
 
-public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<MyBatisSecondCourse> implements ISecondCourseOperation{
+public class MyBatisSecondCourseOperation extends MyBatisBaseOperation<ISecondCourseOperation> implements ISecondCourseOperation{
     public MyBatisSecondCourseOperation(){
-        super(MyBatisSecondCourse.class);
+        super(ISecondCourseOperation.class);
     }
 
 	public SecondCourse get(int key){

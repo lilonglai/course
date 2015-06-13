@@ -48,7 +48,7 @@
         </property>
     </bean>
 
-    <bean id="myBatisFirstCourse" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <bean id="myBatisFirstCourseDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.kevin.aeas.operation.db.IFirstCourseOperation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>

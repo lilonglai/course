@@ -2,13 +2,12 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.TeacherAbility;
 import com.kevin.aeas.operation.db.ITeacherAbilityOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherAbility;
 
 import java.util.List;
 
-public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<MyBatisTeacherAbility> implements ITeacherAbilityOperation{
+public class MyBatisTeacherAbilityOperation extends MyBatisBaseOperation<ITeacherAbilityOperation> implements ITeacherAbilityOperation{
     public MyBatisTeacherAbilityOperation(){
-        super(MyBatisTeacherAbility.class);
+        super(ITeacherAbilityOperation.class);
     }
 
 	public TeacherAbility get(int key) {

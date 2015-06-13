@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kevin.aeas.operation.db.mybatis.inter.MyBatisTeacherHoliday">
+<mapper namespace="com.kevin.aeas.operation.db.ITeacherHolidayOperation">
     <resultMap id="ListTeacherHoliday" type="TeacherHoliday">
         <id column="id" property="id"/>
         <result column="teacherid" property="teacherId"/>
@@ -24,12 +24,16 @@
     </select>
 
     <select id="getByTeacherAndDate" parameterType="map" resultType="TeacherHoliday">
+    <!--
+        #{teacherId} is for #{0}
+        #{adjustDate} is for #{1}
+    -->
         select *
         from aeas_teacherholiday
-        where teacherid =#{teacherId} and adjustdate = #{adjustDate}
+        where teacherid =#{0} and adjustdate = #{1}
     </select>
 
-    <insert id="add" parameterType="TeacherHoliday">
+    <insert id="add" parameterType="TeacherHoliday" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_teacherholiday(teacherid,adjustdate, isholiday)
         values(#{teacherId}, #{adjustDate}, #{isHoliday})
     </insert>

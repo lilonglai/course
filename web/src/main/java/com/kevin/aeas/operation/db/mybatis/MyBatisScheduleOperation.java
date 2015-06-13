@@ -2,15 +2,14 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Schedule;
 import com.kevin.aeas.operation.db.IScheduleOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisSchedule;
 
 import java.sql.Date;
 import java.util.List;
 
-public class MyBatisScheduleOperation extends MyBatisBaseOperation<MyBatisSchedule> implements IScheduleOperation{
+public class MyBatisScheduleOperation extends MyBatisBaseOperation<IScheduleOperation> implements IScheduleOperation{
 
     public MyBatisScheduleOperation(){
-        super(MyBatisSchedule.class);
+        super(IScheduleOperation.class);
     }
 
 	public Schedule get(int key){

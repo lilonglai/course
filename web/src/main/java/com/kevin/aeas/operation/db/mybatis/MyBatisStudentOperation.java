@@ -2,13 +2,12 @@ package com.kevin.aeas.operation.db.mybatis;
 
 import com.kevin.aeas.object.Student;
 import com.kevin.aeas.operation.db.IStudentOperation;
-import com.kevin.aeas.operation.db.mybatis.inter.MyBatisStudent;
 
 import java.util.List;
 
-public class MyBatisStudentOperation extends MyBatisBaseOperation<MyBatisStudent> implements IStudentOperation{
+public class MyBatisStudentOperation extends MyBatisBaseOperation<IStudentOperation> implements IStudentOperation{
     public MyBatisStudentOperation(){
-        super(MyBatisStudent.class);
+        super(IStudentOperation.class);
     }
 
 	public Student get(int key) {
