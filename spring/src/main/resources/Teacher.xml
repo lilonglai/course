@@ -49,7 +49,7 @@
         select * from aeas_teacher where isalive =0
     </select>
 
-    <insert id="add" parameterType="Teacher">
+    <insert id="add" parameterType="Teacher" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_teacher(name,shortname,phone,ismaster)
         values(#{name}, #{shortName}, #{phone}, #{isMaster})
     </insert>

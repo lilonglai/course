@@ -44,7 +44,7 @@
         select * from aeas_student where teacherid =#{teacherId}
     </select>
 
-    <insert id="add" parameterType="Student">
+    <insert id="add" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_student(name,shortname,grade,testscore,targetscore,examinedate,examineplace,teacherid,description)
         values(#{name}, #{shortName}, #{grade}, #{testScore}, #{targetScore}, #{examineDate}, #{examinePlace}, #{teacherId}, #{description})
     </insert>

@@ -30,7 +30,7 @@
         select * from aeas_teacherability
     </select>
 
-    <insert id="add" parameterType="TeacherAbility">
+    <insert id="add" parameterType="TeacherAbility" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_teacherability(teacherid,courseid)
         values(#{teacherId}, #{courseId})
     </insert>

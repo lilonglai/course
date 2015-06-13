@@ -29,7 +29,7 @@
         where teacherid =#{teacherId} and adjustdate = #{adjustDate}
     </select>
 
-    <insert id="add" parameterType="TeacherHoliday">
+    <insert id="add" parameterType="TeacherHoliday" useGeneratedKeys="true" keyProperty="id">
         insert into aeas_teacherholiday(teacherid,adjustdate, isholiday)
         values(#{teacherId}, #{adjustDate}, #{isHoliday})
     </insert>
