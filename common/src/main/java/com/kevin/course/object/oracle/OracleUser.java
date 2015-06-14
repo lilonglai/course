@@ -1,9 +1,7 @@
 package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.User;
-
 import javax.persistence.*;
-
 /**
  * Created by loli on 2014/11/30.
  */

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "aeas_firstcourse")
 public class MySqlFirstCourse extends FirstCourse {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;

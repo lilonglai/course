@@ -1,18 +1,16 @@
-package com.kevin.course.object.mysql;
+package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.TeacherAbility;
-
 import javax.persistence.*;
-
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
 @Table(name = "aeas_teacherability")
-public class MySqlTeacherAbility extends TeacherAbility {
-
+public class OracleTeacherAbility extends TeacherAbility {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherability_id")
+    @SequenceGenerator(name="aeas_teacherability_id", sequenceName="aeas_teacherability_id")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -29,5 +27,4 @@ public class MySqlTeacherAbility extends TeacherAbility {
 	public int getCourseId() {
 		return courseId;
 	}
-
 }

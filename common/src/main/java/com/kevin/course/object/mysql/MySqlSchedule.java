@@ -2,8 +2,8 @@ package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.Schedule;
 
-import javax.persistence.*;
 import java.sql.Date;
+import javax.persistence.*;
 
 /**
  * Created by loli on 2014/11/30.

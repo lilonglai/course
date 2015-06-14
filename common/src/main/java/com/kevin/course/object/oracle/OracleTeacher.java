@@ -1,28 +1,20 @@
 package com.kevin.course.object.oracle;
 
-import com.kevin.course.object.FirstCourse;
-
+import com.kevin.course.object.Teacher;
 import javax.persistence.*;
-
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_firstcourse")
-public class OracleFirstCourse extends FirstCourse {
+@Table(name = "aeas_teacher")
+public class OracleTeacher extends Teacher{
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_firstcourse_id")
-    @SequenceGenerator(name="aeas_firstcourse_id", sequenceName="aeas_firstcourse_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacher_id")
+    @SequenceGenerator(name="aeas_teacher_id", sequenceName="aeas_teacher_id")
     @Column(name = "id")
     public int getId() {
         return id;
     }
-
-	@Basic
-	@Column(name = "grade")
-	public int getGrade() {
-	    return grade;
-	}
 
 	@Basic
 	@Column(name = "name")
@@ -37,9 +29,15 @@ public class OracleFirstCourse extends FirstCourse {
 	}
 
 	@Basic
-	@Column(name = "description")
-	public String getDescription() {
-	    return description;
+	@Column(name = "phone")
+	public String getPhone() {
+	    return phone;
+	}
+
+	@Basic
+	@Column(name = "ismaster")
+	public Boolean getIsMaster() {
+	    return isMaster;
 	}
 
 	@Basic

@@ -1,4 +1,4 @@
-package com.kevin.course.test.db.mybatis;
+package com.kevin.course.test.db.jpa;
 
 import com.kevin.course.object.Teacher;
 import com.kevin.course.operation.db.ITeacherOperation;
@@ -11,8 +11,8 @@ import java.util.List;
 public  class TeacherOperationTest extends TestCase{
 	ITeacherOperation operation;
 	public TeacherOperationTest(){
-		ApplicationContext context = ApplicationContextUtils.getMybatisInstance();
-		operation = (ITeacherOperation)context.getBean("myBatisTeacherDao");
+		ApplicationContext context = ApplicationContextUtils.getJpaInstance();
+		operation = (ITeacherOperation)context.getBean("jpaTeacherDao");
 	}
 	public void testGet(){
 		Teacher teacher = operation.get(1);
@@ -29,21 +29,21 @@ public  class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testGetAll(){
-		List<? extends Teacher> list = operation.getAll();
+		List<Teacher> list =  operation.getAll();
 	}
 	
 	public void testGetAlive(){
-		List<? extends Teacher> list = operation.getAlive();
+		List<Teacher> list =  operation.getAlive();
 	}
 	
 	public void testGetNotAlive(){
-		List<? extends Teacher> list = operation.getNotAlive();
+		List<Teacher> list =  operation.getNotAlive();
 	}
 	
 	public void testGetByCondition(){
 		Teacher teacher = new Teacher();
 		teacher.setName("test");
-        teacher = operation.getByCondition(teacher);
+		operation.getByCondition(teacher);
 	}
 	
 	public void testAdd(){
@@ -56,7 +56,7 @@ public  class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testUpdate(){
-		List<? extends Teacher> list = operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				teacher.setShortName("test2");
@@ -68,7 +68,7 @@ public  class TeacherOperationTest extends TestCase{
 	
 	
 	public void testDelete(){
-		List<? extends Teacher> list = operation.getAll();
+		List<Teacher> list = operation.getAll();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.delete(teacher.getId());;
@@ -77,7 +77,7 @@ public  class TeacherOperationTest extends TestCase{
 	}
 	
 	public void testRetire(){
-		List<? extends Teacher> list = operation.getAlive();
+		List<Teacher> list = operation.getAlive();
 		for(Teacher teacher: list){
 			if(teacher.getName().equals("test")){
 				operation.retire(teacher.getId());;

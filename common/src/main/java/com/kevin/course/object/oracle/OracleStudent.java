@@ -1,19 +1,18 @@
-package com.kevin.course.object.mysql;
+package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.Student;
 
-import javax.persistence.*;
 import java.sql.Date;
-
+import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
 @Table(name = "aeas_student")
-public class MySqlStudent extends Student{
-
+public class OracleStudent extends Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_student_id")
+    @SequenceGenerator(name="aeas_student_id", sequenceName="aeas_student_id")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -78,5 +77,4 @@ public class MySqlStudent extends Student{
 	public Boolean getIsAlive() {
 	    return isAlive;
 	}
-
 }

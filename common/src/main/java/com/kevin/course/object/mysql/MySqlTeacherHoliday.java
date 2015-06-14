@@ -1,19 +1,18 @@
-package com.kevin.course.object.oracle;
+package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.TeacherHoliday;
 
-import javax.persistence.*;
 import java.sql.Date;
-
+import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
 @Table(name = "aeas_teacherholiday")
-public class OracleTeacherHoliday extends TeacherHoliday {
+public class MySqlTeacherHoliday extends TeacherHoliday {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherholiday_id")
-    @SequenceGenerator(name="aeas_teacherholiday_id", sequenceName="aeas_teacherholiday_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -36,4 +35,5 @@ public class OracleTeacherHoliday extends TeacherHoliday {
 	public int getTeacherId() {
 		return teacherId;
 	}
+    
 }
