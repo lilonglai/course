@@ -1,3 +1,5 @@
+apply plugin: 'war'
+apply plugin: 'ear'
 
 repositories {
     mavenCentral()
@@ -6,11 +8,18 @@ repositories {
 dependencies {
     compile project(':common')
     compile project(':api')
+    compile project(':utils')
+
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+
     compile group:'org.springframework', name: 'spring-context', version: '4.1.1.RELEASE'
     compile 'org.springframework:spring-aop:4.1.1.RELEASE'
     compile 'org.springframework:spring-tx:4.1.1.RELEASE'
     compile 'org.springframework:spring-jdbc:4.1.1.RELEASE'
     compile 'org.springframework:spring-orm:4.1.1.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.1.1.RELEASE'
+
+    compile 'javax.servlet:jstl:1.2'
 
     compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.18'

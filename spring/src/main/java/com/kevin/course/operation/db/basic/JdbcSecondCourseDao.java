@@ -19,7 +19,7 @@ public class JdbcSecondCourseDao extends JdbcBaseDao<SecondCourse> implements IS
 		secondCourse.setDescription(rs.getString("description"));
 		return secondCourse;
 	}
-	
+
 	public List<SecondCourse> getByFirstCourseId(int firstCourseId){
 		String sql = "select * from " + getTableName() + " where firstcourseid = ?";
 		return query(sql, this, new Object[]{firstCourseId});
