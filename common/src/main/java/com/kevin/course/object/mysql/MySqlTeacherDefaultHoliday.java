@@ -1,12 +1,14 @@
 package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.TeacherDefaultHoliday;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "teacherdefaultholiday")
+@Table(name = TableName.TEACHERDEFAULTHOLIDAY)
 public class MySqlTeacherDefaultHoliday extends TeacherDefaultHoliday{
 
     @Id

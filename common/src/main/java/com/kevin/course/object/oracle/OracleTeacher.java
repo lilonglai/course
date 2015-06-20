@@ -1,12 +1,14 @@
 package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.Teacher;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_teacher")
+@Table(name = TableName.TEACHER)
 public class OracleTeacher extends Teacher{
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacher_id")

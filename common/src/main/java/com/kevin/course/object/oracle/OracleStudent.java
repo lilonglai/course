@@ -1,6 +1,7 @@
 package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.Student;
+import com.kevin.course.utils.TableName;
 
 import java.sql.Date;
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_student")
+@Table(name = TableName.STUDENT)
 public class OracleStudent extends Student {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_student_id")

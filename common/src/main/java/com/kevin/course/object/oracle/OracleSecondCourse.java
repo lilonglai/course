@@ -1,12 +1,14 @@
 package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.SecondCourse;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_secondcourse")
+@Table(name = TableName.SECONDCOURSE)
 public class OracleSecondCourse extends SecondCourse {
 
     @Id

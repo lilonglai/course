@@ -1,12 +1,14 @@
 package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.TeacherDefaultHoliday;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_teacherdefaultholiday")
+@Table(name = TableName.TEACHERDEFAULTHOLIDAY)
 public class OracleTeacherDefaultHoliday extends TeacherDefaultHoliday{	
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_teacherdefaultholiday_id")

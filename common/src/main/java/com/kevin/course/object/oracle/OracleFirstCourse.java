@@ -1,12 +1,14 @@
 package com.kevin.course.object.oracle;
 
 import com.kevin.course.object.FirstCourse;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_firstcourse")
+@Table(name = TableName.FIRSTCOURSE)
 public class OracleFirstCourse extends FirstCourse {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aeas_firstcourse_id")

@@ -1,12 +1,14 @@
 package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.Teacher;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "teacher")
+@Table(name = TableName.TEACHER)
 public class MySqlTeacher extends Teacher{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 

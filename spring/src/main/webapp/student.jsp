@@ -159,7 +159,7 @@
             </thead>
 
             <tbody>
-            <c:forEach var="student" items="${studentList}" varStatus="status">
+            <c:forEach var="student" items="${studentList}" >
                 <tr>
                     <td>${student.name}</td>
                     <td>${student.shortName}</td>
@@ -175,7 +175,7 @@
                                onclick="modifyStudent(${student.id})">
                         <input type="button" class="btn btn-default" value='删除'
                                onclick="deleteStudent(${student.id})">
-                        <c:if test="status == 2">
+                        <c:if test="${status==2}">
                             <input type="button" class="btn btn-default" value='毕业'
                                    onclick="retireStudent(${student.id})">
                             <input type="button" class="btn btn-default" value='排课'

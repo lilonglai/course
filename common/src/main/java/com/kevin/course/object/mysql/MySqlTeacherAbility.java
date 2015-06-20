@@ -1,12 +1,14 @@
 package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.TeacherAbility;
+import com.kevin.course.utils.TableName;
+
 import javax.persistence.*;
 /**
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "teacherability")
+@Table(name = TableName.TEACHERABILITY)
 public class MySqlTeacherAbility extends TeacherAbility {
 
     @Id

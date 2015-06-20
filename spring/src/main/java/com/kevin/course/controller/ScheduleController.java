@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,20 +27,30 @@ public class ScheduleController {
     @Autowired
     private ScheduleBusinessOperation scheduleOperation;
 
+    /* id indicate the studentId*/
     @RequestMapping(value = "schedule", method = RequestMethod.GET)
-    public ModelAndView getAll(int studentId) {
-        Student student = studentOperation.get(studentId);
+    public ModelAndView getAll(int id) {
+        Student student = studentOperation.get(id);
         List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(student.getGrade());
         List<Teacher> teacherList = teacherOperation.getAll();
 
-        List<Schedule> scheduleList = scheduleOperation.getByStudentId(studentId);
+        List<Schedule> scheduleList = scheduleOperation.getByStudentId(id);
+        List<SecondCourse> scheduledSecondCourseList = new ArrayList<SecondCourse>();
+        List<Teacher> scheduledTeacherList = new ArrayList<Teacher>();
 
-        ModelAndView model = new ModelAndView("course");
+        for(Schedule schedule : scheduleList){
+            scheduledSecondCourseList.add(secondCourseOperation.get(schedule.getCourseId()));
+            scheduledTeacherList.add(teacherOperation.get(schedule.getTeacherId()));
+        }
+
+        ModelAndView model = new ModelAndView("schedule");
         model.addObject("student", student);
         model.addObject("firstCourseList", firstCourseList);
         model.addObject("teacherList", teacherList);
         model.addObject("scheduleList", scheduleList);
         model.addObject("totalHours", calculateTotalHours(scheduleList));
+        model.addObject("scheduledSecondCourseList", scheduledSecondCourseList);
+        model.addObject("scheduledTeacherList", scheduledTeacherList);
         return model;
     }
 

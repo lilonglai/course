@@ -1,6 +1,7 @@
 package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.TeacherHoliday;
+import com.kevin.course.utils.TableName;
 
 import java.sql.Date;
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "teacherholiday")
+@Table(name = TableName.TEACHERHOLIDAY)
 public class MySqlTeacherHoliday extends TeacherHoliday {
 
     @Id

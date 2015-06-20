@@ -1,6 +1,7 @@
 package com.kevin.course.object.mysql;
 
 import com.kevin.course.object.FirstCourse;
+import com.kevin.course.utils.TableName;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "firstcourse")
+@Table(name = TableName.FIRSTCOURSE)
 public class MySqlFirstCourse extends FirstCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -143,14 +143,24 @@
             </thead>
             <tbody>
 
-            <c:forEach var="schedule" items="scheduleList">
+            <c:forEach var="schedule" items="${scheduleList}" varStatus="status">
                 <tr>
-                    <c:set var="secondCourse" value="${secondCourseOperation.get(schedule.courseId)}"/>
-                    <c:set var="teacher" value="${teacherOperation.get(schedule.teacherId)}"/>
                     <td>${schedule.onDate}</td>
-                    <td>${TimeHelp.getStringByNumber(schedule.onTime)}</td>
-                    <td>${secondCourse.name}</td>
-                    <td>${teacher.name}</td>
+                    <td>
+                    <c:choose>
+                        <c:when test="${schedule.onTime==1}">
+                            9:00-11:30
+                        </c:when>
+                        <c:when test="${schedule.onTime==2}">
+                            12:30-14:30
+                        </c:when>
+                        <c:when test="${schedule.onTime==3}">
+                            14:45-16:45
+                        </c:when>
+                    </c:choose>
+                    </td>
+                    <td>${scheduledSecondCourseList[status.index].name}</td>
+                    <td>${scheduledTeacherList[status.index].name}</td>
                     <td>${schedule.description}</td>
                     <td><input type="button" value='修改' onclick="modifyStudent(${schedule.id})">
                         <input type="button" value='删除' onclick="deleteSchedule(${schedule.id})">
