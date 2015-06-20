@@ -15,36 +15,36 @@
     </resultMap>
 
     <select id="get" parameterType="int" resultType="TeacherDefaultHoliday">
-        select * from aeas_teacherdefaultholiday where id=#{id}
+        select * from teacherdefaultholiday where id=#{id}
     </select>
 
     <select id="getAll"  resultMap="ListTeacherDefaultHoliday">
-        select * from aeas_teacherdefaultholiday
+        select * from teacherdefaultholiday
     </select>
 
     <select id="getByTeacherId" parameterType="int" resultType="TeacherDefaultHoliday">
         select *
-        from aeas_teacherdefaultholiday
+        from teacherdefaultholiday
         where teacherid =#{teacherId}
     </select>
 
     <insert id="add" parameterType="TeacherDefaultHoliday" useGeneratedKeys="true" keyProperty="id">
-        insert into aeas_teacherdefaultholiday(teacherid,week1, week2,week3,week4,week5,week6,week7)
+        insert into teacherdefaultholiday(teacherid,week1, week2,week3,week4,week5,week6,week7)
         values(#{teacherId}, #{week1}, #{week2},#{week3},#{week4},#{week5},#{week6},#{week7})
     </insert>
 
     <update id="update" parameterType="TeacherDefaultHoliday">
-        update aeas_teacherdefaultholiday
+        update teacherdefaultholiday
         set teacherid=#{teacherId}, week1=#{week1},  week2=#{week2}, week3=#{week3}, week4=#{week4},
                                     week5=#{week5}, week7=#{week6}, week6=#{week7}
         where id=#{id}
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_teacherdefaultholiday where id =#{id};
+        delete from teacherdefaultholiday where id =#{id};
     </delete>
 
     <delete id="deleteByTeacherId" parameterType="int">
-        delete from aeas_teacherdefaultholiday where teacherid =#{teacherId};
+        delete from teacherdefaultholiday where teacherid =#{teacherId};
     </delete>
 </mapper>

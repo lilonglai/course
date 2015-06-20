@@ -10,16 +10,16 @@
     </resultMap>
 
     <select id="get" parameterType="int" resultType="TeacherHoliday">
-        select * from aeas_teacherholiday where id=#{id}
+        select * from teacherholiday where id=#{id}
     </select>
 
     <select id="getAll"  resultMap="ListTeacherHoliday">
-        select * from aeas_teacherholiday
+        select * from teacherholiday
     </select>
 
     <select id="getByTeacherId" parameterType="int" resultMap="ListTeacherHoliday">
         select *
-        from aeas_teacherholiday
+        from teacherholiday
         where teacherid =#{teacherId}
     </select>
 
@@ -29,23 +29,23 @@
         #{adjustDate} is for #{1}
     -->
         select *
-        from aeas_teacherholiday
+        from teacherholiday
         where teacherid =#{0} and adjustdate = #{1}
     </select>
 
     <insert id="add" parameterType="TeacherHoliday" useGeneratedKeys="true" keyProperty="id">
-        insert into aeas_teacherholiday(teacherid,adjustdate, isholiday)
+        insert into teacherholiday(teacherid,adjustdate, isholiday)
         values(#{teacherId}, #{adjustDate}, #{isHoliday})
     </insert>
 
     <update id="update" parameterType="TeacherHoliday">
-        update aeas_teacherability
+        update teacherability
         set teacherid=#{teacherId}, adjustdate=#{adjustDate}, isholiday=#{isHoliday}
         where id=#{id}
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_teacherholiday where id =#{id}
+        delete from teacherholiday where id =#{id}
     </delete>
 
 </mapper>

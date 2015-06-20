@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "aeas_firstcourse")
+@Table(name = "firstcourse")
 public class MySqlFirstCourse extends FirstCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

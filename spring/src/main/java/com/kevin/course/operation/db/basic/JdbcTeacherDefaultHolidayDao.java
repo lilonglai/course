@@ -2,6 +2,7 @@ package com.kevin.course.operation.db.basic;
 
 import com.kevin.course.object.TeacherDefaultHoliday;
 import com.kevin.course.operation.db.ITeacherDefaultHolidayOperation;
+import com.kevin.course.utils.TableName;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import java.sql.PreparedStatement;
@@ -79,7 +80,7 @@ public class JdbcTeacherDefaultHolidayDao extends JdbcBaseDao<TeacherDefaultHoli
 
 	@Override
 	protected String getTableName() {
-		return "aeas_teacherdefaultholiday";
+		return TableName.TEACHERDEFAULTHOLIDAY;
 	}
 	
 }

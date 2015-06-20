@@ -11,35 +11,35 @@
     </resultMap>
 
     <select id="get" parameterType="int" resultType="FirstCourse">
-        select * from aeas_firstcourse where id=#{id}
+        select * from firstcourse where id=#{id}
     </select>
 
     <!--
     <select id="getByGrade" parameterType="int" resultMap="ListFirstCourse">
-        select * from aeas_firstcourse where grade =#{grade}
+        select * from firstcourse where grade =#{grade}
     </select>
     -->
 
     <select id="getByGrade" parameterType="int" resultType="FirstCourse">
-        select * from aeas_firstcourse where grade =#{grade}
+        select * from firstcourse where grade =#{grade}
     </select>
 
     <select id="getAll" parameterType="int" resultMap="ListFirstCourse">
-        select * from aeas_firstcourse
+        select * from firstcourse
     </select>
 
     <insert id="add" parameterType="FirstCourse">
-        insert into aeas_firstcourse(grade,name,shortname,description)
+        insert into firstcourse(grade,name,shortname,description)
                values(#{grade}, #{name}, #{shortName}, #{description})
     </insert>
 
     <update id="update" parameterType="FirstCourse">
-        update aeas_firstcourse
+        update firstcourse
         set grade=#{grade}, name=#{name}, shortname=#{shortName}, description= #{description}
         where id=#{id}
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_firstcourse where id =#{id}
+        delete from firstcourse where id =#{id}
     </delete>
 </mapper>

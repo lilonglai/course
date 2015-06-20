@@ -12,35 +12,35 @@
     </resultMap>
 
     <select id="get" parameterType="int" resultType="SecondCourse">
-        select * from aeas_secondcourse where id=#{id}
+        select * from secondcourse where id=#{id}
     </select>
 
     <select id="getByFirstCourseId" parameterType="int" resultMap="ListSecondCourse">
-        select * from aeas_secondcourse where firstcourseid =#{firstCourseId}
+        select * from secondcourse where firstcourseid =#{firstCourseId}
     </select>
 
     <select id="getByGrade" parameterType="int" resultMap="ListSecondCourse">
-        select aeas_secondcourse.* from aeas_firstcourse,aeas_secondcourse
-	    where aeas_firstcourse.id=aeas_secondcourse.firstcourseid and grade = #{grade}
-		order by aeas_secondcourse.firstcourseid
+        select secondcourse.* from firstcourse,secondcourse
+	    where firstcourse.id=secondcourse.firstcourseid and grade = #{grade}
+		order by secondcourse.firstcourseid
     </select>
 
     <select id="getAll" parameterType="int" resultMap="ListSecondCourse">
-        select * from aeas_secondcourse
+        select * from secondcourse
     </select>
 
     <insert id="add" parameterType="SecondCourse">
-        insert into aeas_secondcourse(name,shortname,firstcourseid,description)
+        insert into secondcourse(name,shortname,firstcourseid,description)
         values(#{name}, #{shortName}, #{firstCourseId} ,#{description})
     </insert>
 
     <update id="update" parameterType="SecondCourse">
-        update aeas_secondcourse
+        update secondcourse
         set name=#{name}, shortname=#{shortName}, firstcourseid=#{firstCourseId} description= #{description}
         where id=#{id}
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_secondcourse where id =#{id}
+        delete from secondcourse where id =#{id}
     </delete>
 </mapper>

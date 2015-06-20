@@ -2,6 +2,7 @@ package com.kevin.course.operation.db.basic;
 
 import com.kevin.course.object.User;
 import com.kevin.course.operation.db.IUserOperation;
+import com.kevin.course.utils.TableName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +34,6 @@ public class JdbcUserDao extends JdbcBaseDao<User> implements IUserOperation {
 
 	@Override
 	protected String getTableName() {
-		return "aeas_user";
+		return TableName.USER;
 	}
 }

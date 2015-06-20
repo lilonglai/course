@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_teacherholiday")
+@Table(name = "teacherholiday")
 public class MySqlTeacherHoliday extends TeacherHoliday {
 
     @Id

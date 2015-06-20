@@ -3,6 +3,7 @@ package com.kevin.course.operation.db.basic;
 import com.kevin.course.object.BasicException;
 import com.kevin.course.object.Teacher;
 import com.kevin.course.operation.db.ITeacherOperation;
+import com.kevin.course.utils.TableName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -132,7 +133,7 @@ public class JdbcTeacherOperation extends JdbcBaseOperation<Teacher> implements 
 
 	@Override
 	protected String getTableName() {
-		return "aeas_teacher";
+		return TableName.TEACHER;
 	}
 	
 

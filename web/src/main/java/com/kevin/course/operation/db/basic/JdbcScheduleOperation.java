@@ -3,6 +3,7 @@ package com.kevin.course.operation.db.basic;
 import com.kevin.course.object.BasicException;
 import com.kevin.course.object.Schedule;
 import com.kevin.course.operation.db.IScheduleOperation;
+import com.kevin.course.utils.TableName;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -107,7 +108,7 @@ public class JdbcScheduleOperation extends JdbcBaseOperation<Schedule> implement
 
 	@Override
 	protected String getTableName() {
-		return "aeas_schedule";
+		return TableName.SCHEDULE;
 	}
 
 }

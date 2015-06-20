@@ -12,19 +12,19 @@
     </resultMap>
 
     <select id="get" parameterType="int" resultType="Teacher">
-        select * from aeas_teacher where id=#{id}
+        select * from teacher where id=#{id}
     </select>
 
     <select id="getByName" parameterType="String" resultType="Teacher">
-        select * from aeas_teacher where name=#{name}
+        select * from teacher where name=#{name}
     </select>
 
     <select id="getByShortName" parameterType="String" resultType="Teacher">
-        select * from aeas_teacher where shortname=#{shortName}
+        select * from teacher where shortname=#{shortName}
     </select>
 
     <select id="getByCondition" parameterType="Teacher" resultType="Teacher">
-        select * from aeas_teacher where 1=1
+        select * from teacher where 1=1
         <if test="name != null">
             and name=#{name}
         </if>
@@ -38,34 +38,34 @@
     </select>
 
     <select id="getAll"  resultMap="ListTeacher">
-        select * from aeas_teacher
+        select * from teacher
     </select>
 
     <select id="getAlive"  resultMap="ListTeacher">
-        select * from aeas_teacher where isalive =1
+        select * from teacher where isalive =1
     </select>
 
     <select id="getNotAlive"  resultMap="ListTeacher">
-        select * from aeas_teacher where isalive =0
+        select * from teacher where isalive =0
     </select>
 
     <insert id="add" parameterType="Teacher" useGeneratedKeys="true" keyProperty="id">
-        insert into aeas_teacher(name,shortname,phone,ismaster)
+        insert into teacher(name,shortname,phone,ismaster)
         values(#{name}, #{shortName}, #{phone}, #{isMaster})
     </insert>
 
     <update id="update" parameterType="Teacher">
-        update aeas_teacher
+        update teacher
         set name=#{name}, shortname=#{shortName},
         phone =#{phone}, ismaster=#{isMaster}
         where id=#{id}
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_teacher where id =#{id}
+        delete from teacher where id =#{id}
     </delete>
 
     <update id="retire" parameterType="int">
-        update aeas_teacher set isalive = false where id=#{id}
+        update teacher set isalive = false where id=#{id}
     </update>
 </mapper>

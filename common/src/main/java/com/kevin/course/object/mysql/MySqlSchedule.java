@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_schedule")
+@Table(name = "schedule")
 public class MySqlSchedule extends Schedule{
 	
     @Id

@@ -2,6 +2,7 @@ package com.kevin.course.operation.db.basic;
 
 import com.kevin.course.object.Teacher;
 import com.kevin.course.operation.db.ITeacherOperation;
+import com.kevin.course.utils.TableName;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import java.sql.PreparedStatement;
@@ -86,7 +87,7 @@ public class JdbcTeacherDao extends JdbcBaseDao<Teacher> implements ITeacherOper
 
 	@Override
 	protected String getTableName() {
-		return "aeas_teacher";
+		return TableName.TEACHER;
 	}
 	
 

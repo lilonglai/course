@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="get" parameterType="int" resultType="Schedule">
-        select * from aeas_schedule where id=#{id}
+        select * from schedule where id=#{id}
     </select>
 
     <select id="getByStudentIdOnDateAndTime" parameterType="map" resultType="Schedule">
@@ -22,17 +22,17 @@
             #{onDate}  is for the #{1}
             #{onTime} is for the #{2}
         -->
-        select * from aeas_schedule
+        select * from schedule
         where studentid=#{0} and ondate=#{1} and ontime=#{2}
     </select>
 
     <select id="getByTeacherId" parameterType="int" resultMap="ListSchedule">
-        select * from aeas_schedule where teacherid =#{teacherId}
+        select * from schedule where teacherid =#{teacherId}
         order by ondate,ontime
     </select>
 
     <select id="getByStudentId" parameterType="int" resultMap="ListSchedule">
-        select * from aeas_schedule where studentid =#{studentId}
+        select * from schedule where studentid =#{studentId}
         order by ondate,ontime
     </select>
 
@@ -40,28 +40,28 @@
           <!-- #{onDate}  is for the #{0}
               #{onTime} is for the #{1}
           -->
-        select * from aeas_schedule where ondate=#{0} and ontime=#{1}
+        select * from schedule where ondate=#{0} and ontime=#{1}
         order by ondate,ontime
     </select>
 
     <select id="getAll" resultMap="ListSchedule">
-        select * from aeas_schedule
+        select * from schedule
         order by ondate,ontime
     </select>
 
     <insert id="add" parameterType="Schedule" useGeneratedKeys="true" keyProperty="id">
-        insert into aeas_schedule(ondate,ontime,studentid,courseid, teacherid, addition, description)
+        insert into schedule(ondate,ontime,studentid,courseid, teacherid, addition, description)
         values(#{onDate}, #{onTime}, #{studentId}, #{courseId}, #{teacherId}, #{addition}, #{description})
     </insert>
 
     <update id="update" parameterType="Schedule">
-        update aeas_schedule
+        update schedule
         set ondate=#{onDate}, ontime=#{onTime}, studentid=#{studentId}, courseid= #{courseId}, teacherid= #{teacherId}
             addition = #{addition}, description= #{description}
         where id=#{id}
     </update>
 
     <delete id="delete" parameterType="int">
-        delete from aeas_schedule where id =#{id}
+        delete from schedule where id =#{id}
     </delete>
 </mapper>

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_teacher")
+@Table(name = "teacher")
 public class MySqlTeacher extends Teacher{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 

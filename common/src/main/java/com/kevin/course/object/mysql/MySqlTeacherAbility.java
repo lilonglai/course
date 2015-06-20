@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by loli on 2014/11/30.
  */
 @Entity
-@Table(name = "aeas_teacherability")
+@Table(name = "teacherability")
 public class MySqlTeacherAbility extends TeacherAbility {
 
     @Id

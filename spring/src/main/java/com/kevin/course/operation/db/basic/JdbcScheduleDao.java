@@ -2,6 +2,7 @@ package com.kevin.course.operation.db.basic;
 
 import com.kevin.course.object.Schedule;
 import com.kevin.course.operation.db.IScheduleOperation;
+import com.kevin.course.utils.TableName;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import java.sql.Date;
@@ -98,7 +99,7 @@ public class JdbcScheduleDao extends JdbcBaseDao<Schedule> implements IScheduleO
 
 	@Override
 	protected String getTableName() {
-		return "aeas_schedule";
+		return TableName.SCHEDULE;
 	}
 
 }

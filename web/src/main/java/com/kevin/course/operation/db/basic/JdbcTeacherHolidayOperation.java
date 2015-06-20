@@ -3,6 +3,7 @@ package com.kevin.course.operation.db.basic;
 import com.kevin.course.object.BasicException;
 import com.kevin.course.object.TeacherHoliday;
 import com.kevin.course.operation.db.ITeacherHolidayOperation;
+import com.kevin.course.utils.TableName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,7 +69,7 @@ public class JdbcTeacherHolidayOperation extends JdbcBaseOperation<TeacherHolida
 
 	@Override
 	protected String getTableName() {
-		return "aeas_teacherholiday";
+		return TableName.TEACHERHOLIDAY;
 	}
 
 }

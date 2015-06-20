@@ -3,6 +3,7 @@ package com.kevin.course.operation.db.basic;
 import com.kevin.course.object.BasicException;
 import com.kevin.course.object.TeacherDefaultHoliday;
 import com.kevin.course.operation.db.ITeacherDefaultHolidayOperation;
+import com.kevin.course.utils.TableName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,7 +75,7 @@ public class JdbcTeacherDefaultHolidayOperation extends JdbcBaseOperation<Teache
 
 	@Override
 	protected String getTableName() {
-		return "aeas_teacherdefaultholiday";
+		return TableName.TEACHERDEFAULTHOLIDAY;
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.kevin.course.operation.db.basic;
 
 import com.kevin.course.object.FirstCourse;
 import com.kevin.course.operation.db.IFirstCourseOperation;
+import com.kevin.course.utils.TableName;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import java.sql.PreparedStatement;
@@ -60,7 +61,7 @@ public class JdbcFirstCourseDao extends JdbcBaseDao<FirstCourse> implements IFir
 
 	@Override
 	protected String getTableName() {
-		return "aeas_firstcourse";
+		return TableName.FIRSTCOURSE;
 	}
 
 }

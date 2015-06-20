@@ -3,6 +3,7 @@ package com.kevin.course.operation.db.basic;
 import com.kevin.course.object.BasicException;
 import com.kevin.course.object.FirstCourse;
 import com.kevin.course.operation.db.IFirstCourseOperation;
+import com.kevin.course.utils.TableName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,7 +59,7 @@ public class JdbcFirstCourseOperation extends JdbcBaseOperation<FirstCourse> imp
 
 	@Override
 	protected String getTableName() {
-		return "aeas_firstcourse";
+		return TableName.FIRSTCOURSE;
 	}
 
 }
