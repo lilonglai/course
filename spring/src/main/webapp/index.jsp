@@ -15,9 +15,9 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="./course.jsp">课程信息</a></li>
-					<li><a href="./teacher.jsp">老师信息</a></li>
-					<li><a href="./student.jsp">学生信息</a></li>
+					<li><a href="./course.html">课程信息</a></li>
+					<li><a href="./teacher.html">老师信息</a></li>
+					<li><a href="./student.html">学生信息</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

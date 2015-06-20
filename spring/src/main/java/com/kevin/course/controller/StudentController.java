@@ -5,6 +5,7 @@ import com.kevin.course.object.Teacher;
 import com.kevin.course.operation.business.StudentBusinessOperation;
 import com.kevin.course.operation.business.TeacherBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,13 +20,15 @@ import java.util.List;
  */
 @Controller
 public class StudentController {
+    @Autowired
     private StudentBusinessOperation studentOperation;
+    @Autowired
     private TeacherBusinessOperation teacherOperation;
 
     @RequestMapping( value = "student", method = RequestMethod.GET)
-    public ModelAndView getAll(int status){
+    public ModelAndView getAll(Integer status){
         List<Student> list = null;
-        if(status == 0){
+        if(status == null){
             status = 2;
         }
         switch(status){
@@ -41,7 +44,9 @@ public class StudentController {
         }
 
         ModelAndView model = new ModelAndView("student");
+        model.addObject("status", status);
         model.addObject("studentList", list);
+        model.addObject("teacherOperation", teacherOperation);
         return model;
     }
 
@@ -59,7 +64,7 @@ public class StudentController {
         setObject(request, student);
         student.setIsAlive(true);
         studentOperation.add(student);
-        ModelAndView model = new ModelAndView("student");
+        ModelAndView model = new ModelAndView("redirect:student.html");
         return model;
     }
 
@@ -67,7 +72,7 @@ public class StudentController {
     public ModelAndView studentUpdate(int id){
         Student student = studentOperation.get(id);
         List<Teacher> teacherList = teacherOperation.getAll();
-        ModelAndView model = new ModelAndView("teacherUpdate");
+        ModelAndView model = new ModelAndView("studentUpdate");
         model.addObject("student", student);
         model.addObject("teacherList", teacherList);
         return model;
@@ -80,21 +85,21 @@ public class StudentController {
         student = studentOperation.get(studentId);
         setObject(request, student);
         studentOperation.update(student);
-        ModelAndView model = new ModelAndView("student");
+        ModelAndView model = new ModelAndView("redirect:student.html");
         return model;
     }
 
     @RequestMapping( value = "studentDelete", method = RequestMethod.GET)
     private ModelAndView studentDelete(int id) {
         studentOperation.delete(id);
-        ModelAndView model = new ModelAndView("teacher");
+        ModelAndView model = new ModelAndView("redirect:student.html");
         return model;
     }
 
     @RequestMapping( value = "studentRetire", method = RequestMethod.GET)
     private ModelAndView studentRetire(int id) {
         studentOperation.retire(id);
-        ModelAndView model = new ModelAndView("teacher");
+        ModelAndView model = new ModelAndView("redirect:student.html");
         return model;
     }
 

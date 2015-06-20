@@ -45,6 +45,7 @@ public class TeacherController {
         }
 
         ModelAndView model = new ModelAndView("teacher");
+        model.addObject("status", status);
         model.addObject("teacherList", list);
         return model;
     }
@@ -57,14 +58,15 @@ public class TeacherController {
     @RequestMapping( value = "teacherAddSubmit", method = RequestMethod.GET)
     public ModelAndView teacherAddSubmit(HttpServletRequest request) throws UnsupportedEncodingException {
         Teacher teacher = new Teacher();
-        teacher.setName(HttpRequestUtil.getString(request, "name"));
-        teacher.setShortName(HttpRequestUtil.getString(request, "shortName"));
-        teacher.setPhone(request.getParameter("phone"));
-        if (request.getParameter("isMaster") != null)
-            teacher.setIsMaster(true);
-        else
-            teacher.setIsMaster(false);
-        ModelAndView model = new ModelAndView("teacher.html");
+        setObject(request, teacher);
+        teacher.setIsAlive(true);
+        teacherOperation.add(teacher);
+
+        TeacherDefaultHoliday teacherDefaultHoliday = new TeacherDefaultHoliday();
+        teacherDefaultHoliday.setTeacherId(teacher.getId());
+        setObject(request, teacherDefaultHoliday);
+        teacherDefaultHolidayOperation.add(teacherDefaultHoliday);
+        ModelAndView model = new ModelAndView("redirect:teacher.html");
         return model;
     }
 
@@ -93,21 +95,22 @@ public class TeacherController {
         }
         setObject(request, teacherDefaultHoliday);
         teacherDefaultHolidayOperation.update(teacherDefaultHoliday);
-        ModelAndView model = new ModelAndView("teacher.html");
+        ModelAndView model = new ModelAndView("redirect:teacher.html");
         return model;
     }
 
     @RequestMapping( value = "teacherDelete", method = RequestMethod.GET)
     private ModelAndView teacherDelete(int id) {
+        teacherDefaultHolidayOperation.deleteByTeacherId(id);
         teacherOperation.delete(id);
-        ModelAndView model = new ModelAndView("teacher.html");
+        ModelAndView model = new ModelAndView("redirect:teacher.html");
         return model;
     }
 
     @RequestMapping( value = "teacherRetire", method = RequestMethod.GET)
     private ModelAndView retire(int id) {
         teacherOperation.retire(id);
-        ModelAndView model = new ModelAndView("teacher.html");
+        ModelAndView model = new ModelAndView("redirect:teacher.html");
         return model;
     }
 
@@ -125,6 +128,13 @@ public class TeacherController {
 
     private void setObject(HttpServletRequest request, TeacherDefaultHoliday teacherDefaultHoliday) throws UnsupportedEncodingException{
         String[] weeks = request.getParameterValues("weeks");
+        teacherDefaultHoliday.setWeek1(false);
+        teacherDefaultHoliday.setWeek2(false);
+        teacherDefaultHoliday.setWeek3(false);
+        teacherDefaultHoliday.setWeek4(false);
+        teacherDefaultHoliday.setWeek5(false);
+        teacherDefaultHoliday.setWeek6(false);
+        teacherDefaultHoliday.setWeek7(false);
         if (weeks != null) {
             for (String week : weeks) {
                 if ("week1".equals(week))

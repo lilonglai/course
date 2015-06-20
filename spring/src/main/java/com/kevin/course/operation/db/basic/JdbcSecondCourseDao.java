@@ -51,7 +51,7 @@ public class JdbcSecondCourseDao extends JdbcBaseDao<SecondCourse> implements IS
 	
 	public void update(final SecondCourse secondCourse){
 		String sql = "update " + getTableName() + " set "
-				+ "name=:name,shortname=?, firstcourseid=?, description=? "
+				+ "name=?,shortname=?, firstcourseid=?, description=? "
                 + "where id = ?";
         PreparedStatementSetter setter = new PreparedStatementSetter() {
             @Override

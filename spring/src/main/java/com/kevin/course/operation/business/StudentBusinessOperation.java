@@ -2,10 +2,12 @@ package com.kevin.course.operation.business;
 
 import com.kevin.course.object.Student;
 import com.kevin.course.operation.db.IStudentOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class StudentBusinessOperation {
+    @Autowired
     IStudentOperation studentOperation;
 
     public void add(Student student){

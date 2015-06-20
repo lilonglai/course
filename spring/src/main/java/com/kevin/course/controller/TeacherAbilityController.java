@@ -6,6 +6,7 @@ import com.kevin.course.object.TeacherAbility;
 import com.kevin.course.operation.business.FirstCourseBusinessOperation;
 import com.kevin.course.operation.business.TeacherAbilityBusinessOperation;
 import com.kevin.course.operation.business.TeacherBusinessOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +20,11 @@ import java.util.List;
  */
 @Controller
 public class TeacherAbilityController {
+    @Autowired
     private TeacherBusinessOperation teacherOperation;
+    @Autowired
     private TeacherAbilityBusinessOperation teacherAbilityOperation;
+    @Autowired
     private FirstCourseBusinessOperation firstCourseOperation;
 
     @RequestMapping( value = "teacherAbility.html", method = RequestMethod.GET)

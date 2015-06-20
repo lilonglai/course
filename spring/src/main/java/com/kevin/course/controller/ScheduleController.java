@@ -2,6 +2,7 @@ package com.kevin.course.controller;
 
 import com.kevin.course.object.*;
 import com.kevin.course.operation.business.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,10 +15,15 @@ import java.util.List;
  */
 @Controller
 public class ScheduleController {
+    @Autowired
     private StudentBusinessOperation studentOperation;
+    @Autowired
     private FirstCourseBusinessOperation firstCourseOperation;
+    @Autowired
     private SecondCourseBusinessOperation secondCourseOperation;
+    @Autowired
     private TeacherBusinessOperation teacherOperation;
+    @Autowired
     private ScheduleBusinessOperation scheduleOperation;
 
     @RequestMapping(value = "schedule", method = RequestMethod.GET)

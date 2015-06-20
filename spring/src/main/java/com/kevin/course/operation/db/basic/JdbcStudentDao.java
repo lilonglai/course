@@ -77,8 +77,8 @@ public class JdbcStudentDao extends JdbcBaseDao<Student> implements IStudentOper
 	public void update(final Student student) {
 		String sql = "update " + getTableName() + " set "
 				+ "name=?, shortname=?, grade=?, testscore=?, targetscore=?, examinedate=?, examinePlace=?, "
-                + "teacherid =:teacherId, description=:description "
-                + "where id = :id";
+                + "teacherid=?, description=? "
+                + "where id=?";
 		PreparedStatementSetter setter = new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {

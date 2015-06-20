@@ -33,4 +33,8 @@ public class TeacherDefaultHolidayBusinessOperation {
     public TeacherDefaultHoliday getByTeacherId(int teacherId){
         return teacherDefaultHolidayOperation.getByTeacherId(teacherId);
     }
+
+    public void deleteByTeacherId(int teacherId){
+        teacherDefaultHolidayOperation.deleteByTeacherId(teacherId);
+    }
 }

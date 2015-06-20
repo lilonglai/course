@@ -32,24 +32,24 @@
 
         <div class="form-group">
             年级:
-            <c:if test="firstCourse.grade == 1">
+            <c:if test="${firstCourse.grade == 1}">
                 <input type="radio" name="grade" value="1" checked> 4-6
             </c:if>
-            <c:if test="firstCourse.grade != 1">
+            <c:if test="${firstCourse.grade != 1}">
                 <input type="radio" name="grade" value="1"> 4-6
             </c:if>
 
-            <c:if test="firstCourse.grade == 2">
+            <c:if test="${firstCourse.grade == 2}">
                 <input type="radio" name="grade" value="2" checked>7-9
             </c:if>
-            <c:if test="firstCourse.grade != 2">
+            <c:if test="${firstCourse.grade != 2}">
                 <input type="radio" name="grade" value="2">7-9
             </c:if>
 
-            <c:if test="firstCourse.grade == 3">
+            <c:if test="${firstCourse.grade == 3}">
                 <input type="radio" name="grade" value="3" checked> 10-12
             </c:if>
-            <c:if test="firstCourse.grade != 3">
+            <c:if test="${firstCourse.grade != 3}">
                 <input type="radio" name="grade" value="3"> 10-12
             </c:if>
 

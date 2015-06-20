@@ -7,6 +7,7 @@ import com.kevin.course.operation.business.TeacherBusinessOperation;
 import com.kevin.course.operation.business.TeacherDefaultHolidayBusinessOperation;
 import com.kevin.course.operation.business.TeacherHolidayBusinessOperation;
 import com.kevin.course.utils.DateHelp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +22,11 @@ import java.util.List;
  */
 @Controller
 public class TeacherHolidayController {
+    @Autowired
     TeacherBusinessOperation teacherOperation;
+    @Autowired
     TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation;
+    @Autowired
     TeacherHolidayBusinessOperation teacherHolidayOperation;
 
     @RequestMapping( value = "teacherHoliday", method = RequestMethod.GET)

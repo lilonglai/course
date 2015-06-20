@@ -82,14 +82,14 @@
 
 <div class="container">
 
-    <form action="teacher.jsp" method="get" name="statusForm" id="statusForm">
+    <form action="teacher.html" method="get" name="statusForm" id="statusForm">
         <select name="status" onChange="document.getElementById('statusForm').submit()">
-            <c:if test="status == 1"> <option value="1" selected> >所有老师</option></c:if>
-            <c:if test="status == 1"><option value="1"> >所有老师</option></c:if>
-            <c:if test="status == 2"> <option value="2" selected> >在职老师</option></c:if>
-            <c:if test="status == 2"><option value="2"> >在职老师</option></c:if>
-            <c:if test="status == 3"> <option value="3" selected> >离职老师</option></c:if>
-            <c:if test="status == 3"><option value="3"> >离职老师</option></c:if>
+            <c:if test="${status == 1}"> <option value="1" selected> 所有老师</option></c:if>
+            <c:if test="${status != 1}"><option value="1"> 所有老师</option></c:if>
+            <c:if test="${status == 2}"> <option value="2" selected> 在职老师</option></c:if>
+            <c:if test="${status != 2}"><option value="2"> 在职老师</option></c:if>
+            <c:if test="${status == 3}"> <option value="3" selected>离职老师</option></c:if>
+            <c:if test="${status != 3}"><option value="3"> 离职老师</option></c:if>
         </select>
     </form>
     <div class="table-responsive">

@@ -21,8 +21,6 @@
         function deleteStudent(studentId) {
             var id = document.getElementById("id");
             id.value = studentId;
-            var action = document.getElementById("action");
-            action.value = "delete";
             var form = document.getElementById("studentForm");
             form.action = "studentDelete.html";
             form.submit();
@@ -31,8 +29,6 @@
         function retireStudent(studentId) {
             var id = document.getElementById("id");
             id.value = studentId;
-            var action = document.getElementById("action");
-            action.value = "retire";
             var form = document.getElementById("studentForm");
             form.action = "studentRetire.html";
             form.submit();
@@ -87,9 +83,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./course.jsp">课程信息</a></li>
-                <li><a href="./teacher.jsp">老师信息</a></li>
-                <li><a href="./student.jsp">学生信息</a></li>
+                <li><a href="./course.html">课程信息</a></li>
+                <li><a href="./teacher.html">老师信息</a></li>
+                <li><a href="./student.html">学生信息</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -122,24 +118,24 @@
 
     <br>
 
-    <form action="student.jsp" method="get" name="statusForm" id="statusForm">
+    <form action="student.html" method="get" name="statusForm" id="statusForm">
         <select name="status" onChange="document.getElementById('statusForm').submit()">
-            <c:if test="status==1">
+            <c:if test="${status==1}">
                 <option value="1" selected>所有学生</option>
             </c:if>
-            <c:if test="status!=1">
+            <c:if test="${status!=1}">
                 <option value="1">所有学生</option>
             </c:if>
-            <c:if test="status==2">
+            <c:if test="${status==2}">
                 <option value="2" selected>在职学生</option>
             </c:if>
-            <c:if test="status!=3">
+            <c:if test="${status!=2}">
                 <option value="2">在职学生</option>
             </c:if>
-            <c:if test="status==3">
+            <c:if test="${status==3}">
                 <option value="3" selected>毕业学生</option>
             </c:if>
-            <c:if test="status!=3">
+            <c:if test="${status!=3}">
                 <option value="3">毕业学生</option>
             </c:if>
         </select>
@@ -163,9 +159,8 @@
             </thead>
 
             <tbody>
-            <c:forEach var="student" items="studentList" varStatus="status">
+            <c:forEach var="student" items="${studentList}" varStatus="status">
                 <tr>
-
                     <td>${student.name}</td>
                     <td>${student.shortName}</td>
                     <td>${GradeHelp.getStringByNumber(student.grade)}</td>
@@ -199,7 +194,7 @@
 
     <form method="get" action="student.jsp" name="studentForm" id="studentForm">
         <input type="hidden" name="id" id="id">
-        <input type="hidden" name="action" id="action">
+        <input type="hidden" name="status" value="${status}">
     </form>
 
 </div>

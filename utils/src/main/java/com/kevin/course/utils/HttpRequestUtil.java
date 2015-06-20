@@ -10,10 +10,13 @@ import java.sql.Date;
 public class HttpRequestUtil {
     public static String getString(HttpServletRequest request, String parameterName) throws UnsupportedEncodingException {
         String parameterValue = request.getParameter(parameterName);
+        return parameterValue;
+        /*
         if (parameterValue != null && !parameterValue.equals(""))
             return new String(parameterValue.getBytes("iso-8859-1"), "utf-8");
         else
             return null;
+            */
     }
 
     public static Date getDate(HttpServletRequest request, String parameterName) {
@@ -26,9 +29,9 @@ public class HttpRequestUtil {
     }
 
     public static Integer getInt(HttpServletRequest request, String parameterName) {
-        String parameterValue = request.getParameter("grade");
+        String parameterValue = request.getParameter(parameterName);
         if (parameterValue != null && !parameterValue.equals(""))
-        return Integer.valueOf(request.getParameter("grade"));
+        return Integer.valueOf(parameterValue);
         else
             return null;
     }

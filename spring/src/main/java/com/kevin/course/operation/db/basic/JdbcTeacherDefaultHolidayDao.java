@@ -37,7 +37,7 @@ public class JdbcTeacherDefaultHolidayDao extends JdbcBaseDao<TeacherDefaultHoli
 		PreparedStatementSetter setter = new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, teacherDefaultHoliday.getId());
+				ps.setInt(1, teacherDefaultHoliday.getTeacherId());
 				ps.setBoolean(2, teacherDefaultHoliday.getWeek1());
 				ps.setBoolean(3, teacherDefaultHoliday.getWeek2());
 				ps.setBoolean(4, teacherDefaultHoliday.getWeek3());
@@ -58,7 +58,7 @@ public class JdbcTeacherDefaultHolidayDao extends JdbcBaseDao<TeacherDefaultHoli
 		PreparedStatementSetter setter = new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, teacherDefaultHoliday.getId());
+				ps.setInt(1, teacherDefaultHoliday.getTeacherId());
 				ps.setBoolean(2, teacherDefaultHoliday.getWeek1());
 				ps.setBoolean(3, teacherDefaultHoliday.getWeek2());
 				ps.setBoolean(4, teacherDefaultHoliday.getWeek3());

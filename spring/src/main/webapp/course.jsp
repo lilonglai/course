@@ -12,7 +12,7 @@
             var form = document.firstCourseForm;
             var id = form.id;
             id.value = courseId;
-            form.action = "firstCourseUpdate.jsp";
+            form.action = "firstCourseUpdate.html";
             form.submit();
         }
 
@@ -76,17 +76,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./course.jsp">课程信息</a></li>
-                <li><a href="./teacher.jsp">老师信息</a></li>
-                <li><a href="./student.jsp">学生信息</a></li>
+                <li><a href="./course.html">课程信息</a></li>
+                <li><a href="./teacher.html">老师信息</a></li>
+                <li><a href="./student.html">学生信息</a></li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <form method="get" action="course.jsp" name="gradeForm" id="gradeForm">
+    <form method="get" action="course.html" name="gradeForm" id="gradeForm">
         选择年级:
+        <select name="grade" onChange="gradeChanged();">
         <c:if test="${grade==1}">
             <option value="1" selected>4-6</option>
         </c:if>
@@ -123,7 +124,7 @@
             <thead>
             <tbody>
 
-            <c:forEach var="firstCourse" items="firstCourseList" varStatus="status">
+            <c:forEach var="firstCourse" items="${firstCourseList}" varStatus="status">
                 <tr>
                     <td>${status.index}</td>
                     <td>${firstCourse.name}</td>
@@ -163,7 +164,7 @@
             </thead>
             <tbody>
 
-            <c:forEach var="secondCourse" items="secondCourseList" varStatus="status">
+            <c:forEach var="secondCourse" items="${secondCourseList}" varStatus="status">
                 <tr>
                     <td>${status.index}</td>
                     <td>${secondCourse.name}</td>

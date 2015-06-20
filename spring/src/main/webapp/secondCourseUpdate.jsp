@@ -39,12 +39,12 @@
         <div class="form-group">
             课程分类: <select name="firstCourseId">
 
-            <c:forEach var="firstCourse2" items="firstCourseList">
-                <c:if test="firstCourse2.id == secondCourse.firstCourseId">
-                    <option value="{firstCourse2.id}" selected> ${firstCourse2.name}</option>
+            <c:forEach var="firstCourse2" items="${firstCourseList}">
+                <c:if test="${firstCourse2.id == secondCourse.firstCourseId}">
+                    <option value="${firstCourse2.id}" selected> ${firstCourse2.name}</option>
                 </c:if>
-                <c:if test="firstCourse2.id != secondCourse.firstCourseId">
-                    <option value="{firstCourse2.id}"> ${firstCourse2.name}</option>
+                <c:if test="${firstCourse2.id != secondCourse.firstCourseId}">
+                    <option value="${firstCourse2.id}"> ${firstCourse2.name}</option>
                 </c:if>
             </c:forEach>
         </select>

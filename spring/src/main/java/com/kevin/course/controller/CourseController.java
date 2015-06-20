@@ -26,8 +26,8 @@ public class CourseController {
     private SecondCourseBusinessOperation secondCourseOperation;
 
     @RequestMapping(value = "course", method = RequestMethod.GET)
-    public ModelAndView getAll(int grade) {
-        if (grade == 0)
+    public ModelAndView getAll(Integer grade) {
+        if (grade == null)
             grade = 3;
         List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
         List<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
@@ -51,7 +51,7 @@ public class CourseController {
         firstCourse = new FirstCourse();
         setObject(request, firstCourse);
         firstCourseOperation.add(firstCourse);
-        ModelAndView model = new ModelAndView("course");
+        ModelAndView model = new ModelAndView("redirect:course.html");
         return model;
     }
 
@@ -63,21 +63,21 @@ public class CourseController {
         return model;
     }
 
-    @RequestMapping( value = "firstCourseSubmit", method = RequestMethod.GET)
+    @RequestMapping( value = "firstCourseUpdateSubmit", method = RequestMethod.GET)
     public ModelAndView firstCourseUpdateSubmit(HttpServletRequest request) throws UnsupportedEncodingException {
         FirstCourse firstCourse = null;
         int courseId = HttpRequestUtil.getInt(request, "id");
         firstCourse = firstCourseOperation.get(courseId);
         setObject(request, firstCourse);
         firstCourseOperation.update(firstCourse);
-        ModelAndView model = new ModelAndView("course");
+        ModelAndView model = new ModelAndView("redirect:course.html");
         return model;
     }
 
-    @RequestMapping( value = "firstCoursedDelete", method = RequestMethod.GET)
+    @RequestMapping( value = "firstCourseDelete", method = RequestMethod.GET)
     private ModelAndView firstCoursedDelete(int id) {
         firstCourseOperation.delete(id);
-        ModelAndView model = new ModelAndView("course");
+        ModelAndView model = new ModelAndView("redirect:course.html");
         return model;
     }
 
@@ -99,36 +99,36 @@ public class CourseController {
         secondCourse = new SecondCourse();
         setObject(request, secondCourse);
         secondCourseOperation.add(secondCourse);
-        ModelAndView model = new ModelAndView("course");
+        ModelAndView model = new ModelAndView("redirect:course.html");
         return model;
     }
 
     @RequestMapping( value = "secondCourseUpdate", method = RequestMethod.GET)
-    public ModelAndView secondCourseUpdate(int secondCourseId){
+    public ModelAndView secondCourseUpdate(int id){
         SecondCourse secondCourse = null;
-        secondCourse = secondCourseOperation.get(secondCourseId);
+        secondCourse = secondCourseOperation.get(id);
 
         int firstCourseId = secondCourse.getFirstCourseId();
         FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
         int grade = firstCourse.getGrade();
         List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
 
-        ModelAndView model = new ModelAndView("course");
+        ModelAndView model = new ModelAndView("secondCourseUpdate");
         model.addObject("secondCourse", secondCourse);
         model.addObject("firstCourse", firstCourse);
         model.addObject("firstCourseList", firstCourseList);
         return model;
     }
 
-    @RequestMapping( value = "secondCourseSubmit", method = RequestMethod.GET)
-    public ModelAndView secondCourseSubmit(HttpServletRequest request) throws UnsupportedEncodingException {
+    @RequestMapping( value = "secondCourseUpdateSubmit", method = RequestMethod.GET)
+    public ModelAndView secondCourseUpdateSubmit(HttpServletRequest request) throws UnsupportedEncodingException {
         SecondCourse secondCourse = null;
         int courseId = HttpRequestUtil.getInt(request, "id");
         secondCourse = secondCourseOperation.get(courseId);
         setObject(request, secondCourse);
 
         secondCourseOperation.update(secondCourse);
-        ModelAndView model = new ModelAndView("course");
+        ModelAndView model = new ModelAndView("redirect:course.html");
         return model;
     }
 
@@ -137,6 +137,13 @@ public class CourseController {
         firstCourse.setName(HttpRequestUtil.getString(request,"name"));
         firstCourse.setShortName(HttpRequestUtil.getString(request, "shortName"));
         firstCourse.setDescription(HttpRequestUtil.getString(request, "description"));
+    }
+
+    @RequestMapping( value = "secondCourseDelete", method = RequestMethod.GET)
+    private ModelAndView secondCourseDelete(int id) {
+        secondCourseOperation.delete(id);
+        ModelAndView model = new ModelAndView("redirect:course.html");
+        return model;
     }
 
     private void setObject(HttpServletRequest request, SecondCourse secondCourse) throws UnsupportedEncodingException{

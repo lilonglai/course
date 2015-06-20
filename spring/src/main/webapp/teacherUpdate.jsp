@@ -34,75 +34,76 @@
         <div class="form-group">
             电话: <input type="text" class="form-control" name="phone" value="${teacher.phone}"/>
         </div>
-        < class="form-group">
-        <c:if test="${teacher.isMaster == true}">
-        班主任: <input type="checkbox" name="isMaster" checked/> <br>
-        </c:if>
-        <c:if test="${teacher.isMaster == false}">
-        班主任: <input type="checkbox" name="isMaster"/> <br>
-        </c:if>
-</div>
-<div class="form-group">
-    默认休假情况:<br> &nbsp;&nbsp;
+        <div class="form-group">
+            <c:if test="${teacher.isMaster == true}">
+                班主任: <input type="checkbox" name="isMaster" checked/> <br>
+            </c:if>
+            <c:if test="${teacher.isMaster == false}">
+                班主任: <input type="checkbox" name="isMaster"/> <br>
+            </c:if>
+        </div>
+        <div class="form-group">
+            默认休假情况:<br> &nbsp;&nbsp;
 
-    <c:if test="${teacherDefaultHoliday != null}">
-        <input type="hidden" name="id2" value="${teacherDefaultHoliday.id}">
-        <c:if test="teacherDefaultHoliday.getWeek1() == true}">
-            周一 <input type="checkbox" name="weeks" value="week1" checked> &nbsp;
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek1() == false}">
-            周一 <input type="checkbox" name="weeks" value="week1"> &nbsp;
-        </c:if>
 
-        <c:if test="teacherDefaultHoliday.getWeek2() == true}">
-            周二 <input type="checkbox" name="weeks" value="week2" checked> &nbsp;
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek2() == false}">
-            周二 <input type="checkbox" name="weeks" value="week2"> &nbsp;
-        </c:if>
+            <c:if test="${teacherDefaultHoliday != null}">
+                <input type="hidden" name="id2" value="${teacherDefaultHoliday.id}">
+                <c:if test="${teacherDefaultHoliday.week1 == true}">
+                    周一 <input type="checkbox" name="weeks" value="week1" checked> &nbsp;
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week1 == false}">
+                    周一 <input type="checkbox" name="weeks" value="week1"> &nbsp;
+                </c:if>
 
-        <c:if test="teacherDefaultHoliday.getWeek3() == true}">
-            周三 <input type="checkbox" name="weeks" value="week3" checked> &nbsp;
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek3() == false}">
-            周三 <input type="checkbox" name="weeks" value="week3"> &nbsp;
-        </c:if>
+                <c:if test="${teacherDefaultHoliday.week2 == true}">
+                    周二 <input type="checkbox" name="weeks" value="week2" checked> &nbsp;
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week2 == false}">
+                    周二 <input type="checkbox" name="weeks" value="week2"> &nbsp;
+                </c:if>
 
-        <c:if test="teacherDefaultHoliday.getWeek4() == true}">
-            周四 <input type="checkbox" name="weeks" value="week4" checked> &nbsp;
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek4() == false}">
-            周四 <input type="checkbox" name="weeks" value="week4"> &nbsp;
-        </c:if>
+                <c:if test="${teacherDefaultHoliday.week3 == true}">
+                    周三 <input type="checkbox" name="weeks" value="week3" checked> &nbsp;
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week3 == false}">
+                    周三 <input type="checkbox" name="weeks" value="week3"> &nbsp;
+                </c:if>
 
-        <c:if test="teacherDefaultHoliday.getWeek5() == true}">
-            周五 <input type="checkbox" name="weeks" value="week5" checked> &nbsp;
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek5() == false}">
-            周五 <input type="checkbox" name="weeks" value="week5"> &nbsp;
-        </c:if>
+                <c:if test="${teacherDefaultHoliday.week4 == true}">
+                    周四 <input type="checkbox" name="weeks" value="week4" checked> &nbsp;
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week4 == false}">
+                    周四 <input type="checkbox" name="weeks" value="week4"> &nbsp;
+                </c:if>
 
-        <c:if test="teacherDefaultHoliday.getWeek6() == true}">
-            周六 <input type="checkbox" name="weeks" value="week6" checked> &nbsp;
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek6() == false}">
-            周六 <input type="checkbox" name="weeks" value="week6"> &nbsp;
-        </c:if>
+                <c:if test="${teacherDefaultHoliday.week5 == true}">
+                    周五 <input type="checkbox" name="weeks" value="week5" checked> &nbsp;
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week5 == false}">
+                    周五 <input type="checkbox" name="weeks" value="week5"> &nbsp;
+                </c:if>
 
-        <c:if test="teacherDefaultHoliday.getWeek7() == true}">
-            周日 <input type="checkbox" name="weeks" value="week7" checked>
-        </c:if>
-        <c:if test="teacherDefaultHoliday.getWeek7() == false}">
-            周日 <input type="checkbox" name="weeks" value="week7">
-        </c:if>
+                <c:if test="${teacherDefaultHoliday.week6 == true}">
+                    周六 <input type="checkbox" name="weeks" value="week6" checked> &nbsp;
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week6 == false}">
+                    周六 <input type="checkbox" name="weeks" value="week6"> &nbsp;
+                </c:if>
 
-    </c:if>
+                <c:if test="${teacherDefaultHoliday.week7 == true}">
+                    周日 <input type="checkbox" name="weeks" value="week7" checked>
+                </c:if>
+                <c:if test="${teacherDefaultHoliday.week7 == false}">
+                    周日 <input type="checkbox" name="weeks" value="week7">
+                </c:if>
 
-</div>
-<div class="form-group">
-    <input type="submit" class="btn btn-default" value="提交"/>
-</div>
-</form>
+            </c:if>
+
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-default" value="提交"/>
+        </div>
+    </form>
 
 </div>
 </body>
