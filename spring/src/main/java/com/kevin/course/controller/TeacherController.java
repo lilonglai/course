@@ -94,7 +94,13 @@ public class TeacherController {
             teacherDefaultHoliday = new TeacherDefaultHoliday();
         }
         setObject(request, teacherDefaultHoliday);
-        teacherDefaultHolidayOperation.update(teacherDefaultHoliday);
+        teacherDefaultHoliday.setTeacherId(teacherId);
+        if(teacherDefaultHoliday.getId() > 0) {
+            teacherDefaultHolidayOperation.update(teacherDefaultHoliday);
+        }
+        else{
+            teacherDefaultHolidayOperation.add(teacherDefaultHoliday);
+        }
         ModelAndView model = new ModelAndView("redirect:teacher.html");
         return model;
     }

@@ -43,8 +43,8 @@
             }
 
             $.ajax({
-                url: "service/schedule/getSecondCourseAndTeacherList",
-                type: "POST",
+                url: "service/schedule/getSecondCourseAndTeacherList.html",
+                type: "GET",
                 data: {onDate: onDate, onTime: onTime, studentId: studentId, firstCourseId: firstCourseId}
             }).done(function (data) {
                 var jsonData = eval(data);
@@ -59,8 +59,8 @@
             var index = document.scheduleForm.onTime.selectedIndex;
             var onTime = document.scheduleForm.onTime.options[index].value;
             $.ajax({
-                url: "service/schedule/getAvailableTeacherList",
-                type: "POST",
+                url: "service/schedule/getAvailableTeacherList.html",
+                type: "GET",
                 data: {onDate: onDate, onTime: onTime}
             }).done(function (data) {
                 var jsonData = eval(data);
@@ -75,8 +75,8 @@
             var onTime = document.scheduleForm.onTime.options[index].value;
 
             $.ajax({
-                url: "service/schedule/getAvailableTeacherList",
-                type: "POST",
+                url: "service/schedule/getAvailableTeacherList.html",
+                type: "GET",
                 data: {onDate: onDate, onTime: onTime}
             }).done(function (data) {
                 var jsonData = eval(data);

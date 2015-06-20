@@ -99,6 +99,16 @@
 
             </c:if>
 
+            <c:if test="${teacherDefaultHoliday == null}">
+                周一 <input type="checkbox" name="weeks" value="week1"> &nbsp;
+                周二 <input type="checkbox" name="weeks" value="week2"> &nbsp;
+                周三 <input type="checkbox" name="weeks" value="week3"> &nbsp;
+                周四 <input type="checkbox" name="weeks" value="week4"> &nbsp;
+                周五 <input type="checkbox" name="weeks" value="week5"> &nbsp;
+                周六 <input type="checkbox" name="weeks" value="week6"> &nbsp;
+                周日 <input type="checkbox" name="weeks" value="week7">
+            </c:if>
+
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-default" value="提交"/>

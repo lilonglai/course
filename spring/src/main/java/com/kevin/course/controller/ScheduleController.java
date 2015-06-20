@@ -3,13 +3,18 @@ package com.kevin.course.controller;
 import com.kevin.course.object.*;
 import com.kevin.course.operation.business.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by loli on 2015/6/18.
@@ -67,5 +72,37 @@ public class ScheduleController {
             }
         }
         return totalHours;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "service/schedule/getSecondCourseList",  method =RequestMethod.GET )
+    public List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
+        List<SecondCourse> secondCourseList = scheduleOperation.getSecondCourseList(studentId, firstCourseId);
+        return secondCourseList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "service/schedule/getTeacherList",  method =RequestMethod.GET )
+    public  List<Teacher> getTeacherListByGet(Date onDate, int onTime, int firstCourseId){
+        List<Teacher> teacherList = scheduleOperation.getTeacherList(onDate, onTime, firstCourseId);
+        return teacherList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "service/schedule/getAvailableTeacherList", method =RequestMethod.GET )
+    public List<Teacher> getAvailableTeacherListByGet(Date onDate, int onTime){
+        return scheduleOperation.getAvailableTeacherList(onDate, onTime);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "service/schedule/getSecondCourseAndTeacherList", method =RequestMethod.GET )
+    public Map<String, Object> getSecondCourseAndTeacherListByGet( Date onDate,  int onTime,
+                                                                   int studentId, int firstCourseId){
+        List<SecondCourse> secondCourseList = scheduleOperation.getSecondCourseList(studentId, firstCourseId);
+        List<Teacher> teacherList = scheduleOperation.getTeacherList(onDate, onTime, firstCourseId);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("secondCourseList", secondCourseList);
+        map.put("teacherList", teacherList);
+        return map;
     }
 }

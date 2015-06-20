@@ -30,5 +30,8 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.7.Final'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.3.7.Final'
 
+    compile group: 'org.codehaus.jackson', name: 'jackson-core-asl', version: '1.9.2', ext: 'jar'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.2', ext: 'jar'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
