@@ -2,14 +2,16 @@ package com.kevin.course.controller;
 
 import com.kevin.course.object.*;
 import com.kevin.course.operation.business.*;
+import com.kevin.course.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +45,7 @@ public class ScheduleController {
         List<SecondCourse> scheduledSecondCourseList = new ArrayList<SecondCourse>();
         List<Teacher> scheduledTeacherList = new ArrayList<Teacher>();
 
-        for(Schedule schedule : scheduleList){
+        for (Schedule schedule : scheduleList) {
             scheduledSecondCourseList.add(secondCourseOperation.get(schedule.getCourseId()));
             scheduledTeacherList.add(teacherOperation.get(schedule.getTeacherId()));
         }
@@ -59,10 +61,38 @@ public class ScheduleController {
         return model;
     }
 
+    @RequestMapping(value = "scheduleAddSubmit", method = RequestMethod.GET)
+    public ModelAndView studentAddSubmit(HttpServletRequest request) throws UnsupportedEncodingException {
+        Schedule schedule = new Schedule();
+        setObject(request, schedule);
+        scheduleOperation.add(schedule);
+        ModelAndView model = new ModelAndView("redirect:schedule.html" +"?id=" + schedule.getStudentId());
+        return model;
+    }
 
-    private double calculateTotalHours(List<Schedule> scheduleList){
+    @RequestMapping(value = "scheduleDelete", method = RequestMethod.GET)
+    public ModelAndView scheduleDelete(HttpServletRequest request) throws UnsupportedEncodingException {
+        int scheduleId = Integer.valueOf(request.getParameter("scheduleId"));
+        scheduleOperation.delete(scheduleId);
+        int studentId = Integer.valueOf(request.getParameter("id"));
+        ModelAndView model = new ModelAndView("redirect:schedule.html" +"?id=" + studentId);
+        return model;
+    }
+
+
+    private void setObject(HttpServletRequest request, Schedule schedule) throws UnsupportedEncodingException {
+        schedule.setOnDate(HttpRequestUtil.getDate(request, "onDate"));
+        schedule.setOnTime(HttpRequestUtil.getInt(request, "onTime"));
+        schedule.setStudentId(HttpRequestUtil.getInt(request, "id"));
+        schedule.setCourseId(HttpRequestUtil.getInt(request, "secondCourseId"));
+        schedule.setTeacherId(HttpRequestUtil.getInt(request, "teacherId"));
+        schedule.setDescription(HttpRequestUtil.getString(request, "description"));
+    }
+
+
+    private double calculateTotalHours(List<Schedule> scheduleList) {
         double totalHours = 0;
-        for(Schedule schedule : scheduleList) {
+        for (Schedule schedule : scheduleList) {
             SecondCourse secondCourse = secondCourseOperation.get(schedule.getCourseId());
             Teacher teacher = teacherOperation.get(schedule.getTeacherId());
             if (schedule.getOnTime() == 1) {
@@ -75,29 +105,29 @@ public class ScheduleController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "service/schedule/getSecondCourseList",  method =RequestMethod.GET )
-    public List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId){
+    @RequestMapping(value = "schedule/getSecondCourseList", method = RequestMethod.GET)
+    public List<SecondCourse> getSecondCourseList(int studentId, int firstCourseId) {
         List<SecondCourse> secondCourseList = scheduleOperation.getSecondCourseList(studentId, firstCourseId);
         return secondCourseList;
     }
 
     @ResponseBody
-    @RequestMapping(value = "service/schedule/getTeacherList",  method =RequestMethod.GET )
-    public  List<Teacher> getTeacherListByGet(Date onDate, int onTime, int firstCourseId){
+    @RequestMapping(value = "schedule/getTeacherList", method = RequestMethod.GET)
+    public List<Teacher> getTeacherListByGet(Date onDate, int onTime, int firstCourseId) {
         List<Teacher> teacherList = scheduleOperation.getTeacherList(onDate, onTime, firstCourseId);
         return teacherList;
     }
 
     @ResponseBody
-    @RequestMapping(value = "service/schedule/getAvailableTeacherList", method =RequestMethod.GET )
-    public List<Teacher> getAvailableTeacherListByGet(Date onDate, int onTime){
+    @RequestMapping(value = "schedule/getAvailableTeacherList", method = RequestMethod.GET)
+    public List<Teacher> getAvailableTeacherListByGet(Date onDate, int onTime) {
         return scheduleOperation.getAvailableTeacherList(onDate, onTime);
     }
 
     @ResponseBody
-    @RequestMapping(value = "service/schedule/getSecondCourseAndTeacherList", method =RequestMethod.GET )
-    public Map<String, Object> getSecondCourseAndTeacherListByGet( Date onDate,  int onTime,
-                                                                   int studentId, int firstCourseId){
+    @RequestMapping(value = "schedule/getSecondCourseAndTeacherList", method = RequestMethod.GET)
+    public Map<String, Object> getSecondCourseAndTeacherListByGet(Date onDate, int onTime,
+                                                                  int studentId, int firstCourseId) {
         List<SecondCourse> secondCourseList = scheduleOperation.getSecondCourseList(studentId, firstCourseId);
         List<Teacher> teacherList = scheduleOperation.getTeacherList(onDate, onTime, firstCourseId);
         HashMap<String, Object> map = new HashMap<>();

@@ -24,4 +24,5 @@
     </bean>
 
     <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+
 </beans>

@@ -4,12 +4,6 @@ apply plugin: 'ear'
 apply plugin: 'eclipse-wtp'
 //apply plugin: 'idea'
 
-repositories{
-    mavenCentral()
-    flatDir{
-        dirs 'libs'
-    }
-}
 
 
 dependencies{

@@ -20,26 +20,29 @@ public class JdbcTeacherAbilityDao extends JdbcBaseDao<TeacherAbility> implement
 	}
 	
 	public List<TeacherAbility> getAll() {
-		String sql = "select aeas_teacherability.*" +
-                " from aeas_teacherability,aeas_firstcourse"
-				+ " where aeas_firstcourse.id=aeas_teacherability.courseid"
-				+ " order by aeas_firstcourse.grade";
+		String sqlFormat = "select %1$s.*" +
+                " from %1$s,%2$s"
+				+ " where %2$s.id=%1$s.courseid"
+				+ " order by %2$s.grade";
+		String sql = String.format(sqlFormat, TableName.TEACHERABILITY, TableName.FIRSTCOURSE);
 		return query(sql, this);
 	}
 	
 	public List<TeacherAbility> getByTeacherId(int teacherId) {
-		String sql = "select aeas_teacherability.*"
-				+ " from aeas_teacherability,aeas_firstcourse"
-				+ " where teacherid = ? and aeas_firstcourse.id=aeas_teacherability.courseid"
-				+ " order by aeas_firstcourse.grade";
+		String sqlFormat = "select %1$s.*"
+				+ " from %1$s,%2$s"
+				+ " where %1$s.teacherid = ? and %2$s.id=%1$s.courseid"
+				+ " order by %2$s.grade";
+		String sql = String.format(sqlFormat, TableName.TEACHERABILITY, TableName.FIRSTCOURSE);
 		return query(sql, this, new Object[]{teacherId});
 	}
 	
 	public List<TeacherAbility> getByCourseId(int courseId) {
-		String sql = "select aeas_teacherability.*"
-				+ " from aeas_teacherability,aeas_firstcourse"
-				+ " where courseid = ? and aeas_firstcourse.id=aeas_teacherability.courseid"
-				+ " order by aeas_firstcourse.grade";
+		String sqlFormat = "select %1$s.*"
+				+ " from %1$s,%2$s"
+				+ " where %1$s.courseid = ? and %2$s.id=%1$s.courseid"
+				+ " order by %2$s.grade";
+		String sql = String.format(sqlFormat, TableName.TEACHERABILITY, TableName.FIRSTCOURSE);
 		return query(sql, this, new Object[]{courseId});
 	}
 	
@@ -78,8 +81,9 @@ public class JdbcTeacherAbilityDao extends JdbcBaseDao<TeacherAbility> implement
 	
 	
 	public void deleteByTeacherAndGrade(int teacherId,int grade){
-		String sql = "delete t from aeas_teacherability t where t.teacherid = ?"
-				+ " and t.courseid in(select c.id from aeas_firstcourse c where c.grade = ?)";
+		String sqlFormat = "delete t from %1$s t where t.teacherid = ?"
+				+ " and t.courseid in(select c.id from %2$s c where c.grade = ?)";
+		String sql = String.format(sqlFormat, TableName.TEACHERABILITY, TableName.FIRSTCOURSE);
 		update(sql, new Object[]{teacherId, grade});
 		
 	}

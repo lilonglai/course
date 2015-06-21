@@ -43,8 +43,9 @@
             }
 
             $.ajax({
-                url: "service/schedule/getSecondCourseAndTeacherList.html",
+                url: "service/schedule/getSecondCourseAndTeacherList",
                 type: "GET",
+                dataType : "json",
                 data: {onDate: onDate, onTime: onTime, studentId: studentId, firstCourseId: firstCourseId}
             }).done(function (data) {
                 var jsonData = eval(data);
@@ -59,8 +60,9 @@
             var index = document.scheduleForm.onTime.selectedIndex;
             var onTime = document.scheduleForm.onTime.options[index].value;
             $.ajax({
-                url: "service/schedule/getAvailableTeacherList.html",
+                url: "service/schedule/getAvailableTeacherList",
                 type: "GET",
+                dataType : "json",
                 data: {onDate: onDate, onTime: onTime}
             }).done(function (data) {
                 var jsonData = eval(data);
@@ -75,8 +77,9 @@
             var onTime = document.scheduleForm.onTime.options[index].value;
 
             $.ajax({
-                url: "service/schedule/getAvailableTeacherList.html",
+                url: "service/schedule/getAvailableTeacherList",
                 type: "GET",
+                dataType : "json",
                 data: {onDate: onDate, onTime: onTime}
             }).done(function (data) {
                 var jsonData = eval(data);
@@ -88,8 +91,7 @@
         function deleteSchedule(id) {
             var scheduleId = document.deleteScheduleForm.scheduleId;
             scheduleId.value = id;
-            var action = document.deleteScheduleForm.action;
-            action.value = "delete";
+            document.deleteScheduleForm.action = "scheduleDelete.html";
             document.deleteScheduleForm.submit();
         }
 
@@ -177,7 +179,7 @@
 
     <h2>开始排课</h2>
 
-    <form method="get" action="scheduleServlet" name="scheduleForm" id="scheduleForm">
+    <form method="get" action="scheduleAddSubmit.html" name="scheduleForm" id="scheduleForm">
         <input type="hidden" name="id" value="${student.id}">
         <input type="hidden" name="scheduleId">
         <table>
@@ -239,7 +241,6 @@
     <form method="get" action="scheduleServlet" name="deleteScheduleForm" id="deleteScheduleForm">
         <input type="hidden" name="id" value="${student.id}">
         <input type="hidden" name="scheduleId" id="scheduleId">
-        <input type="hidden" name="action" id="action">
     </form>
 
 </div>
