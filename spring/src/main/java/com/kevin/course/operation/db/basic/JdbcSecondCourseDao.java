@@ -27,10 +27,10 @@ public class JdbcSecondCourseDao extends JdbcBaseDao<SecondCourse> implements IS
 	}
 	
 	public List<SecondCourse> getByGrade(int grade){
-		String sqlFormat= "select %2$s.* from %1$s,%2$s "
-				+ "where %1$s.id=%2$s.firstcourseid and grade = ?"
+		String sqlFormat= "select %1$s.* from %1$s,%2$s "
+				+ "where %2$s.id=%1$s.firstcourseid and grade = ?"
 				+ " order by %1$s.firstcourseid";
-		String sql = String.format(sqlFormat, TableName.FIRSTCOURSE, TableName.SECONDCOURSE);
+		String sql = String.format(sqlFormat, TableName.SECONDCOURSE, TableName.FIRSTCOURSE);
 		return query(sql, this, new Object[]{grade});
 	}
 	
