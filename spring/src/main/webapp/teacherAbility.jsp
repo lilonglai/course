@@ -57,7 +57,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./teacher.jsp">老师信息</a></li>
+                <li><a href="./teacher.html">老师信息</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -66,7 +66,7 @@
 </div>
 
 <div class="container">
-    老师:{teacher.name}<br>
+    老师:${teacher.name}<br>
 
     <h2>目前能力情况</h2>
     <br>
@@ -81,11 +81,11 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="firstCourse" items="allFirstCourseList">
+            <c:forEach var="firstCourse" items="${allFirstCourseList}">
                 <tr>
-                    <td>{firstCourse.grade}</td>
-                    <td>${firstCourse.name()}</td>
-                    <td>${firstCourse.shortName()}</td>
+                    <td>${firstCourse.grade}</td>
+                    <td>${firstCourse.name}</td>
+                    <td>${firstCourse.shortName}</td>
                 </tr>
             </c:forEach>
 
@@ -102,24 +102,24 @@
 
         <div class="form-group">
             选择年级: <select name="grade" onChange="gradeChanged();">
-            <c:if test="grade == 1">
+            <c:if test="${grade == 1}">
                 <option value="1" selected>4-6</option>
             </c:if>
-            <c:if test="grade != 1">
+            <c:if test="${grade != 1}">
                 <option value="1">4-6</option>
             </c:if>
 
-            <c:if test="grade == 2">
+            <c:if test="${grade == 2}">
                 <option value="2" selected>7-9</option>
             </c:if>
-            <c:if test="grade != 2">
+            <c:if test="${grade != 2}">
                 <option value="2">7-9</option>
             </c:if>
 
-            <c:if test="grade == 3">
+            <c:if test="${grade == 3}">
                 <option value="3" selected>10-12</option>
             </c:if>
-            <c:if test="grade != 3">
+            <c:if test="${grade != 3}">
                 <option value="3">10-12</option>
             </c:if>
         </select>
@@ -129,7 +129,7 @@
             <table border="0">
                 <tr>
                     <td><select name="possible" size="25" MULTIPLE width=200 style="width: 200px">
-                        <c:forEach var="firstCourse" items="firstCourseList">
+                        <c:forEach var="firstCourse" items="${firstCourseList}">
                             <option value="${firstCourse.id}"> ${firstCourse.name} </option>
                         </c:forEach>
                     </select></td>
@@ -141,7 +141,7 @@
 
                     <td><select name="chosen" size="25" MULTIPLE width=200 style="width: 200px;">
 
-                        <c:forEach var="firstCourse" items="selectedFirstCourseList">
+                        <c:forEach var="firstCourse" items="${selectedFirstCourseList}">
                             <option value="${firstCourse.id}"> ${firstCourse.name} </option>
                         </c:forEach>
                     </select></td>

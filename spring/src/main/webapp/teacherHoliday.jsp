@@ -86,7 +86,7 @@
     <br>
     修改休假时间:<br>
 
-    <form action="teacherHolidayUpdate.jsp" method="get">
+    <form action="teacherHoliday.jsp" method="get">
         <input type="hidden" name="id" value="${teacher.id}">
         <span>选择日期：</span> <span>
                     <input name="control_date" type="text" id="control_date" size="10"

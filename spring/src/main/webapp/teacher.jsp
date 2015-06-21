@@ -46,7 +46,7 @@
             var id = document.getElementById("id");
             id.value = teacherId;
             var form = document.getElementById("teacherForm");
-            form.action = "teacherHolidayUpdate.html";
+            form.action = "teacherHoliday.html";
             form.submit();
         }
 

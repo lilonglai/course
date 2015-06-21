@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
@@ -30,7 +31,7 @@ public class TeacherHolidayController {
     TeacherHolidayBusinessOperation teacherHolidayOperation;
 
     @RequestMapping( value = "teacherHoliday", method = RequestMethod.GET)
-    public ModelAndView teacherHoliday(int teacherId){
+    public ModelAndView teacherHoliday(@RequestParam("id") int teacherId){
         Teacher teacher = teacherOperation.get(teacherId);
         TeacherDefaultHoliday teacherDefaultHoliday = teacherDefaultHolidayOperation.getByTeacherId(teacherId);
         List<TeacherHoliday> holidayList = teacherHolidayOperation.getByTeacherId(teacherId);
@@ -42,7 +43,7 @@ public class TeacherHolidayController {
         Calendar nextCalendar = (Calendar) calendar.clone();
         nextCalendar.add(Calendar.MONTH, -1);
 
-        ModelAndView model = new ModelAndView("teacher");
+        ModelAndView model = new ModelAndView("teacherHoliday");
         model.addObject("teacher", teacher);
         model.addObject("lastCalendar", lastCalendar);
         model.addObject("thisCalendar", thisCalendar);
@@ -87,7 +88,7 @@ public class TeacherHolidayController {
             if(week % 7 == 1)
                 stringBuilder.append("<tr>\r\n");
             if(DateHelp.isHoliday(calendar, teacherDefaultHoliday, holidayList)){
-                stringBuilder.append("<td>" + i + "–›œ¢" + "</td>");
+                stringBuilder.append("<td>" + i + "‰ºëÊÅØ" + "</td>");
             }
             else{
                 stringBuilder.append("<td>" + i + "</td>");

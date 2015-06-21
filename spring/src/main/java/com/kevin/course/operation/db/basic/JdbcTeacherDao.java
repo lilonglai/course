@@ -17,7 +17,8 @@ public class JdbcTeacherDao extends JdbcBaseDao<Teacher> implements ITeacherOper
 		teacher.setName(rs.getString("name"));
 		teacher.setShortName(rs.getString("shortname"));
 		teacher.setPhone(rs.getString("phone"));
-		teacher.setIsMaster(rs.getBoolean("ismaster"));	
+		teacher.setIsMaster(rs.getBoolean("ismaster"));
+		teacher.setIsAlive(rs.getBoolean("isalive"));
 		return teacher;
 	}
 	

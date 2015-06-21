@@ -24,6 +24,7 @@ public class JdbcStudentDao extends JdbcBaseDao<Student> implements IStudentOper
 		student.setExaminePlace(rs.getString("examineplace"));
 		student.setTeacherId(rs.getInt("teacherid"));
 		student.setDescription(rs.getString("description"));
+		student.setIsAlive(rs.getBoolean("isalive"));
 	    return student;	
 	}
 	

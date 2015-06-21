@@ -159,11 +159,23 @@
             </thead>
 
             <tbody>
-            <c:forEach var="student" items="${studentList}" >
+            <c:forEach var="student" items="${studentList}">
                 <tr>
                     <td>${student.name}</td>
                     <td>${student.shortName}</td>
-                    <td>${GradeHelp.getStringByNumber(student.grade)}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${student.grade==1}">
+                                4-6
+                            </c:when>
+                            <c:when test="${student.grade==2}">
+                                7-9
+                            </c:when>
+                            <c:when test="${student.grade==3}">
+                                10-12
+                            </c:when>
+                        </c:choose>
+                    </td>
                     <td>${student.testScore}</td>
                     <td>${student.targetScore}</td>
                     <td>${student.examineDate}</td>

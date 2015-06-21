@@ -28,13 +28,13 @@ public class TeacherAbilityController {
     private FirstCourseBusinessOperation firstCourseOperation;
 
     @RequestMapping( value = "teacherAbility.html", method = RequestMethod.GET)
-    public ModelAndView teacherAbility(int teacherId, int grade){
-        if(grade == 0){
+    public ModelAndView teacherAbility(int id, Integer grade){
+        if(grade == null){
             grade = 3;
         }
 
-        Teacher teacher = teacherOperation.get(teacherId);
-        List<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(teacherId);
+        Teacher teacher = teacherOperation.get(id);
+        List<TeacherAbility> teacherAbilityList = teacherAbilityOperation.getByTeacherId(id);
 
         List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
         List<FirstCourse> selectedFirstCourseList =new ArrayList<FirstCourse>();
@@ -66,22 +66,22 @@ public class TeacherAbilityController {
 
 
     @RequestMapping( value = "teacherAbilitySubmit", method = RequestMethod.GET)
-    public ModelAndView teacherAbilitySubmit(int teacherId, int grade, String[] chosenCourses){
+    public ModelAndView teacherAbilitySubmit(int id, int grade, String[] chosen){
         if(grade == 0){
             grade = 3;
         }
 
         //teacherAbilityOperation.deleteByTeacherId(teacherId);
-        teacherAbilityOperation.deleteByTeacherAndGrade(teacherId, grade);
+        teacherAbilityOperation.deleteByTeacherAndGrade(id, grade);
         TeacherAbility teacherAbility = new TeacherAbility();
-        teacherAbility.setTeacherId(teacherId);
-        if(chosenCourses != null){
-            for(String chosenCourse:chosenCourses){
+        teacherAbility.setTeacherId(id);
+        if(chosen != null){
+            for(String chosenCourse:chosen){
                 teacherAbility.setCourseId(Integer.valueOf(chosenCourse));
                 teacherAbilityOperation.add(teacherAbility);
             }
         }
 
-        return teacherAbility(teacherId, grade);
+        return teacherAbility(id, grade);
     }
 }
