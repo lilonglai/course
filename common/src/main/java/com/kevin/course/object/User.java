@@ -8,6 +8,7 @@ public class User{
     public String name;
     public String password;
     public String email;
+    public String qq;
     public String phone;
     public String description;
 
@@ -33,6 +34,14 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 
     public String getEmail() {

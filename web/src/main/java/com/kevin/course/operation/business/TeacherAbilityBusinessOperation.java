@@ -29,5 +29,18 @@ public class TeacherAbilityBusinessOperation {
     public List<TeacherAbility> getAll(){
         return teacherAbilityOperation.getAll();
     }
+
+    public void deleteByTeacherId(int teacherId){
+        teacherAbilityOperation.deleteByTeacherId(teacherId);
+    }
+
+    public void deleteByTeacherAndGrade(int teacherId,int grade){
+        teacherAbilityOperation.deleteByTeacherAndGrade(teacherId, grade);
+    }
+
+    public List<TeacherAbility> getByTeacherId(int teacherId){
+        return teacherAbilityOperation.getByTeacherId(teacherId);
+    }
+
 	
 }

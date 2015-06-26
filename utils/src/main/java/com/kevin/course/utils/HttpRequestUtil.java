@@ -35,4 +35,12 @@ public class HttpRequestUtil {
         else
             return null;
     }
+
+    public static Boolean getBoolean(HttpServletRequest request, String parameterName) {
+        String parameterValue = request.getParameter(parameterName);
+        if (parameterValue != null && !parameterValue.equals(""))
+            return Boolean.valueOf(parameterValue);
+        else
+            return null;
+    }
 }

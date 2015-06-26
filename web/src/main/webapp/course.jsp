@@ -1,212 +1,202 @@
-<%@page import="com.kevin.course.object.SecondCourse"%>
-<%@page import="com.kevin.course.object.FirstCourse"%>
-<%@page import="com.kevin.course.operation.db.OperationManager"%>
-<%@page import="com.kevin.course.operation.db.SecondCourseOperation"%>
-<%@page import="com.kevin.course.operation.db.FirstCourseOperation"%>
-<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+         pageEncoding="utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>课程</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript">
-	function modifyFirstCourse(courseId){
-		var form = document.firstCourseForm;
-		var id= form.id;
-		id.value = courseId;
-		form.action="firstCourseUpdate.jsp";
-		form.submit();	
-	}
-	
-	function deleteFirstCourse(courseId){
-		var form = document.firstCourseForm;
-		var id= form.id;
-		id.value = courseId;
-		form.action="firstCourseServlet?action=delete";
-		form.submit();	
-	}
-	
-	function addFirstCourse(grade){
-		var form = document.firstCourseForm;
-		var id= form.id;
-		id.value = grade;
-		form.action="firstCourseAdd.jsp";
-		form.submit();		
-	}
-	
-	
-	function modifySecondCourse(courseId){
-		var form = document.secondCourseForm;
-		var id= form.id;
-		id.value = courseId;
-		form.action="secondCourseUpdate.jsp";
-		form.submit();	
-	}
-	
-	function deleteSecondCourse(courseId){
-		var form = document.secondCourseForm;
-		var id= form.id;
-		id.value = courseId;
-		form.action="secondCourseServlet?action=delete";
-		form.submit();	
-	}
-	
-	function addSecondCourse(firstCourseId){
-		var form = document.secondCourseForm;
-		var id= form.id;
-		id.value = firstCourseId;
-		form.action="secondCourseAdd.jsp";
-		form.submit();		
-	}
-	
-	function gradeChanged(){
-		//alert(document.abilityForm);
-		//document.abilityForm.submit();
-		var form = document.getElementById("gradeForm");
-		form.submit();
-	}
-	
-</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>课程</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript">
+        function modifyFirstCourse(courseId) {
+            var form = document.firstCourseForm;
+            var id = form.id;
+            id.value = courseId;
+            form.action = "firstCourseUpdate.html";
+            form.submit();
+        }
+
+        function deleteFirstCourse(courseId) {
+            var form = document.firstCourseForm;
+            var id = form.id;
+            id.value = courseId;
+            form.action = "firstCourseDelete.html";
+            form.submit();
+        }
+
+        function addFirstCourse(grade) {
+            var form = document.firstCourseForm;
+            var id = form.id;
+            id.value = grade;
+            form.action = "firstCourseAdd.html";
+            form.submit();
+        }
+
+
+        function modifySecondCourse(courseId) {
+            var form = document.secondCourseForm;
+            var id = form.id;
+            id.value = courseId;
+            form.action = "secondCourseUpdate.html";
+            form.submit();
+        }
+
+        function deleteSecondCourse(courseId) {
+            var form = document.secondCourseForm;
+            var id = form.id;
+            id.value = courseId;
+            form.action = "secondCourseDelete.html";
+            form.submit();
+        }
+
+        function addSecondCourse(firstCourseId) {
+            var form = document.secondCourseForm;
+            var id = form.id;
+            id.value = firstCourseId;
+            form.action = "secondCourseAdd.html";
+            form.submit();
+        }
+
+        function gradeChanged() {
+            //alert(document.abilityForm);
+            //document.abilityForm.submit();
+            var form = document.getElementById("gradeForm");
+            form.submit();
+        }
+
+    </script>
 </head>
 
 <body>
 
-	<div class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">排课系统</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="./course.jsp">课程信息</a></li>
-					<li><a href="./teacher.jsp">老师信息</a></li>
-					<li><a href="./student.jsp">学生信息</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-    
-   <%
-       int grade = 3;
-       if (request.getParameter("grade") != null) {
-           grade = Integer.valueOf(request.getParameter("grade"));
-       }
+<div class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">排课系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./course.html">课程信息</a></li>
+                <li><a href="./teacher.html">老师信息</a></li>
+                <li><a href="./student.html">学生信息</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-       FirstCourseOperation firstCourseOperation = OperationManager.getInstance().getFirstCourseOperation();
-       SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
+<div class="container">
+    <form method="get" action="course.html" name="gradeForm" id="gradeForm">
+        选择年级:
+        <select name="grade" onChange="gradeChanged();">
+        <c:if test="${grade==1}">
+            <option value="1" selected>4-6</option>
+        </c:if>
+        <c:if test="${grade!=1}">
+            <option value="1">4-6</option>
+        </c:if>
+        <c:if test="${grade==2}">
+            <option value="2" selected>7-9</option>
+        </c:if>
+        <c:if test="${grade!=2}">
+            <option value="2">7-9</option>
+        </c:if>
+        <c:if test="${grade==3}">
+            <option value="3" selected>10-12</option>
+        </c:if>
+        <c:if test="${grade!=3}">
+            <option value="3">10-12</option>
+        </c:if>
+        </select>
+    </form>
+    <br>
+    课程分类:<br>
 
-   %>
-   
-   <div class="container">
-   	<form method="get" action="course.jsp" name="gradeForm" id="gradeForm">	  	
-	 选择年级:  <select name="grade" onChange="gradeChanged();">
-				 <option value="1" <%=grade==1?"selected":""%>>4-6</option>
-				 <option value="2" <%=grade==2?"selected":""%>>7-9</option>
-				 <option value="3" <%=grade==3?"selected":""%>>10-12</option>
-			   </select>
-     </form>
-     <br>
-	课程分类:<br>	
-	  <div class="table-responsive"> 
-	     <table class="table table-striped table-bordered">
-	       <thead>
-			<tr>
-			    <th>编号</th>
-				<th>课程名称</th>
-				<th>课程简称</th>
-				<th>课程描述</th>
-				<th>操作</th>
-			</tr>
-           <thead>
-		      <tbody>
-					<%
-                        int firstCourseCount = 1;
-                        List<FirstCourse> FirstCourseList = firstCourseOperation.getByGrade(grade);
-                        for (FirstCourse firstCourse : FirstCourseList) {
-					%>
-			
-					<tr>
-					    <td><%=firstCourseCount++%></td>
-						<td><%=firstCourse.getName()%></td>
-						<td><%=firstCourse.getShortName()%></td>
-						<td><%=firstCourse.getDescription()%></td>							
-						
-						<td><input type="button" class="btn btn-default" value='修改' onclick="modifyFirstCourse(<%=firstCourse.getId()%>)"> 
-						    <input type="button" class="btn btn-default" value='删除'  onclick="deleteFirstCourse(<%=firstCourse.getId()%>)">
-						    <input type="button" class="btn btn-default" value='增加具体课程'  onclick="addSecondCourse(<%=firstCourse.getId()%>)">
-					    </td>
-					</tr>
-					<%
-						}
-					%>
-				</tbody>
-	     </table>	
-	</div>
-	
-	<input type="button" class="btn btn-default" value='增加课程' onclick="addFirstCourse(<%=grade%>)">
-	
-	<br> <br>
-		课程详细信息:<br>	
-	<div class="table-responsive"> 
-	     <table class="table table-striped table-bordered">
-	       <thead>
-			<tr>
-			    <th>编号</th>
-				<th>课程名称</th>
-				<th>课程简称</th>
-				<th>课程分类</th>
-				<th>课程描述</th>
-				<th>操作</th>
-			</tr>
-			</thead>
-			<tbody>
-		<%
-            int secondCourseCount = 1;
-            int firstCourseId = 0;
-            List<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
-            for (SecondCourse secondCourse : secondCourseList) {
-                if (firstCourseId == secondCourse.getFirstCourseId()) {
-                    secondCourseCount++;
-                } else {
-                    secondCourseCount = 1;
-                    firstCourseId = secondCourse.getFirstCourseId();
-                }
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>课程名称</th>
+                <th>课程简称</th>
+                <th>课程描述</th>
+                <th>操作</th>
+            </tr>
+            <thead>
+            <tbody>
 
-                FirstCourse firstCourse = firstCourseOperation.get(firstCourseId);
-		%>
+            <c:forEach var="firstCourse" items="${firstCourseList}" varStatus="status">
+                <tr>
+                    <td>${status.index}</td>
+                    <td>${firstCourse.name}</td>
+                    <td>${firstCourse.shortName}</td>
+                    <td>${firstCourse.description}</td>
 
-		<tr>
-		    <td><%=secondCourseCount%></td>
-			<td><%=secondCourse.getName()%></td>
-			<td><%=secondCourse.getShortName()%></td>
-			<td><%=firstCourse.getName() %></td>
-			<td><%=secondCourse.getDescription()%></td>							
-			
-			<td><input type="button" class="btn btn-default" value='修改' onclick="modifySecondCourse(<%=secondCourse.getId()%>)"> 
-			    <input type="button" class="btn btn-default" value='删除' onclick="deleteSecondCourse(<%=secondCourse.getId()%>)">
-		    </td>
-		</tr>
-		<%
-			}
-		%>
-	  </tbody>
-	</table>
-	</div>
-	
-	
-	<form method="get" action="course.jsp" name="firstCourseForm" id="firstCourseForm">
-	  <input type="hidden" name="id" >
-	  <input type="hidden" name="grade" value="<%=grade %>" >
-	</form>
-	
+                    <td><input type="button" class="btn btn-default" value='修改'
+                               onclick="modifyFirstCourse(${firstCourse.id})">
+                        <input type="button" class="btn btn-default" value='删除'
+                               onclick="deleteFirstCourse(${firstCourse.id})">
+                        <input type="button" class="btn btn-default" value='增加具体课程'
+                               onclick="addSecondCourse(${firstCourse.id})">
+                    </td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
+    </div>
+
+    <input type="button" class="btn btn-default" value='增加课程' onclick="addFirstCourse(${grade})">
+
+    <br> <br>
+    课程详细信息:<br>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>课程名称</th>
+                <th>课程简称</th>
+                <th>课程分类</th>
+                <th>课程描述</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach var="secondCourse" items="${secondCourseList}" varStatus="status">
+                <tr>
+                    <td>${status.index}</td>
+                    <td>${secondCourse.name}</td>
+                    <td>${secondCourse.shortName}</td>
+                    <td>${firstCourseOperation.get(secondCourse.id).name}
+                    </td>
+                    <td>${secondCourse.description}</td>
+
+                    <td><input type="button" class="btn btn-default" value='修改'
+                               onclick="modifySecondCourse(${secondCourse.id})">
+                        <input type="button" class="btn btn-default" value='删除'
+                               onclick="deleteSecondCourse(${secondCourse.id})">
+                    </td>
+                </tr>
+
+            </c:forEach>
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <form method="get" action="course.jsp" name="firstCourseForm" id="firstCourseForm">
+        <input type="hidden" name="id">
+        <input type="hidden" name="grade" value="${grade}">
+    </form>
+
     <form method="get" action="course.jsp" name="secondCourseForm" id="secondCourseForm">
-	  <input type="hidden" name="id" >
-	  <input type="hidden" name="grade" value="<%=grade %>" >
-	</form>
-	
-  </div>
+        <input type="hidden" name="id">
+        <input type="hidden" name="grade" value="${grade}">
+    </form>
+
+</div>
 </body>
 </html>

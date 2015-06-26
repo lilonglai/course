@@ -21,7 +21,7 @@
 </head>
 <body>
   <div class="container">
-	<form action="teacherServlet" role="form" method="get" onSubmit="return checkForm();">
+	<form action="teacherAddSubmit.html" role="form" method="get" onSubmit="return checkForm();">
 	    <input type="hidden" name="action" value="add">
 	    <div class="form-group">
 			名称: <input type="text" class="form-control" name="name" />

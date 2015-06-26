@@ -7,7 +7,8 @@ import com.kevin.course.operation.db.TeacherDefaultHolidayOperation;
 import java.util.List;
 
 public class TeacherDefaultHolidayBusinessOperation {
-    TeacherDefaultHolidayOperation teacherDefaultHolidayOperation = OperationManager.getInstance().getTeacherDefaultHolidayOperation();
+
+    private TeacherDefaultHolidayOperation teacherDefaultHolidayOperation= OperationManager.getInstance().getTeacherDefaultHolidayOperation();
 
     public void add(TeacherDefaultHoliday teacherDefaultHoliday){
         teacherDefaultHolidayOperation.add(teacherDefaultHoliday);
@@ -31,5 +32,9 @@ public class TeacherDefaultHolidayBusinessOperation {
 
     public TeacherDefaultHoliday getByTeacherId(int teacherId){
         return teacherDefaultHolidayOperation.getByTeacherId(teacherId);
+    }
+
+    public void deleteByTeacherId(int teacherId){
+        teacherDefaultHolidayOperation.deleteByTeacherId(teacherId);
     }
 }

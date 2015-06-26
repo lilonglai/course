@@ -28,5 +28,9 @@ public class SecondCourseBusinessOperation {
     public List<SecondCourse> getAll(){
         return secondCourseOperation.getAll();
     }
+
+    public List<SecondCourse> getByGrade(int grade){
+        return secondCourseOperation.getByGrade(grade);
+    }
 	
 }

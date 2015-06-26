@@ -272,6 +272,7 @@ CREATE TABLE `user` (
   `name` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
   `email` varchar(64) NOT NULL,
+  `qq` varchar(64) NOT NULL,
   `phone` varchar(64) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),

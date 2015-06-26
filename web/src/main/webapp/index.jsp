@@ -29,5 +29,6 @@
 	<%
 		response.sendRedirect("teacher.jsp");
 	%>
+
 </body>
 </html>
