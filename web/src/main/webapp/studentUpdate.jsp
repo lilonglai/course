@@ -11,13 +11,12 @@
     </script>
     <script type="text/javascript">
         function checkForm() {
-            var name = document.forms[0].name.value;
-            if (name.length == 0) {
+            if ($("[name='name']").val().length == 0) {
                 alert("学生名字不能为空")
                 return false;
             }
-            var grade = document.forms[0].grade.value;
-            if (grade.length == 0) {
+
+            if ($("[name='grade']").val().length == 0) {
                 alert("请选择一个年级")
                 return false;
             }

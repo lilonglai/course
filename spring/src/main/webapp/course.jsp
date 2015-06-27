@@ -7,61 +7,46 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>课程</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
     <script type="text/javascript">
         function modifyFirstCourse(courseId) {
-            var form = document.firstCourseForm;
-            var id = form.id;
-            id.value = courseId;
-            form.action = "firstCourseUpdate.html";
-            form.submit();
+            $("#firstCourseForm [name='id']").val(courseId);
+            $("#firstCourseForm").attr("action","firstCourseUpdate.html" );
+            $("#firstCourseForm").submit();
         }
 
         function deleteFirstCourse(courseId) {
-            var form = document.firstCourseForm;
-            var id = form.id;
-            id.value = courseId;
-            form.action = "firstCourseDelete.html";
-            form.submit();
+            $("#firstCourseForm [name='id']").val(courseId);
+            $("#firstCourseForm").attr("action","firstCourseDelete.html" );
+            $("#firstCourseForm").submit();
         }
 
         function addFirstCourse(grade) {
-            var form = document.firstCourseForm;
-            var id = form.id;
-            id.value = grade;
-            form.action = "firstCourseAdd.html";
-            form.submit();
+            $("#firstCourseForm").attr("action","firstCourseAdd.html" );
+            $("#firstCourseForm").submit();
         }
 
 
         function modifySecondCourse(courseId) {
-            var form = document.secondCourseForm;
-            var id = form.id;
-            id.value = courseId;
-            form.action = "secondCourseUpdate.html";
-            form.submit();
+            $("#secondCourseForm [name='id']").val(courseId);
+            $("#secondCourseForm").attr("action","secondCourseUpdate.html" );
+            $("#secondCourseForm").submit();
         }
 
         function deleteSecondCourse(courseId) {
-            var form = document.secondCourseForm;
-            var id = form.id;
-            id.value = courseId;
-            form.action = "secondCourseDelete.html";
-            form.submit();
+            $("#secondCourseForm [name='id']").val(courseId);
+            $("#secondCourseForm").attr("action","secondCourseDelete.html" );
+            $("#secondCourseForm").submit();
         }
 
         function addSecondCourse(firstCourseId) {
-            var form = document.secondCourseForm;
-            var id = form.id;
-            id.value = firstCourseId;
-            form.action = "secondCourseAdd.html";
-            form.submit();
+            $("#secondCourseForm [name='id']").val(firstCourseId);
+            $("#secondCourseForm").attr("action","secondCourseAdd.html" );
+            $("#secondCourseForm").submit();
         }
 
         function gradeChanged() {
-            //alert(document.abilityForm);
-            //document.abilityForm.submit();
-            var form = document.getElementById("gradeForm");
-            form.submit();
+            $("#gradeForm").submit();
         }
 
     </script>

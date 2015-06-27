@@ -6,46 +6,38 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <title>学生</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
     <script src="js/Calendar3.js">
     </script>
 
     <script type="text/javascript">
         function modifyStudent(studentId) {
-            var id = document.getElementById("id");
-            id.value = studentId;
-            var form = document.getElementById("studentForm");
-            form.action = "studentUpdate.html";
-            form.submit();
+            $("#id").val(studentId);
+            $("#studentForm").attr("action", "studentUpdate.html");
+            $("#studentForm").submit();
         }
 
         function deleteStudent(studentId) {
-            var id = document.getElementById("id");
-            id.value = studentId;
-            var form = document.getElementById("studentForm");
-            form.action = "studentDelete.html";
-            form.submit();
+            $("#id").val(studentId);
+            $("#studentForm").attr("action", "studentDelete.html");
+            $("#studentForm").submit();
         }
 
         function retireStudent(studentId) {
-            var id = document.getElementById("id");
-            id.value = studentId;
-            var form = document.getElementById("studentForm");
-            form.action = "studentRetire.html";
-            form.submit();
+            $("#id").val(studentId);
+            $("#studentForm").attr("action", "studentRetire.html");
+            $("#studentForm").submit();
         }
 
         function addStudent() {
-            var form = document.getElementById("studentForm");
-            form.action = "studentAdd.html";
-            form.submit();
+            $("#studentForm").attr("action", "studentAdd.html");
+            $("#studentForm").submit();
         }
 
         function scheduleCourse(studentId) {
-            var id = document.getElementById("id");
-            id.value = studentId;
-            var form = document.getElementById("studentForm");
-            form.action = "schedule.html";
-            form.submit();
+            $("#id").val(studentId);
+            $("#studentForm").attr("action", "schedule.html");
+            $("#studentForm").submit();
         }
 
         function importCourse() {
@@ -63,12 +55,11 @@
         }
 
         function exportReport() {
-            var form = document.getElementById("exportReportForm");
-            if (form.start_date.value.length == 0) {
+            if ($("#start_date").val().length == 0) {
                 alert("开始时间不能为空")
                 return false;
             }
-            form.submit();
+            $("#exportReportForm").submit();
         }
 
     </script>

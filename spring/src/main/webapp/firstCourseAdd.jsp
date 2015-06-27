@@ -7,15 +7,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>增加新课程</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
     <script type="text/javascript">
         function checkForm() {
-            var name = document.forms[0].name.value;
-            if (name.length == 0) {
-                alert("学生名字不能为空")
+            if ($("[name='name']").val().length == 0) {
+                alert("课程名字不能为空")
                 return false;
             }
-            var grade = document.forms[0].grade.value;
-            if (grade.length == 0) {
+            if ($("[name='grade']").val().length == 0) {
                 alert("请选择一个年级")
                 return false;
             }
@@ -25,6 +24,7 @@
     </script>
 </head>
 <body>
+
 <div class="container">
     <form action="firstCourseAddSubmit.html" role="form" method="get" onSubmit="return checkForm();">
         <div class="form-group">

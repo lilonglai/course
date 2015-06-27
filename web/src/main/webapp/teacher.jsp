@@ -7,56 +7,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <title>老师</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
     <script type="text/javascript">
         function modifyTeacher(teacherId) {
-            var id = document.getElementById("id");
-            id.value = teacherId;
-            var form = document.getElementById("teacherForm");
-            form.action = "teacherUpdate.html";
-            form.submit();
+            $("#id").val(teacherId);
+            $("#teacherForm").attr("action","teacherUpdate.html");
+            $("#teacherForm").submit();
         }
 
         function deleteTeacher(teacherId) {
-            var id = document.getElementById("id");
-            id.value = teacherId;
-            var action = document.getElementById("action");
-            action.value = "delete";
-            var form = document.getElementById("teacherForm");
-            form.action = "teacherDelete.html";
-            form.submit();
+            $("#id").val(teacherId);
+            $("#teacherForm").attr("action","teacherDelete.html");
+            $("#teacherForm").submit();
         }
 
         function retireTeacher(teacherId) {
-            var id = document.getElementById("id");
-            id.value = teacherId;
-            var action = document.getElementById("action");
-            action.value = "retire";
-            var form = document.getElementById("teacherForm");
-            form.action = "teacherRetire.html";
-            form.submit();
+            $("#id").val(teacherId);
+            $("#teacherForm").attr("action","retire.html");
+            $("#teacherForm").submit();
         }
 
         function addTeacher() {
-            var form = document.getElementById("teacherForm");
-            form.action = "teacherAdd.html";
-            form.submit();
+            $("#teacherForm").attr("action","teacherAdd.html");
+            $("#teacherForm").submit();
         }
 
         function modifyTeacherHoliday(teacherId) {
-            var id = document.getElementById("id");
-            id.value = teacherId;
-            var form = document.getElementById("teacherForm");
-            form.action = "teacherHoliday.html";
-            form.submit();
+            $("#id").val(teacherId);
+            $("#teacherForm").attr("action","teacherHoliday.html");
+            $("#teacherForm").submit();
         }
 
         function modifyTeacherAbility(teacherId) {
-            var id = document.getElementById("id");
-            id.value = teacherId;
-            var form = document.getElementById("teacherForm");
-            form.action = "teacherAbility.html";
-            form.submit();
-
+            $("#id").val(teacherId);
+            $("#teacherForm").attr("action","teacherHoliday.html");
+            $("#teacherForm").submit();
         }
     </script>
 </head>

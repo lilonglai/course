@@ -9,11 +9,12 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <script type="text/javascript">
         function checkForm() {
-            var name = document.forms[0].name.value;
-            if (name.length == 0) {
-                alert("老师名字不能为空");
+            if ($("[name='name']").val().length == 0) {
+                alert("老师名字不能为空")
                 return false;
             }
+
+            return true;
 
             return true;
         }
