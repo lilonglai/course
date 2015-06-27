@@ -24,15 +24,15 @@ import java.util.Map;
 @Controller
 public class ScheduleController {
     @Autowired
-    private StudentBusinessOperation studentOperation;
+    private IStudentBusinessOperation studentOperation;
     @Autowired
-    private FirstCourseBusinessOperation firstCourseOperation;
+    private IFirstCourseBusinessOperation firstCourseOperation;
     @Autowired
-    private SecondCourseBusinessOperation secondCourseOperation;
+    private ISecondCourseBusinessOperation secondCourseOperation;
     @Autowired
-    private TeacherBusinessOperation teacherOperation;
+    private ITeacherBusinessOperation teacherOperation;
     @Autowired
-    private ScheduleBusinessOperation scheduleOperation;
+    private IScheduleBusinessOperation scheduleOperation;
 
     /* id indicate the studentId*/
     @RequestMapping(value = "schedule", method = RequestMethod.GET)

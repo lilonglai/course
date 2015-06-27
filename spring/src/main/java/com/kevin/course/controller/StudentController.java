@@ -2,8 +2,8 @@ package com.kevin.course.controller;
 
 import com.kevin.course.object.Student;
 import com.kevin.course.object.Teacher;
-import com.kevin.course.operation.business.StudentBusinessOperation;
-import com.kevin.course.operation.business.TeacherBusinessOperation;
+import com.kevin.course.operation.business.IStudentBusinessOperation;
+import com.kevin.course.operation.business.ITeacherBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +21,9 @@ import java.util.List;
 @Controller
 public class StudentController {
     @Autowired
-    private StudentBusinessOperation studentOperation;
+    private IStudentBusinessOperation studentOperation;
     @Autowired
-    private TeacherBusinessOperation teacherOperation;
+    private ITeacherBusinessOperation teacherOperation;
 
     @RequestMapping( value = "student", method = RequestMethod.GET)
     public ModelAndView getAll(Integer status){

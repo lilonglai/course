@@ -1,7 +1,7 @@
 package com.kevin.course.service;
 
 import com.kevin.course.object.FirstCourse;
-import com.kevin.course.operation.business.FirstCourseBusinessOperation;
+import com.kevin.course.operation.business.IFirstCourseBusinessOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Path("/firstcourse")
 public class FirstCourseService {
-    FirstCourseBusinessOperation bussinessOperation = new FirstCourseBusinessOperation();
+    IFirstCourseBusinessOperation bussinessOperation = new IFirstCourseBusinessOperation();
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

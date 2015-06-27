@@ -2,6 +2,8 @@ package com.kevin.course.action;
 
 import com.kevin.course.object.Teacher;
 import com.kevin.course.object.TeacherDefaultHoliday;
+import com.kevin.course.operation.business.ITeacherBusinessOperation;
+import com.kevin.course.operation.business.ITeacherDefaultHolidayBusinessOperation;
 import com.kevin.course.operation.business.TeacherBusinessOperation;
 import com.kevin.course.operation.business.TeacherDefaultHolidayBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
@@ -24,8 +26,8 @@ import java.util.List;
         @Result(name = "redirect:teacher.html", location = "/teacher.html", type = "redirect")})
 public class TeacherAction {
 
-    private TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
-    private TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayBusinessOperation();
+    private ITeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+    private ITeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayBusinessOperation();
 
 
     List<Teacher> teacherList;

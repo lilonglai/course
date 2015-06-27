@@ -1,8 +1,7 @@
 package com.kevin.course.controller;
 
-import com.kevin.course.object.Teacher;
 import com.kevin.course.object.User;
-import com.kevin.course.operation.business.UserBusinessOperation;
+import com.kevin.course.operation.business.IUserBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,14 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 /**
  * Created by loli on 2015/6/22.
  */
 public class UserController {
     @Autowired
-    UserBusinessOperation userBusinessOperation;
+    IUserBusinessOperation userBusinessOperation;
 
     @RequestMapping(value = "userRegisterSubmit", method = RequestMethod.GET)
     public ModelAndView userRegisterSubmit(HttpServletRequest request) throws UnsupportedEncodingException {

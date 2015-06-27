@@ -3,9 +3,7 @@ package com.kevin.course.action;
 import com.kevin.course.object.FirstCourse;
 import com.kevin.course.object.Teacher;
 import com.kevin.course.object.TeacherAbility;
-import com.kevin.course.operation.business.FirstCourseBusinessOperation;
-import com.kevin.course.operation.business.TeacherAbilityBusinessOperation;
-import com.kevin.course.operation.business.TeacherBusinessOperation;
+import com.kevin.course.operation.business.*;
 import com.kevin.course.utils.HttpRequestUtil;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -23,9 +21,9 @@ import java.util.List;
 @Results({
         @Result(name = "teacherAbility", location = "/teacherAbility.jsp")})
 public class TeacherAbilityAction {
-    private TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
-    private TeacherAbilityBusinessOperation teacherAbilityOperation = new TeacherAbilityBusinessOperation();
-    private FirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
+    private ITeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+    private ITeacherAbilityBusinessOperation teacherAbilityOperation = new TeacherAbilityBusinessOperation();
+    private IFirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
 
     @Action("teacherAbility")
     public String teacherAbility(){

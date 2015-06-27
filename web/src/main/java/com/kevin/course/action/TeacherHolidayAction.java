@@ -3,9 +3,7 @@ package com.kevin.course.action;
 import com.kevin.course.object.Teacher;
 import com.kevin.course.object.TeacherDefaultHoliday;
 import com.kevin.course.object.TeacherHoliday;
-import com.kevin.course.operation.business.TeacherBusinessOperation;
-import com.kevin.course.operation.business.TeacherDefaultHolidayBusinessOperation;
-import com.kevin.course.operation.business.TeacherHolidayBusinessOperation;
+import com.kevin.course.operation.business.*;
 import com.kevin.course.utils.DateHelp;
 import com.kevin.course.utils.HttpRequestUtil;
 import org.apache.struts2.ServletActionContext;
@@ -26,9 +24,9 @@ import java.util.List;
         @Result(name = "teacherHoliday", location = "/teacherHoliday.jsp")})
 public class TeacherHolidayAction {
 
-    TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
-    TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayBusinessOperation();
-    TeacherHolidayBusinessOperation teacherHolidayOperation = new TeacherHolidayBusinessOperation();
+    ITeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+    ITeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation = new TeacherDefaultHolidayBusinessOperation();
+    ITeacherHolidayBusinessOperation teacherHolidayOperation = new TeacherHolidayBusinessOperation();
 
     @Action("teacherHoliday")
     public String teacherHoliday() {

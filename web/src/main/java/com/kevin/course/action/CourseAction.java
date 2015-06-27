@@ -3,6 +3,8 @@ package com.kevin.course.action;
 import com.kevin.course.object.FirstCourse;
 import com.kevin.course.object.SecondCourse;
 import com.kevin.course.operation.business.FirstCourseBusinessOperation;
+import com.kevin.course.operation.business.IFirstCourseBusinessOperation;
+import com.kevin.course.operation.business.ISecondCourseBusinessOperation;
 import com.kevin.course.operation.business.SecondCourseBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
 import org.apache.struts2.ServletActionContext;
@@ -25,8 +27,8 @@ import java.util.List;
         @Result(name = "secondCourseUpdate", location = "/secondCourseUpdate.jsp"),
         @Result(name = "redirect:course.html", location = "/course.html", type = "redirect")})
 public class CourseAction {
-    private FirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
-    private SecondCourseBusinessOperation secondCourseOperation = new SecondCourseBusinessOperation();
+    private IFirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
+    private ISecondCourseBusinessOperation secondCourseOperation = new SecondCourseBusinessOperation();
 
     @Action("course")
     public String getAll() {

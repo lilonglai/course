@@ -6,7 +6,7 @@ import com.kevin.course.operation.db.TeacherOperation;
 
 import java.util.List;
 
-public class TeacherBusinessOperation {
+public class TeacherBusinessOperation implements ITeacherBusinessOperation {
     TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();
 
     public void add(Teacher teacher){

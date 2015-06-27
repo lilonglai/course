@@ -2,11 +2,10 @@ package com.kevin.course.controller;
 
 import com.kevin.course.object.Teacher;
 import com.kevin.course.object.TeacherDefaultHoliday;
-import com.kevin.course.operation.business.TeacherBusinessOperation;
-import com.kevin.course.operation.business.TeacherDefaultHolidayBusinessOperation;
+import com.kevin.course.operation.business.ITeacherBusinessOperation;
+import com.kevin.course.operation.business.ITeacherDefaultHolidayBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +21,9 @@ import java.util.List;
 @Controller
 public class TeacherController {
     @Autowired
-    private TeacherBusinessOperation teacherOperation;
+    private ITeacherBusinessOperation teacherOperation;
     @Autowired
-    private TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation;
+    private ITeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation;
 
     @RequestMapping( value = "teacher", method = RequestMethod.GET)
     public ModelAndView getAll(Integer status){

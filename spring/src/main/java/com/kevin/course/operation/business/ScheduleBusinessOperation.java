@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by loli on 2015/4/4.
  */
-public class ScheduleBusinessOperation {
+public class ScheduleBusinessOperation implements IScheduleBusinessOperation{
     @Autowired
     private ISecondCourseOperation secondCourseOperation;
     @Autowired

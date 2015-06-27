@@ -3,7 +3,7 @@ package com.kevin.course.service;
 import com.kevin.course.object.Schedule;
 import com.kevin.course.object.SecondCourse;
 import com.kevin.course.object.Teacher;
-import com.kevin.course.operation.business.ScheduleBusinessOperation;
+import com.kevin.course.operation.business.IScheduleBusinessOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Path("/schedule")
 public class ScheduleService {
-    ScheduleBusinessOperation bussinessOperation = new ScheduleBusinessOperation();
+    IScheduleBusinessOperation bussinessOperation = new IScheduleBusinessOperation();
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

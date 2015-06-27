@@ -6,7 +6,7 @@ import com.kevin.course.operation.db.SecondCourseOperation;
 
 import java.util.List;
 
-public class SecondCourseBusinessOperation {
+public class SecondCourseBusinessOperation implements ISecondCourseBusinessOperation{
     SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
 
     public void add(SecondCourse secondCourse){

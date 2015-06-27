@@ -2,6 +2,8 @@ package com.kevin.course.action;
 
 import com.kevin.course.object.Student;
 import com.kevin.course.object.Teacher;
+import com.kevin.course.operation.business.IStudentBusinessOperation;
+import com.kevin.course.operation.business.ITeacherBusinessOperation;
 import com.kevin.course.operation.business.StudentBusinessOperation;
 import com.kevin.course.operation.business.TeacherBusinessOperation;
 import com.kevin.course.utils.HttpRequestUtil;
@@ -25,9 +27,9 @@ import java.util.List;
         @Result(name = "redirect:student.html", location = "/student.html", type = "redirect")})
 public class StudentAction {
 
-    private StudentBusinessOperation studentOperation = new StudentBusinessOperation();
+    private IStudentBusinessOperation studentOperation = new StudentBusinessOperation();
 
-    private TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+    private ITeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
 
     @Action("student")
     public String getAll(){

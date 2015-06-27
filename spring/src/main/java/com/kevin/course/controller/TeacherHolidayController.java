@@ -3,9 +3,9 @@ package com.kevin.course.controller;
 import com.kevin.course.object.Teacher;
 import com.kevin.course.object.TeacherDefaultHoliday;
 import com.kevin.course.object.TeacherHoliday;
-import com.kevin.course.operation.business.TeacherBusinessOperation;
-import com.kevin.course.operation.business.TeacherDefaultHolidayBusinessOperation;
-import com.kevin.course.operation.business.TeacherHolidayBusinessOperation;
+import com.kevin.course.operation.business.ITeacherBusinessOperation;
+import com.kevin.course.operation.business.ITeacherDefaultHolidayBusinessOperation;
+import com.kevin.course.operation.business.ITeacherHolidayBusinessOperation;
 import com.kevin.course.utils.DateHelp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +24,11 @@ import java.util.List;
 @Controller
 public class TeacherHolidayController {
     @Autowired
-    TeacherBusinessOperation teacherOperation;
+    ITeacherBusinessOperation teacherOperation;
     @Autowired
-    TeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation;
+    ITeacherDefaultHolidayBusinessOperation teacherDefaultHolidayOperation;
     @Autowired
-    TeacherHolidayBusinessOperation teacherHolidayOperation;
+    ITeacherHolidayBusinessOperation teacherHolidayOperation;
 
     @RequestMapping( value = "teacherHoliday", method = RequestMethod.GET)
     public ModelAndView teacherHoliday(@RequestParam("id") int teacherId){

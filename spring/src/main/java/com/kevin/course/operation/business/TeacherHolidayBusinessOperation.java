@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class TeacherHolidayBusinessOperation {
+public class TeacherHolidayBusinessOperation implements ITeacherHolidayBusinessOperation {
     @Autowired
     private ITeacherHolidayOperation teacherHolidayOperation;
 

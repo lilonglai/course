@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by loli on 2015/4/4.
  */
-public class ScheduleBusinessOperation {
+public class ScheduleBusinessOperation implements IScheduleBusinessOperation{
     SecondCourseOperation secondCourseOperation = OperationManager.getInstance().getSecondCourseOperation();
     ScheduleOperation scheduleOperation = OperationManager.getInstance().getScheduleOperation();
     TeacherOperation teacherOperation = OperationManager.getInstance().getTeacherOperation();

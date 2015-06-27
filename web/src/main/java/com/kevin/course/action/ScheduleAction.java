@@ -15,7 +15,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by loli on 2015/6/18.
@@ -24,11 +23,11 @@ import java.util.Map;
 @Results({
         @Result(name = "schedule", location = "/schedule.jsp")})
 public class ScheduleAction {
-    private StudentBusinessOperation studentOperation = new StudentBusinessOperation();
-    private FirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
-    private SecondCourseBusinessOperation secondCourseOperation = new SecondCourseBusinessOperation();
-    private TeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
-    private ScheduleBusinessOperation scheduleOperation = new ScheduleBusinessOperation();
+    private IStudentBusinessOperation studentOperation = new StudentBusinessOperation();
+    private IFirstCourseBusinessOperation firstCourseOperation = new FirstCourseBusinessOperation();
+    private ISecondCourseBusinessOperation secondCourseOperation = new SecondCourseBusinessOperation();
+    private ITeacherBusinessOperation teacherOperation = new TeacherBusinessOperation();
+    private IScheduleBusinessOperation scheduleOperation = new ScheduleBusinessOperation();
 
     /* id indicate the studentId*/
     @Action("schedule")

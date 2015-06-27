@@ -1,7 +1,7 @@
 package com.kevin.course.service;
 
 import com.kevin.course.object.TeacherAbility;
-import com.kevin.course.operation.business.TeacherAbilityBusinessOperation;
+import com.kevin.course.operation.business.ITeacherAbilityBusinessOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Path("/teacher")
 public class TeacherAbilityService {
-    TeacherAbilityBusinessOperation businessOperation = new TeacherAbilityBusinessOperation();
+    ITeacherAbilityBusinessOperation businessOperation = new ITeacherAbilityBusinessOperation();
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public void add(TeacherAbility teacherAbility){
