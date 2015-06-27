@@ -30,59 +30,7 @@
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
     -->
-
-    <servlet>
-        <servlet-name>teacherServlet</servlet-name>
-        <servlet-class>com.kevin.course.servlet.TeacherServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>teacherServlet</servlet-name>
-        <url-pattern>/teacherServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>studentServlet</servlet-name>
-        <servlet-class>com.kevin.course.servlet.StudentServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>studentServlet</servlet-name>
-        <url-pattern>/studentServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <description></description>
-        <display-name>scheduleServlet</display-name>
-        <servlet-name>scheduleServlet</servlet-name>
-        <servlet-class>com.kevin.course.servlet.ScheduleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>scheduleServlet</servlet-name>
-        <url-pattern>/scheduleServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <description>firstCourseServlet</description>
-        <display-name>firstCourseServlet</display-name>
-        <servlet-name>firstCourseServlet</servlet-name>
-        <servlet-class>com.kevin.course.servlet.FirstCourseServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>firstCourseServlet</servlet-name>
-        <url-pattern>/firstCourseServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <description>secondCourseServlet</description>
-        <display-name>secondCourseServlet</display-name>
-        <servlet-name>secondCourseServlet</servlet-name>
-        <servlet-class>com.kevin.course.servlet.SecondCourseServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>secondCourseServlet</servlet-name>
-        <url-pattern>/secondCourseServlet</url-pattern>
-    </servlet-mapping>
-
-
+    
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
