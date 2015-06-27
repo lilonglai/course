@@ -12,6 +12,7 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
+    <!--
     <servlet>
         <servlet-name>RestServlet</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -28,6 +29,7 @@
         <servlet-name>RestServlet</servlet-name>
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
+    -->
 
     <servlet>
         <servlet-name>teacherServlet</servlet-name>
@@ -97,6 +99,7 @@
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>*.html</url-pattern>
+        <url-pattern>/service/*</url-pattern>
     </filter-mapping>
 
 </web-app>

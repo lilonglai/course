@@ -64,7 +64,8 @@ public class StudentAction {
     }
 
     @Action("studentAddSubmit")
-    public String studentAddSubmit(HttpServletRequest request) throws UnsupportedEncodingException {
+    public String studentAddSubmit() throws UnsupportedEncodingException {
+        HttpServletRequest request = ServletActionContext.getRequest();
         Student student = new Student();
         setObject(request, student);
         student.setIsAlive(true);
@@ -73,8 +74,9 @@ public class StudentAction {
     }
 
     @Action("studentUpdate")
-    public String studentUpdate(int id){
+    public String studentUpdate(){
         HttpServletRequest request = ServletActionContext.getRequest();
+        int id = HttpRequestUtil.getInt(request, "id");
         Student student = studentOperation.get(id);
         List<Teacher> teacherList = teacherOperation.getAll();
         request.setAttribute("student", student);

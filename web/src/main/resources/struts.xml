@@ -5,7 +5,7 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.action.extension" value="html" />
-    <package name="default" namespace="/" extends="struts-default">
+    <constant name="struts.action.extension" value="html," />
+    <package name="default" namespace="/" extends="json-default">
     </package>
 </struts>

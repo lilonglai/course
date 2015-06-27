@@ -29,8 +29,9 @@ public class CourseAction {
     private SecondCourseBusinessOperation secondCourseOperation = new SecondCourseBusinessOperation();
 
     @Action("course")
-    public String getAll(Integer grade) {
+    public String getAll() {
         HttpServletRequest request = ServletActionContext.getRequest();
+        Integer grade = HttpRequestUtil.getInt(request, "grade");
         if (grade == null)
             grade = 3;
         List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
