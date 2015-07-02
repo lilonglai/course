@@ -13,13 +13,13 @@
         <input type="hidden" name="action" value="add">
 
         <div class="form-group">
-            用户名: <input type="text" class="form-control" name="name"/>
+            用户名: <input type="text" class="form-control" name="userName"/>
         </div>
         <div class="form-group">
-            密码: <input type="text" class="form-control" name="shortName"/>
+            密码: <input type="text" class="form-control" name="userPassword"/>
         </div>
         <div class="form-group">
-            验证码: <input type="text" class="form-control" name="phone"/>
+            验证码: <input type="text" class="form-control" name="verifyCode"/>
         </div>
 
         <div class="form-group">

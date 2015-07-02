@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byType">
+    <import resource="spring-engine.xml"/>
+    <bean id="firstCourseBusinessOperation" class="com.kevin.course.operation.business.FirstCourseBusinessOperation" autowire="byType"/>
+    <bean id="secondCourseBusinessOperation" class="com.kevin.course.operation.business.SecondCourseBusinessOperation" autowire="byType"/>
+    <bean id="teacherBusinessOperation" class="com.kevin.course.operation.business.TeacherBusinessOperation" autowire="byType"/>
+    <bean id="teacherAbilityBusinessOperation" class="com.kevin.course.operation.business.TeacherAbilityBusinessOperation" autowire="byType"/>
+    <bean id="teacherDefaultHolidayBusinessOperation" class="com.kevin.course.operation.business.TeacherDefaultHolidayBusinessOperation" autowire="byType"/>
+    <bean id="teacherHolidayBusinessOperation" class="com.kevin.course.operation.business.TeacherHolidayBusinessOperation" autowire="byType"/>
+    <bean id="studentBusinessOperation" class="com.kevin.course.operation.business.StudentBusinessOperation" autowire="byType"/>
+    <bean id="scheduleBusinessOperation" class="com.kevin.course.operation.business.ScheduleBusinessOperation" autowire="byType"/>
+</beans>

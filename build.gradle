@@ -3,10 +3,6 @@ allprojects{
   apply plugin: 'idea'
 
   repositories {
-    maven{
-      url "http://repository.jboss.org/nexus/content/groups/public"
-    }
-
     flatDir{
       dirs 'libs'
     }

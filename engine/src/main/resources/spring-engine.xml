@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="engineFirstCourseDao" class="com.kevin.course.operation.db.engine.EngineFirstCourseDao">
+    </bean>
+
+    <bean id="engineSecondCourseDao" class="com.kevin.course.operation.db.engine.EngineSecondCourseDao">
+    </bean>
+
+    <bean id="engineTeacherDao" class="com.kevin.course.operation.db.engine.EngineTeacherDao">
+    </bean>
+
+    <bean id="engineTeacherDefaultHolidayDao" class="com.kevin.course.operation.db.engine.EngineTeacherDefaultHolidayDao">
+    </bean>
+
+    <bean id="engineTeacherHolidayDao" class="com.kevin.course.operation.db.engine.EngineTeacherHolidayDao">
+    </bean>
+
+    <bean id="engineTeacherAbilityDao" class="com.kevin.course.operation.db.engine.EngineTeacherAbilityDao">
+    </bean>
+
+    <bean id="engineStudentDao" class="com.kevin.course.operation.db.engine.EngineStudentDao">
+    </bean>
+
+    <bean id="engineScheduleDao" class="com.kevin.course.operation.db.engine.EngineScheduleDao">
+    </bean>
+
+</beans>
