@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserBusinessOperation implements IUserBusinessOperation{
     @Autowired
     private IUserOperation userOperation;
+
+    public User get(String userName, String userPassword){
+        return userOperation.get(userName, userPassword);
+    }
     public void add(User user){
         userOperation.add(user);
     }

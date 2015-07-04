@@ -24,5 +24,13 @@
     </bean>
 
     <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <mvc:exclude-mapping path="/user*" />
+            <bean class="com.kevin.course.interceptor.SecurityInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

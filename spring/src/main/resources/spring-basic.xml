@@ -83,4 +83,8 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
+    <bean id="jdbcUserDao" class="com.kevin.course.operation.db.basic.JdbcUserDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
 </beans>

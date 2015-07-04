@@ -36,6 +36,10 @@
         </div>
 
         <div class="form-group">
+            描述: <textarea rows="4" cols="25" name="userDescription"> </textarea>
+        </div>
+
+        <div class="form-group">
             <input type="submit" class="btn btn-default" value="注册" />
         </div>
     </form>

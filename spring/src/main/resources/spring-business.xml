@@ -12,4 +12,6 @@
     <bean id="teacherHolidayBusinessOperation" class="com.kevin.course.operation.business.TeacherHolidayBusinessOperation" autowire="byType"/>
     <bean id="studentBusinessOperation" class="com.kevin.course.operation.business.StudentBusinessOperation" autowire="byType"/>
     <bean id="scheduleBusinessOperation" class="com.kevin.course.operation.business.ScheduleBusinessOperation" autowire="byType"/>
+
+    <bean id="userOperation" class="com.kevin.course.operation.business.UserBusinessOperation" autowire="byType"/>
 </beans>

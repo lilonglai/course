@@ -124,7 +124,7 @@ public class GenerateDataServlet extends HttpServlet {
                     }
                 }
                 else{
-                    entity.setProperty(tableMap.get(tableName).get(i).name, object);
+                    entity.setUnindexedProperty(tableMap.get(tableName).get(i).name, object);
                 }
             }
 
