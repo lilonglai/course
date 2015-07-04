@@ -31,18 +31,31 @@
 </head>
 <body>
 <div class="container">
-    <form action="userLoginSubmit.html" role="form" method="get" onSubmit="return checkForm();">
-        <input type="hidden" name="action" value="add">
+    <form action="userLoginSubmit.html" role="form" class="form-horizontal" method="get" onSubmit="return checkForm();">
 
         <div class="form-group">
-            用户名: <input type="text" class="form-control" name="userName"/>
+            <label class="col-sm-2">用户名: </label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="userName"/>
+            </div>
         </div>
         <div class="form-group">
-            密码: <input type="text" class="form-control" name="userPassword"/>
+            <label class="col-sm-2">密码: </label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="userPassword"/>
+            </div>
         </div>
         <div class="form-group">
-            验证码: <input type="text" class="form-control" name="userVerifyCode"/>
-            <img id="userVerifyImage"  alt="" src="userVerifyCode.html"/>
+            <label class="col-sm-2">验证码: </label>
+
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="userVerifyCode"/>
+            </div>
+            <div class="col-sm-4">
+                <img id="userVerifyImage" alt="" src="userVerifyCode.html"/>
+            </div>
         </div>
 
         <div class="form-group">

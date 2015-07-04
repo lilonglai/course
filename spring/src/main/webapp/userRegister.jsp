@@ -6,6 +6,38 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>排课系统</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+
+    <script type="text/javascript">
+        function checkForm() {
+            if ($("[name='userName']").val().length == 0) {
+                alert("用户名不能为空")
+                return false;
+            }
+
+            if ($("[name='userPassword']").val().length == 0) {
+                alert("密码不能为空")
+                return false;
+            }
+
+            if ($("[name='userPassword2']").val().length == 0) {
+                alert("密码不能为空")
+                return false;
+            }
+
+            if ($("[name='userPassword2']").val() != $("[name='userPassword']").val()) {
+                alert("密码不等于确认密码")
+                return false;
+            }
+
+            if ($("[name='userEmail']").val().length == 0) {
+                alert("验证码不能为空")
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
 <div class="container">
