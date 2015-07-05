@@ -2,6 +2,7 @@ package com.kevin.course.service;
 
 import com.kevin.course.object.Student;
 import com.kevin.course.operation.business.IStudentBusinessOperation;
+import com.kevin.course.operation.business.StudentBusinessOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Path("/student")
 public class StudentService {
-    IStudentBusinessOperation businessOperation = new IStudentBusinessOperation();
+    IStudentBusinessOperation businessOperation = new StudentBusinessOperation();
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

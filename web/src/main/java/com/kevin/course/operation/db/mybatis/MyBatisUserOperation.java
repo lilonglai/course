@@ -12,6 +12,11 @@ public class MyBatisUserOperation extends MyBatisBaseOperation<IUserOperation> i
         return proxy.get(name, password);
     }
 
+    @Override
+    public User getByEmail(String userName, String userEmail) {
+        return null;
+    }
+
     public void add(User user) {
         proxy.add(user);
     }

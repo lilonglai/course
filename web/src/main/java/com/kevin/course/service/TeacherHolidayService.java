@@ -2,6 +2,7 @@ package com.kevin.course.service;
 
 import com.kevin.course.object.TeacherHoliday;
 import com.kevin.course.operation.business.ITeacherHolidayBusinessOperation;
+import com.kevin.course.operation.business.TeacherHolidayBusinessOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Path("/teacher")
 public class TeacherHolidayService {
-    ITeacherHolidayBusinessOperation businessOperation = new ITeacherHolidayBusinessOperation();
+    ITeacherHolidayBusinessOperation businessOperation = new TeacherHolidayBusinessOperation();
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

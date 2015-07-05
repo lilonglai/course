@@ -1,5 +1,7 @@
 package com.kevin.course.operation.db.engine;
 
+import com.google.appengine.api.datastore.*;
+
 import com.kevin.course.object.Schedule;
 import com.kevin.course.operation.db.IScheduleOperation;
 import com.kevin.course.utils.TableName;

@@ -10,6 +10,11 @@ public class JpaUserOperation extends JpaBasicOperation<User> implements IUserOp
 	}
 
 	@Override
+	public User getByEmail(String userName, String userEmail) {
+		return null;
+	}
+
+	@Override
 	public void add(User user) {
 
 	}

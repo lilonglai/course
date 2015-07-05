@@ -13,6 +13,11 @@ public class JdbcUserOperation extends JdbcBaseOperation<User> implements IUserO
 	}
 
 	@Override
+	public User getByEmail(String userName, String userEmail) {
+		return null;
+	}
+
+	@Override
 	public void add(User user) {
 
 	}
