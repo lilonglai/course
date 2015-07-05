@@ -1,6 +1,5 @@
 package com.kevin.course.operation.db.engine;
 
-import com.google.appengine.api.datastore.*;
 import com.kevin.course.object.TeacherHoliday;
 import com.kevin.course.operation.db.ITeacherHolidayOperation;
 import com.kevin.course.utils.TableName;

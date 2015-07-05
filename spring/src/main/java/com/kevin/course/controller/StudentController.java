@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,26 +28,33 @@ public class StudentController {
 
     @RequestMapping( value = "student", method = RequestMethod.GET)
     public ModelAndView getAll(Integer status){
-        List<Student> list = null;
+        List<Student> studentList = null;
         if(status == null){
             status = 2;
         }
         switch(status){
             case 1:
-                list = studentOperation.getAll();
+                studentList = studentOperation.getAll();
                 break;
             case 2:
-                list = studentOperation.getAlive();
+                studentList = studentOperation.getAlive();
                 break;
             case 3:
-                list = studentOperation.getNotAlive();
+                studentList = studentOperation.getNotAlive();
                 break;
         }
 
+        List<Teacher> teacherList = new ArrayList<>();
+        for(Student student: studentList){
+            teacherList.add(teacherOperation.get(student.getTeacherId()));
+        }
+
+
+
         ModelAndView model = new ModelAndView("student");
         model.addObject("status", status);
-        model.addObject("studentList", list);
-        model.addObject("teacherOperation", teacherOperation);
+        model.addObject("studentList", studentList);
+        model.addObject("teacherList", teacherList);
         return model;
     }
 

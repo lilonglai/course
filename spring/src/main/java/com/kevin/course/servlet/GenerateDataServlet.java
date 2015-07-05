@@ -1,6 +1,5 @@
 package com.kevin.course.servlet;
 
-import com.google.appengine.api.datastore.*;
 import com.kevin.course.utils.TableName;
 
 import javax.servlet.ServletException;
@@ -8,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

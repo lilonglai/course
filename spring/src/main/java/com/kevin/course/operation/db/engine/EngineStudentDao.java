@@ -1,11 +1,9 @@
 package com.kevin.course.operation.db.engine;
 
-import com.google.appengine.api.datastore.*;
 import com.kevin.course.object.Student;
 import com.kevin.course.operation.db.IStudentOperation;
 import com.kevin.course.utils.TableName;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 

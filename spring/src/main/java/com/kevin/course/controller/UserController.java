@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -116,12 +119,74 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = "userVerifyCode", method = RequestMethod.GET)
-    public void userVerifyCode(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    @RequestMapping(value = "userFindPassword", method = RequestMethod.GET)
+    public ModelAndView userFindPassword(HttpServletRequest request) throws UnsupportedEncodingException {
+        ModelAndView model = new ModelAndView("userFindPassword");
+        return model;
+    }
+
+    @RequestMapping(value = "userFindPasswordSubmit", method = RequestMethod.GET)
+    public ModelAndView userFindPasswordSubmit(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        String userVerifyCode = HttpRequestUtil.getString(request, "userVerifyCode");
+        String userVerifyCodeInSession = (String) request.getSession().getAttribute("userVerifyCode");
+        if(userVerifyCodeInSession == null || !userVerifyCodeInSession.equals(userVerifyCode)){
+            ModelAndView model = new ModelAndView("redirect:userFindPassword.html");
+            return model;
+        }
+
+        String userName = HttpRequestUtil.getString(request, "userName");
+        String userEmail = HttpRequestUtil.getString(request, "userEmail");
+        User user = userBusinessOperation.getByEmail(userName, userEmail);
+        if(user != null){
+            String newPassword = generateRandomCode(8);
+            userBusinessOperation.updatePassword(userName, newPassword);
+
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.163.com");
+            props.put("mail.smtp.port", "25");
+            props.put("mail.smtp.auth", "true");
+            Session session = Session.getDefaultInstance(props, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("kevinbxy@163.com", "19890824");
+                }
+            });
+
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress("kevinbxy@163.com"));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
+                message.setSubject("reset password");
+                message.setText("123456789");
+                message.saveChanges();
+                Transport.send(message);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+        }
+
+        ModelAndView model = new ModelAndView("redirect:userLogin.jsp");
+        return model;
+    }
+
+    private String generateRandomCode(int count){
         char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
                 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
                 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        int width = 60;
+        Random random = new Random();
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < count; i++) {
+            String strRand = String.valueOf(codeSequence[random.nextInt(36)]);
+            result.append(strRand);
+        }
+        return result.toString();
+    }
+
+    @RequestMapping(value = "userVerifyCode", method = RequestMethod.GET)
+    public void userVerifyCode(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int width = 80;
         int height = 20;
         int codeCount = 4;
         BufferedImage buffImg = new BufferedImage(width, height,
@@ -142,20 +207,18 @@ public class UserController {
             g.drawLine(x, y, x + xl, y + yl);
         }
 
-        StringBuffer verifyCode = new StringBuffer();
+        String verifyCode = generateRandomCode(codeCount);
 
         for (int i = 0; i < codeCount; i++) {
-            String strRand = String.valueOf(codeSequence[random.nextInt(36)]);
+            String strRand = String.valueOf(verifyCode.charAt(i));
             int red = random.nextInt(255);
             int green = random.nextInt(255);
             int blue = random.nextInt(255);
             g.setColor(new Color(red, green, blue));
             g.drawString(strRand, (i + 1) * 13, height-4);
-            // 将产生的四个随机数组合在一起。
-            verifyCode.append(strRand);
         }
 
-        request.getSession(true).setAttribute("userVerifyCode", verifyCode.toString());
+        request.getSession(true).setAttribute("userVerifyCode", verifyCode);
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);

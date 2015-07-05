@@ -154,7 +154,7 @@
                     <td>${status.index}</td>
                     <td>${secondCourse.name}</td>
                     <td>${secondCourse.shortName}</td>
-                    <td>${firstCourseOperation.get(secondCourse.id).name}
+                    <td>${firstCourseList2[status.index].name}
                     </td>
                     <td>${secondCourse.description}</td>
 

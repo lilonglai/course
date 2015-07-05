@@ -150,7 +150,7 @@
             </thead>
 
             <tbody>
-            <c:forEach var="student" items="${studentList}">
+            <c:forEach var="student" items="${studentList}" varStatus="varStatus">
                 <tr>
                     <td>${student.name}</td>
                     <td>${student.shortName}</td>
@@ -171,7 +171,7 @@
                     <td>${student.targetScore}</td>
                     <td>${student.examineDate}</td>
                     <td>${student.examinePlace}</td>
-                    <td>${TeacherHelp.getTeacherName(teacherOperation.get(student.teacherId))}</td>
+                    <td>${teacherList[varStatus.index].name}</td>
                     <td>${student.description}</td>
 
                     <td><input type="button" class="btn btn-default" value='修改'

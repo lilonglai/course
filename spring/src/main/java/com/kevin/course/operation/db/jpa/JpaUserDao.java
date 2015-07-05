@@ -11,6 +11,11 @@ public class JpaUserDao extends JpaBasicDao<User> implements IUserOperation {
 		return null;
 	}
 
+	public User getByEmail(String userName, String userPassword){
+		return null;
+	}
+
+
 	@Transactional
 	public void add(User user) {
 

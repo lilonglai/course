@@ -60,7 +60,7 @@
 
         <div class="form-group">
             <input type="submit" class="btn btn-default" value="登陆"/>
-            <a class="btn btn-primary" href="userFindPassword.jsp">忘记密码?</a>
+            <a class="btn btn-primary" href="userFindPassword.html">忘记密码?</a>
         </div>
 
         <div class="form-group">

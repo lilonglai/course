@@ -15,8 +15,6 @@
 <div class="container">
     老师:${teacher.name} &nbsp;休假情况<br><br>
 
-    日期:${lastCalendar.get(Calendar.YEAR)}.${lastCalendar.get(Calendar.MONTH)+1}<br>
-
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>
@@ -35,8 +33,6 @@
             </tbody>
         </table>
     </div>
-
-    日期:${thisCalendar.get(Calendar.YEAR)}.${thisCalendar.get(Calendar.MONTH)+2}<br>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -60,8 +56,6 @@
 
 
     <br>
-
-    日期:${nextCalendar.get(Calendar.YEAR)}.${nextCalendar.get(Calendar.MONTH)+3}<br>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered">

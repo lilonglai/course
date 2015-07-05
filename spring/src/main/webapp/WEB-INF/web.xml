@@ -28,4 +28,14 @@
         <url-pattern>/service/*</url-pattern>
 	</servlet-mapping>
 
+
+	<servlet>
+		<servlet-name>GenerateDataServlet</servlet-name>
+		<servlet-class>com.kevin.course.servlet.GenerateDataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerateDataServlet</servlet-name>
+		<url-pattern>/generatedata</url-pattern>
+	</servlet-mapping>
+
 </web-app>

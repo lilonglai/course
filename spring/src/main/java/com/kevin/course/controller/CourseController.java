@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,10 +33,16 @@ public class CourseController {
         List<FirstCourse> firstCourseList = firstCourseOperation.getByGrade(grade);
         List<SecondCourse> secondCourseList = secondCourseOperation.getByGrade(grade);
 
+        List<FirstCourse> firstCourseList2 = new ArrayList<>();
+        for(SecondCourse secondCourse: secondCourseList){
+            firstCourseList2.add(firstCourseOperation.get(secondCourse.getFirstCourseId()));
+        }
+
         ModelAndView model = new ModelAndView("course");
         model.addObject("grade", grade);
         model.addObject("firstCourseList", firstCourseList);
         model.addObject("secondCourseList", secondCourseList);
+        model.addObject("firstCourseList2", firstCourseList2);
         return model;
     }
 

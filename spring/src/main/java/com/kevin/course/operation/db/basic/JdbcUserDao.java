@@ -18,9 +18,15 @@ public class JdbcUserDao extends JdbcBaseDao<User> implements IUserOperation {
         return list.isEmpty() ? null : list.get(0);
     }
 
+    public User getByEmail(String userName, String userEmail) {
+        String sql = "select * from " + getTableName() + " where name = ? and email= ?";
+        List<User> list = query(sql, this, new Object[]{userName, userEmail});
+        return list.isEmpty() ? null : list.get(0);
+    }
+
     @Override
     public void add(final User user) {
-        String sql = "insert into " + getTableName() + "(name,password,email,qq,phone,description) values("+
+        String sql = "insert into " + getTableName() + "(name,password,email,qq,phone,description) values(" +
                 "?, password(?), ?, ?, ?, ?)";
         PreparedStatementSetter setter = new PreparedStatementSetter() {
             @Override
@@ -43,7 +49,17 @@ public class JdbcUserDao extends JdbcBaseDao<User> implements IUserOperation {
     }
 
     @Override
-    public void updatePassword(String userName, String userPassword) {
+    public void updatePassword(final String userName, final String userPassword) {
+        String sql = "update " + getTableName() + " set password=password(?)" +
+                " where name = ?";
+        PreparedStatementSetter setter = new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setString(1, userPassword);
+                ps.setString(2, userName);
+            }
+        };
+        update(sql, setter);
 
     }
 
